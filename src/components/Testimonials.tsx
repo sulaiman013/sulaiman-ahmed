@@ -20,7 +20,7 @@ const Testimonials = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Fallback testimonials from the provided content
+  // Updated testimonials from the provided content
   const fallbackTestimonials: Testimonial[] = [
     {
       id: "1",
@@ -43,7 +43,7 @@ const Testimonials = () => {
     {
       id: "3",
       name: "aromeroremax",
-      role: "Company Client",
+      role: "Client",
       company: "Dominican Republic",
       content: "This time we brought Ahmed to a project of high complexity. Not only he quickly understood the challenges but, as usual, he delivered in a very professional and timely manner. Given that he proactively searched for the most favorable cost/benefit solution, we are saving around US$700 on a monthly basis from now on. If you as a person or as a company -which is our case- are looking for a BI/tech outsource who is able to understand your business model and provide the necessary outcome on time, look no further. Ahmed is the one.",
       rating: 5,
@@ -135,7 +135,6 @@ const Testimonials = () => {
               </p>
             </div>
 
-            {/* Show Fiverr CTA even if no testimonials */}
             <div className="text-center">
               <Card className="inline-block p-6 bg-gradient-to-r from-green-500/10 to-blue-500/10 border-green-500/20">
                 <div className="flex items-center justify-center space-x-2 mb-2">
@@ -174,7 +173,6 @@ const Testimonials = () => {
             </p>
           </div>
 
-          {/* Carousel */}
           <div className="relative">
             <Card className="group hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-card to-muted/30">
               <CardContent className="p-8 text-center">
@@ -200,7 +198,6 @@ const Testimonials = () => {
               </CardContent>
             </Card>
 
-            {/* Navigation */}
             {testimonials.length > 1 && (
               <>
                 <Button
@@ -223,7 +220,6 @@ const Testimonials = () => {
             )}
           </div>
 
-          {/* Dots indicator */}
           {testimonials.length > 1 && (
             <div className="flex justify-center mt-6 space-x-2">
               {testimonials.map((_, index) => (
@@ -238,7 +234,6 @@ const Testimonials = () => {
             </div>
           )}
 
-          {/* Fiverr CTA */}
           <div className="text-center mt-12">
             <Card className="inline-block p-6 bg-gradient-to-r from-green-500/10 to-blue-500/10 border-green-500/20">
               <div className="flex items-center justify-center space-x-2 mb-2">
