@@ -22,6 +22,8 @@ const BlogSection = () => {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const categories = ["All", "Power BI", "Microsoft Fabric", "Data Engineering", "Career Advice"];
 
@@ -31,16 +33,30 @@ const BlogSection = () => {
 
   const fetchBlogPosts = async () => {
     try {
+      setLoading(true);
+      setError(null);
+      
+      console.log('Fetching published blog posts...');
+      
       const { data, error } = await supabase
         .from('blogs')
         .select('*')
-        .eq('is_published', true)
+        .eq('is_published', true) // This ensures RLS policy is satisfied
         .order('created_at', { ascending: false });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Error fetching blog posts:', error);
+        setError('Failed to load blog posts');
+        return;
+      }
+
+      console.log('Fetched blog posts:', data?.length || 0);
       setBlogPosts(data || []);
     } catch (error) {
-      console.error('Error fetching blog posts:', error);
+      console.error('Unexpected error fetching blog posts:', error);
+      setError('An unexpected error occurred');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -60,6 +76,40 @@ const BlogSection = () => {
       day: 'numeric'
     });
   };
+
+  if (loading) {
+    return (
+      <section className="py-20 bg-muted/30">
+        <div className="container mx-auto px-6">
+          <div className="max-w-6xl mx-auto text-center">
+            <div className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-blue-500 bg-clip-text text-transparent">
+              Latest from the Blog
+            </div>
+            <p className="text-xl text-muted-foreground mb-16">
+              Loading blog posts...
+            </p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="py-20 bg-muted/30">
+        <div className="container mx-auto px-6">
+          <div className="max-w-6xl mx-auto text-center">
+            <div className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-blue-500 bg-clip-text text-transparent">
+              Latest from the Blog
+            </div>
+            <p className="text-xl text-muted-foreground mb-16">
+              {error}
+            </p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-20 bg-muted/30">
@@ -192,9 +242,14 @@ const BlogSection = () => {
             ))}
           </div>
 
-          {filteredPosts.length === 0 && (
+          {filteredPosts.length === 0 && !loading && (
             <div className="text-center py-12">
-              <p className="text-muted-foreground">No articles found matching your criteria.</p>
+              <p className="text-muted-foreground">
+                {blogPosts.length === 0 
+                  ? "No published blog posts available yet." 
+                  : "No articles found matching your criteria."
+                }
+              </p>
             </div>
           )}
 

@@ -18,6 +18,8 @@ interface Testimonial {
 const Testimonials = () => {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchTestimonials();
@@ -25,15 +27,30 @@ const Testimonials = () => {
 
   const fetchTestimonials = async () => {
     try {
+      setLoading(true);
+      setError(null);
+      
+      console.log('Fetching featured testimonials...');
+      
       const { data, error } = await supabase
         .from('testimonials')
         .select('*')
+        .eq('is_featured', true) // This ensures RLS policy is satisfied
         .order('created_at', { ascending: false });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Error fetching testimonials:', error);
+        setError('Failed to load testimonials');
+        return;
+      }
+
+      console.log('Fetched testimonials:', data?.length || 0);
       setTestimonials(data || []);
     } catch (error) {
-      console.error('Error fetching testimonials:', error);
+      console.error('Unexpected error fetching testimonials:', error);
+      setError('An unexpected error occurred');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -56,8 +73,61 @@ const Testimonials = () => {
     ));
   };
 
-  if (testimonials.length === 0) {
-    return null;
+  if (loading) {
+    return (
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-blue-500 bg-clip-text text-transparent">
+              Client Testimonials
+            </h2>
+            <p className="text-xl text-muted-foreground">
+              Loading testimonials...
+            </p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error || testimonials.length === 0) {
+    return (
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-blue-500 bg-clip-text text-transparent">
+                Client Testimonials
+              </h2>
+              <p className="text-xl text-muted-foreground">
+                What clients say about working with me
+              </p>
+            </div>
+
+            {/* Show Fiverr CTA even if no testimonials */}
+            <div className="text-center">
+              <Card className="inline-block p-6 bg-gradient-to-r from-green-500/10 to-blue-500/10 border-green-500/20">
+                <div className="flex items-center justify-center space-x-2 mb-2">
+                  {renderStars(5)}
+                </div>
+                <p className="text-sm text-muted-foreground mb-1">
+                  <span className="font-semibold text-green-600">73 Five-Star Reviews</span> on Fiverr
+                </p>
+                <p className="text-xs text-muted-foreground mb-3">
+                  5+ years delivering exceptional Power BI & data analytics solutions
+                </p>
+                <Button variant="outline" className="group" asChild>
+                  <a href="https://www.fiverr.com/bi_with_ahmed" target="_blank" rel="noopener noreferrer">
+                    <ExternalLink className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
+                    View Fiverr Profile
+                  </a>
+                </Button>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
   }
 
   return (

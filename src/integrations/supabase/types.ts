@@ -78,6 +78,33 @@ export type Database = {
         }
         Relationships: []
       }
+      rate_limits: {
+        Row: {
+          action_type: string
+          attempt_count: number | null
+          created_at: string | null
+          id: string
+          ip_address: unknown
+          window_start: string | null
+        }
+        Insert: {
+          action_type: string
+          attempt_count?: number | null
+          created_at?: string | null
+          id?: string
+          ip_address: unknown
+          window_start?: string | null
+        }
+        Update: {
+          action_type?: string
+          attempt_count?: number | null
+          created_at?: string | null
+          id?: string
+          ip_address?: unknown
+          window_start?: string | null
+        }
+        Relationships: []
+      }
       testimonials: {
         Row: {
           company: string | null
