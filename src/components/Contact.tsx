@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -159,6 +160,7 @@ const Contact = () => {
         remainingAttempts: rateLimitResult.remainingAttempts 
       });
 
+      // Submit to database
       const { error } = await supabase
         .from('contact_submissions')
         .insert([sanitizedData]);
@@ -177,6 +179,24 @@ const Contact = () => {
           setErrors({ general: 'Failed to send message. Please try again.' });
         }
         return;
+      }
+
+      // Send email notifications
+      try {
+        console.log('Sending email notifications...');
+        const emailResponse = await supabase.functions.invoke('send-contact-notification', {
+          body: sanitizedData
+        });
+
+        if (emailResponse.error) {
+          console.error('Email notification error:', emailResponse.error);
+          // Don't fail the form submission if email fails, just log it
+        } else {
+          console.log('Email notifications sent successfully');
+        }
+      } catch (emailError) {
+        console.error('Email notification failed:', emailError);
+        // Don't fail the form submission if email fails
       }
 
       toast({
