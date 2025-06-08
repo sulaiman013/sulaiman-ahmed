@@ -408,7 +408,7 @@ const Contact = () => {
                     </Button>
                     
                     <Button variant="outline" className="w-full justify-start" asChild>
-                      <a href="https://github.com/sulaimanahmed" target="_blank" rel="noopener noreferrer">
+                      <a href="https://github.com/sulaiman013" target="_blank" rel="noopener noreferrer">
                         <Github className="mr-2 h-5 w-5" />
                         GitHub Profile
                       </a>
@@ -421,9 +421,11 @@ const Contact = () => {
                       </a>
                     </Button>
                     
-                    <Button variant="outline" className="w-full justify-start">
-                      <FileText className="mr-2 h-5 w-5" />
-                      Download Resume
+                    <Button variant="outline" className="w-full justify-start" asChild>
+                      <a href="https://docs.google.com/document/d/1lz3Qg-D93YhwzuOiWphFjvIs744osRia/edit?usp=sharing&ouid=106595007262837950939&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer">
+                        <FileText className="mr-2 h-5 w-5" />
+                        Download Resume
+                      </a>
                     </Button>
                   </div>
                 </CardContent>

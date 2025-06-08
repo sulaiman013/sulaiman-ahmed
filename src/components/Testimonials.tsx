@@ -1,4 +1,3 @@
-
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Star, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
@@ -21,6 +20,37 @@ const Testimonials = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // Fallback testimonials from the provided content
+  const fallbackTestimonials: Testimonial[] = [
+    {
+      id: "1",
+      name: "alvian134",
+      role: "Repeat Client",
+      company: "Moldova",
+      content: "I had multiple meetings with Ahmed for Power BI, and I couldn't be more satisfied with his expertise and professionalism. He is highly knowledgeable, patient, and able to break down complex data concepts into easy-to-understand insights. Ahmed's problem-solving skills and attention to detail made a huge difference in my projects. He was always prepared, efficient, and proactive in suggesting improvements that took my dashboards to the next level. If you need a Power BI expert who delivers quality work and great support, I highly recommend Ahmed! Would definitely work with him again.",
+      rating: 5,
+      is_featured: true
+    },
+    {
+      id: "2",
+      name: "asainternet",
+      role: "Client",
+      company: "United States",
+      content: "Ahmed Sulaiman truly impressed with his exceptional professionalism and keen attention to detail in data visualization. His cooperative nature and quick responsiveness made working with him a seamless experience. I look forward to future collaborations as he consistently goes ABOVE AND BEYOND expectations! 🌟",
+      rating: 5,
+      is_featured: true
+    },
+    {
+      id: "3",
+      name: "aromeroremax",
+      role: "Company Client",
+      company: "Dominican Republic",
+      content: "This time we brought Ahmed to a project of high complexity. Not only he quickly understood the challenges but, as usual, he delivered in a very professional and timely manner. Given that he proactively searched for the most favorable cost/benefit solution, we are saving around US$700 on a monthly basis from now on. If you as a person or as a company -which is our case- are looking for a BI/tech outsource who is able to understand your business model and provide the necessary outcome on time, look no further. Ahmed is the one.",
+      rating: 5,
+      is_featured: true
+    }
+  ];
+
   useEffect(() => {
     fetchTestimonials();
   }, []);
@@ -35,20 +65,21 @@ const Testimonials = () => {
       const { data, error } = await supabase
         .from('testimonials')
         .select('*')
-        .eq('is_featured', true) // This ensures RLS policy is satisfied
+        .eq('is_featured', true)
         .order('created_at', { ascending: false });
 
       if (error) {
         console.error('Error fetching testimonials:', error);
-        setError('Failed to load testimonials');
+        setTestimonials(fallbackTestimonials);
         return;
       }
 
       console.log('Fetched testimonials:', data?.length || 0);
-      setTestimonials(data || []);
+      // Use database testimonials if available, otherwise use fallback
+      setTestimonials(data && data.length > 0 ? data : fallbackTestimonials);
     } catch (error) {
       console.error('Unexpected error fetching testimonials:', error);
-      setError('An unexpected error occurred');
+      setTestimonials(fallbackTestimonials);
     } finally {
       setLoading(false);
     }
@@ -162,7 +193,7 @@ const Testimonials = () => {
                   <div className="text-sm text-muted-foreground">
                     {testimonials[currentIndex]?.role}
                     {testimonials[currentIndex]?.company && (
-                      <span> at {testimonials[currentIndex].company}</span>
+                      <span> • {testimonials[currentIndex].company}</span>
                     )}
                   </div>
                 </div>

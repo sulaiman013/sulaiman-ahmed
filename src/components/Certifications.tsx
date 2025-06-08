@@ -12,7 +12,7 @@ const Certifications = () => {
       description: "Demonstrates expertise in creating Power BI reports and dashboards",
       skills: ["Data Modeling", "DAX", "Power Query", "Report Design"],
       color: "from-yellow-500 to-orange-500",
-      verifyUrl: "#"
+      verifyUrl: "https://learn.microsoft.com/api/credentials/share/en-us/Sulaiman-1779/D86F89EC13EB4F44?sharingId=2F8D8D7121F7566C"
     },
     {
       title: "Microsoft Certified: Fabric Analytics Engineer Associate", 
@@ -20,7 +20,7 @@ const Certifications = () => {
       description: "Validates skills in implementing analytics solutions using Microsoft Fabric",
       skills: ["Data Lakehouse", "Data Factory", "Real-time Analytics", "Data Science"],
       color: "from-blue-500 to-purple-500",
-      verifyUrl: "#"
+      verifyUrl: "https://learn.microsoft.com/api/credentials/share/en-us/Sulaiman-1779/4BF83C913084A933?sharingId=2F8D8D7121F7566C"
     },
     {
       title: "Microsoft Certified: Fabric Data Engineer Associate",
@@ -28,7 +28,7 @@ const Certifications = () => {
       description: "Demonstrates ability to design and implement data engineering solutions",
       skills: ["Data Pipelines", "Delta Lake", "Spark", "Data Governance"],
       color: "from-green-500 to-teal-500",
-      verifyUrl: "#"
+      verifyUrl: "https://learn.microsoft.com/api/credentials/share/en-us/Sulaiman-1779/BA7F6AE3F38244C0?sharingId=2F8D8D7121F7566C"
     },
     {
       title: "Microsoft Certified: Azure Data Engineer Associate",
@@ -36,7 +36,7 @@ const Certifications = () => {
       description: "Validates expertise in Azure data engineering services",
       skills: ["Azure Synapse", "Azure Data Factory", "Azure Databricks", "Cosmos DB"],
       color: "from-indigo-500 to-blue-500", 
-      verifyUrl: "#"
+      verifyUrl: "https://learn.microsoft.com/api/credentials/share/en-us/Sulaiman-1779/8C147E65EC980BE4?sharingId=2F8D8D7121F7566C"
     }
   ];
 
@@ -66,8 +66,10 @@ const Certifications = () => {
                       <Badge className={`bg-gradient-to-r ${cert.color} text-white border-0`}>
                         {cert.code}
                       </Badge>
-                      <Button variant="ghost" size="icon" className="group/btn">
-                        <ExternalLink className="h-4 w-4 group-hover/btn:scale-110 transition-transform" />
+                      <Button variant="ghost" size="icon" className="group/btn" asChild>
+                        <a href={cert.verifyUrl} target="_blank" rel="noopener noreferrer">
+                          <ExternalLink className="h-4 w-4 group-hover/btn:scale-110 transition-transform" />
+                        </a>
                       </Button>
                     </div>
                     <CardTitle className="text-xl group-hover:text-primary transition-colors">

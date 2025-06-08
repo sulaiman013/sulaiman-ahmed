@@ -4,8 +4,6 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Certifications from "@/components/Certifications";
 import Services from "@/components/Services";
-import Portfolio from "@/components/Portfolio";
-import BlogSection from "@/components/BlogSection";
 import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import { useEffect, useState } from "react";
@@ -42,14 +40,6 @@ const Index = () => {
           <Services />
         </section>
         
-        <section id="portfolio">
-          <Portfolio />
-        </section>
-        
-        <section id="blog">
-          <BlogSection />
-        </section>
-        
         <section id="testimonials">
           <Testimonials />
         </section>
@@ -62,7 +52,7 @@ const Index = () => {
       <footer className="bg-muted/30 border-t py-8">
         <div className="container mx-auto px-6 text-center">
           <p className="text-muted-foreground">
-            © 2024 Sulaiman Ahmed. Transforming Data into Strategic Insights.
+            © 2025 Sulaiman Ahmed. Transforming Data into Strategic Insights.
           </p>
         </div>
       </footer>
