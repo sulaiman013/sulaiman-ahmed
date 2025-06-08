@@ -20,7 +20,7 @@ const Testimonials = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Updated testimonials from the provided content
+  // Updated testimonials with your provided content
   const fallbackTestimonials: Testimonial[] = [
     {
       id: "1",
