@@ -1,42 +1,79 @@
 
 import { Button } from "@/components/ui/button";
-import { LinkedinIcon, FileText } from "lucide-react";
+import { FileText, Mail } from "lucide-react";
+import { useState, useEffect } from "react";
 
 const Hero = () => {
+  const [currentRole, setCurrentRole] = useState(0);
+  const roles = [
+    "Analytics Engineer",
+    "Microsoft Certified Professional", 
+    "Data Science Instructor",
+    "Power BI Consultant"
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentRole((prev) => (prev + 1) % roles.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-muted/20 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-      <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl"></div>
+    <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-primary/5 relative overflow-hidden">
+      {/* Animated background particles */}
+      <div className="absolute inset-0">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-pulse animation-delay-200"></div>
+        <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl animate-pulse animation-delay-400"></div>
+      </div>
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-8">
-          <div className="space-y-4">
-            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent animate-fade-up">
-              Sulaiman Ahmed
+          <div className="space-y-6">
+            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-primary via-blue-500 to-purple-500 bg-clip-text text-transparent animate-fade-up">
+              Transforming Data into Strategic Insights
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground animate-fade-up animation-delay-200">
-              Software Engineer & Full-Stack Developer
+            
+            <div className="h-16 flex items-center justify-center">
+              <p className="text-2xl md:text-3xl text-muted-foreground animate-fade-up animation-delay-200">
+                <span className="text-primary font-semibold">
+                  {roles[currentRole]}
+                </span>
+              </p>
+            </div>
+            
+            <p className="text-xl text-muted-foreground animate-fade-up animation-delay-400">
+              Sulaiman Ahmed
             </p>
           </div>
           
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed animate-fade-up animation-delay-400">
-            Passionate about creating scalable solutions, cloud architecture, and modern web technologies. 
-            Experienced in DevOps practices and building robust applications that make a difference.
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed animate-fade-up animation-delay-600">
+            4x Microsoft Certified Analytics Engineer with 5+ years of experience transforming complex data 
+            into actionable insights. Specializing in Power BI, Microsoft Fabric, and data engineering solutions 
+            that drive business growth.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-up animation-delay-600">
-            <Button size="lg" className="group">
+            <Button size="lg" className="group bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90" onClick={() => scrollToSection('portfolio')}>
               <FileText className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-              View My Work
+              View Portfolio
             </Button>
-            <Button variant="outline" size="lg" className="group" asChild>
-              <a href="https://www.linkedin.com/in/sulaimanahmed/" target="_blank" rel="noopener noreferrer">
-                <LinkedinIcon className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-                LinkedIn Profile
-              </a>
+            <Button variant="outline" size="lg" className="group" onClick={() => scrollToSection('contact')}>
+              <Mail className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+              Get in Touch
             </Button>
+          </div>
+          
+          <div className="pt-8 text-sm text-muted-foreground animate-fade-up animation-delay-600">
+            <p>📍 Dhaka, Bangladesh • Available for global remote projects</p>
           </div>
         </div>
       </div>
