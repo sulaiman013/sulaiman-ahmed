@@ -71,10 +71,12 @@ const About = () => {
             
             <div className="space-y-6">
               <div className="relative">
-                <div className="aspect-square bg-gradient-to-br from-primary/20 via-blue-500/20 to-purple-500/20 rounded-2xl flex items-center justify-center">
-                  <div className="w-48 h-48 bg-gradient-to-br from-primary to-blue-600 rounded-full flex items-center justify-center">
-                    <span className="text-4xl font-bold text-white">SA</span>
-                  </div>
+                <div className="aspect-square bg-gradient-to-br from-primary/20 via-blue-500/20 to-purple-500/20 rounded-2xl p-8 flex items-center justify-center">
+                  <img 
+                    src="/lovable-uploads/62dc514a-9f49-4b79-a75e-1f5586e48ca3.png" 
+                    alt="Sulaiman Ahmed - Data Analytics Engineer"
+                    className="w-full h-full object-cover rounded-xl shadow-lg"
+                  />
                 </div>
               </div>
               
