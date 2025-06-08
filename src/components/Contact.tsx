@@ -237,7 +237,7 @@ const Contact = () => {
                     </Button>
                     
                     <Button variant="outline" className="w-full justify-start" asChild>
-                      <a href="https://fiverr.com/sulaimanahmed" target="_blank" rel="noopener noreferrer">
+                      <a href="https://www.fiverr.com/bi_with_ahmed" target="_blank" rel="noopener noreferrer">
                         <MessageCircle className="mr-2 h-5 w-5 text-green-600" />
                         Fiverr Profile
                       </a>

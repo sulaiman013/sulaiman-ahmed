@@ -143,11 +143,14 @@ const Testimonials = () => {
               <div className="flex items-center justify-center space-x-2 mb-2">
                 {renderStars(5)}
               </div>
-              <p className="text-sm text-muted-foreground mb-3">
-                5+ years on Fiverr with 100+ satisfied clients
+              <p className="text-sm text-muted-foreground mb-1">
+                <span className="font-semibold text-green-600">73 Five-Star Reviews</span> on Fiverr
+              </p>
+              <p className="text-xs text-muted-foreground mb-3">
+                5+ years delivering exceptional Power BI & data analytics solutions
               </p>
               <Button variant="outline" className="group" asChild>
-                <a href="https://fiverr.com/sulaimanahmed" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.fiverr.com/bi_with_ahmed" target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
                   View Fiverr Profile
                 </a>
