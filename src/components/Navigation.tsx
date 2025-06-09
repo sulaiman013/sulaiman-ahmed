@@ -33,46 +33,46 @@ const Navigation = ({ darkMode, setDarkMode }: NavigationProps) => {
 
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-background/95 backdrop-blur-md border-b border-warmBrown-200 shadow-lg' : 'bg-transparent'
+      isScrolled ? 'bg-background/95 backdrop-blur-md border-b shadow-lg' : 'bg-transparent'
     }`}>
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
-          <Link to="/" className="font-bold text-xl warm-text-gradient">
+          <Link to="/" className="font-bold text-xl text-primary">
             Sulaiman Ahmed
           </Link>
           
           <div className="hidden md:flex items-center space-x-6">
             {isHomePage ? (
               <>
-                <Button variant="ghost" onClick={() => scrollToSection('hero')} className="text-warmBrown-600 hover:text-warmBrown-700 hover:bg-warmCream-50">
+                <Button variant="ghost" onClick={() => scrollToSection('hero')}>
                   Home
                 </Button>
-                <Button variant="ghost" onClick={() => scrollToSection('about')} className="text-warmBrown-600 hover:text-warmBrown-700 hover:bg-warmCream-50">
+                <Button variant="ghost" onClick={() => scrollToSection('about')}>
                   About
                 </Button>
-                <Button variant="ghost" onClick={() => scrollToSection('services')} className="text-warmBrown-600 hover:text-warmBrown-700 hover:bg-warmCream-50">
+                <Button variant="ghost" onClick={() => scrollToSection('services')}>
                   Services
                 </Button>
                 <Button variant="ghost" asChild>
-                  <Link to="/portfolio" className="text-warmBrown-600 hover:text-warmBrown-700 hover:bg-warmCream-50">Portfolio</Link>
+                  <Link to="/portfolio">Portfolio</Link>
                 </Button>
                 <Button variant="ghost" asChild>
-                  <Link to="/blog" className="text-warmBrown-600 hover:text-warmBrown-700 hover:bg-warmCream-50">Blog</Link>
+                  <Link to="/blog">Blog</Link>
                 </Button>
-                <Button variant="ghost" onClick={() => scrollToSection('contact')} className="text-warmBrown-600 hover:text-warmBrown-700 hover:bg-warmCream-50">
+                <Button variant="ghost" onClick={() => scrollToSection('contact')}>
                   Contact
                 </Button>
               </>
             ) : (
               <>
                 <Button variant="ghost" asChild>
-                  <Link to="/" className="text-warmBrown-600 hover:text-warmBrown-700 hover:bg-warmCream-50">Home</Link>
+                  <Link to="/">Home</Link>
                 </Button>
                 <Button variant="ghost" asChild>
-                  <Link to="/portfolio" className="text-warmBrown-600 hover:text-warmBrown-700 hover:bg-warmCream-50">Portfolio</Link>
+                  <Link to="/portfolio">Portfolio</Link>
                 </Button>
                 <Button variant="ghost" asChild>
-                  <Link to="/blog" className="text-warmBrown-600 hover:text-warmBrown-700 hover:bg-warmCream-50">Blog</Link>
+                  <Link to="/blog">Blog</Link>
                 </Button>
               </>
             )}
@@ -83,16 +83,16 @@ const Navigation = ({ darkMode, setDarkMode }: NavigationProps) => {
               variant="ghost"
               size="icon"
               onClick={() => setDarkMode(!darkMode)}
-              className="rounded-full text-warmBrown-600 hover:bg-warmCream-50"
+              className="rounded-full"
             >
               {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
             {isHomePage ? (
-              <Button size="sm" onClick={() => scrollToSection('contact')} className="warm-button text-white border-0">
+              <Button size="sm" onClick={() => scrollToSection('contact')}>
                 Hire Me
               </Button>
             ) : (
-              <Button size="sm" asChild className="warm-button text-white border-0">
+              <Button size="sm" asChild>
                 <Link to="/#contact">Hire Me</Link>
               </Button>
             )}
