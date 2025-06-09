@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink, Github, Youtube } from "lucide-react";
+import { ExternalLink, Github, Youtube, Users, Video, Calendar } from "lucide-react";
 
 const Portfolio = () => {
   const [darkMode, setDarkMode] = useState(true);
@@ -27,7 +27,7 @@ const Portfolio = () => {
       solution: "Used Power BI, Python, and Excel to create detailed customer segmentation and interactive dashboards with actionable insights.",
       results: ["Customer segmentation clarity", "Actionable recommendations for customized credit card features", "Targeted marketing strategies", "Data-driven interactive dashboard"],
       technologies: ["Power BI", "Python", "Excel", "Data Analysis", "Customer Segmentation"],
-      embed: '<iframe title="Bank Customer Insights" width="600" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiYWYwNGNkZTYtNDM4ZC00OTU0LTg0Y2MtNGU3NjI4ZGRlMjllIiwidCI6ImM2ZTU0OWIzLTVmNDUtNDAzMi1hYWU5LWQ0MjQ0ZGM1YjJjNCJ9" frameborder="0" allowFullScreen="true"></iframe>',
+      embed: '<iframe title="Bank Customer Insights" width="100%" height="100%" src="https://app.powerbi.com/view?r=eyJrIjoiYWYwNGNkZTYtNDM4ZC00OTU0LTg0Y2MtNGU3NjI4ZGRlMjllIiwidCI6ImM2ZTU0OWIzLTVmNDUtNDAzMi1hYWU5LWQ0MjQ0ZGM1YjJjNCJ9" frameborder="0" allowFullScreen="true"></iframe>',
       github: "https://github.com/sulaiman013/My-Personal-Projects/tree/master/Mitron%20Bank%20Credit%20Card",
       youtube: "https://www.youtube.com/watch?v=9NFXrUQP0bc",
       category: "Banking Analytics"
@@ -40,7 +40,7 @@ const Portfolio = () => {
       solution: "Developed comprehensive dashboards using Power BI with key performance indicators and advanced data modeling techniques.",
       results: ["Invaluable insights into finance, sales, marketing, supply chain", "Executive performance tracking", "Data-driven value delivery", "Long-term business success enablement"],
       technologies: ["Power BI", "Data Modeling", "KPIs", "Business Intelligence", "Multi-department Analytics"],
-      embed: '<iframe title="business insights 360" width="600" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiYWEzZTA0MzMtNDk2Mi00YjZiLTg0YzItODJlM2IwYTM0Mzk4IiwidCI6ImM2ZTU0OWIzLTVmNDUtNDAzMi1hYWU5LWQ0MjQ0ZGM1YjJjNCJ9" frameborder="0" allowFullScreen="true"></iframe>',
+      embed: '<iframe title="business insights 360" width="100%" height="100%" src="https://app.powerbi.com/view?r=eyJrIjoiYWEzZTA0MzMtNDk2Mi00YjZiLTg0YzItODJlM2IwYTM0Mzk4IiwidCI6ImM2ZTU0OWIzLTVmNDUtNDAzMi1hYWU5LWQ0MjQ0ZGM1YjJjNCJ9" frameborder="0" allowFullScreen="true"></iframe>',
       github: "https://github.com/sulaiman013/My-Personal-Projects/tree/master/Business%20Insights%20360",
       youtube: "https://www.youtube.com/watch?v=yT6oPMW3orU&t=1s",
       category: "Business Intelligence"
@@ -53,7 +53,7 @@ const Portfolio = () => {
       solution: "Built Power BI financial reports with income statements, balance sheets, cash flow analysis, and aged trial balance with actionable insights.",
       results: ["Comprehensive financial performance view", "Cost optimization insights", "Improved profit margin analysis", "Enhanced cash flow management"],
       technologies: ["Power BI", "Financial Analysis", "Cash Flow Modeling", "Balance Sheet Analysis", "Revenue Analytics"],
-      embed: '<iframe title="Financial Reporting In Power BI" width="600" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiOGY4ZTgwYmItYmMwNS00ZWY0LWEyMDQtZGZmMzJmN2VjY2YzIiwidCI6ImM2ZTU0OWIzLTVmNDUtNDAzMi1hYWU5LWQ0MjQ0ZGM1YjJjNCJ9" frameborder="0" allowFullScreen="true"></iframe>',
+      embed: '<iframe title="Financial Reporting In Power BI" width="100%" height="100%" src="https://app.powerbi.com/view?r=eyJrIjoiOGY4ZTgwYmItYmMwNS00ZWY0LWEyMDQtZGZmMzJmN2VjY2YzIiwidCI6ImM2ZTU0OWIzLTVmNDUtNDAzMi1hYWU5LWQ0MjQ0ZGM1YjJjNCJ9" frameborder="0" allowFullScreen="true"></iframe>',
       github: "https://github.com/sulaiman013/My-Personal-Projects/tree/master/Financial%20Reporting%20in%20Power%20BI",
       youtube: null,
       category: "Financial Analytics"
@@ -66,7 +66,7 @@ const Portfolio = () => {
       solution: "Used Power BI to create interactive dashboards analyzing hospital data, identifying key cost influencers and length of stay factors.",
       results: ["Identified cost per discharge factors", "Length of stay analysis", "Hospital efficiency insights", "Improved patient care recommendations"],
       technologies: ["Power BI", "Healthcare Data", "Statistical Analysis", "Interactive Dashboards", "Performance Metrics"],
-      embed: '<iframe title="healthcare analytics" width="600" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiOTYzYWJkN2YtMzhlMi00ZjMzLTk4N2YtMmUzNmM5YjRkYjlhIiwidCI6ImM2ZTU0OWIzLTVmNDUtNDAzMi1hYWU5LWQ0MjQ0ZGM1YjJjNCJ9" frameborder="0" allowFullScreen="true"></iframe>',
+      embed: '<iframe title="healthcare analytics" width="100%" height="100%" src="https://app.powerbi.com/view?r=eyJrIjoiOTYzYWJkN2YtMzhlMi00ZjMzLTk4N2YtMmUzNmM5YjRkYjlhIiwidCI6ImM2ZTU0OWIzLTVmNDUtNDAzMi1hYWU5LWQ0MjQ0ZGM1YjJjNCJ9" frameborder="0" allowFullScreen="true"></iframe>',
       github: "https://github.com/sulaiman013/My-Personal-Projects/tree/master/Healthcare%20Analytics%20in%20PowerBI",
       youtube: null,
       category: "Healthcare Analytics"
@@ -79,7 +79,7 @@ const Portfolio = () => {
       solution: "Implemented cohort analysis using Power BI with DAX measures, data modeling, and visualizations for monthly and weekly trends.",
       results: ["Monthly and weekly customer trends", "Customer behavior insights", "Strategic business recommendations", "Retention pattern analysis"],
       technologies: ["Power BI", "Cohort Analysis", "DAX", "Data Modeling", "Retail Analytics"],
-      embed: '<iframe title="CA on retail dataset" width="600" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiMDhhMzFhOTgtOTYzZC00OWM1LWIxNTAtNTFmZjEzODY2NTA0IiwidCI6ImM2ZTU0OWIzLTVmNDUtNDAzMi1hYWU5LWQ0MjQ0ZGM1YjJjNCJ9" frameborder="0" allowFullScreen="true"></iframe>',
+      embed: '<iframe title="CA on retail dataset" width="100%" height="100%" src="https://app.powerbi.com/view?r=eyJrIjoiMDhhMzFhOTgtOTYzZC00OWM1LWIxNTAtNTFmZjEzODY2NTA0IiwidCI6ImM2ZTU0OWIzLTVmNDUtNDAzMi1hYWU5LWQ0MjQ0ZGM1YjJjNCJ9" frameborder="0" allowFullScreen="true"></iframe>',
       github: "https://github.com/sulaiman013/My-Personal-Projects/tree/master/Cohort%20Analysis%20Using%20PowerBI",
       youtube: null,
       category: "Customer Analytics"
@@ -115,11 +115,54 @@ const Portfolio = () => {
                 <p className="text-xl text-muted-foreground mb-8">
                   Real-world data analytics solutions delivering measurable business impact
                 </p>
-                <div className="flex justify-center">
+                
+                {/* YouTube Channel Highlight */}
+                <div className="bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 rounded-lg p-6 mb-8 max-w-4xl mx-auto">
+                  <div className="flex items-center justify-center mb-4">
+                    <Youtube className="h-8 w-8 text-red-600 mr-3" />
+                    <h3 className="text-2xl font-bold text-red-600">YouTube Channel - Data Analytics Hub</h3>
+                  </div>
+                  
+                  <div className="grid md:grid-cols-3 gap-4 mb-6">
+                    <div className="text-center">
+                      <div className="flex items-center justify-center mb-2">
+                        <Users className="h-5 w-5 text-red-600 mr-2" />
+                        <span className="font-semibold">341 Subscribers</span>
+                      </div>
+                    </div>
+                    <div className="text-center">
+                      <div className="flex items-center justify-center mb-2">
+                        <Video className="h-5 w-5 text-red-600 mr-2" />
+                        <span className="font-semibold">89 Videos</span>
+                      </div>
+                    </div>
+                    <div className="text-center">
+                      <div className="flex items-center justify-center mb-2">
+                        <Calendar className="h-5 w-5 text-red-600 mr-2" />
+                        <span className="font-semibold">Regular Updates</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <p className="text-muted-foreground mb-4 leading-relaxed">
+                    <strong>@sulaimanahmed013</strong> - Your go-to destination for comprehensive data analytics education! 
+                    Featuring Microsoft certification prep (PL-300), advanced Power BI & DAX tutorials, end-to-end ML projects, 
+                    Azure data integration, Python EDA, and statistical concepts in both English and Bengali.
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-2 justify-center mb-4">
+                    <Badge variant="outline" className="bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300">Microsoft Certification Prep</Badge>
+                    <Badge variant="outline" className="bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300">Power BI & DAX</Badge>
+                    <Badge variant="outline" className="bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300">Machine Learning Projects</Badge>
+                    <Badge variant="outline" className="bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300">Azure Analytics</Badge>
+                    <Badge variant="outline" className="bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300">Bengali Statistics</Badge>
+                    <Badge variant="outline" className="bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300">Python EDA</Badge>
+                  </div>
+                  
                   <Button asChild className="bg-red-600 hover:bg-red-700 text-white">
                     <a href="https://www.youtube.com/@sulaimanahmed013/videos" target="_blank" rel="noopener noreferrer">
                       <Youtube className="mr-2 h-4 w-4" />
-                      YouTube Channel - Data Analytics Content
+                      Explore Data Analytics Content
                     </a>
                   </Button>
                 </div>
@@ -135,9 +178,9 @@ const Portfolio = () => {
                     onClick={() => setSelectedProject(selectedProject === index ? null : index)}
                   >
                     {project.embed && (
-                      <div className="aspect-video relative overflow-hidden bg-muted/30">
+                      <div className="aspect-video relative overflow-hidden bg-muted/30 border-b">
                         <div 
-                          className="w-full h-full"
+                          className="w-full h-full flex items-center justify-center"
                           dangerouslySetInnerHTML={{ __html: project.embed }}
                         />
                         <div className="absolute top-4 left-4">
