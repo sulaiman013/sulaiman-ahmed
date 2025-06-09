@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import BlogPost from "@/components/BlogPost";
 
 const Blog = () => {
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
   const { slug } = useParams();
 
   useEffect(() => {
