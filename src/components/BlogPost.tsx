@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Calendar, Clock, Share2, BookOpen, Linkedin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import MarkdownRenderer from "./MarkdownRenderer";
 
 interface BlogPostData {
   id: string;
@@ -70,35 +71,6 @@ const BlogPost = ({ slug }: BlogPostProps) => {
     const wordsPerMinute = 200;
     const wordCount = content.split(' ').length;
     return Math.ceil(wordCount / wordsPerMinute);
-  };
-
-  const convertMarkdownToHtml = (markdown: string) => {
-    let html = markdown;
-    
-    // Convert headers
-    html = html.replace(/^##### (.*$)/gim, '<h5 class="text-lg font-semibold mt-6 mb-3 text-foreground">$1</h5>');
-    html = html.replace(/^#### (.*$)/gim, '<h4 class="text-xl font-semibold mt-6 mb-4 text-foreground">$1</h4>');
-    html = html.replace(/^### (.*$)/gim, '<h3 class="text-2xl font-bold mt-8 mb-4 text-foreground">$1</h3>');
-    html = html.replace(/^## (.*$)/gim, '<h2 class="text-3xl font-bold mt-10 mb-6 text-foreground border-b border-border pb-2">$1</h2>');
-    html = html.replace(/^# (.*$)/gim, '<h1 class="text-4xl font-bold mt-12 mb-8 text-foreground">$1</h1>');
-    
-    // Convert code blocks
-    html = html.replace(/```([^`]+)```/gim, '<div class="bg-muted p-4 rounded-lg my-4 overflow-x-auto"><pre class="text-sm text-foreground whitespace-pre-wrap"><code>$1</code></pre></div>');
-    
-    // Convert inline code
-    html = html.replace(/`([^`]+)`/gim, '<code class="bg-muted px-2 py-1 rounded text-sm text-foreground">$1</code>');
-    
-    // Convert bold text
-    html = html.replace(/\*\*(.*?)\*\*/gim, '<strong class="font-semibold">$1</strong>');
-    
-    // Convert line breaks
-    html = html.replace(/\n/g, '<br>');
-    
-    // Convert paragraphs (group consecutive lines)
-    html = html.replace(/(<br>){2,}/g, '</p><p class="mb-4 leading-relaxed text-foreground">');
-    html = '<p class="mb-4 leading-relaxed text-foreground">' + html + '</p>';
-    
-    return html;
   };
 
   if (loading) {
@@ -233,16 +205,11 @@ const BlogPost = ({ slug }: BlogPostProps) => {
           {/* Article Content */}
           <Card className="border-0 shadow-xl bg-card/50 backdrop-blur-sm">
             <CardContent className="p-8">
-              <div className="prose prose-lg max-w-none dark:prose-invert">
-                {post.content ? (
-                  <div 
-                    className="markdown-content"
-                    dangerouslySetInnerHTML={{ __html: convertMarkdownToHtml(post.content) }} 
-                  />
-                ) : (
-                  <p className="text-muted-foreground">Content will be available soon.</p>
-                )}
-              </div>
+              {post.content ? (
+                <MarkdownRenderer content={post.content} />
+              ) : (
+                <p className="text-muted-foreground">Content will be available soon.</p>
+              )}
             </CardContent>
           </Card>
 
