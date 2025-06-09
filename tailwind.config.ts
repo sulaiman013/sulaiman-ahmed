@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -23,53 +24,54 @@ export default {
 				heading: ['Poppins', 'Inter', 'system-ui', 'sans-serif'],
 			},
 			colors: {
-				sage: {
-					50: '#f8f9f6',
-					100: '#e9edc9',
-					200: '#ccd5ae',
-					300: '#9da489',
-					400: '#8a9177',
-					500: '#7a8068',
-					600: '#6a6e5a',
-					700: '#5a5d4d',
-					800: '#4a4d40',
-					900: '#3a3d33',
+				// Warm, elegant color palette
+				warmBrown: {
+					50: '#fcf9f6',
+					100: '#f8f1e8',
+					200: '#f0e2d0',
+					300: '#e6d0b5',
+					400: '#dab584',
+					500: '#cd855f',
+					600: '#b76e46',
+					700: '#9d5a3a',
+					800: '#824a33',
+					900: '#6b3d2c',
 				},
-				cream: {
-					50: '#fefae0',
-					100: '#fef7cd',
-					200: '#fef0a0',
-					300: '#fde96d',
-					400: '#fce13d',
-					500: '#fbd914',
-					600: '#e8bf0a',
-					700: '#d4a307',
-					800: '#b08408',
-					900: '#8f6608',
+				warmPeach: {
+					50: '#fef9f5',
+					100: '#fdf2ea',
+					200: '#fae3d0',
+					300: '#f6cfa8',
+					400: '#f0b27f',
+					500: '#e99357',
+					600: '#da7539',
+					700: '#b85c2b',
+					800: '#964a26',
+					900: '#7a3d22',
 				},
-				peach: {
-					50: '#fef5f0',
-					100: '#fde8d9',
-					200: '#fbceb2',
-					300: '#f8ae81',
-					400: '#f58c4e',
-					500: '#f26d1f',
-					600: '#e85315',
-					700: '#d44113',
-					800: '#b33417',
-					900: '#922b16',
+				warmCream: {
+					50: '#fefdfb',
+					100: '#fcf9f6',
+					200: '#f8f1e8',
+					300: '#f0e2d0',
+					400: '#e8d0b5',
+					500: '#ddb894',
+					600: '#cc9f72',
+					700: '#b8845a',
+					800: '#966a47',
+					900: '#785539',
 				},
-				terracotta: {
-					50: '#faf5f2',
-					100: '#f4e7db',
-					200: '#e8cab5',
-					300: '#d9a68b',
-					400: '#cb8161',
-					500: '#c16543',
-					600: '#b55438',
-					700: '#964430',
-					800: '#7a392b',
-					900: '#643025',
+				warmGold: {
+					50: '#fffcf0',
+					100: '#fef7db',
+					200: '#fcebb7',
+					300: '#f9da87',
+					400: '#f5c55c',
+					500: '#f0b13e',
+					600: '#e19b2e',
+					700: '#bb7b26',
+					800: '#966025',
+					900: '#794f22',
 				},
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -147,14 +149,25 @@ export default {
 						transform: 'translateY(0)'
 					}
 				},
-				'data-pulse': {
+				'warm-pulse': {
 					'0%, 100%': {
-						opacity: '0.6',
+						opacity: '0.7',
 						transform: 'scale(1)'
 					},
 					'50%': {
 						opacity: '1',
 						transform: 'scale(1.05)'
+					}
+				},
+				'floating': {
+					'0%, 100%': {
+						transform: 'translateY(0px) rotate(0deg)'
+					},
+					'33%': {
+						transform: 'translateY(-20px) rotate(2deg)'
+					},
+					'66%': {
+						transform: 'translateY(-10px) rotate(-1deg)'
 					}
 				},
 				'gradient-shift': {
@@ -164,18 +177,29 @@ export default {
 					'50%': {
 						backgroundPosition: '100% 50%'
 					}
+				},
+				'wave': {
+					'0%': {
+						transform: 'translateX(-100%)'
+					},
+					'100%': {
+						transform: 'translateX(100%)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				'fade-up': 'fade-up 0.6s ease-out forwards',
-				'data-pulse': 'data-pulse 2s ease-in-out infinite',
-				'gradient-shift': 'gradient-shift 3s ease infinite',
+				'fade-up': 'fade-up 0.8s ease-out forwards',
+				'warm-pulse': 'warm-pulse 3s ease-in-out infinite',
+				'floating': 'floating 6s ease-in-out infinite',
+				'gradient-shift': 'gradient-shift 8s ease infinite',
+				'wave': 'wave 8s ease-in-out infinite',
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
 				'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+				'warm-gradient': 'linear-gradient(135deg, rgb(183, 110, 70), rgb(205, 133, 63), rgb(218, 165, 132))',
 			}
 		}
 	},

@@ -16,7 +16,7 @@ const Services = () => {
         "Performance Tuning",
         "Data Modeling"
       ],
-      color: "from-peach-400 to-terracotta-400"
+      color: "from-warmPeach-400 to-warmBrown-400"
     },
     {
       icon: Database,
@@ -29,7 +29,7 @@ const Services = () => {
         "Data Lake Architecture",
         "Real-time Analytics"
       ],
-      color: "from-sage-400 to-sage-600"
+      color: "from-warmBrown-400 to-warmBrown-600"
     },
     {
       icon: GraduationCap,
@@ -42,7 +42,7 @@ const Services = () => {
         "Certification Prep",
         "Custom Curriculum"
       ],
-      color: "from-cream-400 to-peach-400"
+      color: "from-warmGold-400 to-warmPeach-400"
     }
   ];
 
@@ -54,11 +54,11 @@ const Services = () => {
   };
 
   return (
-    <section className="py-20 bg-sage-50/50">
+    <section className="py-20 warm-gradient-bg wave-bg relative">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-sage-500 to-peach-500 bg-clip-text text-transparent">
+            <h2 className="text-4xl font-bold mb-4 warm-text-gradient">
               Services
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -68,12 +68,12 @@ const Services = () => {
           
           <div className="grid lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
-              <Card key={index} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-sage-200 bg-gradient-to-br from-card to-sage-50/30">
+              <Card key={index} className="group card-hover border-warmBrown-200 bg-gradient-to-br from-card/95 to-warmCream-50/90 backdrop-blur-sm">
                 <CardHeader className="text-center pb-4">
-                  <div className={`w-16 h-16 mx-auto rounded-full bg-gradient-to-r ${service.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                  <div className={`w-16 h-16 mx-auto rounded-full bg-gradient-to-r ${service.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg`}>
                     <service.icon className="h-8 w-8 text-white" />
                   </div>
-                  <CardTitle className="text-xl group-hover:text-sage-600 transition-colors">
+                  <CardTitle className="text-xl group-hover:text-warmBrown-600 transition-colors">
                     {service.title}
                   </CardTitle>
                 </CardHeader>
@@ -84,7 +84,7 @@ const Services = () => {
                   </p>
                   
                   <div className="space-y-3">
-                    <h4 className="font-semibold">What's Included:</h4>
+                    <h4 className="font-semibold text-warmBrown-700">What's Included:</h4>
                     <ul className="space-y-2">
                       {service.features.map((feature, featureIndex) => (
                         <li key={featureIndex} className="flex items-center text-sm text-muted-foreground">
@@ -96,7 +96,7 @@ const Services = () => {
                   </div>
                   
                   <Button 
-                    className="w-full group/btn bg-gradient-to-r from-sage-400 to-peach-400 hover:from-sage-500 hover:to-peach-500 text-white"
+                    className="w-full group/btn warm-button text-white border-0"
                     onClick={scrollToContact}
                   >
                     Get Started
@@ -111,7 +111,7 @@ const Services = () => {
             <p className="text-muted-foreground mb-4">
               Need a custom solution? Let's discuss your specific requirements.
             </p>
-            <Button variant="outline" size="lg" className="border-sage-300 text-sage-600 hover:bg-sage-50" onClick={scrollToContact}>
+            <Button variant="outline" size="lg" className="border-warmBrown-300 text-warmBrown-600 hover:bg-warmCream-50 hover:border-warmBrown-400" onClick={scrollToContact}>
               Schedule a Consultation
             </Button>
           </div>
