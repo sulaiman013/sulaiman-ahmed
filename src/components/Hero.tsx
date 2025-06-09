@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { FileText, Mail } from "lucide-react";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   const [currentRole, setCurrentRole] = useState(0);
@@ -55,9 +56,11 @@ const Hero = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button size="lg" className="group" onClick={() => scrollToSection('portfolio')}>
-              <FileText className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-              View Portfolio
+            <Button size="lg" className="group" asChild>
+              <Link to="/portfolio">
+                <FileText className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+                View Portfolio
+              </Link>
             </Button>
             <Button variant="outline" size="lg" className="group" onClick={() => scrollToSection('contact')}>
               <Mail className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />

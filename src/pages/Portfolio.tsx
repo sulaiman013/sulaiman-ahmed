@@ -1,4 +1,3 @@
-
 import Navigation from "@/components/Navigation";
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Github, Youtube, Users, Video, Calendar } from "lucide-react";
 
 const Portfolio = () => {
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
 
   useEffect(() => {
