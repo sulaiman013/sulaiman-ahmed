@@ -16,7 +16,7 @@ const Services = () => {
         "Performance Tuning",
         "Data Modeling"
       ],
-      color: "from-yellow-500 to-orange-500"
+      color: "from-peach-400 to-terracotta-400"
     },
     {
       icon: Database,
@@ -29,7 +29,7 @@ const Services = () => {
         "Data Lake Architecture",
         "Real-time Analytics"
       ],
-      color: "from-blue-500 to-purple-500"
+      color: "from-sage-400 to-sage-600"
     },
     {
       icon: GraduationCap,
@@ -42,7 +42,7 @@ const Services = () => {
         "Certification Prep",
         "Custom Curriculum"
       ],
-      color: "from-green-500 to-teal-500"
+      color: "from-cream-400 to-peach-400"
     }
   ];
 
@@ -54,11 +54,11 @@ const Services = () => {
   };
 
   return (
-    <section className="py-20 bg-muted/30">
+    <section className="py-20 bg-sage-50/50">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-blue-500 bg-clip-text text-transparent">
+            <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-sage-500 to-peach-500 bg-clip-text text-transparent">
               Services
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -68,12 +68,12 @@ const Services = () => {
           
           <div className="grid lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
-              <Card key={index} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0 bg-gradient-to-br from-card to-card/50">
+              <Card key={index} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-sage-200 bg-gradient-to-br from-card to-sage-50/30">
                 <CardHeader className="text-center pb-4">
                   <div className={`w-16 h-16 mx-auto rounded-full bg-gradient-to-r ${service.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
                     <service.icon className="h-8 w-8 text-white" />
                   </div>
-                  <CardTitle className="text-xl group-hover:text-primary transition-colors">
+                  <CardTitle className="text-xl group-hover:text-sage-600 transition-colors">
                     {service.title}
                   </CardTitle>
                 </CardHeader>
@@ -96,7 +96,7 @@ const Services = () => {
                   </div>
                   
                   <Button 
-                    className="w-full group/btn bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90"
+                    className="w-full group/btn bg-gradient-to-r from-sage-400 to-peach-400 hover:from-sage-500 hover:to-peach-500 text-white"
                     onClick={scrollToContact}
                   >
                     Get Started
@@ -111,7 +111,7 @@ const Services = () => {
             <p className="text-muted-foreground mb-4">
               Need a custom solution? Let's discuss your specific requirements.
             </p>
-            <Button variant="outline" size="lg" onClick={scrollToContact}>
+            <Button variant="outline" size="lg" className="border-sage-300 text-sage-600 hover:bg-sage-50" onClick={scrollToContact}>
               Schedule a Consultation
             </Button>
           </div>

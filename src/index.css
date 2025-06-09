@@ -3,67 +3,67 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Dark theme design system */
+/* Custom color palette design system */
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
+    --background: 254 250 224; /* FEFAE0 - cream background */
+    --foreground: 45 45 45; /* Dark text for contrast */
+    --card: 254 250 224; /* FEFAE0 - cream */
+    --card-foreground: 45 45 45;
+    --popover: 254 250 224; /* FEFAE0 - cream */
+    --popover-foreground: 45 45 45;
+    --primary: 157 164 137; /* 9DA489 - sage green */
+    --primary-foreground: 45 45 45;
+    --secondary: 233 237 201; /* E9EDC9 - light sage */
+    --secondary-foreground: 45 45 45;
+    --muted: 233 237 201; /* E9EDC9 - light sage */
+    --muted-foreground: 100 100 100;
+    --accent: 250 173 109; /* FAED0D - peach accent */
+    --accent-foreground: 45 45 45;
+    --destructive: 220 38 38;
+    --destructive-foreground: 254 250 224;
+    --border: 205 197 174; /* CCD5AE - sage border */
+    --input: 205 197 174; /* CCD5AE - sage border */
+    --ring: 157 164 137; /* 9DA489 - sage green */
     --radius: 0.5rem;
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 254 250 224; /* FEFAE0 - cream */
+    --sidebar-foreground: 45 45 45;
+    --sidebar-primary: 157 164 137; /* 9DA489 - sage green */
+    --sidebar-primary-foreground: 45 45 45;
+    --sidebar-accent: 233 237 201; /* E9EDC9 - light sage */
+    --sidebar-accent-foreground: 45 45 45;
+    --sidebar-border: 205 197 174; /* CCD5AE - sage border */
+    --sidebar-ring: 157 164 137; /* 9DA489 - sage green */
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --background: 45 45 45; /* Dark background */
+    --foreground: 254 250 224; /* FEFAE0 - cream text */
+    --card: 60 60 60; /* Darker card background */
+    --card-foreground: 254 250 224; /* FEFAE0 - cream text */
+    --popover: 60 60 60;
+    --popover-foreground: 254 250 224; /* FEFAE0 - cream text */
+    --primary: 157 164 137; /* 9DA489 - sage green */
+    --primary-foreground: 254 250 224; /* FEFAE0 - cream text */
+    --secondary: 80 80 80;
+    --secondary-foreground: 254 250 224; /* FEFAE0 - cream text */
+    --muted: 80 80 80;
+    --muted-foreground: 180 180 180;
+    --accent: 250 173 109; /* FAED0D - peach accent */
+    --accent-foreground: 45 45 45;
+    --destructive: 220 38 38;
+    --destructive-foreground: 254 250 224; /* FEFAE0 - cream text */
+    --border: 80 80 80;
+    --input: 80 80 80;
+    --ring: 157 164 137; /* 9DA489 - sage green */
+    --sidebar-background: 45 45 45;
+    --sidebar-foreground: 254 250 224; /* FEFAE0 - cream text */
+    --sidebar-primary: 157 164 137; /* 9DA489 - sage green */
+    --sidebar-primary-foreground: 254 250 224; /* FEFAE0 - cream text */
+    --sidebar-accent: 80 80 80;
+    --sidebar-accent-foreground: 254 250 224; /* FEFAE0 - cream text */
+    --sidebar-border: 80 80 80;
+    --sidebar-ring: 157 164 137; /* 9DA489 - sage green */
   }
 }
 
@@ -132,8 +132,8 @@
 /* Data visualization inspired grid pattern */
 .bg-grid-pattern {
   background-image: 
-    linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+    linear-gradient(rgba(157, 164, 137, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(157, 164, 137, 0.1) 1px, transparent 1px);
   background-size: 50px 50px;
 }
 
@@ -179,7 +179,7 @@ html {
 
 /* Progress bar styling */
 [data-radix-progress-indicator] {
-  background: linear-gradient(90deg, hsl(var(--primary)), #3b82f6, #8b5cf6);
+  background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--primary)));
   transition: transform 0.65s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
@@ -190,12 +190,12 @@ html {
 
 .card-hover:hover {
   transform: translateY(-8px);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 25px 50px -12px rgba(157, 164, 137, 0.25);
 }
 
 /* Gradient text utilities */
 .gradient-text {
-  background: linear-gradient(135deg, hsl(var(--primary)), #3b82f6, #8b5cf6);
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)), #D4A373);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
