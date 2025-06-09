@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { Search, Calendar, Clock, ArrowRight } from "lucide-react";
+import { Search, Calendar, Clock, ArrowRight, Linkedin } from "lucide-react";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Link } from "react-router-dom";
@@ -78,6 +78,12 @@ const BlogSection = () => {
     });
   };
 
+  const estimateReadingTime = (content: string) => {
+    const wordsPerMinute = 200;
+    const wordCount = content?.split(' ').length || 0;
+    return Math.ceil(wordCount / wordsPerMinute);
+  };
+
   if (loading) {
     return (
       <section className="py-20 bg-muted/30">
@@ -123,6 +129,17 @@ const BlogSection = () => {
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Insights on data analytics, Power BI tips, and industry trends to help you transform data into strategic insights
             </p>
+            <div className="flex items-center justify-center gap-2 mt-4">
+              <span className="text-lg font-medium">by Sulaiman Ahmed</span>
+              <a 
+                href="https://www.linkedin.com/in/sulaimanahmed" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-primary hover:text-primary/80 transition-colors"
+              >
+                <Linkedin className="h-6 w-6" />
+              </a>
+            </div>
           </div>
 
           {/* Featured Posts */}
@@ -132,14 +149,10 @@ const BlogSection = () => {
                 <span className="bg-gradient-to-r from-yellow-500 to-orange-500 w-1 h-6 rounded-full"></span>
                 Featured Articles
               </h3>
-              <div className="grid md:grid-cols-2 gap-8">
-                {featuredPosts.slice(0, 2).map((post) => (
+              <div className="space-y-6">
+                {featuredPosts.slice(0, 3).map((post) => (
                   <Link key={post.id} to={`/blog/${post.slug}`}>
-                    <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 overflow-hidden bg-gradient-to-br from-card to-card/50 backdrop-blur-sm border-0 shadow-xl cursor-pointer">
-                      <div className="aspect-video bg-gradient-to-br from-primary/20 to-blue-500/20 flex items-center justify-center relative overflow-hidden">
-                        <div className="text-6xl opacity-20 group-hover:scale-110 transition-transform duration-500">📊</div>
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-                      </div>
+                    <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 overflow-hidden bg-gradient-to-br from-card to-card/50 backdrop-blur-sm border-0 shadow-xl cursor-pointer">
                       <CardHeader className="pb-4">
                         <div className="flex items-center justify-between mb-3">
                           <Badge className="bg-gradient-to-r from-primary to-blue-600 text-white">
@@ -149,19 +162,23 @@ const BlogSection = () => {
                             Featured
                           </Badge>
                         </div>
-                        <CardTitle className="text-xl group-hover:text-primary transition-colors line-clamp-2 leading-tight">
+                        <CardTitle className="text-2xl md:text-3xl group-hover:text-primary transition-colors leading-tight">
                           {post.title}
                         </CardTitle>
                       </CardHeader>
                       <CardContent>
-                        <p className="text-muted-foreground leading-relaxed line-clamp-3 mb-4">
+                        <p className="text-muted-foreground leading-relaxed line-clamp-2 mb-4 text-lg">
                           {post.excerpt}
                         </p>
                         <div className="flex items-center justify-between">
-                          <div className="flex items-center text-xs text-muted-foreground gap-4">
+                          <div className="flex items-center text-sm text-muted-foreground gap-4">
                             <div className="flex items-center gap-1">
-                              <Calendar className="h-3 w-3" />
+                              <Calendar className="h-4 w-4" />
                               {formatDate(post.created_at)}
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <Clock className="h-4 w-4" />
+                              {estimateReadingTime(post.excerpt || '')} min read
                             </div>
                           </div>
                           <div className="flex items-center text-primary group-hover:translate-x-1 transition-transform">
@@ -208,43 +225,40 @@ const BlogSection = () => {
             </div>
           </div>
 
-          {/* Blog Posts Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {/* Blog Posts List */}
+          <div className="space-y-6 mb-12">
             {filteredPosts.map((post) => (
               <Link key={post.id} to={`/blog/${post.slug}`}>
-                <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden cursor-pointer bg-card/50 backdrop-blur-sm border-0 shadow-lg">
-                  <div className="aspect-video bg-gradient-to-br from-muted to-muted/50 flex items-center justify-center relative overflow-hidden">
-                    <div className="text-4xl opacity-30 group-hover:scale-110 transition-transform duration-500">
-                      {post.category === 'Power BI' ? '📊' : 
-                       post.category === 'Microsoft Fabric' ? '🔗' :
-                       post.category === 'Data Engineering' ? '⚙️' : '💡'}
-                    </div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
-                  </div>
-                  
+                <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 overflow-hidden cursor-pointer bg-card/50 backdrop-blur-sm border-0 shadow-lg">
                   <CardHeader className="pb-3">
                     <div className="flex items-center justify-between text-sm text-muted-foreground mb-3">
                       <Badge variant="secondary" className="bg-muted/50">
                         {post.category}
                       </Badge>
-                      <div className="flex items-center gap-1">
-                        <Calendar className="h-3 w-3" />
-                        {formatDate(post.created_at)}
+                      <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-1">
+                          <Calendar className="h-3 w-3" />
+                          {formatDate(post.created_at)}
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Clock className="h-3 w-3" />
+                          {estimateReadingTime(post.excerpt || '')} min read
+                        </div>
                       </div>
                     </div>
-                    <CardTitle className="text-lg group-hover:text-primary transition-colors line-clamp-2 leading-tight">
+                    <CardTitle className="text-xl md:text-2xl group-hover:text-primary transition-colors leading-tight">
                       {post.title}
                     </CardTitle>
                   </CardHeader>
                   
                   <CardContent>
-                    <p className="text-muted-foreground leading-relaxed line-clamp-3 mb-4">
+                    <p className="text-muted-foreground leading-relaxed line-clamp-2 mb-4 text-base">
                       {post.excerpt}
                     </p>
                     
                     {post.tags && post.tags.length > 0 && (
-                      <div className="flex flex-wrap gap-1 mb-4">
-                        {post.tags.slice(0, 3).map((tag, tagIndex) => (
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {post.tags.slice(0, 4).map((tag, tagIndex) => (
                           <Badge key={tagIndex} variant="outline" className="text-xs border-muted-foreground/20">
                             #{tag}
                           </Badge>

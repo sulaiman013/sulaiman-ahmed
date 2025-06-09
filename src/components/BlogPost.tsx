@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowLeft, Calendar, Clock, Share2, BookOpen } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, Share2, BookOpen, Linkedin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -127,20 +127,33 @@ const BlogPost = ({ slug }: BlogPostProps) => {
           <Card className="border-0 shadow-xl bg-card/50 backdrop-blur-sm mb-8">
             <CardContent className="p-8">
               <div className="space-y-6">
-                {/* Category and Featured Badge */}
-                <div className="flex items-center gap-3">
-                  <Badge className="bg-gradient-to-r from-primary to-blue-600 text-white">
-                    {post.category}
-                  </Badge>
-                  {post.is_featured && (
-                    <Badge variant="outline" className="border-yellow-500 text-yellow-600">
-                      Featured
+                {/* Author and LinkedIn */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <Badge className="bg-gradient-to-r from-primary to-blue-600 text-white">
+                      {post.category}
                     </Badge>
-                  )}
+                    {post.is_featured && (
+                      <Badge variant="outline" className="border-yellow-500 text-yellow-600">
+                        Featured
+                      </Badge>
+                    )}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-medium">by Sulaiman Ahmed</span>
+                    <a 
+                      href="https://www.linkedin.com/in/sulaimanahmed" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-primary hover:text-primary/80 transition-colors"
+                    >
+                      <Linkedin className="h-5 w-5" />
+                    </a>
+                  </div>
                 </div>
 
                 {/* Title */}
-                <h1 className="text-4xl md:text-5xl font-bold leading-tight bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text">
+                <h1 className="text-3xl md:text-5xl font-bold leading-tight bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text">
                   {post.title}
                 </h1>
 
@@ -208,11 +221,14 @@ const BlogPost = ({ slug }: BlogPostProps) => {
               <CardContent className="p-8">
                 <h3 className="text-2xl font-bold mb-4">Enjoyed this article?</h3>
                 <p className="text-muted-foreground mb-6">
-                  Subscribe to my newsletter for more insights on data analytics and Power BI tips.
+                  Connect with me on LinkedIn for more insights on data analytics and Power BI tips.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button size="lg" className="bg-gradient-to-r from-primary to-blue-600">
-                    Subscribe to Newsletter
+                  <Button size="lg" className="bg-gradient-to-r from-primary to-blue-600" asChild>
+                    <a href="https://www.linkedin.com/in/sulaimanahmed" target="_blank" rel="noopener noreferrer">
+                      <Linkedin className="mr-2 h-5 w-5" />
+                      Connect on LinkedIn
+                    </a>
                   </Button>
                   <Button variant="outline" size="lg" asChild>
                     <Link to="/blog">Read More Articles</Link>
