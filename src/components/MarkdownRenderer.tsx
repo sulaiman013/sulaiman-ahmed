@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 interface MarkdownRendererProps {
   content: string;
@@ -16,21 +15,21 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content, className 
     
     // Convert code blocks (multi-line)
     html = html.replace(/```(\w+)?\n([\s\S]*?)```/gim, (match, lang, code) => {
-      return `<div class="bg-muted border border-border rounded-lg my-4 overflow-x-auto">
-        <pre class="p-4 text-sm text-foreground whitespace-pre overflow-x-auto"><code class="language-${lang || 'text'}">${escapeHtml(code.trim())}</code></pre>
+      return `<div class="bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg my-4 overflow-x-auto">
+        <pre class="p-4 text-sm whitespace-pre overflow-x-auto"><code class="language-${lang || 'text'}">${escapeHtml(code.trim())}</code></pre>
       </div>`;
     });
     
     // Convert inline code
-    html = html.replace(/`([^`\n]+)`/gim, '<code class="bg-muted px-2 py-1 rounded text-sm text-foreground font-mono border">$1</code>');
+    html = html.replace(/`([^`\n]+)`/gim, '<code class="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-sm font-mono border border-gray-300 dark:border-gray-600">$1</code>');
     
     // Convert headers (from largest to smallest to avoid conflicts)
-    html = html.replace(/^###### (.*$)/gim, '<h6 class="text-base font-semibold mt-6 mb-3 text-foreground">$1</h6>');
-    html = html.replace(/^##### (.*$)/gim, '<h5 class="text-lg font-semibold mt-6 mb-3 text-foreground">$1</h5>');
-    html = html.replace(/^#### (.*$)/gim, '<h4 class="text-xl font-semibold mt-8 mb-4 text-foreground">$1</h4>');
-    html = html.replace(/^### (.*$)/gim, '<h3 class="text-2xl font-bold mt-10 mb-6 text-foreground">$1</h3>');
-    html = html.replace(/^## (.*$)/gim, '<h2 class="text-3xl font-bold mt-12 mb-8 text-foreground border-b border-border pb-3">$1</h2>');
-    html = html.replace(/^# (.*$)/gim, '<h1 class="text-4xl font-bold mt-16 mb-10 text-foreground">$1</h1>');
+    html = html.replace(/^###### (.*$)/gim, '<h6 class="text-base font-semibold mt-6 mb-3 text-gray-900 dark:text-gray-100">$1</h6>');
+    html = html.replace(/^##### (.*$)/gim, '<h5 class="text-lg font-semibold mt-6 mb-3 text-gray-900 dark:text-gray-100">$1</h5>');
+    html = html.replace(/^#### (.*$)/gim, '<h4 class="text-xl font-semibold mt-8 mb-4 text-gray-900 dark:text-gray-100">$1</h4>');
+    html = html.replace(/^### (.*$)/gim, '<h3 class="text-2xl font-bold mt-10 mb-6 text-gray-900 dark:text-gray-100">$1</h3>');
+    html = html.replace(/^## (.*$)/gim, '<h2 class="text-3xl font-bold mt-12 mb-8 text-gray-900 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700 pb-3">$1</h2>');
+    html = html.replace(/^# (.*$)/gim, '<h1 class="text-4xl font-bold mt-16 mb-10 text-gray-900 dark:text-gray-100">$1</h1>');
     
     // Convert bold text
     html = html.replace(/\*\*(.*?)\*\*/gim, '<strong class="font-semibold">$1</strong>');
@@ -39,7 +38,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content, className 
     html = html.replace(/\*(.*?)\*/gim, '<em class="italic">$1</em>');
     
     // Convert links
-    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2" class="text-primary hover:text-primary/80 underline transition-colors" target="_blank" rel="noopener noreferrer">$1</a>');
+    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline transition-colors" target="_blank" rel="noopener noreferrer">$1</a>');
     
     // Convert unordered lists
     html = html.replace(/^[\s]*[\*\-\+][\s]+(.*)$/gim, '<li class="ml-4 mb-2">$1</li>');
@@ -49,10 +48,10 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content, className 
     html = html.replace(/^[\s]*\d+\.[\s]+(.*)$/gim, '<li class="ml-4 mb-2">$1</li>');
     
     // Convert blockquotes
-    html = html.replace(/^>\s*(.*)$/gim, '<blockquote class="border-l-4 border-border pl-4 py-2 my-4 bg-muted/30 italic text-muted-foreground">$1</blockquote>');
+    html = html.replace(/^>\s*(.*)$/gim, '<blockquote class="border-l-4 border-gray-300 dark:border-gray-600 pl-4 py-2 my-4 bg-gray-50 dark:bg-gray-800 italic text-gray-700 dark:text-gray-300">$1</blockquote>');
     
     // Convert horizontal rules
-    html = html.replace(/^---$/gim, '<hr class="border-t border-border my-8" />');
+    html = html.replace(/^---$/gim, '<hr class="border-t border-gray-300 dark:border-gray-600 my-8" />');
     
     // Convert line breaks to paragraphs
     const paragraphs = html.split(/\n\s*\n/);
@@ -65,7 +64,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content, className 
         return trimmed;
       }
       
-      return `<p class="mb-4 leading-relaxed text-foreground">${trimmed}</p>`;
+      return `<p class="mb-4 leading-relaxed text-gray-700 dark:text-gray-300">${trimmed}</p>`;
     }).join('\n');
     
     // Clean up any remaining newlines
@@ -98,25 +97,25 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content, className 
           .filter(cell => cell !== '')
       ).filter(row => row.length > 0);
       
-      // Generate table HTML
-      let tableHtml = '<div class="my-6 overflow-x-auto border border-border rounded-lg">';
-      tableHtml += '<table class="w-full border-collapse">';
+      // Generate table HTML with GitHub-style styling
+      let tableHtml = '<div class="my-6 overflow-x-auto border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm">';
+      tableHtml += '<table class="w-full border-collapse bg-white dark:bg-gray-900">';
       
       // Header
-      tableHtml += '<thead class="bg-muted/50">';
+      tableHtml += '<thead class="bg-gray-50 dark:bg-gray-800">';
       tableHtml += '<tr>';
       headers.forEach(header => {
-        tableHtml += `<th class="border-b border-border px-4 py-3 text-left font-semibold text-foreground">${header}</th>`;
+        tableHtml += `<th class="border-b border-gray-200 dark:border-gray-700 px-6 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">${header}</th>`;
       });
       tableHtml += '</tr>';
       tableHtml += '</thead>';
       
       // Body
-      tableHtml += '<tbody>';
+      tableHtml += '<tbody class="divide-y divide-gray-200 dark:divide-gray-700">';
       rows.forEach((row, index) => {
-        tableHtml += `<tr class="${index % 2 === 0 ? 'bg-background' : 'bg-muted/20'} hover:bg-muted/30 transition-colors">`;
+        tableHtml += `<tr class="${index % 2 === 0 ? 'bg-white dark:bg-gray-900' : 'bg-gray-50 dark:bg-gray-800'} hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">`;
         row.forEach(cell => {
-          tableHtml += `<td class="border-b border-border px-4 py-3 text-foreground">${cell}</td>`;
+          tableHtml += `<td class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300 whitespace-nowrap">${cell}</td>`;
         });
         tableHtml += '</tr>';
       });
@@ -138,6 +137,10 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content, className 
   return (
     <div 
       className={`prose prose-lg max-w-none dark:prose-invert markdown-content ${className}`}
+      style={{
+        lineHeight: '1.75',
+        fontSize: '16px'
+      }}
       dangerouslySetInnerHTML={{ __html: convertMarkdownToHtml(content) }}
     />
   );
