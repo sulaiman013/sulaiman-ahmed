@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Search, Calendar, Clock, ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { Link } from "react-router-dom";
 
 interface BlogPost {
   id: string;
@@ -112,65 +113,78 @@ const BlogSection = () => {
   }
 
   return (
-    <section className="py-20 bg-muted/30">
+    <section className="py-20 bg-gradient-to-br from-muted/30 to-background">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-blue-500 bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-blue-500 bg-clip-text text-transparent">
               Latest from the Blog
             </h2>
-            <p className="text-xl text-muted-foreground">
-              Insights on data analytics, Power BI tips, and industry trends
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Insights on data analytics, Power BI tips, and industry trends to help you transform data into strategic insights
             </p>
           </div>
 
           {/* Featured Posts */}
           {featuredPosts.length > 0 && (
-            <div className="mb-12">
-              <h3 className="text-2xl font-bold mb-6">Featured Posts</h3>
-              <div className="grid md:grid-cols-2 gap-6">
+            <div className="mb-16">
+              <h3 className="text-2xl font-bold mb-8 flex items-center gap-2">
+                <span className="bg-gradient-to-r from-yellow-500 to-orange-500 w-1 h-6 rounded-full"></span>
+                Featured Articles
+              </h3>
+              <div className="grid md:grid-cols-2 gap-8">
                 {featuredPosts.slice(0, 2).map((post) => (
-                  <Card key={post.id} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 overflow-hidden">
-                    <div className="aspect-video bg-gradient-to-br from-primary/20 to-blue-500/20 flex items-center justify-center">
-                      <div className="text-6xl opacity-20">📊</div>
-                    </div>
-                    <CardHeader>
-                      <div className="flex items-center justify-between mb-2">
-                        <Badge className="bg-primary/90 text-white">
-                          {post.category}
-                        </Badge>
-                        <div className="flex items-center text-xs text-muted-foreground">
-                          <Calendar className="h-3 w-3 mr-1" />
-                          {formatDate(post.created_at)}
-                        </div>
+                  <Link key={post.id} to={`/blog/${post.slug}`}>
+                    <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 overflow-hidden bg-gradient-to-br from-card to-card/50 backdrop-blur-sm border-0 shadow-xl cursor-pointer">
+                      <div className="aspect-video bg-gradient-to-br from-primary/20 to-blue-500/20 flex items-center justify-center relative overflow-hidden">
+                        <div className="text-6xl opacity-20 group-hover:scale-110 transition-transform duration-500">📊</div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                       </div>
-                      <CardTitle className="text-xl group-hover:text-primary transition-colors line-clamp-2">
-                        {post.title}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-muted-foreground leading-relaxed line-clamp-3 mb-4">
-                        {post.excerpt}
-                      </p>
-                      <Button variant="ghost" className="group/btn justify-start px-0">
-                        Read More
-                        <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-                      </Button>
-                    </CardContent>
-                  </Card>
+                      <CardHeader className="pb-4">
+                        <div className="flex items-center justify-between mb-3">
+                          <Badge className="bg-gradient-to-r from-primary to-blue-600 text-white">
+                            {post.category}
+                          </Badge>
+                          <Badge variant="outline" className="border-yellow-500 text-yellow-600">
+                            Featured
+                          </Badge>
+                        </div>
+                        <CardTitle className="text-xl group-hover:text-primary transition-colors line-clamp-2 leading-tight">
+                          {post.title}
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-muted-foreground leading-relaxed line-clamp-3 mb-4">
+                          {post.excerpt}
+                        </p>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center text-xs text-muted-foreground gap-4">
+                            <div className="flex items-center gap-1">
+                              <Calendar className="h-3 w-3" />
+                              {formatDate(post.created_at)}
+                            </div>
+                          </div>
+                          <div className="flex items-center text-primary group-hover:translate-x-1 transition-transform">
+                            <span className="text-sm font-medium">Read More</span>
+                            <ArrowRight className="ml-1 h-4 w-4" />
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </Link>
                 ))}
               </div>
             </div>
           )}
 
           {/* Search and Filter */}
-          <div className="mb-8 space-y-4">
-            <div className="flex flex-col md:flex-row gap-4">
+          <div className="mb-12 space-y-6">
+            <div className="flex flex-col lg:flex-row gap-6">
               <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                 <Input
-                  placeholder="Search articles..."
-                  className="pl-10"
+                  placeholder="Search articles, topics, or keywords..."
+                  className="pl-12 h-12 text-base border-0 bg-card/50 backdrop-blur-sm shadow-lg"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
@@ -182,7 +196,10 @@ const BlogSection = () => {
                     variant={selectedCategory === category ? "default" : "outline"}
                     size="sm"
                     onClick={() => setSelectedCategory(category)}
-                    className={selectedCategory === category ? "bg-gradient-to-r from-primary to-blue-600" : ""}
+                    className={selectedCategory === category 
+                      ? "bg-gradient-to-r from-primary to-blue-600 shadow-lg" 
+                      : "bg-card/50 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl"
+                    }
                   >
                     {category}
                   </Button>
@@ -194,68 +211,80 @@ const BlogSection = () => {
           {/* Blog Posts Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             {filteredPosts.map((post) => (
-              <Card key={post.id} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 overflow-hidden cursor-pointer">
-                <div className="aspect-video bg-gradient-to-br from-muted to-muted/50 flex items-center justify-center">
-                  <div className="text-4xl opacity-30">
-                    {post.category === 'Power BI' ? '📊' : 
-                     post.category === 'Microsoft Fabric' ? '🔗' :
-                     post.category === 'Data Engineering' ? '⚙️' : '💡'}
-                  </div>
-                </div>
-                
-                <CardHeader>
-                  <div className="flex items-center justify-between text-sm text-muted-foreground mb-2">
-                    <Badge variant="secondary">
-                      {post.category}
-                    </Badge>
-                    <div className="flex items-center">
-                      <Calendar className="h-3 w-3 mr-1" />
-                      {formatDate(post.created_at)}
+              <Link key={post.id} to={`/blog/${post.slug}`}>
+                <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden cursor-pointer bg-card/50 backdrop-blur-sm border-0 shadow-lg">
+                  <div className="aspect-video bg-gradient-to-br from-muted to-muted/50 flex items-center justify-center relative overflow-hidden">
+                    <div className="text-4xl opacity-30 group-hover:scale-110 transition-transform duration-500">
+                      {post.category === 'Power BI' ? '📊' : 
+                       post.category === 'Microsoft Fabric' ? '🔗' :
+                       post.category === 'Data Engineering' ? '⚙️' : '💡'}
                     </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
                   </div>
-                  <CardTitle className="text-lg group-hover:text-primary transition-colors line-clamp-2">
-                    {post.title}
-                  </CardTitle>
-                </CardHeader>
-                
-                <CardContent>
-                  <p className="text-muted-foreground leading-relaxed line-clamp-3 mb-4">
-                    {post.excerpt}
-                  </p>
                   
-                  {post.tags && post.tags.length > 0 && (
-                    <div className="flex flex-wrap gap-1 mb-4">
-                      {post.tags.slice(0, 3).map((tag, tagIndex) => (
-                        <Badge key={tagIndex} variant="outline" className="text-xs">
-                          {tag}
-                        </Badge>
-                      ))}
+                  <CardHeader className="pb-3">
+                    <div className="flex items-center justify-between text-sm text-muted-foreground mb-3">
+                      <Badge variant="secondary" className="bg-muted/50">
+                        {post.category}
+                      </Badge>
+                      <div className="flex items-center gap-1">
+                        <Calendar className="h-3 w-3" />
+                        {formatDate(post.created_at)}
+                      </div>
                     </div>
-                  )}
+                    <CardTitle className="text-lg group-hover:text-primary transition-colors line-clamp-2 leading-tight">
+                      {post.title}
+                    </CardTitle>
+                  </CardHeader>
                   
-                  <Button variant="ghost" className="group/btn justify-start px-0">
-                    Read More
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-                  </Button>
-                </CardContent>
-              </Card>
+                  <CardContent>
+                    <p className="text-muted-foreground leading-relaxed line-clamp-3 mb-4">
+                      {post.excerpt}
+                    </p>
+                    
+                    {post.tags && post.tags.length > 0 && (
+                      <div className="flex flex-wrap gap-1 mb-4">
+                        {post.tags.slice(0, 3).map((tag, tagIndex) => (
+                          <Badge key={tagIndex} variant="outline" className="text-xs border-muted-foreground/20">
+                            #{tag}
+                          </Badge>
+                        ))}
+                      </div>
+                    )}
+                    
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center text-primary group-hover:translate-x-1 transition-transform">
+                        <span className="text-sm font-medium">Read Article</span>
+                        <ArrowRight className="ml-1 h-4 w-4" />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
 
           {filteredPosts.length === 0 && !loading && (
-            <div className="text-center py-12">
-              <p className="text-muted-foreground">
+            <div className="text-center py-16">
+              <div className="text-6xl mb-4">🔍</div>
+              <h3 className="text-2xl font-bold mb-2">No articles found</h3>
+              <p className="text-muted-foreground mb-6">
                 {blogPosts.length === 0 
-                  ? "No published blog posts available yet." 
-                  : "No articles found matching your criteria."
+                  ? "No published blog posts available yet. Check back soon for new content!" 
+                  : "Try adjusting your search terms or category filters."
                 }
               </p>
+              {searchTerm && (
+                <Button variant="outline" onClick={() => setSearchTerm("")}>
+                  Clear Search
+                </Button>
+              )}
             </div>
           )}
 
           <div className="text-center">
-            <Button variant="outline" size="lg">
-              View All Posts
+            <Button variant="outline" size="lg" className="bg-card/50 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl">
+              Load More Articles
             </Button>
           </div>
         </div>

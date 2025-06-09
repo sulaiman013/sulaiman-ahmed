@@ -1,9 +1,13 @@
 
 import Navigation from "@/components/Navigation";
+import BlogSection from "@/components/BlogSection";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import BlogPost from "@/components/BlogPost";
 
 const Blog = () => {
   const [darkMode, setDarkMode] = useState(true);
+  const { slug } = useParams();
 
   useEffect(() => {
     if (darkMode) {
@@ -18,26 +22,11 @@ const Blog = () => {
       <Navigation darkMode={darkMode} setDarkMode={setDarkMode} />
       
       <main className="pt-20">
-        <section className="py-20 bg-muted/30">
-          <div className="container mx-auto px-6">
-            <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-16">
-                <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-blue-500 bg-clip-text text-transparent">
-                  Latest from the Blog
-                </h1>
-                <p className="text-xl text-muted-foreground">
-                  Insights on data analytics, Power BI tips, and industry trends
-                </p>
-              </div>
-              
-              <div className="text-center py-20">
-                <p className="text-lg text-muted-foreground">
-                  Blog content will be added soon.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
+        {slug ? (
+          <BlogPost slug={slug} />
+        ) : (
+          <BlogSection />
+        )}
       </main>
       
       <footer className="bg-muted/30 border-t py-8">
