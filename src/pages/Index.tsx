@@ -9,7 +9,7 @@ import Contact from "@/components/Contact";
 import { useEffect, useState } from "react";
 
 const Index = () => {
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
     if (darkMode) {
