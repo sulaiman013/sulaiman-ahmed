@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -5,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Calendar, Clock, Share2, BookOpen, Linkedin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import MarkdownRenderer from "./MarkdownRenderer";
+import SimpleMarkdownRenderer from "./SimpleMarkdownRenderer";
 
 interface BlogPostData {
   id: string;
@@ -206,7 +207,10 @@ const BlogPost = ({ slug }: BlogPostProps) => {
           <Card className="border-0 shadow-xl bg-card/50 backdrop-blur-sm">
             <CardContent className="p-8">
               {post.content ? (
-                <MarkdownRenderer content={post.content} />
+                <SimpleMarkdownRenderer 
+                  content={post.content} 
+                  className="text-gray-800 dark:text-gray-200"
+                />
               ) : (
                 <p className="text-muted-foreground">Content will be available soon.</p>
               )}
