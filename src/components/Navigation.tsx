@@ -57,6 +57,9 @@ const Navigation = ({ darkMode, setDarkMode }: NavigationProps) => {
                   <Link to="/portfolio">Portfolio</Link>
                 </Button>
                 <Button variant="ghost" asChild>
+                  <Link to="/experience">Experience</Link>
+                </Button>
+                <Button variant="ghost" asChild>
                   <Link to="/blog">Blog</Link>
                 </Button>
                 <Button variant="ghost" onClick={() => scrollToSection('contact')}>
@@ -70,6 +73,9 @@ const Navigation = ({ darkMode, setDarkMode }: NavigationProps) => {
                 </Button>
                 <Button variant="ghost" asChild>
                   <Link to="/portfolio">Portfolio</Link>
+                </Button>
+                <Button variant="ghost" asChild>
+                  <Link to="/experience">Experience</Link>
                 </Button>
                 <Button variant="ghost" asChild>
                   <Link to="/blog">Blog</Link>
