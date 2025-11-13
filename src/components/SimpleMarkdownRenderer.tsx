@@ -1,5 +1,5 @@
-
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import mermaid from 'mermaid';
 
 interface SimpleMarkdownRendererProps {
   content: string;
@@ -7,6 +7,17 @@ interface SimpleMarkdownRendererProps {
 }
 
 const SimpleMarkdownRenderer: React.FC<SimpleMarkdownRendererProps> = ({ content, className = "" }) => {
+  const mermaidRef = useRef<number>(0);
+
+  useEffect(() => {
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'default',
+      securityLevel: 'loose',
+      fontFamily: 'inherit',
+    });
+  }, []);
+
   const parseMarkdown = (markdown: string) => {
     // Split content into lines for processing
     const lines = markdown.split('\n');
@@ -54,7 +65,7 @@ const SimpleMarkdownRenderer: React.FC<SimpleMarkdownRendererProps> = ({ content
         elements.push(tableResult.element);
         currentIndex = tableResult.nextIndex - 1;
       }
-      // Code blocks
+      // Code blocks (including mermaid)
       else if (line.startsWith('```')) {
         const codeResult = parseCodeBlock(lines, currentIndex);
         elements.push(codeResult.element);
@@ -160,6 +171,39 @@ const SimpleMarkdownRenderer: React.FC<SimpleMarkdownRendererProps> = ({ content
     while (currentIndex < lines.length && !lines[currentIndex].startsWith('```')) {
       codeLines.push(lines[currentIndex]);
       currentIndex++;
+    }
+
+    // Check if it's a mermaid diagram
+    if (language === 'mermaid') {
+      const mermaidId = `mermaid-${startIndex}-${Date.now()}`;
+      const code = codeLines.join('\n');
+      
+      setTimeout(() => {
+        const element = document.getElementById(mermaidId);
+        if (element && code.trim()) {
+          try {
+            element.innerHTML = code.trim();
+            element.removeAttribute('data-processed');
+            mermaid.run({ nodes: [element] });
+          } catch (error) {
+            console.error('Mermaid rendering error:', error);
+          }
+        }
+      }, 100);
+
+      return {
+        element: (
+          <div key={startIndex} className="my-8 flex justify-center">
+            <div 
+              id={mermaidId}
+              className="mermaid bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm overflow-x-auto"
+            >
+              {code}
+            </div>
+          </div>
+        ),
+        nextIndex: currentIndex + 1,
+      };
     }
 
     const codeElement = (
