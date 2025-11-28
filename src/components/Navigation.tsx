@@ -57,6 +57,9 @@ const Navigation = ({ darkMode, setDarkMode }: NavigationProps) => {
                   <Link to="/portfolio">Portfolio</Link>
                 </Button>
                 <Button variant="ghost" asChild>
+                  <Link to="/case-study">Case Study</Link>
+                </Button>
+                <Button variant="ghost" asChild>
                   <Link to="/experience">Experience</Link>
                 </Button>
                 <Button variant="ghost" asChild>
@@ -73,6 +76,9 @@ const Navigation = ({ darkMode, setDarkMode }: NavigationProps) => {
                 </Button>
                 <Button variant="ghost" asChild>
                   <Link to="/portfolio">Portfolio</Link>
+                </Button>
+                <Button variant="ghost" asChild>
+                  <Link to="/case-study">Case Study</Link>
                 </Button>
                 <Button variant="ghost" asChild>
                   <Link to="/experience">Experience</Link>
