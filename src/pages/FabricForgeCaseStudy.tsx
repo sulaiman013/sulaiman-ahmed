@@ -24,7 +24,8 @@ import {
   Building2,
   RefreshCw,
   Eye,
-  ExternalLink
+  ExternalLink,
+  Download
 } from "lucide-react";
 
 const FabricForgeCaseStudy = () => {
@@ -552,8 +553,174 @@ const FabricForgeCaseStudy = () => {
           </div>
         </section>
 
-        {/* Results & Impact */}
+        {/* Video Tutorials */}
         <section className="py-16 bg-background">
+          <div className="container mx-auto px-6">
+            <div className="max-w-5xl mx-auto">
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center">
+                  <Play className="h-5 w-5 text-red-500" />
+                </div>
+                <h2 className="text-2xl md:text-3xl font-bold">Video Tutorial Series</h2>
+              </div>
+
+              <p className="text-muted-foreground mb-8">
+                Follow along with our comprehensive video series to get FabricForge up and running in your environment.
+              </p>
+
+              {/* Main Demo Video */}
+              <Card className="overflow-hidden shadow-xl mb-8">
+                <CardHeader className="bg-muted/30 border-b">
+                  <div className="flex items-center justify-between">
+                    <CardTitle className="flex items-center gap-2">
+                      <Play className="h-5 w-5 text-red-500" />
+                      1. Getting Started with n8n
+                    </CardTitle>
+                    <Badge variant="outline" className="text-xs">Start Here</Badge>
+                  </div>
+                </CardHeader>
+                <CardContent className="p-0">
+                  <div className="aspect-video w-full">
+                    <iframe
+                      src="https://www.youtube.com/embed/LxRW9tSX1I8"
+                      title="Getting Started with n8n"
+                      width="100%"
+                      height="100%"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="border-0"
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Additional Videos Grid */}
+              <div className="grid md:grid-cols-2 gap-6 mb-8">
+                <Card className="overflow-hidden">
+                  <CardHeader className="bg-muted/30 border-b py-3">
+                    <CardTitle className="flex items-center gap-2 text-base">
+                      <Play className="h-4 w-4 text-red-500" />
+                      2. Prerequisites and Setup
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-0">
+                    <div className="aspect-video w-full">
+                      <iframe
+                        src="https://www.youtube.com/embed/mZ5HjktZbps"
+                        title="Prerequisites and Setup"
+                        width="100%"
+                        height="100%"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="border-0"
+                      />
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="overflow-hidden">
+                  <CardHeader className="bg-muted/30 border-b py-3">
+                    <CardTitle className="flex items-center gap-2 text-base">
+                      <Play className="h-4 w-4 text-red-500" />
+                      3. Configuration Walkthrough
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-0">
+                    <div className="aspect-video w-full">
+                      <iframe
+                        src="https://www.youtube.com/embed/ynfgEHNRJMQ"
+                        title="Configuration Walkthrough"
+                        width="100%"
+                        height="100%"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="border-0"
+                      />
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="overflow-hidden">
+                  <CardHeader className="bg-muted/30 border-b py-3">
+                    <CardTitle className="flex items-center gap-2 text-base">
+                      <Play className="h-4 w-4 text-red-500" />
+                      4. Workflow Execution
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-0">
+                    <div className="aspect-video w-full">
+                      <iframe
+                        src="https://www.youtube.com/embed/sb6nJxe_j18"
+                        title="Workflow Execution"
+                        width="100%"
+                        height="100%"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="border-0"
+                      />
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="overflow-hidden">
+                  <CardHeader className="bg-muted/30 border-b py-3">
+                    <CardTitle className="flex items-center gap-2 text-base">
+                      <Play className="h-4 w-4 text-red-500" />
+                      5. Debugging and Troubleshooting
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-0">
+                    <div className="aspect-video w-full">
+                      <iframe
+                        src="https://www.youtube.com/embed/N5MB8KIBb5U"
+                        title="Debugging and Troubleshooting"
+                        width="100%"
+                        height="100%"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="border-0"
+                      />
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* N8N Workflow Download */}
+              <Card className="border-primary/30 bg-primary/5">
+                <CardContent className="pt-6">
+                  <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                        <Download className="h-6 w-6 text-primary" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold">Download N8N Workflow</h3>
+                        <p className="text-sm text-muted-foreground">Get the complete n8n workflow script to import into your instance</p>
+                      </div>
+                    </div>
+                    <a
+                      href="https://drive.google.com/drive/folders/1GMtyOL_a-cujlBtIzVQKCMlepWeybFFO"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-semibold"
+                    >
+                      <Download className="h-5 w-5" />
+                      Download Workflow
+                    </a>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Results & Impact */}
+        <section className="py-16 bg-muted/30">
           <div className="container mx-auto px-6">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">

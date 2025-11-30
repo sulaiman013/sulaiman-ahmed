@@ -20,7 +20,8 @@ import {
   Sparkles,
   Terminal,
   FileCode,
-  Layers
+  Layers,
+  Play
 } from "lucide-react";
 
 const FabricSQLAssistantCaseStudy = () => {
@@ -459,8 +460,52 @@ const FabricSQLAssistantCaseStudy = () => {
           </div>
         </section>
 
-        {/* Results & Impact */}
+        {/* Video Demo */}
         <section className="py-16 bg-background">
+          <div className="container mx-auto px-6">
+            <div className="max-w-5xl mx-auto">
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center">
+                  <Play className="h-5 w-5 text-red-500" />
+                </div>
+                <h2 className="text-2xl md:text-3xl font-bold">See It In Action</h2>
+              </div>
+
+              <Card className="overflow-hidden shadow-xl">
+                <CardHeader className="bg-muted/30 border-b">
+                  <div className="flex items-center justify-between">
+                    <CardTitle className="flex items-center gap-2">
+                      <Play className="h-5 w-5 text-red-500" />
+                      Fabric SQL Assistant Demo
+                    </CardTitle>
+                    <Badge variant="outline" className="text-xs">Video Tutorial</Badge>
+                  </div>
+                </CardHeader>
+                <CardContent className="p-0">
+                  <div className="aspect-video w-full">
+                    <iframe
+                      src="https://www.youtube.com/embed/aQoJ5_XmtGk"
+                      title="Fabric SQL Assistant Demo"
+                      width="100%"
+                      height="100%"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="border-0"
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+
+              <p className="text-center text-muted-foreground mt-4">
+                Watch how natural language queries are translated into SQL and executed against Microsoft Fabric in real-time.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Results & Impact */}
+        <section className="py-16 bg-muted/30">
           <div className="container mx-auto px-6">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">

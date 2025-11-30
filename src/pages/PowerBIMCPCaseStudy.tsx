@@ -24,7 +24,8 @@ import {
   Eye,
   Terminal,
   GitBranch,
-  CloudCog
+  CloudCog,
+  Play
 } from "lucide-react";
 
 const PowerBIMCPCaseStudy = () => {
@@ -517,8 +518,88 @@ const PowerBIMCPCaseStudy = () => {
           </div>
         </section>
 
-        {/* Results & Impact */}
+        {/* Video Demos */}
         <section className="py-16 bg-background">
+          <div className="container mx-auto px-6">
+            <div className="max-w-5xl mx-auto">
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center">
+                  <Play className="h-5 w-5 text-red-500" />
+                </div>
+                <h2 className="text-2xl md:text-3xl font-bold">See It In Action</h2>
+              </div>
+
+              <p className="text-muted-foreground mb-8">
+                Watch the evolution of Power BI MCP Server from V1 to V2, featuring the groundbreaking PBIP-safe refactoring capabilities.
+              </p>
+
+              <div className="grid md:grid-cols-2 gap-8">
+                {/* V1 Demo */}
+                <Card className="overflow-hidden shadow-xl">
+                  <CardHeader className="bg-muted/30 border-b">
+                    <div className="flex items-center justify-between">
+                      <CardTitle className="flex items-center gap-2">
+                        <Play className="h-5 w-5 text-red-500" />
+                        V1 Demonstration
+                      </CardTitle>
+                      <Badge variant="outline" className="text-xs">Original Release</Badge>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="p-0">
+                    <div className="aspect-video w-full">
+                      <iframe
+                        src="https://www.youtube.com/embed/eFDfghAtpOg"
+                        title="Power BI MCP Server V1 Demo"
+                        width="100%"
+                        height="100%"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="border-0"
+                      />
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* V2 Update */}
+                <Card className="overflow-hidden shadow-xl border-primary/30">
+                  <CardHeader className="bg-primary/5 border-b">
+                    <div className="flex items-center justify-between">
+                      <CardTitle className="flex items-center gap-2">
+                        <Play className="h-5 w-5 text-red-500" />
+                        V2 Update
+                      </CardTitle>
+                      <Badge className="text-xs bg-primary text-primary-foreground">Latest</Badge>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="p-0">
+                    <div className="aspect-video w-full">
+                      <iframe
+                        src="https://www.youtube.com/embed/Uut19Biv15E"
+                        title="Power BI MCP Server V2 Update"
+                        width="100%"
+                        height="100%"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="border-0"
+                      />
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <div className="mt-6 p-4 rounded-lg bg-muted/30 text-center">
+                <p className="text-sm text-muted-foreground">
+                  <strong className="text-foreground">V2 Highlights:</strong> PBIP-safe refactoring, automatic DAX rewriting, visual.json synchronization, and zero broken visuals during rename operations.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Results & Impact */}
+        <section className="py-16 bg-muted/30">
           <div className="container mx-auto px-6">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">
