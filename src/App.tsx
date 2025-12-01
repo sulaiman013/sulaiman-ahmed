@@ -14,6 +14,7 @@ import PowerBIMCPCaseStudy from "./pages/PowerBIMCPCaseStudy";
 import AirtableMCPCaseStudy from "./pages/AirtableMCPCaseStudy";
 import FabricSQLAssistantCaseStudy from "./pages/FabricSQLAssistantCaseStudy";
 import FabricForgeCaseStudy from "./pages/FabricForgeCaseStudy";
+import ICLAAnalyticsCaseStudy from "./pages/ICLAAnalyticsCaseStudy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,6 +37,7 @@ const App = () => (
           <Route path="/case-study/airtable-mcp" element={<AirtableMCPCaseStudy />} />
           <Route path="/case-study/fabric-sql-assistant" element={<FabricSQLAssistantCaseStudy />} />
           <Route path="/case-study/fabricforge" element={<FabricForgeCaseStudy />} />
+          <Route path="/case-study/icla-analytics" element={<ICLAAnalyticsCaseStudy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

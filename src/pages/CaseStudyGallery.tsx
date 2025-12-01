@@ -51,6 +51,21 @@ const CaseStudyGallery = () => {
       link: "/case-study/lumina-lux"
     },
     {
+      id: "icla-analytics",
+      title: "Enterprise Analytics Platform",
+      subtitle: "From Chaos to AI-Powered Clarity",
+      description: "Transformed a franchise business's fragmented data trapped in a locked CRM into a fully automated, near real-time analytics platform with AI-powered natural language insights—reducing data freshness from days to 30 minutes.",
+      icon: Layers,
+      color: "orange",
+      tags: ["Python", "Selenium", "MySQL", "Power BI", "MCP", "Claude AI"],
+      metrics: [
+        { icon: Clock, value: "30 min", label: "Data Fresh" },
+        { icon: Zap, value: "Instant", label: "Reports" },
+        { icon: MessageSquare, value: "AI", label: "Insights" }
+      ],
+      link: "/case-study/icla-analytics"
+    },
+    {
       id: "powerbi-mcp",
       title: "Power BI MCP Server",
       subtitle: "AI-Powered Business Intelligence Integration",
@@ -143,6 +158,12 @@ const CaseStudyGallery = () => {
         border: "border-teal-500/30 hover:border-teal-500/50",
         text: "text-teal-500",
         badge: "bg-teal-500/10 text-teal-500"
+      },
+      orange: {
+        bg: "from-orange-500/10 to-orange-500/5",
+        border: "border-orange-500/30 hover:border-orange-500/50",
+        text: "text-orange-500",
+        badge: "bg-orange-500/10 text-orange-500"
       }
     };
     return colors[color] || colors.blue;
