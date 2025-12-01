@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 interface NavigationProps {
@@ -11,6 +11,7 @@ interface NavigationProps {
 
 const Navigation = ({ darkMode, setDarkMode }: NavigationProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -22,7 +23,13 @@ const Navigation = ({ darkMode, setDarkMode }: NavigationProps) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
+
   const scrollToSection = (sectionId: string) => {
+    setIsMobileMenuOpen(false);
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -33,7 +40,7 @@ const Navigation = ({ darkMode, setDarkMode }: NavigationProps) => {
 
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-background/95 backdrop-blur-md border-b shadow-lg' : 'bg-transparent'
+      isScrolled || isMobileMenuOpen ? 'bg-background/95 backdrop-blur-md border-b shadow-lg' : 'bg-background/80 backdrop-blur-sm'
     }`}>
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
@@ -100,16 +107,89 @@ const Navigation = ({ darkMode, setDarkMode }: NavigationProps) => {
               {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
             {isHomePage ? (
-              <Button size="sm" onClick={() => scrollToSection('contact')}>
+              <Button size="sm" className="hidden md:inline-flex" onClick={() => scrollToSection('contact')}>
                 Hire Me
               </Button>
             ) : (
-              <Button size="sm" asChild>
+              <Button size="sm" className="hidden md:inline-flex" asChild>
                 <Link to="/#contact">Hire Me</Link>
               </Button>
             )}
+            {/* Mobile Menu Button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden rounded-full"
+            >
+              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </Button>
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden border-t bg-background/95 backdrop-blur-md">
+            <div className="px-4 py-4 space-y-2">
+              {isHomePage ? (
+                <>
+                  <Button variant="ghost" className="w-full justify-start" onClick={() => scrollToSection('hero')}>
+                    Home
+                  </Button>
+                  <Button variant="ghost" className="w-full justify-start" onClick={() => scrollToSection('about')}>
+                    About
+                  </Button>
+                  <Button variant="ghost" className="w-full justify-start" onClick={() => scrollToSection('services')}>
+                    Services
+                  </Button>
+                  <Button variant="ghost" className="w-full justify-start" asChild>
+                    <Link to="/portfolio">Portfolio</Link>
+                  </Button>
+                  <Button variant="ghost" className="w-full justify-start" asChild>
+                    <Link to="/case-study">Case Study</Link>
+                  </Button>
+                  <Button variant="ghost" className="w-full justify-start" asChild>
+                    <Link to="/experience">Experience</Link>
+                  </Button>
+                  <Button variant="ghost" className="w-full justify-start" asChild>
+                    <Link to="/blog">Blog</Link>
+                  </Button>
+                  <Button variant="ghost" className="w-full justify-start" onClick={() => scrollToSection('contact')}>
+                    Contact
+                  </Button>
+                  <div className="pt-2 border-t">
+                    <Button className="w-full" onClick={() => scrollToSection('contact')}>
+                      Hire Me
+                    </Button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <Button variant="ghost" className="w-full justify-start" asChild>
+                    <Link to="/">Home</Link>
+                  </Button>
+                  <Button variant="ghost" className="w-full justify-start" asChild>
+                    <Link to="/portfolio">Portfolio</Link>
+                  </Button>
+                  <Button variant="ghost" className="w-full justify-start" asChild>
+                    <Link to="/case-study">Case Study</Link>
+                  </Button>
+                  <Button variant="ghost" className="w-full justify-start" asChild>
+                    <Link to="/experience">Experience</Link>
+                  </Button>
+                  <Button variant="ghost" className="w-full justify-start" asChild>
+                    <Link to="/blog">Blog</Link>
+                  </Button>
+                  <div className="pt-2 border-t">
+                    <Button className="w-full" asChild>
+                      <Link to="/#contact">Hire Me</Link>
+                    </Button>
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );
