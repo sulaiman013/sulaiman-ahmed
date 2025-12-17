@@ -9,7 +9,7 @@ import { LinkedinIcon, FileText, Github, MapPin, Clock, Mail, MessageCircle, Shi
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { checkRateLimit, sanitizeInput, validateEmail, validateRequired } from "@/utils/security";
+import { sanitizeInput, validateEmail, validateRequired } from "@/utils/security";
 
 interface FormErrors {
   name?: string;
@@ -28,7 +28,7 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
-  const [remainingAttempts, setRemainingAttempts] = useState<number | null>(null);
+  const [isRateLimited, setIsRateLimited] = useState(false);
   const { toast } = useToast();
 
   const services = [
@@ -40,12 +40,7 @@ const Contact = () => {
     "Other"
   ];
 
-  useEffect(() => {
-    // Check initial rate limit status
-    checkRateLimit('contact_form', 3, 15).then(result => {
-      setRemainingAttempts(result.remainingAttempts);
-    });
-  }, []);
+  // Rate limiting is now handled server-side in the edge function
 
   const validateForm = (): FormErrors => {
     const newErrors: FormErrors = {};
@@ -128,24 +123,7 @@ const Contact = () => {
         return;
       }
 
-      // Check rate limiting
-      const rateLimitResult = await checkRateLimit('contact_form', 3, 15);
-      setRemainingAttempts(rateLimitResult.remainingAttempts);
-
-      if (!rateLimitResult.allowed) {
-        const resetTime = rateLimitResult.resetTime;
-        const resetMessage = resetTime 
-          ? `Please try again after ${resetTime.toLocaleTimeString()}`
-          : 'Please try again later';
-        
-        toast({
-          title: "Too many attempts",
-          description: resetMessage,
-          variant: "destructive",
-        });
-        setIsSubmitting(false);
-        return;
-      }
+      // Rate limiting is now handled server-side in the edge function
 
       // Sanitize data before submission
       const sanitizedData = {
@@ -155,10 +133,7 @@ const Contact = () => {
         message: sanitizeInput(formData.message)
       };
 
-      console.log('Submitting contact form:', { 
-        ...sanitizedData, 
-        remainingAttempts: rateLimitResult.remainingAttempts 
-      });
+      console.log('Submitting contact form:', sanitizedData);
 
       // Submit to database
       const { error } = await supabase
@@ -181,7 +156,7 @@ const Contact = () => {
         return;
       }
 
-      // Send email notifications
+      // Send email notifications (also handles server-side rate limiting)
       try {
         console.log('Sending email notifications...');
         const emailResponse = await supabase.functions.invoke('send-contact-notification', {
@@ -190,7 +165,19 @@ const Contact = () => {
 
         if (emailResponse.error) {
           console.error('Email notification error:', emailResponse.error);
-          // Don't fail the form submission if email fails, just log it
+          
+          // Check for rate limiting (429 status)
+          if (emailResponse.error.message?.includes('429') || 
+              emailResponse.error.message?.includes('Too many requests')) {
+            setIsRateLimited(true);
+            toast({
+              title: "Too many attempts",
+              description: "Please try again later.",
+              variant: "destructive",
+            });
+            return;
+          }
+          // Don't fail the form submission if other email errors occur
         } else {
           console.log('Email notifications sent successfully');
         }
@@ -211,7 +198,7 @@ const Contact = () => {
         message: '',
         honeypot: ''
       });
-      setRemainingAttempts(prev => prev ? prev - 1 : null);
+      // Form submitted successfully
     } catch (error) {
       console.error('Unexpected error:', error);
       setErrors({ general: 'An unexpected error occurred. Please try again.' });
@@ -256,10 +243,10 @@ const Contact = () => {
                 <CardTitle className="flex items-center">
                   <MessageCircle className="h-5 w-5 mr-2 text-primary" />
                   Send a Message
-                  {remainingAttempts !== null && remainingAttempts <= 2 && (
-                    <Badge variant="outline" className="ml-2 text-xs">
+                  {isRateLimited && (
+                    <Badge variant="outline" className="ml-2 text-xs text-destructive">
                       <Shield className="h-3 w-3 mr-1" />
-                      {remainingAttempts} attempts left
+                      Too many attempts
                     </Badge>
                   )}
                 </CardTitle>
@@ -365,7 +352,7 @@ const Contact = () => {
                   <Button 
                     type="submit" 
                     className="w-full bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90"
-                    disabled={isSubmitting || (remainingAttempts !== null && remainingAttempts <= 0)}
+                    disabled={isSubmitting || isRateLimited}
                   >
                     {isSubmitting ? "Sending..." : "Send Message"}
                   </Button>
