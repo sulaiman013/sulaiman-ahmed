@@ -2,13 +2,26 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github, Youtube } from "lucide-react";
 import { useState } from "react";
 
 const Portfolio = () => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
 
   const projects = [
+    {
+      title: "Power BI Expert Webapp",
+      subtitle: "Open Source AI Assistant",
+      description: "Enterprise-grade AI-powered web application that enables natural language interaction with Power BI data. An open-source template for organizations to customize and embed into their own applications.",
+      challenge: "Power BI users face significant barriers: expensive Copilot licensing (requires Premium + $30/user/month), complex DAX syntax, no AI assistance for Pro license holders, and inability to use AI in air-gapped regulated environments.",
+      solution: "Built a complete webapp with multi-provider LLM support (Azure Claude, Azure OpenAI, Ollama), automatic USERELATIONSHIP handling for inactive relationships, interactive PBIP bulk editing tools, and enterprise security features including schema-only transmission and tamper-evident audit logging.",
+      results: ["70-80% reduction in DAX development time", "Zero per-user licensing fees - deploy once for entire team", "Air-gap deployment capability for regulated industries", "Full open-source codebase for white-label customization"],
+      technologies: ["Python", "Flask", "Power BI", "Azure AI Foundry", "ADOMD.NET", "XMLA", "Ollama", "DAX"],
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
+      category: "AI & Analytics",
+      github: "https://github.com/sulaiman013/powerbi-expert-app",
+      youtube: "https://youtu.be/5gNa9BUJ4r8"
+    },
     {
       title: "Healthcare Analytics Dashboard",
       subtitle: "Emergient/Centene Corporation",
@@ -145,9 +158,31 @@ const Portfolio = () => {
                       <ExternalLink className="mr-2 h-4 w-4 group-hover/btn:scale-110 transition-transform" />
                       View Details
                     </Button>
-                    <Button variant="ghost" size="sm">
-                      <Github className="h-4 w-4" />
-                    </Button>
+                    {project.youtube && (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          window.open(project.youtube, '_blank');
+                        }}
+                        className="text-red-500 hover:text-red-600"
+                      >
+                        <Youtube className="h-4 w-4" />
+                      </Button>
+                    )}
+                    {project.github && (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          window.open(project.github, '_blank');
+                        }}
+                      >
+                        <Github className="h-4 w-4" />
+                      </Button>
+                    )}
                   </div>
                 </CardContent>
               </Card>
