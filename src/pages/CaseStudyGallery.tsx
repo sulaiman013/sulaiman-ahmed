@@ -36,6 +36,21 @@ const CaseStudyGallery = () => {
 
   const caseStudies = [
     {
+      id: "powerbi-expert-webapp",
+      title: "Power BI Expert Webapp",
+      subtitle: "Open Source AI Assistant",
+      description: "An enterprise-grade AI-powered web application enabling natural language interaction with Power BI data. An open-source template for organizations to customize and embed into their own applications—without Microsoft Copilot's licensing barriers.",
+      icon: Bot,
+      color: "blue",
+      tags: ["Python", "Flask", "Azure AI Foundry", "Ollama", "XMLA", "DAX"],
+      metrics: [
+        { icon: Clock, value: "70-80%", label: "Time Saved" },
+        { icon: DollarSign, value: "$0", label: "Per-User Fee" },
+        { icon: Shield, value: "100%", label: "Data Security" }
+      ],
+      link: "/case-study/powerbi-expert-webapp"
+    },
+    {
       id: "lumina-lux",
       title: "Lumina Lux Corp Financial Analytics",
       subtitle: "Enterprise Financial Consolidation Platform",
