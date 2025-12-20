@@ -20,7 +20,9 @@ import {
   Sparkles,
   Clock,
   Zap,
-  Settings
+  Settings,
+  Target,
+  GitBranch
 } from "lucide-react";
 
 const CaseStudyGallery = () => {
@@ -139,6 +141,21 @@ const CaseStudyGallery = () => {
         { icon: Shield, value: "Zero", label: "Config Errors" }
       ],
       link: "/case-study/fabricforge"
+    },
+    {
+      id: "quickbooks-medallion",
+      title: "QuickBooks Financial Analytics",
+      subtitle: "Medallion Architecture Implementation",
+      description: "Transformed raw QuickBooks Online data into a production-ready financial reporting system using a 3-tier Medallion Architecture—achieving 99.999% P&L accuracy and 100% Balance Sheet equation verification through proper double-entry accounting principles.",
+      icon: GitBranch,
+      color: "green",
+      tags: ["Power BI", "Python", "QuickBooks API", "DAX"],
+      metrics: [
+        { icon: Target, value: "99.999%", label: "P&L Accuracy" },
+        { icon: Shield, value: "100%", label: "BS Verified" },
+        { icon: Database, value: "15", label: "Tables" }
+      ],
+      link: "/case-study/quickbooks-medallion"
     }
   ];
 
