@@ -17,6 +17,7 @@ import FabricForgeCaseStudy from "./pages/FabricForgeCaseStudy";
 import ICLAAnalyticsCaseStudy from "./pages/ICLAAnalyticsCaseStudy";
 import PowerBIExpertWebappCaseStudy from "./pages/PowerBIExpertWebappCaseStudy";
 import QuickBooksMedallionCaseStudy from "./pages/QuickBooksMedallionCaseStudy";
+import BankingChurnCaseStudy from "./pages/BankingChurnCaseStudy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -42,6 +43,7 @@ const App = () => (
           <Route path="/case-study/icla-analytics" element={<ICLAAnalyticsCaseStudy />} />
           <Route path="/case-study/powerbi-expert-webapp" element={<PowerBIExpertWebappCaseStudy />} />
           <Route path="/case-study/quickbooks-medallion" element={<QuickBooksMedallionCaseStudy />} />
+          <Route path="/case-study/banking-churn" element={<BankingChurnCaseStudy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

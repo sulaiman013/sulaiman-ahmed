@@ -22,7 +22,9 @@ import {
   Zap,
   Settings,
   Target,
-  GitBranch
+  GitBranch,
+  Brain,
+  Users
 } from "lucide-react";
 
 const CaseStudyGallery = () => {
@@ -51,6 +53,21 @@ const CaseStudyGallery = () => {
         { icon: Database, value: "15", label: "Tables" }
       ],
       link: "/case-study/quickbooks-medallion"
+    },
+    {
+      id: "banking-churn",
+      title: "Banking Customer Churn Platform",
+      subtitle: "End-to-End ML on Databricks",
+      description: "Unified fragmented customer data from 4 disparate systems into a production-ready ML platform that predicts customer churn and delivers personalized retention recommendations—saving an estimated $5-6M annually in preventable churn.",
+      icon: Brain,
+      color: "orange",
+      tags: ["Databricks", "dbt", "Python", "scikit-learn", "Unity Catalog"],
+      metrics: [
+        { icon: Users, value: "4→1", label: "Unified IDs" },
+        { icon: Brain, value: "30+", label: "ML Features" },
+        { icon: DollarSign, value: "$5-6M", label: "Annual Impact" }
+      ],
+      link: "/case-study/banking-churn"
     },
     {
       id: "powerbi-expert-webapp",
