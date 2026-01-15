@@ -768,8 +768,51 @@ const BankingChurnCaseStudy = () => {
           </div>
         </section>
 
-        {/* Results & Impact */}
+        {/* Live Dashboard */}
         <section className="py-16 bg-background">
+          <div className="container mx-auto px-6">
+            <div className="max-w-5xl mx-auto">
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center">
+                  <BarChart3 className="h-5 w-5 text-orange-500" />
+                </div>
+                <h2 className="text-2xl md:text-3xl font-bold">Live Dashboard</h2>
+              </div>
+
+              <Card className="overflow-hidden shadow-xl">
+                <CardHeader className="bg-muted/30 border-b">
+                  <div className="flex items-center justify-between">
+                    <CardTitle className="flex items-center gap-2">
+                      <BarChart3 className="h-5 w-5 text-orange-500" />
+                      Banking Customer Churn Analytics
+                    </CardTitle>
+                    <Badge variant="outline" className="text-xs">Interactive</Badge>
+                  </div>
+                </CardHeader>
+                <CardContent className="p-0">
+                  <div className="aspect-video w-full">
+                    <iframe
+                      title="Banking Customer Churn Analytics"
+                      width="100%"
+                      height="100%"
+                      src="https://app.fabric.microsoft.com/view?r=eyJrIjoiNjk1ZTNmNWEtYjc4Yy00YWFhLTgxMzEtM2JhMGY3NmIzMDM2IiwidCI6ImNhM2YwNTZlLTQ0NDgtNDI1YS05MmE5LWU5ZDMyOTFlYTJmMyJ9"
+                      frameBorder="0"
+                      allowFullScreen={true}
+                      className="border-0"
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+
+              <p className="text-sm text-muted-foreground mt-4 text-center">
+                Interactive Power BI dashboard showing customer churn insights, risk segmentation, and retention recommendations
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Results & Impact */}
+        <section className="py-16 bg-muted/30">
           <div className="container mx-auto px-6">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">

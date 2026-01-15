@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git fetch:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm run dev:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(dir:*)",
+      "Bash(copy:*)",
+      "Bash(ls -la \"C:\\\\Users\\\\SulaimanAhmed\\\\Desktop\\\\portfolio\\\\Banking project\\\\banking-churn-databricks\\\\docs\\\\diagrams\"\" 2>/dev/null || echo \"Diagrams directory not found \")",
+      "Bash(git -C \"c:\\\\Users\\\\SulaimanAhmed\\\\Desktop\\\\portfolio\\\\sulaiman-ahmed\" log --oneline -10)",
+      "Bash(wc:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
