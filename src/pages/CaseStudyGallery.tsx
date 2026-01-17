@@ -38,139 +38,141 @@ const CaseStudyGallery = () => {
     }
   }, [darkMode]);
 
+  // XYZ Formula: Accomplished [X] as measured by [Y], by doing [Z]
+  // Lead with result, quantify impact, then explain how
   const caseStudies = [
     {
       id: "quickbooks-medallion",
-      title: "Automated Financial Reporting",
+      title: "Cut Financial Reporting Time by 10+ Hours/Week",
       subtitle: "QuickBooks to Power BI Pipeline",
-      description: "Saved 10+ hours/week by replacing manual QuickBooks exports with an automated 3-tier Medallion Architecture. Achieved 99.999% P&L accuracy and 100% Balance Sheet equation verification through proper double-entry accounting principles.",
+      description: "Achieved 99.999% P&L accuracy and 100% Balance Sheet verification by building an automated 3-tier Medallion Architecture that replaced manual QuickBooks exports and Excel reconciliation.",
       icon: GitBranch,
       color: "green",
       tags: ["Power BI", "Python", "QuickBooks API", "DAX"],
       metrics: [
+        { icon: Clock, value: "10+ hrs", label: "Saved Weekly" },
         { icon: Target, value: "99.999%", label: "P&L Accuracy" },
-        { icon: Shield, value: "100%", label: "BS Verified" },
-        { icon: Clock, value: "10+ hrs", label: "Saved Weekly" }
+        { icon: Shield, value: "100%", label: "BS Verified" }
       ],
       link: "/case-study/quickbooks-medallion"
     },
     {
       id: "banking-churn",
-      title: "Predicted Customer Churn Risk",
-      subtitle: "End-to-End ML on Databricks",
-      description: "Identified high-risk customers before they churned, enabling $5-6M in annual savings potential. Unified 4 siloed data systems into a single customer view using email-based entity resolution and built 30+ ML features for proactive retention.",
+      title: "Enabled $5-6M Annual Savings via Churn Prediction",
+      subtitle: "End-to-End ML Platform on Databricks",
+      description: "Identified high-risk customers before they left by unifying 4 siloed data systems into a single customer view and engineering 30+ ML features for proactive retention targeting.",
       icon: Brain,
       color: "orange",
       tags: ["Databricks", "dbt", "Python", "scikit-learn", "Unity Catalog"],
       metrics: [
-        { icon: Users, value: "4→1", label: "Unified Systems" },
-        { icon: Brain, value: "30+", label: "ML Features" },
-        { icon: DollarSign, value: "$5-6M", label: "Annual Impact" }
+        { icon: DollarSign, value: "$5-6M", label: "Annual Impact" },
+        { icon: Users, value: "4 to 1", label: "Systems Unified" },
+        { icon: Brain, value: "30+", label: "ML Features" }
       ],
       link: "/case-study/banking-churn"
     },
     {
       id: "powerbi-expert-webapp",
-      title: "Democratized BI with AI",
-      subtitle: "Open Source Power BI Assistant",
-      description: "Reduced time-to-insight by 70-80% with natural language queries to Power BI. Eliminated per-user Copilot licensing costs with an open-source enterprise solution that enables non-technical users to explore data without learning DAX.",
+      title: "Reduced BI Query Time by 70-80%",
+      subtitle: "Open Source AI Assistant for Power BI",
+      description: "Enabled non-technical users to query Power BI data in plain English by building an open-source AI assistant, eliminating per-user Copilot licensing costs while maintaining 100% data security.",
       icon: Bot,
       color: "blue",
       tags: ["Python", "Flask", "Azure AI Foundry", "Ollama", "XMLA", "DAX"],
       metrics: [
-        { icon: Clock, value: "70-80%", label: "Time Saved" },
-        { icon: DollarSign, value: "$0", label: "Per-User Fee" },
-        { icon: Shield, value: "100%", label: "Data Security" }
+        { icon: Clock, value: "70-80%", label: "Faster Queries" },
+        { icon: DollarSign, value: "$0", label: "Per-User Cost" },
+        { icon: Shield, value: "100%", label: "Data Secure" }
       ],
       link: "/case-study/powerbi-expert-webapp"
     },
     {
       id: "lumina-lux",
-      title: "Consolidated Global Financials",
-      subtitle: "Multi-Entity Reporting Platform",
-      description: "Unified $166.7M+ in financial data from 3 global subsidiaries into one real-time dashboard. Eliminated month-end consolidation delays and enabled drill-down from consolidated view to individual entity transactions.",
+      title: "Unified $166.7M+ Across 3 Global Subsidiaries",
+      subtitle: "Multi-Entity Financial Consolidation",
+      description: "Eliminated month-end consolidation delays by building a real-time reporting platform that processes 120,846 transactions and enables drill-down from consolidated view to entity-level details.",
       icon: BarChart3,
       color: "blue",
       tags: ["Power BI", "MySQL", "Python", "DAX"],
       metrics: [
-        { icon: Database, value: "120,846", label: "Transactions" },
-        { icon: Globe, value: "3", label: "Global Entities" },
-        { icon: DollarSign, value: "$166.7M+", label: "Financial Volume" }
+        { icon: DollarSign, value: "$166.7M+", label: "Consolidated" },
+        { icon: Globe, value: "3", label: "Subsidiaries" },
+        { icon: Database, value: "120,846", label: "Transactions" }
       ],
       link: "/case-study/lumina-lux"
     },
     {
       id: "icla-analytics",
-      title: "Unlocked Trapped Business Data",
-      subtitle: "From Locked CRM to AI-Powered Insights",
-      description: "Reduced data freshness from days to 30 minutes by automating extraction from a locked CRM with no API access. Added AI-powered natural language insights for instant answers to business questions.",
+      title: "Cut Data Latency from Days to 30 Minutes",
+      subtitle: "Automated Extraction from Locked CRM",
+      description: "Freed business-critical data trapped in a CRM with no API access by building an automated extraction pipeline, then added AI-powered natural language insights for instant business answers.",
       icon: Layers,
       color: "orange",
       tags: ["Python", "Selenium", "MySQL", "Power BI", "MCP", "Claude AI"],
       metrics: [
-        { icon: Clock, value: "30 min", label: "Data Fresh" },
-        { icon: Zap, value: "Instant", label: "Reports" },
-        { icon: MessageSquare, value: "AI", label: "Insights" }
+        { icon: Clock, value: "30 min", label: "Data Freshness" },
+        { icon: Zap, value: "Instant", label: "AI Insights" },
+        { icon: MessageSquare, value: "NL", label: "Queries" }
       ],
       link: "/case-study/icla-analytics"
     },
     {
       id: "powerbi-mcp",
-      title: "Enabled AI-Powered BI Analysis",
+      title: "Built 34 AI Tools for Power BI Integration",
       subtitle: "Model Context Protocol Server",
-      description: "Built 34 AI tools allowing Claude to query Power BI models via natural language. Enabled safe bulk operations with enterprise-grade security and open-sourced for community use with 3 connection methods.",
+      description: "Enabled Claude to execute DAX queries and explore Power BI models via natural language by building an open-source MCP server with 3 connection methods and enterprise-grade security.",
       icon: Bot,
       color: "purple",
       tags: ["Python", "MCP", "ADOMD.NET", "XMLA", "TMDL"],
       metrics: [
         { icon: Wrench, value: "34", label: "AI Tools" },
         { icon: Server, value: "3", label: "Connectors" },
-        { icon: Shield, value: "100%", label: "Enterprise Security" }
+        { icon: Shield, value: "100%", label: "Secure" }
       ],
       link: "/case-study/powerbi-mcp"
     },
     {
       id: "airtable-mcp",
-      title: "Simplified Database Operations",
-      subtitle: "Natural Language for Airtable",
-      description: "Replaced complex Airtable formulas with plain English queries via Claude. Ensured 100% input validation preventing accidental data corruption and enabled instant schema discovery without training.",
+      title: "Replaced Airtable Formulas with Plain English",
+      subtitle: "Natural Language Database Operations",
+      description: "Enabled instant schema discovery and complex filtering without training by building an MCP server with 100% input validation that prevents accidental data corruption.",
       icon: Table,
       color: "amber",
       tags: ["Python", "MCP", "pyairtable", "Claude Desktop"],
       metrics: [
         { icon: Wrench, value: "6", label: "Core Tools" },
-        { icon: Shield, value: "100%", label: "Input Validation" },
-        { icon: MessageSquare, value: "Natural", label: "Language" }
+        { icon: Shield, value: "100%", label: "Validated" },
+        { icon: MessageSquare, value: "NL", label: "Queries" }
       ],
       link: "/case-study/airtable-mcp"
     },
     {
       id: "fabric-sql-assistant",
-      title: "Natural Language SQL for Fabric",
-      subtitle: "AI-Powered Query Generation",
-      description: "Translated plain English questions into optimized SQL queries automatically. Secured with Azure AD authentication for enterprise compliance and reduced the SQL learning curve for analysts new to Microsoft Fabric.",
+      title: "Translated Plain English to Optimized SQL",
+      subtitle: "AI Query Generator for Microsoft Fabric",
+      description: "Reduced the SQL learning curve for analysts new to Fabric by building an MCP server that auto-generates queries from natural language with Azure AD authentication for enterprise compliance.",
       icon: Database,
       color: "green",
       tags: ["Python", "MCP", "pyodbc", "MSAL", "OpenAI"],
       metrics: [
-        { icon: MessageSquare, value: "Natural", label: "Language" },
+        { icon: Sparkles, value: "AI", label: "Query Gen" },
         { icon: Cloud, value: "Azure", label: "AD Auth" },
-        { icon: Sparkles, value: "AI", label: "Query Gen" }
+        { icon: MessageSquare, value: "NL", label: "Input" }
       ],
       link: "/case-study/fabric-sql-assistant"
     },
     {
       id: "fabricforge",
-      title: "Automated Workspace Provisioning",
-      subtitle: "Visual Fabric Deployment Platform",
-      description: "Reduced workspace setup time by 90%, from hours of manual configuration to 5 minutes. Eliminated configuration errors with visual form builder and AI-powered code generation.",
+      title: "Cut Workspace Setup from Hours to 5 Minutes",
+      subtitle: "Visual Fabric Deployment Automation",
+      description: "Eliminated configuration errors by building a visual form builder with AI-powered code generation, reducing Microsoft Fabric workspace provisioning time by 90%.",
       icon: Settings,
       color: "teal",
       tags: ["n8n", "Microsoft Fabric", "Azure AD", "OpenAI"],
       metrics: [
         { icon: Clock, value: "90%", label: "Time Saved" },
-        { icon: Zap, value: "5 min", label: "Deploy Time" },
-        { icon: Shield, value: "Zero", label: "Config Errors" }
+        { icon: Zap, value: "5 min", label: "Deploy" },
+        { icon: Shield, value: "Zero", label: "Errors" }
       ],
       link: "/case-study/fabricforge"
     }
@@ -223,19 +225,19 @@ const CaseStudyGallery = () => {
       <Navigation darkMode={darkMode} setDarkMode={setDarkMode} />
 
       <main className="pt-20">
-        {/* Hero Section */}
+        {/* Hero Section - Optimized for 6-second scan */}
         <section className="py-16 md:py-24 bg-gradient-to-b from-primary/10 via-primary/5 to-background">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto text-center">
               <Badge variant="outline" className="text-xs mb-6">Portfolio</Badge>
 
               <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
-                Case Studies
+                Data Engineering & AI Projects
               </h1>
 
               <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-                Real impact through data engineering, business intelligence, and AI integration.
-                Each project measured in time saved, revenue protected, and efficiency gained.
+                Each project shows the problem I solved, how I measured success, and the tools I used.
+                Click any card for the full technical deep-dive.
               </p>
             </div>
           </div>
@@ -258,15 +260,17 @@ const CaseStudyGallery = () => {
                             </div>
                             <ArrowRight className={`h-5 w-5 ${colors.text} opacity-0 group-hover:opacity-100 transition-opacity`} />
                           </div>
-                          <CardTitle className="text-xl mb-2">{study.title}</CardTitle>
+                          {/* Title with quantified result - the hook */}
+                          <CardTitle className="text-xl mb-2 leading-tight">{study.title}</CardTitle>
                           <p className={`text-sm font-medium ${colors.text}`}>{study.subtitle}</p>
                         </CardHeader>
                         <CardContent className="space-y-6">
+                          {/* XYZ format: Result + Metric + Method */}
                           <p className="text-muted-foreground text-sm leading-relaxed">
                             {study.description}
                           </p>
 
-                          {/* Metrics */}
+                          {/* Metrics - Visual proof */}
                           <div className="grid grid-cols-3 gap-3">
                             {study.metrics.map((metric, idx) => (
                               <div key={idx} className="text-center p-3 rounded-lg bg-background/50">
@@ -277,7 +281,7 @@ const CaseStudyGallery = () => {
                             ))}
                           </div>
 
-                          {/* Tags */}
+                          {/* Tags - Skills proof */}
                           <div className="flex flex-wrap gap-2">
                             {study.tags.map((tag, idx) => (
                               <Badge key={idx} variant="secondary" className="text-xs">
@@ -288,7 +292,7 @@ const CaseStudyGallery = () => {
 
                           {/* CTA */}
                           <div className={`flex items-center gap-2 text-sm font-medium ${colors.text} group-hover:gap-3 transition-all`}>
-                            View Case Study
+                            View Full Case Study
                             <ArrowRight className="h-4 w-4" />
                           </div>
                         </CardContent>
@@ -306,17 +310,18 @@ const CaseStudyGallery = () => {
           <div className="container mx-auto px-6">
             <div className="max-w-3xl mx-auto text-center">
               <Layers className="h-12 w-12 text-primary mx-auto mb-6" />
-              <h2 className="text-2xl md:text-3xl font-bold mb-4">Building the Future of Data & AI</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-4">Let's Build Something Together</h2>
               <p className="text-muted-foreground mb-6">
-                From enterprise financial analytics to AI-powered integrations, these case studies showcase
-                end-to-end solutions that transform how organizations work with data.
+                I solve data problems with Python, SQL, and cloud platforms.
+                These projects show how I think, build, and deliver results.
               </p>
               <div className="flex flex-wrap gap-3 justify-center">
-                <Badge className="text-sm px-4 py-2">Data Engineering</Badge>
-                <Badge className="text-sm px-4 py-2">Business Intelligence</Badge>
-                <Badge className="text-sm px-4 py-2">AI Integration</Badge>
-                <Badge className="text-sm px-4 py-2">MCP Servers</Badge>
+                <Badge className="text-sm px-4 py-2">Databricks</Badge>
+                <Badge className="text-sm px-4 py-2">Power BI</Badge>
+                <Badge className="text-sm px-4 py-2">dbt</Badge>
+                <Badge className="text-sm px-4 py-2">Python</Badge>
                 <Badge className="text-sm px-4 py-2">Microsoft Fabric</Badge>
+                <Badge className="text-sm px-4 py-2">AI/ML</Badge>
               </div>
             </div>
           </div>
