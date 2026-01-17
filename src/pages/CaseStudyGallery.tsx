@@ -1,6 +1,6 @@
 import Navigation from "@/components/Navigation";
 import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import {
@@ -8,23 +8,12 @@ import {
   Bot,
   ArrowRight,
   Database,
-  Globe,
-  Shield,
-  Wrench,
-  Server,
-  DollarSign,
   Layers,
   Table,
-  MessageSquare,
-  Cloud,
-  Sparkles,
-  Clock,
-  Zap,
   Settings,
-  Target,
   GitBranch,
   Brain,
-  Users
+  CheckCircle2
 } from "lucide-react";
 
 const CaseStudyGallery = () => {
@@ -41,178 +30,154 @@ const CaseStudyGallery = () => {
   const caseStudies = [
     {
       id: "quickbooks-medallion",
-      title: "QuickBooks Financial Analytics",
-      subtitle: "Medallion Architecture Implementation",
-      description: "Transformed raw QuickBooks Online data into a production-ready financial reporting system using a 3-tier Medallion Architecture—achieving 99.999% P&L accuracy and 100% Balance Sheet equation verification through proper double-entry accounting principles.",
+      title: "Automated Financial Reporting",
+      techStack: "Power BI + Python + QuickBooks API",
+      bullets: [
+        "Saved 10+ hours/week by eliminating manual QuickBooks exports and Excel reconciliation",
+        "Achieved 99.999% P&L accuracy with automated double-entry accounting validation",
+        "Delivered real-time financial dashboards replacing days of manual report creation"
+      ],
       icon: GitBranch,
       color: "green",
-      tags: ["Power BI", "Python", "QuickBooks API", "DAX"],
-      metrics: [
-        { icon: Target, value: "99.999%", label: "P&L Accuracy" },
-        { icon: Shield, value: "100%", label: "BS Verified" },
-        { icon: Database, value: "15", label: "Tables" }
-      ],
       link: "/case-study/quickbooks-medallion"
     },
     {
       id: "banking-churn",
-      title: "Banking Customer Churn Platform",
-      subtitle: "End-to-End ML on Databricks",
-      description: "Unified fragmented customer data from 4 disparate systems into a production-ready ML platform that predicts customer churn and delivers personalized retention recommendations—saving an estimated $5-6M annually in preventable churn.",
+      title: "Predicted Customer Churn Risk",
+      techStack: "Databricks + dbt + scikit-learn",
+      bullets: [
+        "Identified high-risk customers before churn, enabling $5-6M in annual savings potential",
+        "Unified 4 siloed data systems into a single customer view using email-based entity resolution",
+        "Built 30+ ML features and ensemble model for proactive retention recommendations"
+      ],
       icon: Brain,
       color: "orange",
-      tags: ["Databricks", "dbt", "Python", "scikit-learn", "Unity Catalog"],
-      metrics: [
-        { icon: Users, value: "4→1", label: "Unified IDs" },
-        { icon: Brain, value: "30+", label: "ML Features" },
-        { icon: DollarSign, value: "$5-6M", label: "Annual Impact" }
-      ],
       link: "/case-study/banking-churn"
     },
     {
       id: "powerbi-expert-webapp",
-      title: "Power BI Expert Webapp",
-      subtitle: "Open Source AI Assistant",
-      description: "An enterprise-grade AI-powered web application enabling natural language interaction with Power BI data. An open-source template for organizations to customize and embed into their own applications—without Microsoft Copilot's licensing barriers.",
+      title: "Democratized BI with AI Assistant",
+      techStack: "Python + Flask + Azure AI + XMLA",
+      bullets: [
+        "Reduced time-to-insight by 70-80% with natural language queries to Power BI",
+        "Eliminated per-user Copilot licensing costs with open-source enterprise solution",
+        "Enabled non-technical users to explore data without learning DAX"
+      ],
       icon: Bot,
       color: "blue",
-      tags: ["Python", "Flask", "Azure AI Foundry", "Ollama", "XMLA", "DAX"],
-      metrics: [
-        { icon: Clock, value: "70-80%", label: "Time Saved" },
-        { icon: DollarSign, value: "$0", label: "Per-User Fee" },
-        { icon: Shield, value: "100%", label: "Data Security" }
-      ],
       link: "/case-study/powerbi-expert-webapp"
     },
     {
       id: "lumina-lux",
-      title: "Lumina Lux Corp Financial Analytics",
-      subtitle: "Enterprise Financial Consolidation Platform",
-      description: "Transformed global financial reporting for a multi-national corporation by consolidating $166.7M+ in financial data from three global subsidiaries into a unified, real-time reporting system using a 3-tier medallion architecture.",
+      title: "Consolidated Global Financial Reporting",
+      techStack: "Power BI + MySQL + Python + DAX",
+      bullets: [
+        "Unified $166.7M+ in financial data from 3 global subsidiaries into one dashboard",
+        "Eliminated month-end consolidation delays with real-time automated reporting",
+        "Enabled drill-down from consolidated view to individual entity transactions"
+      ],
       icon: BarChart3,
       color: "blue",
-      tags: ["Power BI", "MySQL", "Python", "DAX"],
-      metrics: [
-        { icon: Database, value: "120,846", label: "Transactions" },
-        { icon: Globe, value: "3", label: "Global Entities" },
-        { icon: DollarSign, value: "$166.7M+", label: "Financial Volume" }
-      ],
       link: "/case-study/lumina-lux"
     },
     {
       id: "icla-analytics",
-      title: "Enterprise Analytics Platform",
-      subtitle: "From Chaos to AI-Powered Clarity",
-      description: "Transformed a franchise business's fragmented data trapped in a locked CRM into a fully automated, near real-time analytics platform with AI-powered natural language insights—reducing data freshness from days to 30 minutes.",
+      title: "Unlocked Trapped Business Data",
+      techStack: "Python + Selenium + MySQL + Claude AI",
+      bullets: [
+        "Reduced data freshness from days to 30 minutes with automated extraction pipeline",
+        "Freed business-critical data from a locked CRM with no API access",
+        "Added AI-powered natural language insights for instant answers to business questions"
+      ],
       icon: Layers,
       color: "orange",
-      tags: ["Python", "Selenium", "MySQL", "Power BI", "MCP", "Claude AI"],
-      metrics: [
-        { icon: Clock, value: "30 min", label: "Data Fresh" },
-        { icon: Zap, value: "Instant", label: "Reports" },
-        { icon: MessageSquare, value: "AI", label: "Insights" }
-      ],
       link: "/case-study/icla-analytics"
     },
     {
       id: "powerbi-mcp",
-      title: "Power BI MCP Server",
-      subtitle: "AI-Powered Business Intelligence Integration",
-      description: "Built an enterprise-grade Model Context Protocol server enabling AI assistants like Claude to interact with Microsoft Power BI through natural language—executing DAX queries, exploring models, and performing safe bulk operations.",
+      title: "Enabled AI-Powered BI Analysis",
+      techStack: "Python + MCP + XMLA + ADOMD.NET",
+      bullets: [
+        "Built 34 AI tools allowing Claude to query Power BI models via natural language",
+        "Enabled safe bulk operations with enterprise-grade security and audit trails",
+        "Open-sourced for community use with 3 connection methods (local, cloud, Fabric)"
+      ],
       icon: Bot,
       color: "purple",
-      tags: ["Python", "MCP", "ADOMD.NET", "XMLA", "TMDL"],
-      metrics: [
-        { icon: Wrench, value: "34", label: "AI Tools" },
-        { icon: Server, value: "3", label: "Connectors" },
-        { icon: Shield, value: "100%", label: "Enterprise Security" }
-      ],
       link: "/case-study/powerbi-mcp"
     },
     {
       id: "airtable-mcp",
-      title: "Airtable MCP Server",
-      subtitle: "Natural Language Database Operations",
-      description: "A security-first Model Context Protocol server enabling AI assistants to interact with Airtable databases through natural language—performing advanced filtering, aggregations, and schema discovery without writing formulas.",
+      title: "Simplified Database Operations",
+      techStack: "Python + MCP + pyairtable",
+      bullets: [
+        "Replaced complex Airtable formulas with plain English queries via Claude",
+        "Ensured 100% input validation preventing accidental data corruption",
+        "Enabled instant schema discovery and advanced filtering without training"
+      ],
       icon: Table,
       color: "amber",
-      tags: ["Python", "MCP", "pyairtable", "Claude Desktop"],
-      metrics: [
-        { icon: Wrench, value: "6", label: "Core Tools" },
-        { icon: Shield, value: "100%", label: "Input Validation" },
-        { icon: MessageSquare, value: "Natural", label: "Language" }
-      ],
       link: "/case-study/airtable-mcp"
     },
     {
       id: "fabric-sql-assistant",
-      title: "Fabric SQL Assistant",
-      subtitle: "Natural Language Queries for Microsoft Fabric",
-      description: "An MCP server enabling Claude Desktop to interact with Microsoft Fabric SQL databases through natural language—translating plain English questions into SQL queries with Azure AD authentication and OpenAI integration.",
+      title: "Natural Language SQL for Fabric",
+      techStack: "Python + MCP + OpenAI + Azure AD",
+      bullets: [
+        "Translated plain English questions into optimized SQL queries automatically",
+        "Secured with Azure AD authentication for enterprise compliance",
+        "Reduced SQL learning curve for analysts new to Microsoft Fabric"
+      ],
       icon: Database,
       color: "green",
-      tags: ["Python", "MCP", "pyodbc", "MSAL", "OpenAI"],
-      metrics: [
-        { icon: MessageSquare, value: "Natural", label: "Language" },
-        { icon: Cloud, value: "Azure", label: "AD Auth" },
-        { icon: Sparkles, value: "AI", label: "Query Gen" }
-      ],
       link: "/case-study/fabric-sql-assistant"
     },
     {
       id: "fabricforge",
-      title: "FabricForge",
-      subtitle: "Visual Workspace Automation Platform",
-      description: "A web-based visual form builder that transforms Microsoft Fabric workspace provisioning from hours of manual configuration to minutes of automated deployment—with AI-powered code generation and n8n workflow orchestration.",
+      title: "Automated Workspace Provisioning",
+      techStack: "n8n + Microsoft Fabric + OpenAI",
+      bullets: [
+        "Reduced workspace setup time by 90%—from hours of manual config to 5 minutes",
+        "Eliminated configuration errors with visual form builder and validation",
+        "Generated deployment code automatically with AI-powered assistance"
+      ],
       icon: Settings,
       color: "teal",
-      tags: ["n8n", "Microsoft Fabric", "Azure AD", "OpenAI"],
-      metrics: [
-        { icon: Clock, value: "90%", label: "Time Saved" },
-        { icon: Zap, value: "5 min", label: "Deploy Time" },
-        { icon: Shield, value: "Zero", label: "Config Errors" }
-      ],
       link: "/case-study/fabricforge"
     }
   ];
 
   const getColorClasses = (color: string) => {
-    const colors: Record<string, { bg: string; border: string; text: string; badge: string }> = {
+    const colors: Record<string, { border: string; text: string; bullet: string }> = {
       blue: {
-        bg: "from-blue-500/10 to-blue-500/5",
-        border: "border-blue-500/30 hover:border-blue-500/50",
+        border: "border-blue-500/20 hover:border-blue-500/40",
         text: "text-blue-500",
-        badge: "bg-blue-500/10 text-blue-500"
+        bullet: "text-blue-500"
       },
       purple: {
-        bg: "from-purple-500/10 to-purple-500/5",
-        border: "border-purple-500/30 hover:border-purple-500/50",
+        border: "border-purple-500/20 hover:border-purple-500/40",
         text: "text-purple-500",
-        badge: "bg-purple-500/10 text-purple-500"
+        bullet: "text-purple-500"
       },
       amber: {
-        bg: "from-amber-500/10 to-amber-500/5",
-        border: "border-amber-500/30 hover:border-amber-500/50",
+        border: "border-amber-500/20 hover:border-amber-500/40",
         text: "text-amber-500",
-        badge: "bg-amber-500/10 text-amber-500"
+        bullet: "text-amber-500"
       },
       green: {
-        bg: "from-green-500/10 to-green-500/5",
-        border: "border-green-500/30 hover:border-green-500/50",
+        border: "border-green-500/20 hover:border-green-500/40",
         text: "text-green-500",
-        badge: "bg-green-500/10 text-green-500"
+        bullet: "text-green-500"
       },
       teal: {
-        bg: "from-teal-500/10 to-teal-500/5",
-        border: "border-teal-500/30 hover:border-teal-500/50",
+        border: "border-teal-500/20 hover:border-teal-500/40",
         text: "text-teal-500",
-        badge: "bg-teal-500/10 text-teal-500"
+        bullet: "text-teal-500"
       },
       orange: {
-        bg: "from-orange-500/10 to-orange-500/5",
-        border: "border-orange-500/30 hover:border-orange-500/50",
+        border: "border-orange-500/20 hover:border-orange-500/40",
         text: "text-orange-500",
-        badge: "bg-orange-500/10 text-orange-500"
+        bullet: "text-orange-500"
       }
     };
     return colors[color] || colors.blue;
@@ -224,73 +189,76 @@ const CaseStudyGallery = () => {
 
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="py-16 md:py-24 bg-gradient-to-b from-primary/10 via-primary/5 to-background">
+        <section className="py-12 md:py-16 bg-gradient-to-b from-primary/10 via-primary/5 to-background">
           <div className="container mx-auto px-6">
-            <div className="max-w-4xl mx-auto text-center">
-              <Badge variant="outline" className="text-xs mb-6">Portfolio</Badge>
+            <div className="max-w-3xl mx-auto text-center">
+              <Badge variant="outline" className="text-xs mb-4">Portfolio</Badge>
 
-              <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
-                Case Studies
+              <h1 className="text-3xl md:text-4xl font-bold mb-4">
+                Projects That Delivered Results
               </h1>
 
-              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-                Deep dives into real-world projects showcasing end-to-end solutions in data engineering,
-                business intelligence, and AI integration. Each case study demonstrates the journey from
-                challenge to impact.
+              <p className="text-muted-foreground leading-relaxed">
+                Real impact through data engineering, BI, and AI—measured in time saved, revenue protected, and efficiency gained.
               </p>
             </div>
           </div>
         </section>
 
         {/* Case Studies Grid */}
-        <section className="py-16 bg-background">
+        <section className="py-12 bg-background">
           <div className="container mx-auto px-6">
-            <div className="max-w-6xl mx-auto">
-              <div className="grid md:grid-cols-2 gap-8">
+            <div className="max-w-5xl mx-auto">
+              <div className="grid gap-6">
                 {caseStudies.map((study) => {
                   const colors = getColorClasses(study.color);
                   return (
                     <Link key={study.id} to={study.link} className="group">
-                      <Card className={`h-full transition-all duration-300 ${colors.border} bg-gradient-to-br ${colors.bg} hover:shadow-xl hover:-translate-y-1`}>
-                        <CardHeader>
-                          <div className="flex items-start justify-between mb-4">
-                            <div className={`w-14 h-14 rounded-xl ${colors.badge} flex items-center justify-center`}>
-                              <study.icon className={`h-7 w-7 ${colors.text}`} />
+                      <Card className={`transition-all duration-200 ${colors.border} hover:shadow-lg hover:bg-muted/30`}>
+                        <CardContent className="p-6">
+                          <div className="flex flex-col md:flex-row md:items-start gap-4">
+                            {/* Icon - Hidden on mobile for cleaner look */}
+                            <div className={`hidden md:flex w-12 h-12 rounded-lg bg-muted/50 items-center justify-center flex-shrink-0`}>
+                              <study.icon className={`h-6 w-6 ${colors.text}`} />
                             </div>
-                            <ArrowRight className={`h-5 w-5 ${colors.text} opacity-0 group-hover:opacity-100 transition-opacity`} />
-                          </div>
-                          <CardTitle className="text-xl mb-2">{study.title}</CardTitle>
-                          <p className={`text-sm font-medium ${colors.text}`}>{study.subtitle}</p>
-                        </CardHeader>
-                        <CardContent className="space-y-6">
-                          <p className="text-muted-foreground text-sm leading-relaxed">
-                            {study.description}
-                          </p>
 
-                          {/* Metrics */}
-                          <div className="grid grid-cols-3 gap-3">
-                            {study.metrics.map((metric, idx) => (
-                              <div key={idx} className="text-center p-3 rounded-lg bg-background/50">
-                                <metric.icon className={`h-4 w-4 ${colors.text} mx-auto mb-1`} />
-                                <div className={`font-bold text-sm ${colors.text}`}>{metric.value}</div>
-                                <div className="text-xs text-muted-foreground">{metric.label}</div>
+                            {/* Content */}
+                            <div className="flex-1 min-w-0">
+                              {/* Title Row */}
+                              <div className="flex items-start justify-between gap-4 mb-2">
+                                <div className="flex items-center gap-3">
+                                  {/* Mobile Icon */}
+                                  <div className={`md:hidden w-10 h-10 rounded-lg bg-muted/50 flex items-center justify-center flex-shrink-0`}>
+                                    <study.icon className={`h-5 w-5 ${colors.text}`} />
+                                  </div>
+                                  <div>
+                                    <h2 className="text-lg md:text-xl font-semibold group-hover:text-primary transition-colors">
+                                      {study.title}
+                                    </h2>
+                                    <p className="text-sm text-muted-foreground">
+                                      {study.techStack}
+                                    </p>
+                                  </div>
+                                </div>
+                                <ArrowRight className={`h-5 w-5 ${colors.text} opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 mt-1`} />
                               </div>
-                            ))}
-                          </div>
 
-                          {/* Tags */}
-                          <div className="flex flex-wrap gap-2">
-                            {study.tags.map((tag, idx) => (
-                              <Badge key={idx} variant="secondary" className="text-xs">
-                                {tag}
-                              </Badge>
-                            ))}
-                          </div>
+                              {/* Bullet Points */}
+                              <ul className="space-y-2 mt-4">
+                                {study.bullets.map((bullet, idx) => (
+                                  <li key={idx} className="flex items-start gap-3 text-sm">
+                                    <CheckCircle2 className={`h-4 w-4 ${colors.bullet} flex-shrink-0 mt-0.5`} />
+                                    <span className="text-muted-foreground leading-relaxed">{bullet}</span>
+                                  </li>
+                                ))}
+                              </ul>
 
-                          {/* CTA */}
-                          <div className={`flex items-center gap-2 text-sm font-medium ${colors.text} group-hover:gap-3 transition-all`}>
-                            View Case Study
-                            <ArrowRight className="h-4 w-4" />
+                              {/* CTA - Mobile */}
+                              <div className={`mt-4 flex items-center gap-2 text-sm font-medium ${colors.text} md:hidden`}>
+                                View Details
+                                <ArrowRight className="h-4 w-4" />
+                              </div>
+                            </div>
                           </div>
                         </CardContent>
                       </Card>
@@ -303,30 +271,29 @@ const CaseStudyGallery = () => {
         </section>
 
         {/* Bottom CTA */}
-        <section className="py-16 bg-muted/30 border-t">
+        <section className="py-12 bg-muted/30 border-t">
           <div className="container mx-auto px-6">
-            <div className="max-w-3xl mx-auto text-center">
-              <Layers className="h-12 w-12 text-primary mx-auto mb-6" />
-              <h2 className="text-2xl md:text-3xl font-bold mb-4">Building the Future of Data & AI</h2>
-              <p className="text-muted-foreground mb-6">
-                From enterprise financial analytics to AI-powered integrations, these case studies showcase
-                end-to-end solutions that transform how organizations work with data.
+            <div className="max-w-2xl mx-auto text-center">
+              <h2 className="text-xl md:text-2xl font-bold mb-3">Let's Build Something Impactful</h2>
+              <p className="text-muted-foreground text-sm mb-6">
+                Data Engineering | Business Intelligence | AI Integration
               </p>
-              <div className="flex flex-wrap gap-3 justify-center">
-                <Badge className="text-sm px-4 py-2">Data Engineering</Badge>
-                <Badge className="text-sm px-4 py-2">Business Intelligence</Badge>
-                <Badge className="text-sm px-4 py-2">AI Integration</Badge>
-                <Badge className="text-sm px-4 py-2">MCP Servers</Badge>
-                <Badge className="text-sm px-4 py-2">Microsoft Fabric</Badge>
+              <div className="flex flex-wrap gap-2 justify-center">
+                <Badge variant="secondary" className="text-xs">Databricks</Badge>
+                <Badge variant="secondary" className="text-xs">Power BI</Badge>
+                <Badge variant="secondary" className="text-xs">dbt</Badge>
+                <Badge variant="secondary" className="text-xs">Python</Badge>
+                <Badge variant="secondary" className="text-xs">Microsoft Fabric</Badge>
+                <Badge variant="secondary" className="text-xs">MCP Servers</Badge>
               </div>
             </div>
           </div>
         </section>
       </main>
 
-      <footer className="bg-muted/30 border-t py-8">
+      <footer className="bg-muted/30 border-t py-6">
         <div className="container mx-auto px-6 text-center">
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground text-sm">
             © 2025 Sulaiman Ahmed. Transforming Data into Strategic Insights.
           </p>
         </div>
