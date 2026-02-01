@@ -3,10 +3,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { Search, Calendar, Clock, ArrowRight, Linkedin } from "lucide-react";
+import { Search, Calendar, Clock, ArrowRight, Linkedin, Target, TrendingUp, FileText } from "lucide-react";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Link } from "react-router-dom";
+import { Progress } from "@/components/ui/progress";
 
 interface BlogPost {
   id: string;
@@ -131,15 +132,60 @@ const BlogSection = () => {
             </p>
             <div className="flex items-center justify-center gap-2 mt-4">
               <span className="text-lg font-medium">by Sulaiman Ahmed</span>
-              <a 
-                href="https://www.linkedin.com/in/sulaimanahmed" 
-                target="_blank" 
+              <a
+                href="https://www.linkedin.com/in/sulaimanahmed"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary hover:text-primary/80 transition-colors"
               >
                 <Linkedin className="h-6 w-6" />
               </a>
             </div>
+          </div>
+
+          {/* MVP Journey Progress Stats */}
+          <div className="mb-12 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <Card className="bg-gradient-to-br from-primary/10 to-blue-500/10 border-0 shadow-lg">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-3 mb-2">
+                  <FileText className="h-5 w-5 text-primary" />
+                  <span className="text-sm text-muted-foreground">Blogs Published</span>
+                </div>
+                <div className="text-3xl font-bold">{blogPosts.length}</div>
+                <div className="mt-2">
+                  <Progress value={(blogPosts.length / 24) * 100} className="h-2" />
+                  <span className="text-xs text-muted-foreground mt-1 block">{blogPosts.length}/24 MVP goal</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 border-0 shadow-lg">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-3 mb-2">
+                  <TrendingUp className="h-5 w-5 text-green-500" />
+                  <span className="text-sm text-muted-foreground">Days Since Last Post</span>
+                </div>
+                <div className="text-3xl font-bold">
+                  {blogPosts.length > 0
+                    ? Math.floor((Date.now() - new Date(blogPosts[0]?.created_at).getTime()) / (1000 * 60 * 60 * 24))
+                    : '-'}
+                </div>
+                <span className="text-xs text-muted-foreground">Target: Post every 14 days</span>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 border-0 shadow-lg">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-3 mb-2">
+                  <Target className="h-5 w-5 text-purple-500" />
+                  <span className="text-sm text-muted-foreground">MVP Journey</span>
+                </div>
+                <div className="text-3xl font-bold">
+                  {Math.round((blogPosts.length / 24) * 100)}%
+                </div>
+                <span className="text-xs text-muted-foreground">Microsoft Data Platform MVP</span>
+              </CardContent>
+            </Card>
           </div>
 
           {/* Featured Posts */}
