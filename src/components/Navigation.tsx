@@ -51,8 +51,8 @@ const Navigation = () => {
                 <Button variant="ghost" onClick={() => scrollToSection('hero')}>
                   Home
                 </Button>
-                <Button variant="ghost" onClick={() => scrollToSection('about')}>
-                  About
+                <Button variant="ghost" asChild>
+                  <Link to="/about">About</Link>
                 </Button>
                 <Button variant="ghost" asChild>
                   <Link to="/portfolio">Portfolio</Link>
@@ -74,6 +74,9 @@ const Navigation = () => {
               <>
                 <Button variant="ghost" asChild>
                   <Link to="/">Home</Link>
+                </Button>
+                <Button variant="ghost" asChild>
+                  <Link to="/about">About</Link>
                 </Button>
                 <Button variant="ghost" asChild>
                   <Link to="/portfolio">Portfolio</Link>
@@ -130,8 +133,8 @@ const Navigation = () => {
                   <Button variant="ghost" className="w-full justify-start" onClick={() => scrollToSection('hero')}>
                     Home
                   </Button>
-                  <Button variant="ghost" className="w-full justify-start" onClick={() => scrollToSection('about')}>
-                    About
+                  <Button variant="ghost" className="w-full justify-start" asChild>
+                    <Link to="/about">About</Link>
                   </Button>
                   <Button variant="ghost" className="w-full justify-start" asChild>
                     <Link to="/portfolio">Portfolio</Link>
@@ -158,6 +161,9 @@ const Navigation = () => {
                 <>
                   <Button variant="ghost" className="w-full justify-start" asChild>
                     <Link to="/">Home</Link>
+                  </Button>
+                  <Button variant="ghost" className="w-full justify-start" asChild>
+                    <Link to="/about">About</Link>
                   </Button>
                   <Button variant="ghost" className="w-full justify-start" asChild>
                     <Link to="/portfolio">Portfolio</Link>
