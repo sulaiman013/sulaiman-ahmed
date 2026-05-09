@@ -1,17 +1,14 @@
 import Navigation from "@/components/Navigation";
-import { useState, useEffect } from "react";
+import Footer from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
   TrendingUp,
   Database,
-  Layers,
-  Globe,
   CheckCircle2,
   Code2,
   AlertTriangle,
   ArrowRight,
-  Zap,
   Target,
   Shield,
   ChevronRight,
@@ -25,20 +22,11 @@ import {
   Terminal,
   GitBranch,
   CloudCog,
-  Play
+  Play,
+  Layers,
 } from "lucide-react";
 
 const PowerBIMCPCaseStudy = () => {
-  const [darkMode, setDarkMode] = useState(false);
-
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [darkMode]);
-
   const keyResults = [
     { icon: Wrench, value: "34", label: "AI-Powered Tools", description: "For Power BI automation" },
     { icon: Server, value: "3", label: "Connector Types", description: "Desktop, Cloud, PBIP" },
@@ -54,17 +42,17 @@ const PowerBIMCPCaseStudy = () => {
     {
       icon: GitBranch,
       title: "Fragmented Tooling",
-      description: "No unified interface to manage Power BI Desktop and Power BI Service semantic models—developers juggle multiple tools and APIs."
+      description: "No unified interface to manage Power BI Desktop and Power BI Service semantic models. Developers juggle multiple tools and APIs."
     },
     {
       icon: Lock,
       title: "Security & Compliance Gaps",
-      description: "Enterprise environments require PII detection, audit logging, and role-based access control that native tools don't provide out of the box."
+      description: "Enterprise environments require PII detection, audit logging, and role-based access control that native tools do not provide out of the box."
     },
     {
       icon: Bot,
       title: "AI Integration Barriers",
-      description: "AI assistants couldn't interact with Power BI models, execute DAX queries, or help with model development without extensive custom integration."
+      description: "AI assistants could not interact with Power BI models, execute DAX queries, or help with model development without extensive custom integration."
     }
   ];
 
@@ -91,7 +79,7 @@ const PowerBIMCPCaseStudy = () => {
     {
       area: "Rename Operations",
       before: "Rename breaks visuals, hours of manual fixes",
-      after: "PBIP-safe rename updates model + visuals atomically"
+      after: "PBIP-safe rename updates model and visuals atomically"
     },
     {
       area: "Security Testing",
@@ -125,7 +113,7 @@ const PowerBIMCPCaseStudy = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Navigation darkMode={darkMode} setDarkMode={setDarkMode} />
+      <Navigation />
 
       <main className="pt-20">
         {/* Hero Section */}
@@ -133,7 +121,7 @@ const PowerBIMCPCaseStudy = () => {
           <div className="container mx-auto px-6">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-2 mb-6">
-                <Badge variant="outline" className="text-xs">Case Study</Badge>
+                <Badge variant="outline" className="text-xs">Pet Project</Badge>
                 <ChevronRight className="h-4 w-4 text-muted-foreground" />
                 <Badge variant="outline" className="text-xs">AI + Power BI</Badge>
               </div>
@@ -144,7 +132,7 @@ const PowerBIMCPCaseStudy = () => {
 
               <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-4xl">
                 An enterprise-grade Model Context Protocol server enabling AI assistants like Claude to interact with
-                Microsoft Power BI through natural language—executing DAX queries, exploring models, and performing
+                Microsoft Power BI through natural language: executing DAX queries, exploring models, and performing
                 safe bulk operations across Desktop and Cloud environments.
               </p>
 
@@ -174,7 +162,7 @@ const PowerBIMCPCaseStudy = () => {
           </div>
         </section>
 
-        {/* Key Results - Value Pillars */}
+        {/* Key Results */}
         <section className="py-12 bg-background border-y">
           <div className="container mx-auto px-6">
             <div className="max-w-5xl mx-auto">
@@ -440,8 +428,8 @@ const PowerBIMCPCaseStudy = () => {
                 <CardContent className="space-y-4">
                   <p className="text-muted-foreground">
                     The key innovation is the PBIP (Power BI Project) connector that performs file-based editing,
-                    simultaneously updating both the semantic model layer and report visual definitions—something
-                    the native TOM API cannot achieve.
+                    simultaneously updating both the semantic model layer and report visual definitions. This is
+                    something the native TOM API cannot achieve.
                   </p>
 
                   <div className="grid md:grid-cols-2 gap-4">
@@ -473,15 +461,6 @@ const PowerBIMCPCaseStudy = () => {
                         <p className="text-xs text-muted-foreground">Maintains natural language query mappings</p>
                       </div>
                     </div>
-                  </div>
-
-                  <div className="p-4 rounded-lg bg-slate-900 text-slate-100 font-mono text-sm overflow-x-auto">
-                    <div className="text-slate-400 mb-2"># Safe rename workflow</div>
-                    <div className="text-green-400">$ pbip_load_project("/path/to/project.pbip")</div>
-                    <div className="text-slate-300">Project loaded: 12 tables, 45 measures</div>
-                    <div className="text-green-400 mt-2">$ pbip_rename_table("Sales", "SalesTransactions")</div>
-                    <div className="text-slate-300">Updated: model.tmdl, 23 DAX expressions, 8 visuals, Q&A schema</div>
-                    <div className="text-blue-400 mt-2"># All references preserved - zero broken visuals</div>
                   </div>
                 </CardContent>
               </Card>
@@ -598,51 +577,6 @@ const PowerBIMCPCaseStudy = () => {
           </div>
         </section>
 
-        {/* Results & Impact */}
-        <section className="py-16 bg-muted/30">
-          <div className="container mx-auto px-6">
-            <div className="max-w-5xl mx-auto">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center">
-                  <CheckCircle2 className="h-5 w-5 text-green-500" />
-                </div>
-                <h2 className="text-2xl md:text-3xl font-bold">Results & Impact</h2>
-              </div>
-
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <Card className="text-center bg-gradient-to-br from-green-500/10 to-green-500/5 border-green-500/20">
-                  <CardContent className="pt-6">
-                    <div className="text-3xl font-bold text-green-500 mb-2">34</div>
-                    <div className="text-sm font-medium">MCP Tools</div>
-                    <div className="text-xs text-muted-foreground">Available for AI assistants</div>
-                  </CardContent>
-                </Card>
-                <Card className="text-center bg-gradient-to-br from-blue-500/10 to-blue-500/5 border-blue-500/20">
-                  <CardContent className="pt-6">
-                    <div className="text-3xl font-bold text-blue-500 mb-2">0</div>
-                    <div className="text-sm font-medium">Broken Visuals</div>
-                    <div className="text-xs text-muted-foreground">With PBIP-safe refactoring</div>
-                  </CardContent>
-                </Card>
-                <Card className="text-center bg-gradient-to-br from-purple-500/10 to-purple-500/5 border-purple-500/20">
-                  <CardContent className="pt-6">
-                    <div className="text-3xl font-bold text-purple-500 mb-2">2</div>
-                    <div className="text-sm font-medium">Environments</div>
-                    <div className="text-xs text-muted-foreground">Desktop + Cloud unified</div>
-                  </CardContent>
-                </Card>
-                <Card className="text-center bg-gradient-to-br from-amber-500/10 to-amber-500/5 border-amber-500/20">
-                  <CardContent className="pt-6">
-                    <div className="text-3xl font-bold text-amber-500 mb-2">MIT</div>
-                    <div className="text-sm font-medium">Open Source</div>
-                    <div className="text-xs text-muted-foreground">Community-driven development</div>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* CTA Section */}
         <section className="py-16 bg-gradient-to-r from-primary/10 to-blue-500/10 border-t">
           <div className="container mx-auto px-6">
@@ -650,7 +584,7 @@ const PowerBIMCPCaseStudy = () => {
               <h2 className="text-2xl md:text-3xl font-bold mb-4">Ready to Supercharge Your Power BI Workflow?</h2>
               <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
                 Transform how you interact with Power BI. Let AI assistants help you explore models, write DAX,
-                and safely refactor your semantic models—all through natural language.
+                and safely refactor your semantic models through natural language.
               </p>
               <div className="flex flex-wrap gap-3 justify-center">
                 <a
@@ -674,13 +608,7 @@ const PowerBIMCPCaseStudy = () => {
         </section>
       </main>
 
-      <footer className="bg-muted/30 border-t py-8">
-        <div className="container mx-auto px-6 text-center">
-          <p className="text-muted-foreground">
-            © 2025 Sulaiman Ahmed. Building the Future of AI-Powered Business Intelligence.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

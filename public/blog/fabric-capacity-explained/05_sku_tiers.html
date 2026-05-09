@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fabric SKU Tiers</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #0a0a1a;
+    color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1600px;
+    background: linear-gradient(145deg, #12122a, #0d0d20);
+    border-radius: 24px;
+    border: 1px solid rgba(0, 255, 136, 0.15);
+    padding: 24px 40px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 80px rgba(0, 255, 136, 0.05);
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05));
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: #60a5fa;
+    margin-bottom: 6px;
+  }
+
+  .title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 3px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+    color: #8888aa;
+    margin-bottom: 16px;
+  }
+
+  /* Main layout: SKU list left, scenarios right */
+  .main-layout {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 28px;
+    margin-bottom: 14px;
+  }
+
+  /* SKU visual bars */
+  .sku-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .sku-row {
+    display: grid;
+    grid-template-columns: 70px 1fr 80px 90px;
+    align-items: center;
+    gap: 12px;
+    padding: 5px 0;
+  }
+
+  .sku-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  .sku-bar-track {
+    height: 20px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .sku-bar-fill {
+    height: 100%;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.8);
+  }
+
+  .sku-cus {
+    text-align: right;
+    font-size: 13px;
+    font-weight: 600;
+    color: #aaaacc;
+  }
+
+  .sku-price {
+    text-align: right;
+    font-size: 12px;
+    color: #6666aa;
+  }
+
+  /* Color gradient from small to large */
+  .sku-f2 .sku-bar-fill { width: 2%; background: #1a5c3a; min-width: 20px; }
+  .sku-f4 .sku-bar-fill { width: 4%; background: #1a7c4a; min-width: 24px; }
+  .sku-f8 .sku-bar-fill { width: 6%; background: #1a9c5a; min-width: 28px; }
+  .sku-f16 .sku-bar-fill { width: 8%; background: #22b06a; min-width: 32px; }
+  .sku-f32 .sku-bar-fill { width: 12%; background: #2cc87a; }
+  .sku-f64 .sku-bar-fill { width: 18%; background: linear-gradient(90deg, #00ff88, #00cc6a); }
+  .sku-f128 .sku-bar-fill { width: 28%; background: linear-gradient(90deg, #3b82f6, #2563eb); }
+  .sku-f256 .sku-bar-fill { width: 40%; background: linear-gradient(90deg, #6366f1, #4f46e5); }
+  .sku-f512 .sku-bar-fill { width: 56%; background: linear-gradient(90deg, #8b5cf6, #7c3aed); }
+  .sku-f1024 .sku-bar-fill { width: 76%; background: linear-gradient(90deg, #a855f7, #9333ea); }
+  .sku-f2048 .sku-bar-fill { width: 100%; background: linear-gradient(90deg, #ec4899, #db2777); }
+
+  .sku-header {
+    display: grid;
+    grid-template-columns: 70px 1fr 80px 90px;
+    gap: 12px;
+    padding: 0 0 6px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    margin-bottom: 4px;
+  }
+
+  .sku-header span {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #555577;
+  }
+
+  .sku-header span:nth-child(3),
+  .sku-header span:nth-child(4) {
+    text-align: right;
+  }
+
+  /* Highlight F64 */
+  .sku-f64 {
+    background: rgba(0, 255, 136, 0.04);
+    border-radius: 8px;
+    padding: 5px 8px 5px 0 !important;
+    margin: 0 -8px;
+  }
+
+  .sku-f64 .sku-name { color: #00ff88; }
+
+  .popular-tag {
+    display: inline-block;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: rgba(0, 255, 136, 0.15);
+    color: #00ff88;
+    margin-left: 3px;
+    vertical-align: middle;
+  }
+
+  .trial-tag {
+    display: inline-block;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: rgba(0, 255, 136, 0.1);
+    color: #00ff88;
+    border: 1px dashed rgba(0, 255, 136, 0.3);
+    margin-left: 3px;
+    vertical-align: middle;
+  }
+
+  /* Right side: Scenario cards */
+  .scenarios {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .scenario-card {
+    border-radius: 12px;
+    padding: 12px 14px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scenario-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+  }
+
+  .scenario-starter {
+    background: linear-gradient(145deg, rgba(26, 124, 74, 0.12), rgba(26, 124, 74, 0.03));
+    border: 1px solid rgba(26, 124, 74, 0.2);
+  }
+  .scenario-starter::before { background: #1a7c4a; }
+
+  .scenario-mid {
+    background: linear-gradient(145deg, rgba(0, 255, 136, 0.08), rgba(0, 255, 136, 0.02));
+    border: 1px solid rgba(0, 255, 136, 0.15);
+  }
+  .scenario-mid::before { background: #00ff88; }
+
+  .scenario-enterprise {
+    background: linear-gradient(145deg, rgba(236, 72, 153, 0.08), rgba(236, 72, 153, 0.02));
+    border: 1px solid rgba(236, 72, 153, 0.15);
+  }
+  .scenario-enterprise::before { background: #ec4899; }
+
+  .scenario-title {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .scenario-starter .scenario-title { color: #1a9c5a; }
+  .scenario-mid .scenario-title { color: #00ff88; }
+  .scenario-enterprise .scenario-title { color: #ec4899; }
+
+  .scenario-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .scenario-list li {
+    font-size: 11px;
+    color: #aaaacc;
+    line-height: 1.5;
+    padding-left: 12px;
+    position: relative;
+  }
+
+  .scenario-list li::before {
+    content: '\2022';
+    position: absolute;
+    left: 0;
+    color: #555577;
+  }
+
+  .scenario-list .num {
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  .scenario-math {
+    font-size: 10px;
+    color: #6666aa;
+    margin-top: 5px;
+    padding-top: 5px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    line-height: 1.5;
+  }
+
+  .scenario-math .num {
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  /* Bottom row */
+  .bottom-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 12px;
+  }
+
+  .bottom-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .stat-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-size: 15px;
+    font-weight: 800;
+    color: #ffffff;
+  }
+
+  .stat-label {
+    font-size: 9px;
+    color: #8888aa;
+    margin-top: 2px;
+  }
+
+  .stat-value.green { color: #00ff88; }
+  .stat-value.blue { color: #60a5fa; }
+
+  .tips-column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .tip {
+    padding: 10px 14px;
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.06), rgba(0, 255, 136, 0.02));
+    border: 1px solid rgba(0, 255, 136, 0.15);
+    border-radius: 10px;
+    font-size: 11px;
+    color: #aaaacc;
+    line-height: 1.5;
+  }
+
+  .tip strong { color: #00ff88; }
+
+  .tip-blue {
+    padding: 10px 14px;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.06), rgba(59, 130, 246, 0.02));
+    border: 1px solid rgba(59, 130, 246, 0.15);
+    border-radius: 10px;
+    font-size: 11px;
+    color: #aaaacc;
+    line-height: 1.5;
+  }
+
+  .tip-blue strong { color: #60a5fa; }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .footer-text { font-size: 10px; color: #555577; }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div style="text-align: center;">
+      <div class="badge">Fabric SKU Tiers</div>
+      <div class="title">Choose Your Capacity</div>
+      <div class="subtitle">From F2 (2 CUs) to F2048 (2,048 CUs). Billed per second with 1-minute minimum. PAYG at ~$0.18/CU/hr (US West 2).</div>
+    </div>
+
+    <div class="main-layout">
+      <!-- LEFT: SKU List -->
+      <div>
+        <div class="sku-header">
+          <span>SKU</span>
+          <span>Relative Capacity</span>
+          <span>CUs</span>
+          <span>~Monthly</span>
+        </div>
+
+        <div class="sku-list">
+          <div class="sku-row sku-f2">
+            <div class="sku-name">F2</div>
+            <div class="sku-bar-track"><div class="sku-bar-fill"></div></div>
+            <div class="sku-cus">2</div>
+            <div class="sku-price">~$262</div>
+          </div>
+          <div class="sku-row sku-f4">
+            <div class="sku-name">F4</div>
+            <div class="sku-bar-track"><div class="sku-bar-fill"></div></div>
+            <div class="sku-cus">4</div>
+            <div class="sku-price">~$524</div>
+          </div>
+          <div class="sku-row sku-f8">
+            <div class="sku-name">F8</div>
+            <div class="sku-bar-track"><div class="sku-bar-fill"></div></div>
+            <div class="sku-cus">8</div>
+            <div class="sku-price">~$1,048</div>
+          </div>
+          <div class="sku-row sku-f16">
+            <div class="sku-name">F16</div>
+            <div class="sku-bar-track"><div class="sku-bar-fill"></div></div>
+            <div class="sku-cus">16</div>
+            <div class="sku-price">~$2,096</div>
+          </div>
+          <div class="sku-row sku-f32">
+            <div class="sku-name">F32</div>
+            <div class="sku-bar-track"><div class="sku-bar-fill"></div></div>
+            <div class="sku-cus">32</div>
+            <div class="sku-price">~$4,192</div>
+          </div>
+          <div class="sku-row sku-f64">
+            <div class="sku-name">F64 <span class="popular-tag">Popular</span></div>
+            <div class="sku-bar-track"><div class="sku-bar-fill">P1 Equivalent</div></div>
+            <div class="sku-cus">64</div>
+            <div class="sku-price">~$8,384</div>
+          </div>
+          <div class="sku-row sku-f128">
+            <div class="sku-name">F128</div>
+            <div class="sku-bar-track"><div class="sku-bar-fill">P2 Equivalent</div></div>
+            <div class="sku-cus">128</div>
+            <div class="sku-price">~$16,768</div>
+          </div>
+          <div class="sku-row sku-f256">
+            <div class="sku-name">F256</div>
+            <div class="sku-bar-track"><div class="sku-bar-fill">P3 Equivalent</div></div>
+            <div class="sku-cus">256</div>
+            <div class="sku-price">~$33,536</div>
+          </div>
+          <div class="sku-row sku-f512">
+            <div class="sku-name">F512</div>
+            <div class="sku-bar-track"><div class="sku-bar-fill"></div></div>
+            <div class="sku-cus">512</div>
+            <div class="sku-price">~$67,072</div>
+          </div>
+          <div class="sku-row sku-f1024">
+            <div class="sku-name">F1024</div>
+            <div class="sku-bar-track"><div class="sku-bar-fill"></div></div>
+            <div class="sku-cus">1,024</div>
+            <div class="sku-price">~$134,144</div>
+          </div>
+          <div class="sku-row sku-f2048">
+            <div class="sku-name">F2048</div>
+            <div class="sku-bar-track"><div class="sku-bar-fill">Enterprise Maximum</div></div>
+            <div class="sku-cus">2,048</div>
+            <div class="sku-price">~$268,288</div>
+          </div>
+          <div class="sku-row" style="margin-top: 2px; padding-top: 5px; border-top: 1px dashed rgba(0, 255, 136, 0.15);">
+            <div class="sku-name" style="color: #00ff88;">Trial <span class="trial-tag">Free</span></div>
+            <div class="sku-bar-track"><div class="sku-bar-fill" style="width: 18%; background: linear-gradient(90deg, rgba(0, 255, 136, 0.4), rgba(0, 255, 136, 0.2)); border: 1px dashed rgba(0, 255, 136, 0.4);">60 Days Free</div></div>
+            <div class="sku-cus" style="color: #00ff88;">64</div>
+            <div class="sku-price" style="color: #00ff88;">$0</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Scenario-based examples -->
+      <div class="scenarios">
+        <div class="scenario-card scenario-starter">
+          <div class="scenario-title">&#128218; F4: Small Team / PoC</div>
+          <ul class="scenario-list">
+            <li><span class="num">5</span> Power BI users viewing reports</li>
+            <li><span class="num">1</span> nightly dbt job + <span class="num">1</span> small Notebook</li>
+            <li>A few pipelines moving data daily</li>
+          </ul>
+          <div class="scenario-math">
+            <span class="num">~$524/mo ($17/day)</span>. Great for PoC or a team of <span class="num">3 to 5</span> people testing Fabric.
+          </div>
+        </div>
+
+        <div class="scenario-card scenario-mid">
+          <div class="scenario-title">&#9889; F64: Mid-Size Production (Most Popular)</div>
+          <ul class="scenario-list">
+            <li><span class="num">100+</span> Power BI users across departments</li>
+            <li><span class="num">10+</span> dbt models running 2x daily + <span class="num">5</span> Spark Notebooks</li>
+            <li>Dataflow Gen2 ingestion. Same as old Premium P1.</li>
+          </ul>
+          <div class="scenario-math">
+            <span class="num">~$8,384/mo</span>. Daily budget: <span class="num">64 CUs &times; 1,440 min = 92,160 CU-min/day</span>. Plenty for mixed workloads.
+          </div>
+        </div>
+
+        <div class="scenario-card scenario-enterprise">
+          <div class="scenario-title">&#127965; F2048: Enterprise Maximum</div>
+          <ul class="scenario-list">
+            <li><span class="num">1,000+</span> global users, <span class="num">1,500+</span> ETL tables</li>
+            <li>Real-time IoT (<span class="num">4,000+</span> sensors) + ML training</li>
+            <li><span class="num">50+</span> source systems, 2 batch cycles/day</li>
+          </ul>
+          <div class="scenario-math">
+            From Microsoft's Contoso scenario: <span class="num">50 systems, 1,500 tables, 8,533 GiB</span>. Cost: <span class="num">~$268K/mo</span>.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom row: stats left, tips right -->
+    <div class="bottom-row">
+      <div class="bottom-stats">
+        <div class="stat-card">
+          <div class="stat-value green">~41%</div>
+          <div class="stat-label">Savings with 3-Year Reserved</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value blue">Per Second</div>
+          <div class="stat-label">Billing (1-min minimum)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">Pause/Resume</div>
+          <div class="stat-label">Available on PAYG</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value green">60 Days</div>
+          <div class="stat-label">Free Trial (F64 equiv.)</div>
+        </div>
+      </div>
+
+      <div class="tips-column">
+        <div class="tip">
+          <strong>SKU Estimator (Preview):</strong> Free calculator at <strong>aka.ms/fabricskuestimator</strong>.
+          Enter data size (GiB), batch cycles, and table count. Select workloads, and it recommends the right SKU.
+        </div>
+        <div class="tip-blue">
+          <strong>Sizing Shortcut:</strong> Start with <strong>F64</strong> (the old P1). Under 50 users and 5 nightly jobs? Try F32/F16.
+          Over 200 users or real-time streaming? Look at F128+. PAYG lets you scale anytime.
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-text">Source: Microsoft Learn, Fabric Licenses &amp; SKU Estimator (Updated Feb 2026)</div>
+      <div class="footer-text">&copy; Sulaiman Ahmed</div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Power BI Price Hike Breakeven</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #0a0a1a;
+    color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px;
+  }
+
+  .container {
+    width: 900px;
+    background: linear-gradient(145deg, #12122a, #0d0d20);
+    border-radius: 24px;
+    border: 1px solid rgba(0, 255, 136, 0.15);
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 80px rgba(0, 255, 136, 0.05);
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, rgba(245, 197, 66, 0.15), rgba(245, 197, 66, 0.05));
+    border: 1px solid rgba(245, 197, 66, 0.3);
+    color: #f5c542;
+    margin-bottom: 16px;
+  }
+
+  .title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    color: #8888aa;
+    margin-bottom: 36px;
+  }
+
+  /* Price comparison cards */
+  .price-compare {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+
+  .price-card {
+    border-radius: 18px;
+    padding: 24px;
+    text-align: center;
+  }
+
+  .price-card.before {
+    background: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .price-card.after {
+    background: linear-gradient(145deg, rgba(245, 197, 66, 0.08), rgba(245, 197, 66, 0.02));
+    border: 1px solid rgba(245, 197, 66, 0.2);
+  }
+
+  .price-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #6666aa;
+    margin-bottom: 16px;
+  }
+
+  .price-card.after .price-label { color: #f5c542; }
+
+  .price-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .price-item:last-child { border-bottom: none; }
+
+  .price-tier {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ccccee;
+  }
+
+  .price-amount {
+    font-size: 20px;
+    font-weight: 800;
+    color: #ffffff;
+  }
+
+  .price-card.after .price-amount { color: #f5c542; }
+
+  .price-change {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 6px;
+    margin-left: 8px;
+  }
+
+  .change-up {
+    background: rgba(255, 68, 68, 0.15);
+    color: #ff6b6b;
+  }
+
+  .arrow-col {
+    text-align: center;
+  }
+
+  .arrow {
+    font-size: 32px;
+    color: #f5c542;
+  }
+
+  .arrow-text {
+    font-size: 10px;
+    color: #8888aa;
+    margin-top: 4px;
+  }
+
+  /* Breakeven section */
+  .breakeven {
+    background: linear-gradient(145deg, rgba(0, 255, 136, 0.06), rgba(0, 255, 136, 0.02));
+    border: 1px solid rgba(0, 255, 136, 0.15);
+    border-radius: 18px;
+    padding: 28px;
+    margin-bottom: 24px;
+  }
+
+  .be-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .be-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .be-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .be-card.highlight {
+    border-color: rgba(0, 255, 136, 0.3);
+    background: rgba(0, 255, 136, 0.04);
+  }
+
+  .be-scenario {
+    font-size: 11px;
+    font-weight: 600;
+    color: #8888aa;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .be-users {
+    font-size: 13px;
+    color: #aaaacc;
+    margin-bottom: 4px;
+  }
+
+  .be-cost {
+    font-size: 24px;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 4px;
+  }
+
+  .be-card.highlight .be-cost { color: #00ff88; }
+
+  .be-vs {
+    font-size: 11px;
+    color: #6666aa;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .be-verdict {
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 8px;
+  }
+
+  .verdict-ppu { color: #f5c542; }
+  .verdict-fabric { color: #00ff88; }
+
+  .callout {
+    padding: 16px 20px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    font-size: 13px;
+    color: #aaaacc;
+    line-height: 1.6;
+  }
+
+  .callout strong { color: #00ff88; }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .footer-text { font-size: 11px; color: #555577; }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div style="text-align: center;">
+      <div class="badge">April 2025 Price Hike</div>
+      <div class="title">Power BI Pricing Changed the Math</div>
+      <div class="subtitle">First price increase in a decade. This shifts when Fabric capacity beats per-user licensing.</div>
+    </div>
+
+    <!-- Before vs After -->
+    <div class="price-compare">
+      <div class="price-card before">
+        <div class="price-label">Before April 2025</div>
+        <div class="price-item">
+          <span class="price-tier">Pro</span>
+          <span class="price-amount">$10<span style="font-size: 12px; color: #8888aa;">/mo</span></span>
+        </div>
+        <div class="price-item">
+          <span class="price-tier">PPU</span>
+          <span class="price-amount">$20<span style="font-size: 12px; color: #8888aa;">/mo</span></span>
+        </div>
+      </div>
+
+      <div class="arrow-col">
+        <div class="arrow">&#10132;</div>
+        <div class="arrow-text">First hike<br>in 10 years</div>
+      </div>
+
+      <div class="price-card after">
+        <div class="price-label">After April 2025</div>
+        <div class="price-item">
+          <span class="price-tier">Pro</span>
+          <span class="price-amount">$14<span style="font-size: 12px; color: #8888aa;">/mo</span> <span class="price-change change-up">+40%</span></span>
+        </div>
+        <div class="price-item">
+          <span class="price-tier">PPU</span>
+          <span class="price-amount">$24<span style="font-size: 12px; color: #8888aa;">/mo</span> <span class="price-change change-up">+20%</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Breakeven Analysis -->
+    <div class="breakeven">
+      <div class="be-title">Breakeven: PPU vs Fabric Capacity (Post-Hike)</div>
+      <div class="be-grid">
+        <div class="be-card">
+          <div class="be-scenario">Small Team</div>
+          <div class="be-users">50 Users on PPU</div>
+          <div class="be-cost">$1,200/mo</div>
+          <div class="be-vs">vs F8 at ~$1,051/mo</div>
+          <div class="be-verdict verdict-fabric">Fabric wins + full platform</div>
+        </div>
+        <div class="be-card highlight">
+          <div class="be-scenario">Mid-Size Team</div>
+          <div class="be-users">200 Users on PPU</div>
+          <div class="be-cost">$4,800/mo</div>
+          <div class="be-vs">vs F32 at ~$4,205/mo</div>
+          <div class="be-verdict verdict-fabric">Fabric saves $595/mo</div>
+        </div>
+        <div class="be-card">
+          <div class="be-scenario">Enterprise</div>
+          <div class="be-users">500 Users on PPU</div>
+          <div class="be-cost">$12,000/mo</div>
+          <div class="be-vs">vs F64 at ~$8,410/mo</div>
+          <div class="be-verdict verdict-fabric">Fabric saves $3,590/mo</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Key Takeaway:</strong> With the new pricing, the breakeven point has dropped significantly.
+      Even teams with 50 users can justify an F8 Fabric capacity over PPU licensing.
+      At 200+ users, the savings are substantial, and you get the entire Fabric platform
+      (Notebooks, Pipelines, Dataflows, dbt Jobs, Warehouse, Real-Time Intelligence) included
+      instead of just Power BI features.
+    </div>
+
+    <div class="footer">
+      <div class="footer-text">Power BI Pricing Update (April 2025) | Fabric Capacity Analysis</div>
+      <div class="footer-text">&copy; Sulaiman Ahmed</div>
+    </div>
+  </div>
+</body>
+</html>

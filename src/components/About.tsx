@@ -31,39 +31,39 @@ const About = () => {
                 <CardContent className="p-6">
                   <h3 className="text-xl font-semibold mb-4">Professional Journey</h3>
                   <p className="text-muted-foreground leading-relaxed mb-4">
-                    Currently serving as an Analytics Engineer at <span className="text-primary font-semibold">Data Crafters</span>, 
-                    I specialize in transforming complex healthcare and business data into actionable insights. With over 5 years 
-                    of experience across healthcare, consulting, and education sectors, I've helped organizations optimize their 
-                    data strategies and make informed decisions.
+                    Currently working as an Analytics Engineer at <span className="text-primary font-semibold">Data Crafters</span>.
+                    Over the last 5+ years I have worked across healthcare, consulting, and education sectors,
+                    turning complex data into models, dashboards, and pipelines that people actually trust.
                   </p>
-                  
+
                   <div className="grid grid-cols-2 gap-4">
                     <div className="text-center p-3 bg-primary/10 rounded-lg">
                       <div className="text-2xl font-bold text-primary">4+</div>
                       <div className="text-sm text-muted-foreground">Microsoft Certifications</div>
                     </div>
                     <div className="text-center p-3 bg-blue-500/10 rounded-lg">
-                      <div className="text-2xl font-bold text-blue-500">100+</div>
-                      <div className="text-sm text-muted-foreground">Satisfied Clients</div>
+                      <div className="text-2xl font-bold text-blue-500">5+</div>
+                      <div className="text-sm text-muted-foreground">Years in Analytics</div>
                     </div>
                   </div>
                 </CardContent>
               </Card>
-              
+
               <Card className="hover:shadow-lg transition-shadow border-l-4 border-l-blue-500">
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-4">Teaching & Mentoring</h3>
+                  <h3 className="text-xl font-semibold mb-4">What I Work On</h3>
                   <p className="text-muted-foreground leading-relaxed mb-4">
-                    As an instructor at <span className="text-blue-500 font-semibold">DataSolution-360</span>, I'm passionate 
-                    about sharing knowledge and helping the next generation of data professionals. I provide corporate training, 
-                    one-on-one mentoring, and workshop facilitation.
+                    I spend most of my time on Power BI semantic modeling, Microsoft Fabric pipelines, and the
+                    spaces where AI is starting to meet the modern data stack. I write about what I learn here
+                    on the blog.
                   </p>
-                  
+
                   <div className="flex flex-wrap gap-2">
-                    <Badge variant="secondary">Corporate Training</Badge>
-                    <Badge variant="secondary">Data Analytics</Badge>
                     <Badge variant="secondary">Power BI</Badge>
                     <Badge variant="secondary">Microsoft Fabric</Badge>
+                    <Badge variant="secondary">dbt</Badge>
+                    <Badge variant="secondary">PySpark</Badge>
+                    <Badge variant="secondary">Semantic Models</Badge>
                   </div>
                 </CardContent>
               </Card>

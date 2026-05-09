@@ -22,7 +22,6 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    service_needed: '',
     message: '',
     honeypot: '' // Hidden field for spam protection
   });
@@ -30,15 +29,6 @@ const Contact = () => {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isRateLimited, setIsRateLimited] = useState(false);
   const { toast } = useToast();
-
-  const services = [
-    "Power BI Consulting",
-    "Data Engineering",
-    "Microsoft Fabric Implementation",
-    "Training & Mentoring",
-    "Custom Analytics Solutions",
-    "Other"
-  ];
 
   // Rate limiting is now handled server-side in the edge function
 
@@ -129,7 +119,7 @@ const Contact = () => {
       const sanitizedData = {
         name: sanitizeInput(formData.name),
         email: sanitizeInput(formData.email),
-        service_needed: formData.service_needed || null,
+        service_needed: null,
         message: sanitizeInput(formData.message)
       };
 
@@ -187,14 +177,13 @@ const Contact = () => {
       }
 
       toast({
-        title: "Message sent successfully!",
-        description: "I'll get back to you within 24 hours.",
+        title: "Message sent!",
+        description: "Thanks for reaching out. I'll reply soon.",
       });
 
       setFormData({
         name: '',
         email: '',
-        service_needed: '',
         message: '',
         honeypot: ''
       });
@@ -216,23 +205,16 @@ const Contact = () => {
     });
   };
 
-  const isBusinessHours = () => {
-    const now = new Date();
-    const dhakaNow = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Dhaka"}));
-    const hour = dhakaNow.getHours();
-    return hour >= 9 && hour < 18; // 9 AM to 6 PM Dhaka time
-  };
-
   return (
     <section className="py-20 bg-muted/30">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-blue-500 bg-clip-text text-transparent">
-              Let's Work Together
+              Reach Out
             </h2>
             <p className="text-xl text-muted-foreground">
-              Ready to transform your data into strategic insights?
+              Got a question, idea, or just want to say hi? Drop me a note.
             </p>
           </div>
           
@@ -307,24 +289,6 @@ const Contact = () => {
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="service_needed">Service Needed</Label>
-                    <select
-                      id="service_needed"
-                      name="service_needed"
-                      value={formData.service_needed}
-                      onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
-                    >
-                      <option value="">Select a service</option>
-                      {services.map((service) => (
-                        <option key={service} value={service}>
-                          {service}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  
-                  <div className="space-y-2">
                     <Label htmlFor="message">Message *</Label>
                     <Textarea
                       id="message"
@@ -332,7 +296,7 @@ const Contact = () => {
                       value={formData.message}
                       onChange={handleInputChange}
                       required
-                      placeholder="Tell me about your project requirements..."
+                      placeholder="Say hi, ask a question, or share a thought..."
                       rows={4}
                       maxLength={2000}
                       className={errors.message ? "border-destructive" : ""}
@@ -366,33 +330,24 @@ const Contact = () => {
             
             {/* Contact Information */}
             <div className="space-y-6">
-              {/* Availability */}
+              {/* Where I am */}
               <Card className="hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Clock className="h-5 w-5 mr-2 text-primary" />
-                    Availability
+                    Where I Am
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                      <MapPin className="h-4 w-4 mr-2 text-muted-foreground" />
-                      <span className="text-sm">Dhaka, Bangladesh</span>
-                    </div>
-                    <Badge variant={isBusinessHours() ? "default" : "secondary"}>
-                      {isBusinessHours() ? "Available" : "Away"}
-                    </Badge>
+                  <div className="flex items-center">
+                    <MapPin className="h-4 w-4 mr-2 text-muted-foreground" />
+                    <span className="text-sm">Dhaka, Bangladesh</span>
                   </div>
-                  
+
                   <div className="text-center p-3 bg-muted/50 rounded-lg">
                     <div className="text-lg font-semibold">{getCurrentTime()}</div>
-                    <div className="text-xs text-muted-foreground">Current Local Time (GMT+6)</div>
+                    <div className="text-xs text-muted-foreground">My local time (GMT+6)</div>
                   </div>
-                  
-                  <p className="text-sm text-muted-foreground">
-                    Business Hours: 9:00 AM - 6:00 PM (Bangladesh Time)
-                  </p>
                 </CardContent>
               </Card>
 
@@ -422,13 +377,6 @@ const Contact = () => {
                     </Button>
                     
                     <Button variant="outline" className="w-full justify-start" asChild>
-                      <a href="https://www.fiverr.com/bi_with_ahmed" target="_blank" rel="noopener noreferrer">
-                        <MessageCircle className="mr-2 h-5 w-5 text-green-600" />
-                        Fiverr Profile
-                      </a>
-                    </Button>
-                    
-                    <Button variant="outline" className="w-full justify-start" asChild>
                       <a href="https://docs.google.com/document/d/1lz3Qg-D93YhwzuOiWphFjvIs744osRia/edit?usp=sharing&ouid=106595007262837950939&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer">
                         <FileText className="mr-2 h-5 w-5" />
                         Download Resume
@@ -438,15 +386,15 @@ const Contact = () => {
                 </CardContent>
               </Card>
               
-              {/* Quick Response */}
+              {/* Response time */}
               <Card className="bg-gradient-to-br from-primary/10 to-blue-500/10 border-primary/20 hover:shadow-lg transition-shadow">
                 <CardHeader>
-                  <CardTitle className="text-primary">Quick Response Guarantee</CardTitle>
+                  <CardTitle className="text-primary">A Quick Note</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground">
-                    I typically respond to all inquiries within <strong>24 hours</strong>. 
-                    For urgent projects, LinkedIn is the fastest way to reach me.
+                    I usually reply within a couple of days. LinkedIn is the fastest way to reach me if you
+                    want a quicker response.
                   </p>
                 </CardContent>
               </Card>

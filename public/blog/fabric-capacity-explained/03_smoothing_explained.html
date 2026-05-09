@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smoothing Explained</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #0a0a1a;
+    color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1400px;
+    background: linear-gradient(145deg, #12122a, #0d0d20);
+    border-radius: 24px;
+    border: 1px solid rgba(0, 255, 136, 0.15);
+    padding: 32px 40px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 80px rgba(0, 255, 136, 0.05);
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.15), rgba(0, 255, 136, 0.05));
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    color: #00ff88;
+    margin-bottom: 10px;
+  }
+
+  .title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 4px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    color: #8888aa;
+    margin-bottom: 28px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Two column comparison */
+  .comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+
+  .comp-card {
+    background: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .comp-card.interactive {
+    border-color: rgba(245, 197, 66, 0.2);
+  }
+
+  .comp-card.interactive::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #f5c542, #fad66d);
+  }
+
+  .comp-card.background {
+    border-color: rgba(0, 255, 136, 0.2);
+  }
+
+  .comp-card.background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #00ff88, #66ffb2);
+  }
+
+  .comp-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+
+  .comp-type {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .comp-type.int { color: #f5c542; }
+  .comp-type.bg { color: #00ff88; }
+
+  .comp-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  .comp-window {
+    font-size: 36px;
+    font-weight: 800;
+    text-align: right;
+  }
+
+  .comp-window.int { color: #f5c542; }
+  .comp-window.bg { color: #00ff88; }
+
+  .comp-window-label {
+    font-size: 11px;
+    color: #8888aa;
+    text-align: right;
+  }
+
+  /* Smoothing visualization */
+  .smooth-viz {
+    margin: 12px 0;
+    height: 70px;
+    position: relative;
+    background: rgba(255,255,255,0.02);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .smooth-spike {
+    position: absolute;
+    bottom: 0;
+  }
+
+  .spike-int {
+    left: 15%;
+    width: 30px;
+    height: 60px;
+    background: linear-gradient(to top, rgba(245, 197, 66, 0.1), rgba(245, 197, 66, 0.5));
+    border-radius: 4px 4px 0 0;
+  }
+
+  .spike-int-smooth {
+    left: 10%;
+    width: 120px;
+    height: 18px;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(245, 197, 66, 0.2), rgba(245, 197, 66, 0.2), transparent);
+    border-radius: 4px;
+  }
+
+  .spike-bg {
+    left: 15%;
+    width: 30px;
+    height: 60px;
+    background: linear-gradient(to top, rgba(0, 255, 136, 0.1), rgba(0, 255, 136, 0.5));
+    border-radius: 4px 4px 0 0;
+  }
+
+  .spike-bg-smooth {
+    left: 2%;
+    width: 96%;
+    height: 6px;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(0, 255, 136, 0.15) 5%, rgba(0, 255, 136, 0.15) 95%, transparent 100%);
+    border-radius: 4px;
+  }
+
+  .cap-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    border-top: 2px dashed rgba(255, 100, 100, 0.3);
+  }
+
+  .cap-label {
+    position: absolute;
+    right: 4px;
+    font-size: 8px;
+    color: rgba(255, 100, 100, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .spike-label-before {
+    position: absolute;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .scenario {
+    margin-top: 14px;
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.02);
+    border-radius: 10px;
+    border-left: 3px solid;
+  }
+
+  .scenario.int-scenario { border-color: #f5c542; }
+  .scenario.bg-scenario { border-color: #00ff88; }
+
+  .scenario-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .scenario-label.int-label { color: #f5c542; }
+  .scenario-label.bg-label { color: #00ff88; }
+
+  .scenario-text {
+    font-size: 12px;
+    color: #ccccdd;
+    line-height: 1.7;
+  }
+
+  .scenario-text .num {
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  .scenario-text .result {
+    font-weight: 700;
+  }
+
+  .scenario-text .result.int-result { color: #f5c542; }
+  .scenario-text .result.bg-result { color: #00ff88; }
+
+  /* Bottom section: F4 example */
+  .example-section {
+    background: linear-gradient(145deg, rgba(59, 130, 246, 0.06), rgba(59, 130, 246, 0.02));
+    border: 1px solid rgba(59, 130, 246, 0.15);
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-bottom: 18px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 28px;
+    align-items: center;
+  }
+
+  .example-left {
+    min-width: 0;
+  }
+
+  .example-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: rgba(59, 130, 246, 0.15);
+    color: #60a5fa;
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    margin-bottom: 10px;
+  }
+
+  .example-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 12px;
+  }
+
+  .math-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .math-box {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 10px 16px;
+    text-align: center;
+  }
+
+  .math-value {
+    font-size: 22px;
+    font-weight: 800;
+    color: #ffffff;
+  }
+
+  .math-label {
+    font-size: 9px;
+    color: #8888aa;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+  }
+
+  .math-op {
+    font-size: 18px;
+    color: #555577;
+    font-weight: 300;
+  }
+
+  .math-result {
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 255, 136, 0.04));
+    border: 1px solid rgba(0, 255, 136, 0.25);
+  }
+
+  .math-result .math-value { color: #00ff88; }
+
+  .example-note {
+    font-size: 12px;
+    color: #ccccdd;
+    line-height: 1.7;
+  }
+
+  .example-note strong { color: #00ff88; }
+
+  .example-steps {
+    margin-top: 8px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .example-steps li {
+    padding: 3px 0;
+    font-size: 12px;
+    color: #ccccdd;
+    line-height: 1.5;
+  }
+
+  .example-steps li::before {
+    content: '>';
+    color: #60a5fa;
+    font-weight: 700;
+    margin-right: 8px;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .footer-text { font-size: 10px; color: #555577; }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div style="text-align: center;">
+      <div class="badge">Smoothing Explained</div>
+      <div class="title">How Fabric Absorbs Your CU Spikes</div>
+      <div class="subtitle">Think of smoothing like a credit card bill. You can spend more than your limit in a single moment, as long as your average stays under the limit over the billing period.</div>
+    </div>
+
+    <!-- Two-column comparison -->
+    <div class="comparison">
+      <!-- Interactive -->
+      <div class="comp-card interactive">
+        <div class="comp-top">
+          <div>
+            <div class="comp-type int">Interactive Operations</div>
+            <div class="comp-title">Reports, DAX, SQL DB</div>
+          </div>
+          <div>
+            <div class="comp-window int">5 to 64 <span style="font-size: 16px; font-weight: 500;">min</span></div>
+            <div class="comp-window-label">Dynamic smoothing window</div>
+          </div>
+        </div>
+
+        <div class="smooth-viz">
+          <div class="cap-line" style="top: 12px;">
+            <span class="cap-label" style="top: -12px;">Capacity Limit</span>
+          </div>
+          <div class="smooth-spike spike-int"></div>
+          <div class="smooth-spike spike-int-smooth"></div>
+          <span class="spike-label-before" style="left: 17%; top: 4px; color: rgba(245,197,66,0.7);">Spike</span>
+          <span class="spike-label-before" style="left: 40%; bottom: 22px; color: rgba(245,197,66,0.5); font-size: 8px;">Smoothed over 5-64 min</span>
+        </div>
+
+        <div class="scenario int-scenario">
+          <div class="scenario-label int-label">Scenario</div>
+          <div class="scenario-text">
+            Monday 9 AM: <span class="num">15 users</span> open Power BI dashboards at the same time.
+            The DAX queries spike to <span class="num">20 CUs</span> for <span class="num">10 seconds</span>.<br>
+            Total consumption: <span class="num">20 CUs &times; 10 sec = 200 CU-seconds</span>.<br>
+            Without smoothing: 20 CU peak hit. You'd need F32.<br>
+            With 5-min smoothing: <span class="num">200 &divide; 300 sec</span> = <span class="result int-result">only 0.67 CU average</span>. Your F4 handles it fine.
+          </div>
+        </div>
+      </div>
+
+      <!-- Background -->
+      <div class="comp-card background">
+        <div class="comp-top">
+          <div>
+            <div class="comp-type bg">Background Operations</div>
+            <div class="comp-title">Notebooks, dbt, Pipelines</div>
+          </div>
+          <div>
+            <div class="comp-window bg">24 <span style="font-size: 16px; font-weight: 500;">hours</span></div>
+            <div class="comp-window-label">Fixed smoothing window</div>
+          </div>
+        </div>
+
+        <div class="smooth-viz">
+          <div class="cap-line" style="top: 12px;">
+            <span class="cap-label" style="top: -12px;">Capacity Limit</span>
+          </div>
+          <div class="smooth-spike spike-bg"></div>
+          <div class="smooth-spike spike-bg-smooth"></div>
+          <span class="spike-label-before" style="left: 17%; top: 4px; color: rgba(0,255,136,0.7);">Spike</span>
+          <span class="spike-label-before" style="left: 40%; bottom: 10px; color: rgba(0,255,136,0.5); font-size: 8px;">Smoothed over 24 hours</span>
+        </div>
+
+        <div class="scenario bg-scenario">
+          <div class="scenario-label bg-label">Scenario</div>
+          <div class="scenario-text">
+            2 AM: You schedule a dbt job that uses <span class="num">16 CUs</span> for <span class="num">30 minutes</span>.<br>
+            Total consumption: <span class="num">16 CUs &times; 30 min = 480 CU-minutes</span>.<br>
+            Without smoothing: you'd need F16 capacity to avoid throttling.<br>
+            With 24h smoothing: <span class="num">480 &divide; 1,440 min in a day</span> = <span class="result bg-result">only 0.33 CU average</span>. Even an F2 handles this.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- F4 Example -->
+    <div class="example-section">
+      <div class="example-left">
+        <div class="example-badge">Real-World Example</div>
+        <div class="example-title">F4 SKU: What Can You Actually Run in One Day?</div>
+        <div class="math-row">
+          <div class="math-box">
+            <div class="math-value">4</div>
+            <div class="math-label">CUs (F4 SKU)</div>
+          </div>
+          <div class="math-op">&times;</div>
+          <div class="math-box">
+            <div class="math-value">24</div>
+            <div class="math-label">Hours</div>
+          </div>
+          <div class="math-op">&times;</div>
+          <div class="math-box">
+            <div class="math-value">60</div>
+            <div class="math-label">Minutes</div>
+          </div>
+          <div class="math-op">=</div>
+          <div class="math-box math-result">
+            <div class="math-value">5,760</div>
+            <div class="math-label">CU-Minutes Budget / Day</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-note">
+        With an F4, you get <strong>5,760 CU-minutes per day</strong> for background jobs. That means you could run:
+        <ul class="example-steps">
+          <li>A Notebook using <strong>48 CUs for 2 hours</strong> (48 x 120 = 5,760 CU-min). It runs at full speed, no throttling.</li>
+          <li>Or <strong>6 dbt jobs</strong>, each using 8 CUs for 2 hours (6 x 8 x 120 = 5,760 CU-min).</li>
+          <li>Or <strong>12 Pipeline runs</strong> plus <strong>3 Notebook jobs</strong> during off-peak hours.</li>
+        </ul>
+        The key: schedule heavy jobs at night. They borrow from idle hours and stay under the 24h budget.
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-text">Microsoft Fabric Capacity Model | February 2026</div>
+      <div class="footer-text">&copy; Sulaiman Ahmed</div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,58 +1,36 @@
-
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Certifications from "@/components/Certifications";
-import Services from "@/components/Services";
-import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
-import { useEffect, useState } from "react";
 
 const Index = () => {
-  const [darkMode, setDarkMode] = useState(false);
-
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [darkMode]);
-
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Navigation darkMode={darkMode} setDarkMode={setDarkMode} />
-      
+      <Navigation />
+
       <main>
         <section id="hero">
           <Hero />
         </section>
-        
+
         <section id="about">
           <About />
         </section>
-        
+
         <section id="certifications">
           <Certifications />
         </section>
-        
-        <section id="services">
-          <Services />
-        </section>
-        
-        <section id="testimonials">
-          <Testimonials />
-        </section>
-        
+
         <section id="contact">
           <Contact />
         </section>
       </main>
-      
+
       <footer className="bg-muted/30 border-t py-8">
         <div className="container mx-auto px-6 text-center">
           <p className="text-muted-foreground">
-            © 2025 Sulaiman Ahmed. Transforming Data into Strategic Insights.
+            © 2026 Sulaiman Ahmed
           </p>
         </div>
       </footer>

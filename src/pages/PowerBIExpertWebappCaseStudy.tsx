@@ -1,5 +1,5 @@
 import Navigation from "@/components/Navigation";
-import { useState, useEffect } from "react";
+import Footer from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -29,20 +29,9 @@ import {
   MessageSquare,
   Cpu,
   Building2,
-  ExternalLink
 } from "lucide-react";
 
 const PowerBIExpertWebappCaseStudy = () => {
-  const [darkMode, setDarkMode] = useState(false);
-
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [darkMode]);
-
   const keyResults = [
     { icon: Clock, value: "70-80%", label: "Time Saved", description: "Reduction in DAX development" },
     { icon: DollarSign, value: "$0", label: "Per-User Fees", description: "Deploy once for entire team" },
@@ -53,7 +42,7 @@ const PowerBIExpertWebappCaseStudy = () => {
     {
       icon: DollarSign,
       title: "Expensive Copilot Licensing",
-      description: "Microsoft Copilot for Power BI requires Premium/Fabric capacity plus $30/user/month—prohibitively expensive for many organizations."
+      description: "Microsoft Copilot for Power BI requires Premium/Fabric capacity plus $30/user/month, which is prohibitively expensive for many organizations."
     },
     {
       icon: Lock,
@@ -77,7 +66,7 @@ const PowerBIExpertWebappCaseStudy = () => {
     "Multi-provider LLM support: Azure Claude, Azure OpenAI, Ollama (local)",
     "Automatic USERELATIONSHIP handling for inactive relationships",
     "Interactive PBIP rename tools with automatic reference updates",
-    "Schema-only transmission—actual row data never sent to AI",
+    "Schema-only transmission — actual row data never sent to AI",
     "Tamper-evident audit logging with HMAC signatures and hash chains"
   ];
 
@@ -85,7 +74,7 @@ const PowerBIExpertWebappCaseStudy = () => {
     {
       area: "DAX Development",
       before: "Write complex DAX manually, debug syntax errors for hours",
-      after: "Ask in plain English: 'Revenue by region for Q4'—get working DAX instantly"
+      after: "Ask in plain English: 'Revenue by region for Q4', get working DAX instantly"
     },
     {
       area: "AI Access",
@@ -95,7 +84,7 @@ const PowerBIExpertWebappCaseStudy = () => {
     {
       area: "Regulated Environments",
       before: "No AI allowed due to data sovereignty concerns",
-      after: "Deploy with Ollama—AI runs 100% locally, zero external calls"
+      after: "Deploy with Ollama: AI runs 100% locally, zero external calls"
     },
     {
       area: "PBIP Refactoring",
@@ -122,17 +111,17 @@ const PowerBIExpertWebappCaseStudy = () => {
     {
       icon: Building2,
       title: "Power BI Embedded + AI Chat",
-      description: "Add 'Chat with Your Data' button alongside embedded reports in custom applications"
+      description: "Add a 'Chat with Your Data' button alongside embedded reports in custom applications"
     },
     {
       icon: Users,
       title: "ISV/SaaS Product Enhancement",
-      description: "White-label and integrate into your product—charge premium for 'AI Analytics' tier"
+      description: "White-label and integrate into your product — charge premium for an 'AI Analytics' tier"
     },
     {
       icon: Shield,
       title: "Regulated Industries",
-      description: "Deploy with Ollama for banks, healthcare, government—100% air-gapped operation"
+      description: "Deploy with Ollama for banks, healthcare, government — 100% air-gapped operation"
     },
     {
       icon: Cpu,
@@ -141,17 +130,9 @@ const PowerBIExpertWebappCaseStudy = () => {
     },
   ];
 
-  const architectureLayers = [
-    { name: "Presentation", items: ["Chat UI", "Settings", "Connection Panel"], color: "cyan" },
-    { name: "Application", items: ["Flask Web Server", "API Routes"], color: "purple" },
-    { name: "Business Logic", items: ["State Management", "DAX Processing"], color: "amber" },
-    { name: "Integration", items: ["ADOMD.NET", "XMLA", "PBIP Editor", "Azure Claude", "Azure OpenAI", "Ollama"], color: "green" },
-    { name: "Security", items: ["Data Boundary", "Audit Logger", "Network Validator"], color: "emerald" },
-  ];
-
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Navigation darkMode={darkMode} setDarkMode={setDarkMode} />
+      <Navigation />
 
       <main className="pt-20">
         {/* Hero Section */}
@@ -159,7 +140,7 @@ const PowerBIExpertWebappCaseStudy = () => {
           <div className="container mx-auto px-6">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-2 mb-6">
-                <Badge variant="outline" className="text-xs">Case Study</Badge>
+                <Badge variant="outline" className="text-xs">Pet Project</Badge>
                 <ChevronRight className="h-4 w-4 text-muted-foreground" />
                 <Badge variant="outline" className="text-xs">AI & Analytics</Badge>
               </div>
@@ -169,7 +150,7 @@ const PowerBIExpertWebappCaseStudy = () => {
               </h1>
 
               <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-4xl">
-                An open-source, white-label AI chat layer for Power BI that organizations can customize and embed into their own applications—enabling natural language analytics without Microsoft Copilot's licensing barriers.
+                An open-source, white-label AI chat layer for Power BI that organizations can customize and embed into their own applications, enabling natural language analytics without Microsoft Copilot's licensing barriers.
               </p>
 
               <div className="flex flex-wrap gap-3 mb-6">
@@ -242,7 +223,7 @@ const PowerBIExpertWebappCaseStudy = () => {
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   Microsoft Copilot for Power BI promises AI-powered analytics, but the reality is a significant barrier:
                   Premium/Fabric capacity requirement plus $30/user/month. For organizations with hundreds of users on
-                  Pro licenses, or those in regulated industries that can't use cloud AI, there was no viable option—until now.
+                  Pro licenses, or those in regulated industries that cannot use cloud AI, there was no viable option.
                 </p>
               </div>
 
@@ -274,9 +255,9 @@ const PowerBIExpertWebappCaseStudy = () => {
                     <div>
                       <h3 className="font-bold text-lg mb-2">The Real Opportunity</h3>
                       <p className="text-muted-foreground">
-                        This isn't just a tool—it's an <strong>open-source template</strong> that organizations can fork,
-                        customize, and embed into their own applications. A starter kit for anyone building Power BI
-                        Embedded solutions who wants to add AI-powered Q&A without months of development.
+                        This is not just a tool. It is an <strong>open-source template</strong> that organizations can fork,
+                        customize, and embed into their own applications: a starter kit for anyone building Power BI
+                        Embedded solutions who wants AI-powered Q&A without months of development.
                       </p>
                     </div>
                   </div>
@@ -301,7 +282,7 @@ const PowerBIExpertWebappCaseStudy = () => {
                 <div>
                   <p className="text-lg text-muted-foreground leading-relaxed mb-6">
                     I built an <strong className="text-foreground">enterprise-grade web application</strong> that enables
-                    natural language interaction with Power BI data—supporting multiple LLM providers and both
+                    natural language interaction with Power BI data, supporting multiple LLM providers and both
                     Desktop and Cloud connectivity.
                   </p>
 
@@ -415,7 +396,7 @@ const PowerBIExpertWebappCaseStudy = () => {
               </div>
 
               <p className="text-lg text-muted-foreground mb-8">
-                This webapp is designed as a foundation for custom enterprise solutions—not just a standalone tool.
+                This webapp is designed as a foundation for custom enterprise solutions, not just a standalone tool.
               </p>
 
               <div className="grid md:grid-cols-2 gap-6">
@@ -535,8 +516,8 @@ const PowerBIExpertWebappCaseStudy = () => {
                     <div>
                       <h4 className="font-semibold text-green-500 mb-2">Sent to AI (Metadata Only)</h4>
                       <ul className="space-y-1 text-sm text-muted-foreground">
-                        <li>- Table & column names</li>
-                        <li>- Measure names & DAX expressions</li>
+                        <li>- Table and column names</li>
+                        <li>- Measure names and DAX expressions</li>
                         <li>- Relationship definitions</li>
                         <li>- Your natural language question</li>
                       </ul>
@@ -546,7 +527,7 @@ const PowerBIExpertWebappCaseStudy = () => {
                       <ul className="space-y-1 text-sm text-muted-foreground">
                         <li>- Actual row data</li>
                         <li>- Personally Identifiable Information</li>
-                        <li>- Connection strings & credentials</li>
+                        <li>- Connection strings and credentials</li>
                         <li>- Query results</li>
                       </ul>
                     </div>
@@ -557,58 +538,13 @@ const PowerBIExpertWebappCaseStudy = () => {
           </div>
         </section>
 
-        {/* Results & Impact */}
-        <section className="py-16 bg-muted/30">
-          <div className="container mx-auto px-6">
-            <div className="max-w-5xl mx-auto">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center">
-                  <CheckCircle2 className="h-5 w-5 text-green-500" />
-                </div>
-                <h2 className="text-2xl md:text-3xl font-bold">Why This Matters</h2>
-              </div>
-
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <Card className="text-center bg-gradient-to-br from-green-500/10 to-green-500/5 border-green-500/20">
-                  <CardContent className="pt-6">
-                    <div className="text-3xl font-bold text-green-500 mb-2">$0</div>
-                    <div className="text-sm font-medium">Per-User Licensing</div>
-                    <div className="text-xs text-muted-foreground">Deploy once, team-wide access</div>
-                  </CardContent>
-                </Card>
-                <Card className="text-center bg-gradient-to-br from-blue-500/10 to-blue-500/5 border-blue-500/20">
-                  <CardContent className="pt-6">
-                    <div className="text-3xl font-bold text-blue-500 mb-2">Pro</div>
-                    <div className="text-sm font-medium">License Compatible</div>
-                    <div className="text-xs text-muted-foreground">No Premium required</div>
-                  </CardContent>
-                </Card>
-                <Card className="text-center bg-gradient-to-br from-purple-500/10 to-purple-500/5 border-purple-500/20">
-                  <CardContent className="pt-6">
-                    <div className="text-3xl font-bold text-purple-500 mb-2">100%</div>
-                    <div className="text-sm font-medium">Open Source</div>
-                    <div className="text-xs text-muted-foreground">Fork, customize, white-label</div>
-                  </CardContent>
-                </Card>
-                <Card className="text-center bg-gradient-to-br from-amber-500/10 to-amber-500/5 border-amber-500/20">
-                  <CardContent className="pt-6">
-                    <div className="text-3xl font-bold text-amber-500 mb-2">Air-Gap</div>
-                    <div className="text-sm font-medium">Ready</div>
-                    <div className="text-xs text-muted-foreground">Ollama for offline use</div>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* CTA Section */}
         <section className="py-16 bg-gradient-to-r from-primary/10 to-blue-500/10 border-t">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-2xl md:text-3xl font-bold mb-4">Ready to Build Your Own AI-Powered Power BI Solution?</h2>
               <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Fork the repository, customize for your use case, and deploy. Whether you're building an internal tool
+                Fork the repository, customize for your use case, and deploy. Whether you are building an internal tool
                 or a commercial product, this webapp provides the foundation you need.
               </p>
               <div className="flex flex-wrap gap-3 justify-center">
@@ -643,13 +579,7 @@ const PowerBIExpertWebappCaseStudy = () => {
         </section>
       </main>
 
-      <footer className="bg-muted/30 border-t py-8">
-        <div className="container mx-auto px-6 text-center">
-          <p className="text-muted-foreground">
-            &copy; 2025 Sulaiman Ahmed. Building the Future of AI-Powered Business Intelligence.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

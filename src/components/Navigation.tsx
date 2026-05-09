@@ -3,13 +3,10 @@ import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { Moon, Sun, Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import { useTheme } from "@/hooks/useTheme";
 
-interface NavigationProps {
-  darkMode: boolean;
-  setDarkMode: (value: boolean) => void;
-}
-
-const Navigation = ({ darkMode, setDarkMode }: NavigationProps) => {
+const Navigation = () => {
+  const { theme, toggleTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
@@ -57,9 +54,6 @@ const Navigation = ({ darkMode, setDarkMode }: NavigationProps) => {
                 <Button variant="ghost" onClick={() => scrollToSection('about')}>
                   About
                 </Button>
-                <Button variant="ghost" onClick={() => scrollToSection('services')}>
-                  Services
-                </Button>
                 <Button variant="ghost" asChild>
                   <Link to="/portfolio">Portfolio</Link>
                 </Button>
@@ -101,18 +95,18 @@ const Navigation = ({ darkMode, setDarkMode }: NavigationProps) => {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => setDarkMode(!darkMode)}
+              onClick={toggleTheme}
               className="rounded-full"
             >
-              {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
             {isHomePage ? (
               <Button size="sm" className="hidden md:inline-flex" onClick={() => scrollToSection('contact')}>
-                Hire Me
+                Reach Out
               </Button>
             ) : (
               <Button size="sm" className="hidden md:inline-flex" asChild>
-                <Link to="/#contact">Hire Me</Link>
+                <Link to="/#contact">Reach Out</Link>
               </Button>
             )}
             {/* Mobile Menu Button */}
@@ -139,9 +133,6 @@ const Navigation = ({ darkMode, setDarkMode }: NavigationProps) => {
                   <Button variant="ghost" className="w-full justify-start" onClick={() => scrollToSection('about')}>
                     About
                   </Button>
-                  <Button variant="ghost" className="w-full justify-start" onClick={() => scrollToSection('services')}>
-                    Services
-                  </Button>
                   <Button variant="ghost" className="w-full justify-start" asChild>
                     <Link to="/portfolio">Portfolio</Link>
                   </Button>
@@ -159,7 +150,7 @@ const Navigation = ({ darkMode, setDarkMode }: NavigationProps) => {
                   </Button>
                   <div className="pt-2 border-t">
                     <Button className="w-full" onClick={() => scrollToSection('contact')}>
-                      Hire Me
+                      Reach Out
                     </Button>
                   </div>
                 </>
@@ -182,7 +173,7 @@ const Navigation = ({ darkMode, setDarkMode }: NavigationProps) => {
                   </Button>
                   <div className="pt-2 border-t">
                     <Button className="w-full" asChild>
-                      <Link to="/#contact">Hire Me</Link>
+                      <Link to="/#contact">Reach Out</Link>
                     </Button>
                   </div>
                 </>

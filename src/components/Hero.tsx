@@ -50,11 +50,11 @@ const Hero = () => {
           </div>
           
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            4x Microsoft Certified Analytics Engineer with 5+ years of experience transforming complex data 
-            into actionable insights. Specializing in Power BI, Microsoft Fabric, and data engineering solutions 
-            that drive business growth.
+            4x Microsoft Certified Analytics Engineer with 5+ years of experience turning complex data
+            into clear, actionable insights. I write about Power BI, Microsoft Fabric, and the modern
+            data stack here.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button size="lg" className="group" asChild>
               <Link to="/portfolio">
@@ -64,12 +64,12 @@ const Hero = () => {
             </Button>
             <Button variant="outline" size="lg" className="group" onClick={() => scrollToSection('contact')}>
               <Mail className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-              Get in Touch
+              Reach Out
             </Button>
           </div>
-          
+
           <div className="pt-8 text-sm text-muted-foreground">
-            <p>📍 Dhaka, Bangladesh • Available for global remote projects</p>
+            <p>📍 Dhaka, Bangladesh</p>
           </div>
         </div>
       </div>

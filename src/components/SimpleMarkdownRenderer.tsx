@@ -85,6 +85,49 @@ const SimpleMarkdownRenderer: React.FC<SimpleMarkdownRendererProps> = ({ content
           </blockquote>
         );
       }
+      // Embedded interactive diagrams: @[title](url)
+      else if (line.match(/^@\[.*?\]\(.*?\)$/)) {
+        const match = line.match(/^@\[(.*?)\]\((.*?)\)$/);
+        if (match) {
+          const [, title, url] = match;
+          elements.push(
+            <div key={currentIndex} className="my-8">
+              <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-lg">
+                <iframe
+                  src={url}
+                  title={title}
+                  className="w-full border-0"
+                  style={{ height: '620px', background: '#0a0a1a' }}
+                  loading="lazy"
+                />
+              </div>
+              {title && (
+                <p className="text-center text-sm text-muted-foreground mt-3 italic">{title}</p>
+              )}
+            </div>
+          );
+        }
+      }
+      // Images: ![alt](url)
+      else if (line.match(/^!\[.*?\]\(.*?\)$/)) {
+        const match = line.match(/^!\[(.*?)\]\((.*?)\)$/);
+        if (match) {
+          const [, alt, url] = match;
+          elements.push(
+            <div key={currentIndex} className="my-6">
+              <img
+                src={url}
+                alt={alt}
+                className="w-full rounded-lg shadow-lg border border-gray-200 dark:border-gray-700"
+                loading="lazy"
+              />
+              {alt && (
+                <p className="text-center text-sm text-muted-foreground mt-2 italic">{alt}</p>
+              )}
+            </div>
+          );
+        }
+      }
       // Horizontal rule
       else if (line === '---' || line === '***') {
         elements.push(

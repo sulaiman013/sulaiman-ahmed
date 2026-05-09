@@ -1,5 +1,5 @@
 import Navigation from "@/components/Navigation";
-import { useState, useEffect } from "react";
+import Footer from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -25,16 +25,6 @@ import {
 } from "lucide-react";
 
 const AirtableMCPCaseStudy = () => {
-  const [darkMode, setDarkMode] = useState(false);
-
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [darkMode]);
-
   const keyResults = [
     { icon: Wrench, value: "6", label: "Core Tools", description: "For database operations" },
     { icon: Shield, value: "100%", label: "Input Validation", description: "Security-first design" },
@@ -60,7 +50,7 @@ const AirtableMCPCaseStudy = () => {
     {
       icon: Bot,
       title: "No AI Integration",
-      description: "AI assistants couldn't interact with Airtable data, forcing users to manually translate between natural language and API calls."
+      description: "AI assistants could not interact with Airtable data, forcing users to manually translate between natural language and API calls."
     }
   ];
 
@@ -119,7 +109,7 @@ const AirtableMCPCaseStudy = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Navigation darkMode={darkMode} setDarkMode={setDarkMode} />
+      <Navigation />
 
       <main className="pt-20">
         {/* Hero Section */}
@@ -127,7 +117,7 @@ const AirtableMCPCaseStudy = () => {
           <div className="container mx-auto px-6">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-2 mb-6">
-                <Badge variant="outline" className="text-xs">Case Study</Badge>
+                <Badge variant="outline" className="text-xs">Pet Project</Badge>
                 <ChevronRight className="h-4 w-4 text-muted-foreground" />
                 <Badge variant="outline" className="text-xs">AI + Airtable</Badge>
               </div>
@@ -138,7 +128,7 @@ const AirtableMCPCaseStudy = () => {
 
               <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-4xl">
                 A security-first Model Context Protocol server enabling AI assistants to interact with Airtable databases
-                through natural language—performing advanced filtering, aggregations, and schema discovery without
+                through natural language: performing advanced filtering, aggregations, and schema discovery without
                 writing a single formula.
               </p>
 
@@ -392,7 +382,7 @@ const AirtableMCPCaseStudy = () => {
           </div>
         </section>
 
-        {/* Technical Deep Dive */}
+        {/* Security Architecture */}
         <section className="py-16 bg-muted/30">
           <div className="container mx-auto px-6">
             <div className="max-w-5xl mx-auto">
@@ -443,63 +433,8 @@ const AirtableMCPCaseStudy = () => {
                       </div>
                     </div>
                   </div>
-
-                  <div className="p-4 rounded-lg bg-slate-900 text-slate-100 font-mono text-sm overflow-x-auto">
-                    <div className="text-slate-400 mb-2"># Example natural language queries</div>
-                    <div className="text-green-400">"Find all orders from May 2024"</div>
-                    <div className="text-slate-300">→ Parsed to: date_range filter with May 1-31, 2024</div>
-                    <div className="text-green-400 mt-2">"Calculate total revenue by region"</div>
-                    <div className="text-slate-300">→ Aggregation: SUM(revenue) GROUP BY region</div>
-                    <div className="text-green-400 mt-2">"Show customers with amount greater than $1000"</div>
-                    <div className="text-slate-300">→ Filter: amount {">"} 1000</div>
-                  </div>
                 </CardContent>
               </Card>
-            </div>
-          </div>
-        </section>
-
-        {/* Results & Impact */}
-        <section className="py-16 bg-background">
-          <div className="container mx-auto px-6">
-            <div className="max-w-5xl mx-auto">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center">
-                  <CheckCircle2 className="h-5 w-5 text-green-500" />
-                </div>
-                <h2 className="text-2xl md:text-3xl font-bold">Results & Impact</h2>
-              </div>
-
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <Card className="text-center bg-gradient-to-br from-green-500/10 to-green-500/5 border-green-500/20">
-                  <CardContent className="pt-6">
-                    <div className="text-3xl font-bold text-green-500 mb-2">6</div>
-                    <div className="text-sm font-medium">MCP Tools</div>
-                    <div className="text-xs text-muted-foreground">Complete data operations</div>
-                  </CardContent>
-                </Card>
-                <Card className="text-center bg-gradient-to-br from-blue-500/10 to-blue-500/5 border-blue-500/20">
-                  <CardContent className="pt-6">
-                    <div className="text-3xl font-bold text-blue-500 mb-2">Zero</div>
-                    <div className="text-sm font-medium">Formula Writing</div>
-                    <div className="text-xs text-muted-foreground">Natural language only</div>
-                  </CardContent>
-                </Card>
-                <Card className="text-center bg-gradient-to-br from-purple-500/10 to-purple-500/5 border-purple-500/20">
-                  <CardContent className="pt-6">
-                    <div className="text-3xl font-bold text-purple-500 mb-2">Multi</div>
-                    <div className="text-sm font-medium">Client Support</div>
-                    <div className="text-xs text-muted-foreground">Claude, Cursor, VS Code</div>
-                  </CardContent>
-                </Card>
-                <Card className="text-center bg-gradient-to-br from-amber-500/10 to-amber-500/5 border-amber-500/20">
-                  <CardContent className="pt-6">
-                    <div className="text-3xl font-bold text-amber-500 mb-2">MIT</div>
-                    <div className="text-sm font-medium">Open Source</div>
-                    <div className="text-xs text-muted-foreground">Community-driven</div>
-                  </CardContent>
-                </Card>
-              </div>
             </div>
           </div>
         </section>
@@ -535,13 +470,7 @@ const AirtableMCPCaseStudy = () => {
         </section>
       </main>
 
-      <footer className="bg-muted/30 border-t py-8">
-        <div className="container mx-auto px-6 text-center">
-          <p className="text-muted-foreground">
-            © 2025 Sulaiman Ahmed. Building Secure AI-Data Integrations.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

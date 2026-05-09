@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CU Consumption Rates</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #0a0a1a;
+    color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1400px;
+    background: linear-gradient(145deg, #12122a, #0d0d20);
+    border-radius: 24px;
+    border: 1px solid rgba(0, 255, 136, 0.15);
+    padding: 32px 40px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 80px rgba(0, 255, 136, 0.05);
+  }
+
+  .container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 20%, rgba(0, 255, 136, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.15), rgba(0, 255, 136, 0.05));
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    color: #00ff88;
+    margin-bottom: 10px;
+  }
+
+  .title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 4px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    color: #8888aa;
+  }
+
+  /* Two-column layout */
+  .columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 28px;
+  }
+
+  .column-header {
+    display: grid;
+    grid-template-columns: 220px 1fr 100px;
+    gap: 14px;
+    padding: 0 14px 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 8px;
+  }
+
+  .col-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #555577;
+  }
+
+  .col-label:last-child { text-align: right; }
+
+  .column-items {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  /* Workload row */
+  .row {
+    display: grid;
+    grid-template-columns: 220px 1fr 100px;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 14px;
+    background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    border-left: 3px solid var(--accent);
+  }
+
+  .row-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .row-icon {
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .row-icon img {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+  }
+
+  .row-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.2;
+  }
+
+  .row-detail {
+    font-size: 10px;
+    color: #6666aa;
+    margin-top: 2px;
+  }
+
+  .row-tag {
+    display: inline-block;
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    padding: 1px 6px;
+    border-radius: 4px;
+    margin-top: 3px;
+  }
+
+  .tag-bg { background: rgba(0, 255, 136, 0.1); color: #00ff88; border: 1px solid rgba(0, 255, 136, 0.2); }
+  .tag-int { background: rgba(245, 197, 66, 0.1); color: #f5c542; border: 1px solid rgba(245, 197, 66, 0.2); }
+
+  /* Bar */
+  .bar-wrap {
+    height: 24px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .bar {
+    height: 100%;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+  }
+
+  /* Rate */
+  .rate {
+    text-align: right;
+    font-size: 13px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.2;
+  }
+
+  .rate small {
+    display: block;
+    font-size: 9px;
+    color: #8888aa;
+    font-weight: 400;
+  }
+
+  /* Callout */
+  .callout {
+    margin-top: 18px;
+    padding: 14px 18px;
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.06), rgba(0, 255, 136, 0.02));
+    border: 1px solid rgba(0, 255, 136, 0.15);
+    border-radius: 10px;
+    font-size: 12px;
+    color: #aaaacc;
+    line-height: 1.6;
+  }
+
+  .callout strong { color: #00ff88; }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .footer-text { font-size: 10px; color: #555577; }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="badge">CU Consumption Rates</div>
+      <div class="title">How Different Workloads Burn CUs</div>
+      <div class="subtitle">Not all workloads consume capacity equally. Here is the official rate comparison.</div>
+    </div>
+
+    <div class="columns">
+      <!-- LEFT COLUMN -->
+      <div>
+        <div class="column-header">
+          <div class="col-label">Workload</div>
+          <div class="col-label">Relative CU Consumption</div>
+          <div class="col-label">Rate</div>
+        </div>
+        <div class="column-items">
+
+          <div class="row" style="--accent: #ff6b35;">
+            <div class="row-info">
+              <div class="row-icon"><img src="icons/notebook.svg" alt="Notebook"></div>
+              <div>
+                <div class="row-name">Spark Notebooks</div>
+                <div class="row-detail">2 VCores = 1 CU (3x burst)</div>
+                <div class="row-tag tag-bg">Background 24h</div>
+              </div>
+            </div>
+            <div class="bar-wrap">
+              <div class="bar" style="width: 30%; background: linear-gradient(90deg, rgba(255,107,53,0.6), rgba(255,107,53,0.25));">Efficient</div>
+            </div>
+            <div class="rate">Variable<small>per VCore-sec</small></div>
+          </div>
+
+          <div class="row" style="--accent: #3b82f6;">
+            <div class="row-info">
+              <div class="row-icon"><img src="icons/pipeline.svg" alt="Pipeline"></div>
+              <div>
+                <div class="row-name">Pipeline Orchestration</div>
+                <div class="row-detail">ForEach, If, Switch, Variables</div>
+                <div class="row-tag tag-bg">Background</div>
+              </div>
+            </div>
+            <div class="bar-wrap">
+              <div class="bar" style="width: 4%; background: linear-gradient(90deg, rgba(0,255,136,0.5), rgba(0,255,136,0.2));">~</div>
+            </div>
+            <div class="rate" style="color: #00ff88;">0.0056<small>CU-hr / activity</small></div>
+          </div>
+
+          <div class="row" style="--accent: #60a5fa;">
+            <div class="row-info">
+              <div class="row-icon"><img src="icons/pipeline.svg" alt="Pipeline"></div>
+              <div>
+                <div class="row-name">Pipeline Copy Activity</div>
+                <div class="row-detail">Data movement between sources</div>
+                <div class="row-tag tag-bg">Background</div>
+              </div>
+            </div>
+            <div class="bar-wrap">
+              <div class="bar" style="width: 40%; background: linear-gradient(90deg, rgba(96,165,250,0.6), rgba(96,165,250,0.25));">Moderate</div>
+            </div>
+            <div class="rate">1.5<small>CU-hr / resource</small></div>
+          </div>
+
+          <div class="row" style="--accent: #8b5cf6;">
+            <div class="row-info">
+              <div class="row-icon"><img src="icons/dataflow_gen2.svg" alt="Dataflow Gen2"></div>
+              <div>
+                <div class="row-name">Dataflow Gen2 (CI/CD)</div>
+                <div class="row-detail">Two-tier: 12 CU then 1.5 CU</div>
+                <div class="row-tag tag-bg">Background</div>
+              </div>
+            </div>
+            <div class="bar-wrap">
+              <div class="bar" style="width: 75%; background: linear-gradient(90deg, rgba(139,92,246,0.6), rgba(139,92,246,0.25));">High (first 10 min)</div>
+            </div>
+            <div class="rate">12 / 1.5<small>CU/sec tiered</small></div>
+          </div>
+
+          <div class="row" style="--accent: #a78bfa;">
+            <div class="row-info">
+              <div class="row-icon"><img src="icons/dataflow_gen2.svg" alt="Dataflow Gen2"></div>
+              <div>
+                <div class="row-name">Dataflow Gen2 (Standard)</div>
+                <div class="row-detail">Flat rate, no CI/CD features</div>
+                <div class="row-tag tag-bg">Background</div>
+              </div>
+            </div>
+            <div class="bar-wrap">
+              <div class="bar" style="width: 100%; background: linear-gradient(90deg, rgba(167,139,250,0.6), rgba(167,139,250,0.25));">Highest</div>
+            </div>
+            <div class="rate" style="color: #ff6b6b;">16<small>CU/sec flat</small></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div>
+        <div class="column-header">
+          <div class="col-label">Workload</div>
+          <div class="col-label">Relative CU Consumption</div>
+          <div class="col-label">Rate</div>
+        </div>
+        <div class="column-items">
+
+          <div class="row" style="--accent: #c4b5fd;">
+            <div class="row-info">
+              <div class="row-icon"><img src="icons/dataflow_gen2.svg" alt="Dataflow Gen2"></div>
+              <div>
+                <div class="row-name">Dataflow Gen2 (High Scale)</div>
+                <div class="row-detail">Staging via Lakehouse/WH SQL</div>
+                <div class="row-tag tag-bg">Background</div>
+              </div>
+            </div>
+            <div class="bar-wrap">
+              <div class="bar" style="width: 38%; background: linear-gradient(90deg, rgba(196,181,253,0.5), rgba(196,181,253,0.2));">Moderate</div>
+            </div>
+            <div class="rate">6<small>CU/sec</small></div>
+          </div>
+
+          <div class="row" style="--accent: #ff694a;">
+            <div class="row-info">
+              <div class="row-icon"><img src="icons/data_warehouse.svg" alt="dbt Jobs"></div>
+              <div>
+                <div class="row-name">dbt Jobs</div>
+                <div class="row-detail">SQL via Warehouse engine</div>
+                <div class="row-tag tag-bg">Background 24h</div>
+              </div>
+            </div>
+            <div class="bar-wrap">
+              <div class="bar" style="width: 30%; background: linear-gradient(90deg, rgba(255,105,74,0.6), rgba(255,105,74,0.25));">Efficient</div>
+            </div>
+            <div class="rate">1 core = 2<small>CU (WH billing)</small></div>
+          </div>
+
+          <div class="row" style="--accent: #06b6d4;">
+            <div class="row-info">
+              <div class="row-icon"><img src="icons/data_warehouse.svg" alt="Data Warehouse"></div>
+              <div>
+                <div class="row-name">Data Warehouse</div>
+                <div class="row-detail">T-SQL queries, views, procs</div>
+                <div class="row-tag tag-bg">Background 24h</div>
+              </div>
+            </div>
+            <div class="bar-wrap">
+              <div class="bar" style="width: 30%; background: linear-gradient(90deg, rgba(6,182,212,0.6), rgba(6,182,212,0.25));">Efficient</div>
+            </div>
+            <div class="rate">1 core = 2<small>CU</small></div>
+          </div>
+
+          <div class="row" style="--accent: #f5c542;">
+            <div class="row-info">
+              <div class="row-icon"><img src="icons/power_bi.svg" alt="Power BI"></div>
+              <div>
+                <div class="row-name">Power BI</div>
+                <div class="row-detail">Reports, DAX, Refreshes</div>
+                <div class="row-tag tag-int">Interactive + Background</div>
+              </div>
+            </div>
+            <div class="bar-wrap">
+              <div class="bar" style="width: 25%; background: linear-gradient(90deg, rgba(245,197,66,0.5), rgba(245,197,66,0.2));">Mixed</div>
+            </div>
+            <div class="rate">Mixed<small>5-64 min smoothing</small></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Key Insight:</strong> Pipeline orchestration is nearly free at 0.0056 CU-hr per activity (~20 CU-seconds). Use Pipelines to orchestrate Notebooks and dbt Jobs,
+      not for heavy data movement. Dataflow Gen2 Standard at 16 CU/sec is the most expensive per-second rate.
+      Background operations get 24-hour smoothing, which is far more forgiving than Interactive's 5-64 minute window.
+    </div>
+
+    <div class="footer">
+      <div class="footer-text">Source: Microsoft Learn, Fabric Operations (Updated Feb 2026)</div>
+      <div class="footer-text">&copy; Sulaiman Ahmed</div>
+    </div>
+  </div>
+</body>
+</html>

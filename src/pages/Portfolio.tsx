@@ -1,21 +1,12 @@
 import Navigation from "@/components/Navigation";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Github, Youtube, Users, Video, Calendar } from "lucide-react";
 
 const Portfolio = () => {
-  const [darkMode, setDarkMode] = useState(false);
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
-
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [darkMode]);
 
   const powerBIProjects = [
     {
@@ -101,7 +92,7 @@ const Portfolio = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Navigation darkMode={darkMode} setDarkMode={setDarkMode} />
+      <Navigation />
       
       <main className="pt-20">
         <section className="py-20 bg-background">

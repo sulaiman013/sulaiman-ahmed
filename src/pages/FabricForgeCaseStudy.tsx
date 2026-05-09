@@ -1,10 +1,9 @@
 import Navigation from "@/components/Navigation";
-import { useState, useEffect } from "react";
+import Footer from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
   TrendingUp,
-  Database,
   CheckCircle2,
   Code2,
   AlertTriangle,
@@ -16,29 +15,18 @@ import {
   Clock,
   Settings,
   Layers,
-  Workflow,
   Play,
   FileJson,
   Cloud,
   Sparkles,
   Building2,
   RefreshCw,
-  Eye,
   ExternalLink,
-  Download
+  Download,
+  Workflow,
 } from "lucide-react";
 
 const FabricForgeCaseStudy = () => {
-  const [darkMode, setDarkMode] = useState(false);
-
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [darkMode]);
-
   const keyResults = [
     { icon: Clock, value: "90%", label: "Time Saved", description: "On workspace provisioning" },
     { icon: Zap, value: "5 min", label: "Deployment Time", description: "vs full day manual" },
@@ -70,7 +58,7 @@ const FabricForgeCaseStudy = () => {
 
   const solutionFeatures = [
     "Visual form builder for workspace, lakehouse, and warehouse configuration",
-    "Support for 23 Fabric data types with table/column definitions",
+    "Support for 23 Fabric data types with table and column definitions",
     "AI-powered PySpark code generation via OpenAI API",
     "n8n workflow orchestration with intelligent duplicate detection",
     "JSON import/export for reusable configuration templates",
@@ -124,7 +112,7 @@ const FabricForgeCaseStudy = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Navigation darkMode={darkMode} setDarkMode={setDarkMode} />
+      <Navigation />
 
       <main className="pt-20">
         {/* Hero Section */}
@@ -132,7 +120,7 @@ const FabricForgeCaseStudy = () => {
           <div className="container mx-auto px-6">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-2 mb-6">
-                <Badge variant="outline" className="text-xs">Case Study</Badge>
+                <Badge variant="outline" className="text-xs">Pet Project</Badge>
                 <ChevronRight className="h-4 w-4 text-muted-foreground" />
                 <Badge variant="outline" className="text-xs">Microsoft Fabric Automation</Badge>
               </div>
@@ -143,7 +131,7 @@ const FabricForgeCaseStudy = () => {
 
               <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-4xl">
                 A web-based visual form builder that transforms Microsoft Fabric workspace provisioning from
-                hours of manual configuration to minutes of automated deployment—with AI-powered code generation
+                hours of manual configuration to minutes of automated deployment, with AI-powered code generation
                 and n8n workflow orchestration.
               </p>
 
@@ -424,7 +412,7 @@ const FabricForgeCaseStudy = () => {
           </div>
         </section>
 
-        {/* Technical Deep Dive */}
+        {/* Key Capabilities */}
         <section className="py-16 bg-muted/30">
           <div className="container mx-auto px-6">
             <div className="max-w-5xl mx-auto">
@@ -489,7 +477,7 @@ const FabricForgeCaseStudy = () => {
                     </p>
                     <div className="flex items-start gap-2 p-3 rounded-lg bg-muted/50">
                       <CheckCircle2 className="h-4 w-4 text-green-500 mt-0.5" />
-                      <span className="text-sm">Bronze/Silver/Gold lakehouse templates</span>
+                      <span className="text-sm">Bronze/Silver/Gold lakehouse templates included</span>
                     </div>
                   </CardContent>
                 </Card>
@@ -545,7 +533,7 @@ const FabricForgeCaseStudy = () => {
                   </div>
                   <p className="text-sm text-muted-foreground mt-4">
                     With FabricForge, each new department workspace deploys in <strong className="text-foreground">5 minutes</strong> vs
-                    a <strong className="text-foreground">full day</strong> of manual work—with consistent structure guaranteed.
+                    a <strong className="text-foreground">full day</strong> of manual work, with consistent structure guaranteed.
                   </p>
                 </CardContent>
               </Card>
@@ -553,7 +541,7 @@ const FabricForgeCaseStudy = () => {
           </div>
         </section>
 
-        {/* Video Tutorials */}
+        {/* Video Tutorial Series */}
         <section className="py-16 bg-background">
           <div className="container mx-auto px-6">
             <div className="max-w-5xl mx-auto">
@@ -719,51 +707,6 @@ const FabricForgeCaseStudy = () => {
           </div>
         </section>
 
-        {/* Results & Impact */}
-        <section className="py-16 bg-muted/30">
-          <div className="container mx-auto px-6">
-            <div className="max-w-5xl mx-auto">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center">
-                  <CheckCircle2 className="h-5 w-5 text-green-500" />
-                </div>
-                <h2 className="text-2xl md:text-3xl font-bold">Results & Impact</h2>
-              </div>
-
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <Card className="text-center bg-gradient-to-br from-green-500/10 to-green-500/5 border-green-500/20">
-                  <CardContent className="pt-6">
-                    <div className="text-3xl font-bold text-green-500 mb-2">90%</div>
-                    <div className="text-sm font-medium">Time Reduction</div>
-                    <div className="text-xs text-muted-foreground">In provisioning</div>
-                  </CardContent>
-                </Card>
-                <Card className="text-center bg-gradient-to-br from-blue-500/10 to-blue-500/5 border-blue-500/20">
-                  <CardContent className="pt-6">
-                    <div className="text-3xl font-bold text-blue-500 mb-2">Zero</div>
-                    <div className="text-sm font-medium">Config Errors</div>
-                    <div className="text-xs text-muted-foreground">Automated validation</div>
-                  </CardContent>
-                </Card>
-                <Card className="text-center bg-gradient-to-br from-purple-500/10 to-purple-500/5 border-purple-500/20">
-                  <CardContent className="pt-6">
-                    <div className="text-3xl font-bold text-purple-500 mb-2">23</div>
-                    <div className="text-sm font-medium">Data Types</div>
-                    <div className="text-xs text-muted-foreground">Full Fabric support</div>
-                  </CardContent>
-                </Card>
-                <Card className="text-center bg-gradient-to-br from-amber-500/10 to-amber-500/5 border-amber-500/20">
-                  <CardContent className="pt-6">
-                    <div className="text-3xl font-bold text-amber-500 mb-2">AI</div>
-                    <div className="text-sm font-medium">Code Generation</div>
-                    <div className="text-xs text-muted-foreground">OpenAI-powered</div>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* CTA Section */}
         <section className="py-16 bg-gradient-to-r from-primary/10 to-blue-500/10 border-t">
           <div className="container mx-auto px-6">
@@ -795,13 +738,7 @@ const FabricForgeCaseStudy = () => {
         </section>
       </main>
 
-      <footer className="bg-muted/30 border-t py-8">
-        <div className="container mx-auto px-6 text-center">
-          <p className="text-muted-foreground">
-            © 2025 Sulaiman Ahmed. Automating Enterprise Data Platforms.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

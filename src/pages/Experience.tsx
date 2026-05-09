@@ -1,19 +1,9 @@
 import Navigation from "@/components/Navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { useEffect, useState } from "react";
 import { Briefcase, Code2, Award, GraduationCap, CheckCircle2 } from "lucide-react";
 
 const Experience = () => {
-  const [darkMode, setDarkMode] = useState(false);
-
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [darkMode]);
 
   const experiences = [
     {
@@ -135,7 +125,7 @@ const Experience = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Navigation darkMode={darkMode} setDarkMode={setDarkMode} />
+      <Navigation />
 
       <main className="pt-20">
         {/* Professional Summary Section */}
