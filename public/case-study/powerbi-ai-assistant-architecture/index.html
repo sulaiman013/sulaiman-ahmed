@@ -1,0 +1,1456 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>IC Insightful BOT — Architecture &amp; Replication Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ================== TOP NAV ================== -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="#top" class="brand">
+      <span class="logo-mark"><i data-lucide="sparkles"></i></span>
+      <div class="brand-text">
+        <span class="brand-title">Insightful BOT</span>
+        <span class="brand-sub">Architecture &amp; Replication Guide</span>
+      </div>
+    </a>
+    <nav class="topnav">
+      <a href="#overview"><i data-lucide="compass"></i><span>Overview</span></a>
+      <a href="#architecture"><i data-lucide="network"></i><span>Architecture</span></a>
+      <a href="#layers"><i data-lucide="layers"></i><span>Layers</span></a>
+      <a href="#economics"><i data-lucide="dollar-sign"></i><span>Economics</span></a>
+      <a href="#replication"><i data-lucide="copy"></i><span>Replicate</span></a>
+      <a href="#postmortems"><i data-lucide="bug"></i><span>Postmortems</span></a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <i data-lucide="moon"></i>
+    </button>
+  </div>
+</header>
+
+<!-- ================== HERO ================== -->
+<section class="hero" id="overview">
+  <div class="hero-bg-grid" aria-hidden="true"></div>
+  <div class="hero-blob hero-blob-a" aria-hidden="true"></div>
+  <div class="hero-blob hero-blob-b" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="eyebrow">
+      <i data-lucide="circle-dot" class="eyebrow-dot"></i>
+      <span>Snapshot · 2026-05-08 · Production-ready across 7 branches</span>
+    </div>
+
+    <h1>
+      A multi-modal BI assistant<br/>
+      <span class="grad">grounded in your dashboard.</span>
+    </h1>
+
+    <p class="hero-sub">
+      Not a RAG chatbot. A <b>text-to-DAX agent</b> + <b>report-guide-grounded LLM</b> + <b>vision-grounded screenshot interpreter</b> —
+      routed through a single Edge endpoint, streamed back to the browser in real-time.
+    </p>
+
+    <div class="kpi-row">
+      <div class="kpi">
+        <div class="kpi-icon"><i data-lucide="target"></i></div>
+        <div class="kpi-num">91.8%</div>
+        <div class="kpi-lbl">answer accuracy<span>(170-question suite)</span></div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-icon"><i data-lucide="brain-circuit"></i></div>
+        <div class="kpi-num">94.1%</div>
+        <div class="kpi-lbl">DAX similarity<span>reasoning quality</span></div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-icon"><i data-lucide="coins"></i></div>
+        <div class="kpi-num">$0.0024</div>
+        <div class="kpi-lbl">avg cost / call<span>~88% reduction post-opt</span></div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-icon"><i data-lucide="timer"></i></div>
+        <div class="kpi-num">~2.6s</div>
+        <div class="kpi-lbl">p50 latency<span>fast-path 3-5s</span></div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-icon"><i data-lucide="zap"></i></div>
+        <div class="kpi-num">27.6%</div>
+        <div class="kpi-lbl">recipe hit-rate<span>deterministic shortcuts</span></div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-icon"><i data-lucide="building-2"></i></div>
+        <div class="kpi-num">7 / 7</div>
+        <div class="kpi-lbl">tenants validated<span>≥90% DAX on each</span></div>
+      </div>
+    </div>
+
+    <div class="cta-row">
+      <a href="#architecture" class="btn btn-primary">
+        <i data-lucide="rocket"></i><span>Tour the architecture</span>
+      </a>
+      <a href="story.html" class="btn btn-ghost">
+        <i data-lucide="book-open"></i><span>Read the story version</span>
+      </a>
+      <a href="#replication" class="btn btn-ghost">
+        <span>Replicate for a new client</span><i data-lucide="arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================== THREE PATHS ================== -->
+<section class="section" id="paths">
+  <div class="section-head">
+    <span class="section-tag"><i data-lucide="git-branch"></i><span>How it answers</span></span>
+    <h2>Three answer paths, one endpoint</h2>
+    <p class="section-lede">
+      The BOT routes to one of three answer paths based on the <em>shape of the question</em>.
+      This is not a RAG chatbot — the "knowledge" isn't retrieved text; it's a query result, an image interpretation, or a curated guide block.
+    </p>
+  </div>
+
+  <div class="paths-grid">
+    <article class="path-card path-dax">
+      <div class="path-icon"><i data-lucide="calculator"></i></div>
+      <div class="path-pct">~70%</div>
+      <h3 class="path-name">DAX agent</h3>
+      <p class="path-when">numerical questions</p>
+      <p class="path-body">
+        Either a <b>hand-curated recipe</b> (deterministic DAX) OR an LLM that picks the measure + writes DAX,
+        calling <code>query_dax</code> against the Power BI semantic model. Returns real numbers.
+      </p>
+      <div class="path-foot"><i data-lucide="info"></i><span>Not RAG — the answer is a query result.</span></div>
+    </article>
+
+    <article class="path-card path-vision">
+      <div class="path-icon"><i data-lucide="scan-eye"></i></div>
+      <div class="path-pct">~20%</div>
+      <h3 class="path-name">Vision path</h3>
+      <p class="path-when">screenshot questions</p>
+      <p class="path-body">
+        Vision LLM reads the captured image of the current report page.
+        Can optionally call <code>query_dax</code> if the user asks <em>"why"</em> or <em>"vs last year"</em>.
+      </p>
+      <div class="path-foot"><i data-lucide="info"></i><span>True multimodal interpretation, not OCR.</span></div>
+    </article>
+
+    <article class="path-card path-guide">
+      <div class="path-icon"><i data-lucide="book-open-text"></i></div>
+      <div class="path-pct">~10%</div>
+      <h3 class="path-name">Guide path</h3>
+      <p class="path-when">"where do I find X?"</p>
+      <p class="path-body">
+        The full report guide (~1500 tokens) is <b>eagerly injected</b> into the system prompt.
+        The LLM extracts the relevant section.
+      </p>
+      <div class="path-foot"><i data-lucide="info"></i><span>Not vector retrieval — small enough to inject the whole thing.</span></div>
+    </article>
+  </div>
+</section>
+
+<!-- ================== ONION ================== -->
+<section class="section section-dark onion-section">
+  <div class="section-head">
+    <span class="section-tag"><i data-lucide="layers-3"></i><span>Mental model</span></span>
+    <h2>The BOT is an onion</h2>
+    <p class="section-lede">Each layer is independently swappable. Layers 0–4 lift verbatim across clients; layers 5–7 are domain-specific.</p>
+  </div>
+
+  <div class="onion-wrap">
+    <div class="onion">
+      <div class="onion-layer l-0">
+        <span class="layer-icon"><i data-lucide="cable"></i></span>
+        <span class="layer-num">0</span>
+        <span class="layer-name">Edge runtime + ReadableStream</span>
+        <span class="layer-tag">transport</span>
+      </div>
+      <div class="onion-layer l-1">
+        <span class="layer-icon"><i data-lucide="shield-check"></i></span>
+        <span class="layer-num">1</span>
+        <span class="layer-name">Auth + rate limit + body parse</span>
+        <span class="layer-tag">gatekeepers</span>
+      </div>
+      <div class="onion-layer l-2">
+        <span class="layer-icon"><i data-lucide="file-text"></i></span>
+        <span class="layer-num">2</span>
+        <span class="layer-name">System prompt — identity, rules, cookbook</span>
+        <span class="layer-tag">behaviour</span>
+      </div>
+      <div class="onion-layer l-3">
+        <span class="layer-icon"><i data-lucide="plug-zap"></i></span>
+        <span class="layer-num">3</span>
+        <span class="layer-name">Tool layer — query_dax → Power BI</span>
+        <span class="layer-tag">live data</span>
+      </div>
+      <div class="onion-layer l-4">
+        <span class="layer-icon"><i data-lucide="git-fork"></i></span>
+        <span class="layer-num">4</span>
+        <span class="layer-name">Two-model router — vision + DAX specialist</span>
+        <span class="layer-tag">routing</span>
+      </div>
+      <div class="onion-layer l-5">
+        <span class="layer-icon"><i data-lucide="database"></i></span>
+        <span class="layer-num">5</span>
+        <span class="layer-name">Semantic knowledge — model schema</span>
+        <span class="layer-tag">grounding</span>
+      </div>
+      <div class="onion-layer l-6">
+        <span class="layer-icon"><i data-lucide="bookmark-check"></i></span>
+        <span class="layer-num">6</span>
+        <span class="layer-name">Guide content + per-branch context</span>
+        <span class="layer-tag">factual</span>
+      </div>
+      <div class="onion-layer l-7">
+        <span class="layer-icon"><i data-lucide="chef-hat"></i></span>
+        <span class="layer-num">7</span>
+        <span class="layer-name">Recipe layer — deterministic bypass</span>
+        <span class="layer-tag">fast path</span>
+      </div>
+    </div>
+
+    <div class="onion-legend">
+      <span class="lg-row"><span class="dot reusable"></span>Layers 0–4 — pure pattern, lift verbatim</span>
+      <span class="lg-row"><span class="dot domain"></span>Layers 5–7 — domain-specific, author fresh</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================== ARCHITECTURE ================== -->
+<section class="section" id="architecture">
+  <div class="section-head">
+    <span class="section-tag"><i data-lucide="network"></i><span>01 Architecture</span></span>
+    <h2>Two paths through one endpoint</h2>
+    <p class="section-lede">
+      Every request hits a single Edge route. A pre-LLM matcher decides between the deterministic <b>fast path</b> and the LLM-driven <b>slow path</b>.
+      Streaming is non-negotiable — the user sees the first token in &lt;2 s.
+    </p>
+  </div>
+
+  <div class="diagram-wrap">
+    <div class="diagram-title">
+      <i data-lucide="map"></i><span>At-a-glance system map</span>
+    </div>
+    <div class="mermaid-host">
+      <pre class="mermaid">
+flowchart LR
+  classDef browser fill:#0e1f2e,stroke:#22d3ee,stroke-width:1.5px,color:#e0f2fe
+  classDef edge fill:#1c1235,stroke:#a78bfa,stroke-width:1.5px,color:#ede9fe
+  classDef supa fill:#062e1d,stroke:#34d399,stroke-width:1.5px,color:#d1fae5
+  classDef recipe fill:#2c1d05,stroke:#fbbf24,stroke-width:1.5px,color:#fef3c7
+  classDef llm fill:#311220,stroke:#fb7185,stroke-width:1.5px,color:#ffe4e6
+  classDef pbi fill:#0a1f3d,stroke:#60a5fa,stroke-width:1.5px,color:#dbeafe
+
+  UI("Browser&lt;br&gt;Ask AI · Capture · Summarize"):::browser
+
+  subgraph EDGE["Vercel Edge"]
+    Route("POST /api/copilot/route.ts&lt;br&gt;auth · rate limit · stream loop"):::edge
+  end
+
+  subgraph SUPA["Supabase + RLS"]
+    Auth("auth.users + sessions"):::supa
+    UB("user_branches"):::supa
+    Usage("copilot_usage&lt;br&gt;7-day retention"):::supa
+  end
+
+  subgraph REC["Recipe Layer"]
+    Match("matcher&lt;br&gt;regex → embedding"):::recipe
+    Exec("executor&lt;br&gt;placeholder fill + run"):::recipe
+    UV[("Upstash Vector&lt;br&gt;bge-large-en-v1.5")]:::recipe
+  end
+
+  subgraph LLM["LLMs via OpenRouter"]
+    Vision("Gemini 2.5 Flash&lt;br&gt;round 0 · vision"):::llm
+    DAX("Gemini 3.1 Flash Lite&lt;br&gt;round 1+ · DAX writer"):::llm
+  end
+
+  subgraph PBI["Power BI Service"]
+    SP("SalesforceBI-MCP&lt;br&gt;service principal"):::pbi
+    DS("7 datasets&lt;br&gt;(one per branch)"):::pbi
+  end
+
+  UI -- "question + image?" --> Route
+  Route --> Auth
+  Route --> UB
+  Route -- "fast path" --> Match
+  Match -. "miss" .-> LLM
+  Match -- "hit" --> Exec
+  Match <--> UV
+  Exec --> PBI
+  LLM -- "tool: query_dax" --> PBI
+  PBI --> SP
+  PBI --> DS
+  Route --> Usage
+  LLM -- "stream tokens" --> Route
+  Exec -- "wrap-up" --> DAX
+  Route -- "stream tokens" --> UI
+      </pre>
+    </div>
+  </div>
+
+  <div class="two-col-diagrams">
+    <div class="diagram-card">
+      <div class="diagram-card-head fast-head">
+        <div class="diag-head-row">
+          <span class="diag-head-icon fast"><i data-lucide="zap"></i></span>
+          <div>
+            <div class="diagram-card-title">Fast path</div>
+            <div class="diagram-card-sub">recipe matched · no image · <b>2.5–5s · ~$0.0002</b></div>
+          </div>
+        </div>
+      </div>
+      <div class="mermaid-host">
+        <pre class="mermaid">
+sequenceDiagram
+  autonumber
+  participant U as Browser
+  participant R as route.ts
+  participant M as Matcher
+  participant UV as Upstash
+  participant E as Executor
+  participant P as Power BI
+  participant G as Gemini Lite
+
+  U->>R: POST /api/copilot
+  R->>R: auth + rate limit + parse
+  R->>M: tryMatchRecipe(q, branch)
+  alt regex hit
+    M-->>R: MatcherResult{regex}
+  else regex miss
+    M->>UV: query embedding
+    UV-->>M: {score, recipeId}
+    Note over M: score ≥ 0.90?
+    M-->>R: MatcherResult{embedding}
+  end
+  R->>E: executeRecipe(branch, matched)
+  E->>E: fill {YEAR} / {N} / ...
+  E->>P: POST executeQueries
+  P-->>E: rows
+  E-->>R: {ok, dax, daxResult}
+  R->>G: slim wrap-up call (150 tokens)
+  loop SSE deltas
+    G-->>R: delta.content
+    R-->>U: token
+  end
+  R->>R: insert copilot_usage&lt;br&gt;(recipe_id, version, method)
+        </pre>
+      </div>
+    </div>
+
+    <div class="diagram-card">
+      <div class="diagram-card-head slow-head">
+        <div class="diag-head-row">
+          <span class="diag-head-icon slow"><i data-lucide="waves"></i></span>
+          <div>
+            <div class="diagram-card-title">Slow path</div>
+            <div class="diagram-card-sub">no match OR image attached · <b>8–25s · $0.005–0.018</b></div>
+          </div>
+        </div>
+      </div>
+      <div class="mermaid-host">
+        <pre class="mermaid">
+sequenceDiagram
+  autonumber
+  participant U as Browser
+  participant R as route.ts
+  participant V as Vision (R0)
+  participant D as DAX writer (R1+)
+  participant T as dispatchTool
+  participant P as Power BI
+
+  U->>R: POST + image?
+  R->>V: stream completion (image, tools)
+  alt model answers directly
+    V-->>R: deltas
+    R-->>U: tokens
+  else tool_calls emitted
+    V-->>R: tool_calls
+    R->>U: "[Looking up live data…]"
+    R->>R: strip image from history
+    loop each tool call
+      R->>T: dispatchTool(query_dax)
+      T->>P: executeQueries
+      P-->>T: rows / error
+      T-->>R: markdown table
+    end
+    R->>D: round 1+ stream (NO image)
+    Note over D: up to MAX_TOOL_ROUNDS = 3
+    D-->>R: deltas
+    R-->>U: tokens
+  end
+  R->>R: insert usage row
+        </pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="factstrip">
+    <div class="fact"><i data-lucide="repeat"></i><div><b>MAX_TOOL_ROUNDS = 3</b><span>round 0 vision → tool → round 1 DAX → tool → round 2 (no tools)</span></div></div>
+    <div class="fact"><i data-lucide="image-off"></i><div><b>Image stripped between rounds</b><span>saves ~$0.01 + 3-5s per round</span></div></div>
+    <div class="fact"><i data-lucide="alarm-clock"></i><div><b>Edge timeout 25 s</b><span>vs Node 10s on Vercel Hobby</span></div></div>
+    <div class="fact"><i data-lucide="link-2"></i><div><b>Single endpoint</b><span>handles text + text-with-image — easier auth, logs, rate-limits</span></div></div>
+  </div>
+</section>
+
+<!-- ================== LAYERS HUB ================== -->
+<section class="section section-dark" id="layers">
+  <div class="section-head">
+    <span class="section-tag"><i data-lucide="list-tree"></i><span>Deep dives</span></span>
+    <h2>The 12 layers, expanded</h2>
+    <p class="section-lede">Click any card to jump into the layer's pattern, IC implementation, and pitfalls.</p>
+  </div>
+
+  <div class="layers-grid">
+    <a class="layer-card" href="#auth"><span class="lc-ico"><i data-lucide="shield-check"></i></span><span class="lc-num">02</span><span class="lc-title">Auth &amp; multitenancy</span><span class="lc-q">"How does ICAU not see ICLA's data?"</span></a>
+    <a class="layer-card" href="#screenshot"><span class="lc-ico"><i data-lucide="camera"></i></span><span class="lc-num">03</span><span class="lc-title">Screenshot grounding</span><span class="lc-q">"Where does the image actually go?"</span></a>
+    <a class="layer-card" href="#livedax"><span class="lc-ico"><i data-lucide="database-zap"></i></span><span class="lc-num">04</span><span class="lc-title">Live DAX execution</span><span class="lc-q">"How does the BOT run a DAX query?"</span></a>
+    <a class="layer-card" href="#router"><span class="lc-ico"><i data-lucide="git-fork"></i></span><span class="lc-num">05</span><span class="lc-title">Two-model router</span><span class="lc-q">"Why isn't this just one model?"</span></a>
+    <a class="layer-card" href="#semantic"><span class="lc-ico"><i data-lucide="ruler"></i></span><span class="lc-num">06</span><span class="lc-title">Semantic knowledge</span><span class="lc-q">"How does it know our measure names?"</span></a>
+    <a class="layer-card" href="#branchctx"><span class="lc-ico"><i data-lucide="users-round"></i></span><span class="lc-num">07</span><span class="lc-title">Per-branch context</span><span class="lc-q">"How does it know who Alyssa is?"</span></a>
+    <a class="layer-card" href="#guide"><span class="lc-ico"><i data-lucide="book-open-check"></i></span><span class="lc-num">08</span><span class="lc-title">In-context guide</span><span class="lc-q">"How does it answer 'where do I find X'?"</span></a>
+    <a class="layer-card" href="#recipes"><span class="lc-ico"><i data-lucide="chef-hat"></i></span><span class="lc-num">09</span><span class="lc-title">Recipe layer</span><span class="lc-q">"Common questions, deterministic"</span></a>
+    <a class="layer-card" href="#observability"><span class="lc-ico"><i data-lucide="activity"></i></span><span class="lc-num">10</span><span class="lc-title">Observability</span><span class="lc-q">"How do I see what just happened?"</span></a>
+    <a class="layer-card" href="#streaming"><span class="lc-ico"><i data-lucide="radio-tower"></i></span><span class="lc-num">11</span><span class="lc-title">Streaming &amp; Edge</span><span class="lc-q">"Why does this feel real-time?"</span></a>
+    <a class="layer-card" href="#economics"><span class="lc-ico"><i data-lucide="dollar-sign"></i></span><span class="lc-num">12</span><span class="lc-title">Cost &amp; models</span><span class="lc-q">"What does a call actually cost?"</span></a>
+    <a class="layer-card" href="#replication"><span class="lc-ico"><i data-lucide="copy"></i></span><span class="lc-num">99</span><span class="lc-title">Replication guide</span><span class="lc-q">"Apply this to a new client"</span></a>
+  </div>
+</section>
+
+<!-- ================== 02 AUTH ================== -->
+<section class="section deep" id="auth">
+  <div class="deep-head">
+    <div class="deep-num"><i data-lucide="shield-check"></i><span>02</span></div>
+    <div>
+      <h2>Auth &amp; multitenancy</h2>
+      <p>Five layers stitched together — sign-in, membership, validated active branch, per-branch dataset, and RLS on the audit table.</p>
+    </div>
+  </div>
+
+  <div class="diagram-wrap">
+    <div class="diagram-title"><i data-lucide="shield"></i><span>5-layer tenant safety stack</span></div>
+    <div class="mermaid-host">
+      <pre class="mermaid">
+flowchart TB
+  classDef step fill:#0e1f2e,stroke:#22d3ee,color:#e0f2fe,stroke-width:1.5px
+  classDef warn fill:#311220,stroke:#fb7185,color:#ffe4e6,stroke-width:1.5px
+  classDef good fill:#062e1d,stroke:#34d399,color:#d1fae5,stroke-width:1.5px
+
+  A("L1 · Supabase auth&lt;br&gt;auth.getUser() — JWT re-validated every call&lt;br&gt;not signed in → 401"):::step
+  B("L2 · user_branches join table&lt;br&gt;uuid · branch_code · PK pair&lt;br&gt;no rows → 403 'No branch access'"):::warn
+  C("L3 · Active-branch resolution&lt;br&gt;activeBranch ∈ userBranchCodes&lt;br&gt;else fall back to userBranchCodes[0]&lt;br&gt;NEVER trust client-supplied branch alone"):::warn
+  D("L4 · Dataset routing&lt;br&gt;BranchCode → workspaceId, datasetId&lt;br&gt;via env vars&lt;br&gt;cross-franchise query physically impossible"):::good
+  E("L5 · RLS on copilot_usage&lt;br&gt;using auth.uid() = user_id&lt;br&gt;SELECT + INSERT policies&lt;br&gt;belt-and-suspenders"):::good
+
+  A --> B --> C --> D --> E
+      </pre>
+    </div>
+  </div>
+
+  <div class="shots-pair">
+    <div class="shot">
+      <div class="shot-frame">
+        <img src="img/login.png" alt="Insights Portal sign-in screen." />
+      </div>
+      <div class="shot-caption">
+        <b>L1 — Sign-in.</b> Supabase email + magic-link auth. Every request to the BOT route revalidates the JWT against the auth server.
+      </div>
+    </div>
+    <div class="shot">
+      <div class="shot-frame">
+        <img src="img/pipeline-overview.png" alt="The dashboard with 'Demo Branch' label and 'Scoped to your branch' indicator." />
+      </div>
+      <div class="shot-caption">
+        <b>L3–L4 — Active branch + dataset routing.</b> Top-left shows <code>Demo Branch</code>; top-right shows <i>"Scoped to your branch"</i>. Every PBI query in this session is pinned to this branch's dataset.
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="info-box info-good">
+      <div class="info-title"><i data-lucide="key-round"></i><span>Why service principal, not per-user PBI tokens</span></div>
+      <ul>
+        <li>Per-user tokens require a <b>PPU license per user</b> (~$10/user/month). IC has hundreds of franchise users; only ~10 PPU licenses.</li>
+        <li>Service-principal token refresh is deterministic (1-hour TTL); per-user is on inactivity.</li>
+        <li>SP needs <b>Member</b> on the workspace — not Viewer. <em>(Viewer can't run executeQueries.)</em></li>
+      </ul>
+    </div>
+    <div class="info-box info-danger">
+      <div class="info-title"><i data-lucide="alert-triangle"></i><span>Pitfalls</span></div>
+      <ul>
+        <li><b>branch_code is text, not enum</b> — TS-only safety. Wrong spelling silently passes through.</li>
+        <li><b>Service-role vs anon key</b> — always anon for the BOT route; SR is for migrations only.</li>
+        <li><b>Branch switch must reset chat</b> — otherwise ICAU history flows into ICLA conversation.</li>
+        <li><b>Embed URLs are server-only</b> — leaking them gives the entire dashboard to anyone.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================== 03 SCREENSHOT ================== -->
+<section class="section deep section-dark" id="screenshot">
+  <div class="deep-head">
+    <div class="deep-num"><i data-lucide="camera"></i><span>03</span></div>
+    <div>
+      <h2>Screenshot grounding (Tier 1+2)</h2>
+      <p>How a Power BI dashboard view becomes a vision-LLM input. Captured once per session; reused silently for every subsequent question.</p>
+    </div>
+  </div>
+
+  <div class="diagram-wrap">
+    <div class="diagram-title"><i data-lucide="image"></i><span>Capture pipeline — browser to vision model</span></div>
+    <div class="mermaid-host">
+      <pre class="mermaid">
+flowchart LR
+  classDef client fill:#0e1f2e,stroke:#22d3ee,color:#e0f2fe,stroke-width:1.5px
+  classDef wire fill:#2c1d05,stroke:#fbbf24,color:#fef3c7,stroke-width:1.5px
+  classDef server fill:#1c1235,stroke:#a78bfa,color:#ede9fe,stroke-width:1.5px
+  classDef llm fill:#311220,stroke:#fb7185,color:#ffe4e6,stroke-width:1.5px
+
+  P("getDisplayMedia&lt;br&gt;browser permission picker&lt;br&gt;frameRate 2 · preferCurrentTab"):::client
+  G("ImageCapture.grabFrame&lt;br&gt;or hidden video fallback"):::client
+  C("Canvas → JPEG&lt;br&gt;max 1920px · quality 0.92&lt;br&gt;fallback 0.85 if &gt; 4MB"):::client
+  T("Two outputs&lt;br&gt;full: data:image/jpeg;base64&lt;br&gt;thumb: 160px inline preview"):::client
+
+  J("JSON body&lt;br&gt;question · imageDataUrl · history · branch&lt;br&gt;~5.3 MB max"):::wire
+
+  V("Server validates&lt;br&gt;data:image/ prefix&lt;br&gt;≤ 6 MB cap"):::server
+  M("Multi-modal user msg&lt;br&gt;type:text + type:image_url"):::server
+
+  L("Round 0 vision LLM&lt;br&gt;reads image and answers OR&lt;br&gt;emits query_dax tool call"):::llm
+  X("stripImageFromUserMessages&lt;br&gt;between rounds&lt;br&gt;critical: saves $0.01 + 3-5s/round"):::server
+
+  P --> G --> C --> T --> J --> V --> M --> L
+  L --> X
+  X -.-> L
+      </pre>
+    </div>
+  </div>
+
+  <div class="shot">
+    <div class="shot-frame">
+      <img src="img/ai-summary.png" alt="The AI side-pane summarizing the dashboard view with bold metrics." />
+    </div>
+    <div class="shot-caption">
+      <b>"Summarize this view"</b> in production — the user clicks the canned button, the browser captures the full Pipeline page as a JPEG (quality 0.92, max 1920px), the vision model reads it, and the wrap-up streams a clean five-bullet summary. The screenshot is stripped from the conversation history before any subsequent tool round.
+    </div>
+  </div>
+
+  <div class="callout callout-warn">
+    <div class="callout-tag"><i data-lucide="lightbulb"></i><span>Why JPEG 0.92 (not 0.82)</span></div>
+    Power BI renders charts with thin lines and small numbers. At quality 0.82 the vision model misread digits ("$74,318" → "$74,910"). Bumping to 0.92 fixed it. The tradeoff: image tokens are <b>expensive</b> — a 1920px screenshot is 5–15K tokens at GLM's $0.60/M = ~$0.003–$0.009 just for the image, before any text processing. This is the #1 reason we strip the image after round 0.
+  </div>
+
+  <div class="grid-3">
+    <div class="mini-card">
+      <i data-lucide="image-plus" class="mc-ico"></i>
+      <div class="mc-num">5–15 K</div>
+      <div class="mc-lbl">tokens per screenshot</div>
+    </div>
+    <div class="mini-card">
+      <i data-lucide="sliders-horizontal" class="mc-ico"></i>
+      <div class="mc-num">0.92</div>
+      <div class="mc-lbl">JPEG quality (0.85 fallback)</div>
+    </div>
+    <div class="mini-card">
+      <i data-lucide="hard-drive" class="mc-ico"></i>
+      <div class="mc-num">6 MB</div>
+      <div class="mc-lbl">server-side cap</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== 04 LIVE DAX ================== -->
+<section class="section deep" id="livedax">
+  <div class="deep-head">
+    <div class="deep-num"><i data-lucide="database-zap"></i><span>04</span></div>
+    <div>
+      <h2>Live DAX execution (Tier 3)</h2>
+      <p>Service-principal token cache → POST executeQueries → markdown table for the LLM. Failures are <em>strings the model reads</em>, not exceptions.</p>
+    </div>
+  </div>
+
+  <div class="diagram-wrap">
+    <div class="diagram-title"><i data-lucide="layers"></i><span>executeDax() — six-layer envelope</span></div>
+    <div class="mermaid-host">
+      <pre class="mermaid">
+flowchart TB
+  classDef token fill:#0a1f3d,stroke:#60a5fa,color:#dbeafe,stroke-width:1.5px
+  classDef step fill:#0e1f2e,stroke:#22d3ee,color:#e0f2fe,stroke-width:1.5px
+  classDef err fill:#311220,stroke:#fb7185,color:#ffe4e6,stroke-width:1.5px
+  classDef ok fill:#062e1d,stroke:#34d399,color:#d1fae5,stroke-width:1.5px
+
+  Tool("dispatchTool query_dax dax branch"):::step
+
+  subgraph TOK["L1 · pbi-token.ts — 75 lines, no MSAL"]
+    direction LR
+    Cache[("module-global cache&lt;br&gt;1-hour TTL · 60s safety buffer")]:::token
+    OAuth("POST oauth2/v2.0/token&lt;br&gt;scope=powerbi/api/.default"):::token
+    Cache -. miss .-> OAuth
+    OAuth -. cache .-> Cache
+  end
+
+  Tool --> Cache
+
+  Exec("L2 · POST executeQueries&lt;br&gt;workspaces/.../datasets/.../executeQueries&lt;br&gt;AbortSignal.timeout 30000ms"):::step
+
+  Cache --> Exec
+
+  E401("401 — SP not Member&lt;br&gt;Verify SalesforceBI-MCP is Member of workspace"):::err
+  E404("404 — dataset not found&lt;br&gt;Verify PBI_DS_branchcode env var"):::err
+  Eother("4xx — usually bad DAX&lt;br&gt;raw PBI message · sliced 600 chars&lt;br&gt;model self-corrects on next round"):::err
+  S("2xx — DaxResult envelope&lt;br&gt;columns · rows · rowCount · truncated · error · latencyMs"):::ok
+
+  Exec --> E401
+  Exec --> E404
+  Exec --> Eother
+  Exec --> S
+
+  Trunc("L3 · Truncate to 50 rows&lt;br&gt;flag truncated=true · footnote in render"):::ok
+  Blank("L4 · Detect BLANK row&lt;br&gt;filter matched zero rows&lt;br&gt;'Result was BLANK' + check-list"):::err
+  Format("L5 · formatDaxResultForModel&lt;br&gt;markdown table or error string"):::ok
+  Log("L6 · push to dax_log array&lt;br&gt;round · query · ok · row_count · error · latency_ms"):::ok
+
+  S --> Trunc --> Blank --> Format --> Log
+      </pre>
+    </div>
+  </div>
+
+  <div class="shot">
+    <div class="shot-frame">
+      <img src="img/ai-top-designers.png" alt="The AI answering 'who are my top 3 designers' with live DAX query results." />
+    </div>
+    <div class="shot-caption">
+      <b>Live DAX in action.</b> User asks <i>"who are my top 3 designers?"</i> → vision pass detects no image is needed → DAX writer emits a <code>TOPN(3, ...)</code> against the active branch's dataset → wrap-up renders the result. End-to-end: ~6 s. The model never invented these names — they came from <code>Salesforce_Data[Designer]</code> via <code>executeQueries</code>.
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="info-box">
+      <div class="info-title"><i data-lucide="message-square-text"></i><span>Why errors are strings, not exceptions</span></div>
+      <p>If <code>executeDax</code> threw on every PBI failure, the route would need try/catch around every dispatch. Instead it returns <code>{error: "..."}</code> and the formatter turns that into a string the model sees verbatim. The model recovers — <em>"oh, that column doesn't exist, let me look at the SEMANTIC MODEL section"</em> — and writes a corrected query in round 1 or 2. This is exactly the OpenAI tool-use error-handling pattern.</p>
+    </div>
+    <div class="info-box info-accent">
+      <div class="info-title"><i data-lucide="search-x"></i><span>The BLANK detection</span></div>
+      <p>A <code>CALCULATE([m], filter)</code> whose filter matches zero rows returns <em>one row of all-null columns</em> — looks like success but means "filter eliminated everything." We surface this explicitly with a check-list ("spelling? date range? broaden first then narrow?"). Without it the BOT would tell users "your revenue is $null" — wrong AND misleading.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================== 05 ROUTER ================== -->
+<section class="section deep section-dark" id="router">
+  <div class="deep-head">
+    <div class="deep-num"><i data-lucide="git-fork"></i><span>05</span></div>
+    <div>
+      <h2>Two-model router</h2>
+      <p>One LLM can't do both vision <b>and</b> reliable tool-calling without paying frontier prices. Solution: <b>work-routing</b>, not fallback. Each round dispatched to the model best suited for its job.</p>
+    </div>
+  </div>
+
+  <div class="diagram-wrap">
+    <div class="diagram-title"><i data-lucide="route"></i><span>One-line dispatch · per-round work routing</span></div>
+    <div class="mermaid-host">
+      <pre class="mermaid">
+flowchart LR
+  classDef vision fill:#311220,stroke:#fb7185,color:#ffe4e6,stroke-width:1.5px
+  classDef dax fill:#0a1f3d,stroke:#60a5fa,color:#dbeafe,stroke-width:1.5px
+  classDef route fill:#1c1235,stroke:#a78bfa,color:#ede9fe,stroke-width:1.5px
+  classDef accent fill:#2c1d05,stroke:#fbbf24,color:#fef3c7,stroke-width:1.5px
+
+  Q("User question&lt;br&gt;maybe with image")
+  Disp("const roundModel = round === 0 ? visionModel : daxModel&lt;br&gt;route.ts:511"):::route
+
+  V("Round 0 — Vision&lt;br&gt;Gemini 2.5 Flash&lt;br&gt;$0.30 in / $2.50 out per M&lt;br&gt;reads image · decides next step"):::vision
+  D("Round 1+ — DAX writer&lt;br&gt;Gemini 3.1 Flash Lite Preview&lt;br&gt;$0.25 in / $1.50 out per M&lt;br&gt;tool-calling · syntax · wrap-up"):::dax
+
+  P("query_dax → Power BI"):::accent
+  A("Final answer streamed"):::accent
+
+  Q --> Disp
+  Disp -- "round 0" --> V
+  V -- "tool_calls?" --> D
+  V -- "finish" --> A
+  D -- "loop max 3" --> D
+  D -- "tool_calls" --> P
+  P -- "markdown table" --> D
+  D -- "finish" --> A
+      </pre>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="info-box info-accent">
+      <div class="info-title"><i data-lucide="refresh-cw"></i><span>Why we swapped GLM-4.5V → Gemini 2.5 Flash (2026-05-05)</span></div>
+      <p>Production audit of 332 rows surfaced two GLM-4.5V failure classes:</p>
+      <ol>
+        <li><b>XML-wrapper tool-call leak</b> — emitted Qwen-style markup as plain text instead of OpenAI <code>tool_calls</code>.</li>
+        <li><b>Empty <code>arguments</code> strings</b> — wasted a tool round before retry. ~12 of 14 DAX-using calls in the sample.</li>
+      </ol>
+      <p>Both are GLM-specific. Gemini 2.5 Flash uses the <b>same OpenAI-compatible tool-call format</b> as our DAX writer → these failure classes literally cannot occur. Bonus: 50% cheaper input rate.</p>
+    </div>
+
+    <div class="info-box">
+      <div class="info-title"><i data-lucide="shield-half"></i><span>2026-05-05 reliability layer</span></div>
+      <p>Four server-side defenses, none model-specific (defense-in-depth):</p>
+      <ul>
+        <li><b>XML tool-call recovery</b> — 250-char probe extracts DAX from wrapper</li>
+        <li><b>Numerical hallucination guard</b> — re-checks bare-numbers-no-DAX answers</li>
+        <li><b>Server-side {YEAR}/{MONTH} substitution</b> — placeholder leaks no longer 400</li>
+        <li><b>Empty-DAX early reject</b> — tool description forbids; <code>minLength: 10</code> in JSON schema</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================== 06 SEMANTIC ================== -->
+<section class="section deep" id="semantic">
+  <div class="deep-head">
+    <div class="deep-num"><i data-lucide="ruler"></i><span>06</span></div>
+    <div>
+      <h2>Semantic knowledge injection</h2>
+      <p>The single most common LLM failure: <b>inventing column names that look plausible but don't exist</b>. The fix is structural, not prompt-engineering — inject the model's actual schema as authoritative reference.</p>
+    </div>
+  </div>
+
+  <div class="diagram-wrap">
+    <div class="diagram-title"><i data-lucide="boxes"></i><span>Four data structures, two render paths</span></div>
+    <div class="mermaid-host">
+      <pre class="mermaid">
+flowchart TB
+  classDef src fill:#0e1f2e,stroke:#22d3ee,color:#e0f2fe,stroke-width:1.5px
+  classDef ds fill:#0a1f3d,stroke:#60a5fa,color:#dbeafe,stroke-width:1.5px
+  classDef ren fill:#1c1235,stroke:#a78bfa,color:#ede9fe,stroke-width:1.5px
+  classDef out fill:#062e1d,stroke:#34d399,color:#d1fae5,stroke-width:1.5px
+
+  TMDL("source-of-truth&lt;br&gt;TMDL · dbt manifest · information_schema&lt;br&gt;~620 lines hand-mirrored TS"):::src
+
+  T("TABLES&lt;br&gt;per-table: name, kind, description&lt;br&gt;useFor[] · columns · relatedMeasures"):::ds
+  M("MEASURES&lt;br&gt;per-measure: name, table, description&lt;br&gt;dax (the actual expression) · formatString"):::ds
+  R("RELATIONSHIPS&lt;br&gt;22 entries: from → to, active flag&lt;br&gt;cardinality (many-to-one etc)"):::ds
+  CQ("COMMON_QUESTIONS&lt;br&gt;intent → table + measures&lt;br&gt;routing hints"):::ds
+
+  TMDL --> T & M & R & CQ
+
+  Slim("renderSemanticKnowledgeSlim&lt;br&gt;names + descriptions only&lt;br&gt;~1.2-1.5K tokens"):::ren
+  Full("renderSemanticKnowledge&lt;br&gt;names + descriptions + DAX (derived only,&lt;br&gt;trivial wrappers omitted)&lt;br&gt;~3.0-3.5K tokens"):::ren
+
+  T --> Slim & Full
+  M --> Slim & Full
+  R --> Full
+  CQ --> Full
+
+  V("round 0 · vision LLM&lt;br&gt;Gemini 2.5 Flash&lt;br&gt;only needs to RECOGNIZE names"):::out
+  D("round 1+ · DAX writer&lt;br&gt;Gemini 3.1 Lite&lt;br&gt;needs the computation to reason about combinations"):::out
+
+  Slim --> V
+  Full --> D
+      </pre>
+    </div>
+  </div>
+
+  <div class="shots-pair">
+    <div class="shot">
+      <div class="shot-frame">
+        <img src="img/lead-source-overview.png" alt="Lead Source Report with measure cards, Designer and Lead Source slicers." />
+      </div>
+      <div class="shot-caption">
+        Every measure card shown here (<b>Total Bid, Sold, Total Records, Avg Project Value</b>) has a corresponding entry in <code>MEASURES</code> with its DAX expression — so the LLM can reason about <i>what</i> each one computes, not just its name.
+      </div>
+    </div>
+    <div class="shot">
+      <div class="shot-frame">
+        <img src="img/journey-overview.png" alt="Opportunity Journey Analytics page with Lead Status bar chart." />
+      </div>
+      <div class="shot-caption">
+        The <b>Opportunities by Lead Status</b> visual references <code>Leads[Lead Status]</code> with values like <i>"Sold"</i>, <i>"Moved to Studio"</i>, <i>"Junk"</i>. Those exact strings live in the model — the BOT uses them verbatim in WHERE clauses.
+      </div>
+    </div>
+  </div>
+
+  <div class="callout callout-danger">
+    <div class="callout-tag"><i data-lucide="alert-octagon"></i><span>Spec-vs-model drift caught 2026-05-03</span></div>
+    Exploration script <code>_explore_dax_patterns.mts</code> probed the live ICAU model via <code>INFO.VIEW.COLUMNS()</code> and found <b>9 columns the BOT thought existed didn't actually exist</b> in the M-partition (geographic columns, install dates, etc). They lived in MySQL <code>fact_opportunities</code> but were filtered out at the M-step. The BOT was being told they existed; DAX queries against them returned 400. <b>All 9 removed; comment block now points readers to "geographic data lives on Leads, not Salesforce_Data."</b> Run that probe monthly to catch future drift.
+  </div>
+</section>
+
+<!-- ================== 07 BRANCH CONTEXT ================== -->
+<section class="section deep section-dark" id="branchctx">
+  <div class="deep-head">
+    <div class="deep-num"><i data-lucide="users-round"></i><span>07</span></div>
+    <div>
+      <h2>Per-branch real-data context</h2>
+      <p>Schema knowledge tells the model <em>what columns exist</em>. It does NOT tell the model <em>what values those columns contain</em>. That's how the BOT learns that "Alyssa" means "Alyssa Jordan" in ICAU's roster — without round-tripping a DAX query.</p>
+    </div>
+  </div>
+
+  <div class="diagram-wrap">
+    <div class="diagram-title"><i data-lucide="cog"></i><span>build_branch_context.mjs — once per month → injected per-call</span></div>
+    <div class="mermaid-host">
+      <pre class="mermaid">
+flowchart LR
+  classDef sql fill:#0a1f3d,stroke:#60a5fa,color:#dbeafe,stroke-width:1.5px
+  classDef gen fill:#0e1f2e,stroke:#22d3ee,color:#e0f2fe,stroke-width:1.5px
+  classDef out fill:#062e1d,stroke:#34d399,color:#d1fae5,stroke-width:1.5px
+  classDef route fill:#1c1235,stroke:#a78bfa,color:#ede9fe,stroke-width:1.5px
+
+  MS[("MySQL ICALL_Gold&lt;br&gt;fact_opportunities&lt;br&gt;fact_leads · fact_appointments")]:::sql
+
+  G("scripts/build_branch_context.mjs&lt;br&gt;~10 queries × 7 branches&lt;br&gt;npm run build-branch-context"):::gen
+
+  Per("per-branch snapshot&lt;br&gt;· projects / sold / proposed / lost&lt;br&gt;· totalRevenueM / soldRevenueM&lt;br&gt;· firstDate / lastDate&lt;br&gt;· top 30 designers (with $K)&lt;br&gt;· top 50 lead sources&lt;br&gt;· states[]"):::out
+
+  TS("lib/copilot/branch-data.ts&lt;br&gt;1365 lines · committed to git&lt;br&gt;'server-only' guard"):::out
+
+  Inj("renderBranchContext(activeBranch)&lt;br&gt;injects ONLY the active tenant's slice&lt;br&gt;~600-800 tokens (vs ~5K for all 7)"):::route
+
+  Rule("Behaviour rule&lt;br&gt;'snapshot is for disambiguation only — never quote numbers from it directly.&lt;br&gt;Always run query_dax for any number.'"):::route
+
+  MS --> G --> Per --> TS --> Inj --> Rule
+      </pre>
+    </div>
+  </div>
+
+  <div class="shot">
+    <div class="shot-frame">
+      <img src="img/ai-top-designers.png" alt="The AI returning real designer names from the active branch's roster: Alyssa Jordan, Beth Cloutier, Catherine Meyer." />
+    </div>
+    <div class="shot-caption">
+      <b>The roster paying off.</b> The user wrote <i>"top 3 designers"</i> — no full name given. The branch snapshot, injected into the system prompt as ~600-800 tokens of recognized names, told the model that <code>Alyssa Jordan</code>, <code>Beth Cloutier</code>, and <code>Catherine Meyer</code> are real designers in this branch's roster. The DAX query then ranked them on live data.
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="info-box">
+      <div class="info-title"><i data-lucide="user-check"></i><span>"How is Alyssa doing?" — fixed in one round</span></div>
+      <p>The model's prompt context already contains <b>"Alyssa Jordan (1,247 projects, $812K)"</b>. It writes:</p>
+      <pre class="codeblock">EVALUATE
+ROW("Sold", CALCULATE(
+  [Revenue Sold],
+  Salesforce_Data[Designer] = "Alyssa Jordan",
+  YEAR(Salesforce_Data[Created Date]) = 2026
+))</pre>
+      <p>Right name, first try. Without the snapshot: 1-2 disambiguation rounds, $0.001 + 3s wasted.</p>
+    </div>
+    <div class="info-box info-accent">
+      <div class="info-title"><i data-lucide="hash"></i><span>Why rounded numbers ($812K not $812,403)</span></div>
+      <p>Precise dollars in the prompt would tempt the model to quote them as live values. Pre-rounded values are <b>visually obvious</b> as stale snapshot data. The model has been observed to round less when it sees exact numbers, more when it sees pre-rounded ones. Subtle but real.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================== 08 GUIDE ================== -->
+<section class="section deep" id="guide">
+  <div class="deep-head">
+    <div class="deep-num"><i data-lucide="book-open-check"></i><span>08</span></div>
+    <div>
+      <h2>In-context guide — single source, two surfaces</h2>
+      <p>The same content drives the user-facing drawer AND the BOT's system prompt. Drift is structurally impossible.</p>
+    </div>
+  </div>
+
+  <div class="diagram-wrap">
+    <div class="diagram-title"><i data-lucide="split"></i><span>One PAGES array → two surfaces</span></div>
+    <div class="mermaid-host">
+      <pre class="mermaid">
+flowchart LR
+  classDef src fill:#0a1f3d,stroke:#60a5fa,color:#dbeafe,stroke-width:1.5px
+  classDef hum fill:#062e1d,stroke:#34d399,color:#d1fae5,stroke-width:1.5px
+  classDef bot fill:#1c1235,stroke:#a78bfa,color:#ede9fe,stroke-width:1.5px
+  classDef rule fill:#2c1d05,stroke:#fbbf24,color:#fef3c7,stroke-width:1.5px
+
+  C("lib/guide/content.tsx&lt;br&gt;PAGES: ReportPage[]&lt;br&gt;{name, intent, whenToUse, slicers,&lt;br&gt; visuals, bigQuestions}&lt;br&gt;&lt;br&gt;QUICK_PATTERNS&lt;br&gt;cross-cutting"):::src
+
+  GP("components/GuidePanel.tsx&lt;br&gt;'use client'&lt;br&gt;same UX as BOT panel&lt;br&gt;page list / page detail"):::hum
+
+  RP("renderGuideForPrompt&lt;br&gt;same data → markdown for system prompt&lt;br&gt;~1500-2000 tokens"):::bot
+
+  H("human surface"):::hum
+  M("model surface"):::bot
+
+  R("BEHAVIOUR rule&lt;br&gt;'For navigational/educational questions,&lt;br&gt;answer FROM the guide.&lt;br&gt;DO NOT call query_dax.'"):::rule
+
+  C --> GP --> H
+  C --> RP --> M
+  M --> R
+      </pre>
+    </div>
+  </div>
+
+  <div class="shots-pair">
+    <div class="shot">
+      <div class="shot-frame">
+        <img src="img/guide-drawer.png" alt="Guide drawer landing — 'Dashboard, decoded.'" />
+      </div>
+      <div class="shot-caption">
+        <b>Guide entry.</b> Slide-out drawer with the same UX as the AI panel — only one is open at a time.
+      </div>
+    </div>
+    <div class="shot">
+      <div class="shot-frame">
+        <img src="img/guide-pages-list.png" alt="List of all report pages with one-line descriptions." />
+      </div>
+      <div class="shot-caption">
+        <b>Page list view.</b> Every report page with its tagline. Same data array as <code>renderGuideForPrompt()</code>.
+      </div>
+    </div>
+    <div class="shot">
+      <div class="shot-frame">
+        <img src="img/guide-page-detail.png" alt="Pipeline Report — slicers, visuals, big questions." />
+      </div>
+      <div class="shot-caption">
+        <b>Page detail.</b> Slicers, visuals, and "what to read first" — same content the BOT cites when a navigational question fires.
+      </div>
+    </div>
+    <div class="shot">
+      <div class="shot-frame">
+        <img src="img/guide-page-questions.png" alt="Big questions this page answers — sample queries." />
+      </div>
+      <div class="shot-caption">
+        <b>Big questions.</b> Each page lists the questions it's designed to answer — these double as recipe-authoring candidates.
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-tag"><i data-lucide="lightbulb"></i><span>Why the BOT answers FROM the guide, not by linking TO it</span></div>
+    The user is <em>already in the BOT</em>. Bouncing them to another surface for a definition is bad UX. The BOT's whole value-prop is "answer questions immediately." The system-prompt token cost (~$0.0004) is the price of avoiding the redirect.
+  </div>
+</section>
+
+<!-- ================== 09 RECIPES ================== -->
+<section class="section deep section-dark" id="recipes">
+  <div class="deep-head">
+    <div class="deep-num"><i data-lucide="chef-hat"></i><span>09</span></div>
+    <div>
+      <h2>Recipe layer — the deterministic bypass</h2>
+      <p>For high-confidence question matches, bypass the LLM's DAX-writing step entirely. Run a hand-curated query, ask the LLM only to wrap the result in prose. <b>Same question → byte-identical DAX → same number every time.</b></p>
+    </div>
+  </div>
+
+  <div class="diagram-wrap">
+    <div class="diagram-title"><i data-lucide="filter"></i><span>Two-pass matcher · 47 recipes · 226 vectors</span></div>
+    <div class="mermaid-host">
+      <pre class="mermaid">
+flowchart TB
+  classDef ask fill:#0e1f2e,stroke:#22d3ee,color:#e0f2fe,stroke-width:1.5px
+  classDef gate fill:#2c1d05,stroke:#fbbf24,color:#fef3c7,stroke-width:1.5px
+  classDef match fill:#0a1f3d,stroke:#60a5fa,color:#dbeafe,stroke-width:1.5px
+  classDef hit fill:#062e1d,stroke:#34d399,color:#d1fae5,stroke-width:1.5px
+  classDef miss fill:#311220,stroke:#fb7185,color:#ffe4e6,stroke-width:1.5px
+
+  Q("User question&lt;br&gt;+ branch + image?"):::ask
+  Img{"image attached?"}:::gate
+  Slow("fall through to slow path&lt;br&gt;visual questions need vision"):::miss
+
+  Intent("detectIntent — 7-class enum&lt;br&gt;RANK · LIST · LOOKUP · COMPARE&lt;br&gt;AGGREGATE · EXPLAIN · META"):::gate
+
+  P1("Pass 1 · Regex&lt;br&gt;over RECIPES[].matchers&lt;br&gt;tightest first · free · microseconds&lt;br&gt;~80% of hits"):::match
+
+  P2("Pass 2 · Embedding&lt;br&gt;Upstash Vector · BAAI/bge-large-en-v1.5&lt;br&gt;topK=1 · threshold ≥ 0.90&lt;br&gt;skipEmbedding recipes excluded"):::match
+
+  Gate("Per-recipe intent gate&lt;br&gt;variance question →&lt;br&gt;only handlesVariance:true match&lt;br&gt;else fall through"):::gate
+
+  Exec("executeRecipe&lt;br&gt;fillRecipeDax: substitute YEAR/N/NAME&lt;br&gt;POST executeQueries → rows"):::hit
+
+  Wrap("slim wrap-up call&lt;br&gt;Gemini Lite · 150-token system&lt;br&gt;+ question + result table → narrate"):::hit
+
+  Log("copilot_usage&lt;br&gt;recipe_id · recipe_version · matcher_method&lt;br&gt;intent_classes · recipe_skip_reason"):::hit
+
+  Q --> Img
+  Img -- "yes" --> Slow
+  Img -- "no" --> Intent
+  Intent --> P1
+  P1 -- "hit" --> Gate
+  P1 -- "miss" --> P2
+  P2 -- "hit" --> Gate
+  P2 -- "miss" --> Slow
+  Gate -- "allowed" --> Exec --> Wrap --> Log
+  Gate -- "gated" --> Slow
+      </pre>
+    </div>
+  </div>
+
+  <div class="recipe-stats">
+    <div class="rs"><i data-lucide="package" class="rs-ico"></i><div class="rs-num">47</div><div class="rs-lbl">recipes shipped</div></div>
+    <div class="rs"><i data-lucide="vector-square" class="rs-ico"></i><div class="rs-num">226</div><div class="rs-lbl">embedded vectors</div></div>
+    <div class="rs"><i data-lucide="trending-down" class="rs-ico"></i><div class="rs-num">~50×</div><div class="rs-lbl">cheaper / matched</div></div>
+    <div class="rs"><i data-lucide="rabbit" class="rs-ico"></i><div class="rs-num">~3×</div><div class="rs-lbl">faster (~3s vs ~10s)</div></div>
+    <div class="rs"><i data-lucide="trending-up" class="rs-ico"></i><div class="rs-num">9</div><div class="rs-lbl">handlesVariance</div></div>
+    <div class="rs"><i data-lucide="lock" class="rs-ico"></i><div class="rs-num">5</div><div class="rs-lbl">skipEmbedding</div></div>
+  </div>
+
+  <div class="grid-2">
+    <div class="info-box info-accent">
+      <div class="info-title"><i data-lucide="folder-tree"></i><span>Categories shipped</span></div>
+      <table class="mini-table">
+        <tr><td>Revenue (incl. variance)</td><td><b>7</b></td></tr>
+        <tr><td>Designers (incl. variance)</td><td><b>6</b></td></tr>
+        <tr><td>Appointments</td><td><b>6</b></td></tr>
+        <tr><td>Customer-level lookups</td><td><b>7</b></td></tr>
+        <tr><td>Cross-cutting / Geography</td><td><b>9</b></td></tr>
+        <tr><td>Conversion / Lead source</td><td><b>7</b></td></tr>
+        <tr><td>Counts / Ops / Journey</td><td><b>5</b></td></tr>
+      </table>
+    </div>
+    <div class="info-box">
+      <div class="info-title"><i data-lucide="sliders"></i><span>Why threshold 0.90 (not 0.78 as originally specced)</span></div>
+      <p>Doc originally specced <code>mxbai-embed-large-v1</code> (paraphrase 0.82–0.92, threshold 0.78). Deployed model is <code>BAAI/bge-large-en-v1.5</code> (Upstash didn't have mxbai). bge-large produces tighter, higher-pitched scores: paraphrases 0.93–0.99, false positives 0.81–0.87. Production data caught it; threshold bumped (commit <code>ea6bd1b</code>).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================== 10 OBSERVABILITY ================== -->
+<section class="section deep" id="observability">
+  <div class="deep-head">
+    <div class="deep-num"><i data-lucide="activity"></i><span>10</span></div>
+    <div>
+      <h2>Observability — copilot_usage</h2>
+      <p>One row per call. RLS so users see only their own. 7-day pg_cron retention. Without this you can't debug what you can't see.</p>
+    </div>
+  </div>
+
+  <div class="diagram-wrap">
+    <div class="diagram-title"><i data-lucide="table-2"></i><span>Schema after 10 migrations</span></div>
+    <div class="mermaid-host">
+      <pre class="mermaid">
+flowchart TB
+  classDef pk fill:#2c1d05,stroke:#fbbf24,color:#fef3c7,stroke-width:1.5px
+  classDef id fill:#0e1f2e,stroke:#22d3ee,color:#e0f2fe,stroke-width:1.5px
+  classDef inp fill:#0a1f3d,stroke:#60a5fa,color:#dbeafe,stroke-width:1.5px
+  classDef out fill:#062e1d,stroke:#34d399,color:#d1fae5,stroke-width:1.5px
+  classDef cost fill:#1c1235,stroke:#a78bfa,color:#ede9fe,stroke-width:1.5px
+  classDef tool fill:#311220,stroke:#fb7185,color:#ffe4e6,stroke-width:1.5px
+
+  T("copilot_usage&lt;br&gt;after 10 migrations"):::pk
+
+  ID("identity&lt;br&gt;id · user_id (FK auth.users)&lt;br&gt;branch_code · created_at&lt;br&gt;RLS: auth.uid() = user_id"):::id
+
+  IN("inputs&lt;br&gt;image_attached bool&lt;br&gt;user_question text&lt;br&gt;(includes canned 'Summarize…')"):::inp
+
+  MD("models&lt;br&gt;model — vision · round 0&lt;br&gt;dax_model — rounds 1+, null if no tool"):::id
+
+  TK("cost / tokens&lt;br&gt;prompt_tokens · completion · image&lt;br&gt;cost_usd numeric(10,6)&lt;br&gt;tokens_cached · latency_ms"):::cost
+
+  TL("tool calls&lt;br&gt;tool_calls_count · dax_queries_count&lt;br&gt;dax_log jsonb&lt;br&gt;round · query (substituted) · ok · row_count&lt;br&gt;error · latency_ms"):::tool
+
+  OUT("outputs&lt;br&gt;assistant_answer&lt;br&gt;error — non-null = failed"):::out
+
+  RC("recipe layer (009)&lt;br&gt;recipe_id · recipe_version · matcher_method"):::out
+
+  DG("diagnostic (010)&lt;br&gt;intent_classes text[]&lt;br&gt;recipe_skip_reason"):::out
+
+  CR("retention&lt;br&gt;pg_cron daily · 7-day window&lt;br&gt;17 3 * * * UTC"):::pk
+
+  T --> ID & IN & MD & TK & TL & OUT & RC & DG
+  T --> CR
+      </pre>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="info-box">
+      <div class="info-title"><i data-lucide="search"></i><span>Three inspector scripts</span></div>
+      <ul>
+        <li><code>_check_copilot_usage.mjs</code> — last 10 calls, compact + per-call detail</li>
+        <li><code>_check_copilot_mistakes.mjs</code> — 7-day failure surface</li>
+        <li><code>_check_copilot_today.mjs</code> — 36-hour full Q+A trace</li>
+      </ul>
+    </div>
+    <div class="info-box info-accent">
+      <div class="info-title"><i data-lucide="bell-ring"></i><span>Vercel-log signals (warn-level)</span></div>
+      <table class="mini-table">
+        <tr><td><code>{YEAR} leak</code></td><td>placeholder substituted server-side</td></tr>
+        <tr><td><code>hallucination guard</code></td><td>bare-numbers without DAX → forced correction round</td></tr>
+        <tr><td><code>image_url leaked</code></td><td>genuine bug — investigate immediately</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-tag"><i data-lucide="terminal"></i><span>The killer query</span></div>
+    <pre class="codeblock">select user_question, recipe_skip_reason, intent_classes
+from copilot_usage
+where recipe_skip_reason is not null
+order by created_at desc;</pre>
+    Two latent matcher bugs silently degraded accuracy by ~5pp for weeks. They presented identically: <code>recipe_id=NULL, matcher_method=NULL, error=NULL</code>. With <code>recipe_skip_reason</code>, both bugs were visible in 30 seconds of SQL.
+  </div>
+</section>
+
+<!-- ================== 11 STREAMING ================== -->
+<section class="section deep section-dark" id="streaming">
+  <div class="deep-head">
+    <div class="deep-num"><i data-lucide="radio-tower"></i><span>11</span></div>
+    <div>
+      <h2>Streaming &amp; Edge runtime</h2>
+      <p>Why the BOT feels real-time — and why no Node deps means no reason not to run on Edge.</p>
+    </div>
+  </div>
+
+  <div class="diagram-wrap">
+    <div class="diagram-title"><i data-lucide="signal"></i><span>SSE pipeline — OpenRouter ⇆ ReadableStream ⇆ browser</span></div>
+    <div class="mermaid-host">
+      <pre class="mermaid">
+flowchart LR
+  classDef sse fill:#0a1f3d,stroke:#60a5fa,color:#dbeafe,stroke-width:1.5px
+  classDef edge fill:#1c1235,stroke:#a78bfa,color:#ede9fe,stroke-width:1.5px
+  classDef brow fill:#0e1f2e,stroke:#22d3ee,color:#e0f2fe,stroke-width:1.5px
+
+  OR("OpenRouter SSE&lt;br&gt;data: JSON chunks&lt;br&gt;finish_reason · usage in last chunk"):::sse
+
+  RD("reader.read&lt;br&gt;buffer += decode&lt;br&gt;split on newline&lt;br&gt;buffer.pop() for partial line"):::edge
+
+  EX("extract delta.content&lt;br&gt;+ accumulate tool_calls by index"):::edge
+
+  CT("controller.enqueue(bytes)"):::edge
+
+  TM("tool marker between rounds&lt;br&gt;'Looking up live data…'"):::edge
+
+  RS("ReadableStream&lt;br&gt;Content-Type: text/plain&lt;br&gt;Cache-Control: no-store&lt;br&gt;X-Accel-Buffering: no"):::edge
+
+  CL("client fetch.body.getReader"):::brow
+
+  SD("Streamdown&lt;br&gt;incremental markdown render&lt;br&gt;no flicker"):::brow
+
+  CM("client splits on TOOL_MARKER_RE&lt;br&gt;renders pulsing chip inline"):::brow
+
+  OR --> RD --> EX --> CT --> RS --> CL --> SD
+  EX -. "between rounds" .-> TM --> CT
+  SD --> CM
+      </pre>
+    </div>
+  </div>
+
+  <div class="grid-3">
+    <div class="mini-card"><i data-lucide="alarm-clock-check" class="mc-ico"></i><div class="mc-num">25 s</div><div class="mc-lbl">Edge timeout (Hobby)</div></div>
+    <div class="mini-card"><i data-lucide="alarm-clock-off" class="mc-ico"></i><div class="mc-num">10 s</div><div class="mc-lbl">Node timeout (Hobby)</div></div>
+    <div class="mini-card"><i data-lucide="rocket" class="mc-ico"></i><div class="mc-num">~50 ms</div><div class="mc-lbl">Edge cold start</div></div>
+  </div>
+
+  <div class="callout callout-danger">
+    <div class="callout-tag"><i data-lucide="alert-triangle"></i><span>The SSE buffer-pop pattern is mandatory</span></div>
+    A single <code>reader.read()</code> chunk can split a JSON line in half. If you naively <code>JSON.parse</code> each <code>split("\n")</code> element, ~1 in 100 calls will throw. The pop-the-incomplete-tail pattern handles it. The tool-call delta indexing is by <b>tool-call position</b>, not token order — two parallel tool calls' arguments interleave on the wire; you need the <code>index</code> field to demultiplex.
+  </div>
+</section>
+
+<!-- ================== 12 ECONOMICS ================== -->
+<section class="section deep" id="economics">
+  <div class="deep-head">
+    <div class="deep-num"><i data-lucide="dollar-sign"></i><span>12</span></div>
+    <div>
+      <h2>Cost &amp; model economics</h2>
+      <p>Where the money goes — and the four levers that took the slow path from $0.012 → $0.0014 per call.</p>
+    </div>
+  </div>
+
+  <div class="cost-table-wrap">
+    <table class="cost-table">
+      <thead>
+        <tr><th>Path</th><th>Latency</th><th>Cost / call</th><th>vs slow path</th></tr>
+      </thead>
+      <tbody>
+        <tr class="row-fast"><td><i data-lucide="zap"></i> Recipe fast-path</td><td>3.8 – 5.7 s</td><td>$0.00018 – $0.00026</td><td><b>1×</b> baseline</td></tr>
+        <tr><td><i data-lucide="message-circle"></i> Slow path (text-only, post-opt)</td><td>~10 s</td><td>~$0.0014</td><td>~8×</td></tr>
+        <tr><td><i data-lucide="image"></i> Slow path (image)</td><td>8 – 15 s</td><td>$0.011 – $0.018</td><td>~50×</td></tr>
+        <tr class="row-old"><td><i data-lucide="archive"></i> Slow path (text-only, pre-Step-1)</td><td>10 – 21 s</td><td>$0.0097 – $0.017</td><td>~50–80×</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="diagram-wrap">
+    <div class="diagram-title"><i data-lucide="trending-down"></i><span>Six cost-optimization steps · 2026-05-03</span></div>
+    <div class="mermaid-host">
+      <pre class="mermaid">
+flowchart LR
+  classDef before fill:#311220,stroke:#fb7185,color:#ffe4e6,stroke-width:1.5px
+  classDef step fill:#0a1f3d,stroke:#60a5fa,color:#dbeafe,stroke-width:1.5px
+  classDef after fill:#062e1d,stroke:#34d399,color:#d1fae5,stroke-width:1.5px
+
+  B("Baseline&lt;br&gt;~$0.012/call · 12.8K avg prompt&lt;br&gt;29% cached share"):::before
+
+  S1("Step 1&lt;br&gt;Cache-friendly prefix&lt;br&gt;STATIC_SYSTEM_PROMPT&lt;br&gt;+ {YEAR} placeholders"):::step
+  S2("Step 2&lt;br&gt;Split vision/DAX prompts&lt;br&gt;renderSlim for vision"):::step
+  S3("Step 3&lt;br&gt;Intent classifier&lt;br&gt;variance/guide gated"):::step
+  S4("Step 4&lt;br&gt;Trim trivial-DAX measures"):::step
+  S5("Step 5&lt;br&gt;MAX_HISTORY 6 → 3"):::step
+  S6("Step 6&lt;br&gt;image-strip assertion"):::step
+  SB("Bonus&lt;br&gt;cached-token cost (25% rate)"):::step
+
+  A("Result&lt;br&gt;~$0.0014/call · ~88% reduction&lt;br&gt;cached share ≥ 70%"):::after
+
+  B --> S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> SB --> A
+      </pre>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="info-box">
+      <div class="info-title"><i data-lucide="list-ordered"></i><span>Cost-control levers (priority order)</span></div>
+      <ol>
+        <li><b>Don't include the image after round 0</b> — single biggest win, 50%+ reduction</li>
+        <li><b>Pre-LLM fast paths</b> — recipes ~50× cheaper on matched calls</li>
+        <li><b>Two-model router</b> — cheap model for non-vision rounds, ~2× cheaper</li>
+        <li><b>Tight system prompt</b> — ~$0.0002/call savings per 4K tokens trimmed</li>
+      </ol>
+    </div>
+    <div class="info-box info-accent">
+      <div class="info-title"><i data-lucide="calendar"></i><span>Annual cost (with 80/20 slow/fast split)</span></div>
+      <table class="mini-table">
+        <tr><th>Calls/day</th><th>Daily</th><th>Annual</th></tr>
+        <tr><td>50</td><td>$0.48</td><td>~$175</td></tr>
+        <tr><td>200</td><td>$1.93</td><td>~$700</td></tr>
+        <tr><td>1,000</td><td>$9.64</td><td>~$3,500</td></tr>
+        <tr><td>5,000</td><td>$48</td><td>~$17,500</td></tr>
+      </table>
+      <p class="info-foot">Recipe layer's annual savings @ 1K calls/day: ~$880. <i>The other reason to ship recipes is consistency, not cost.</i></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================== 99 REPLICATION ================== -->
+<section class="section deep section-dark" id="replication">
+  <div class="deep-head">
+    <div class="deep-num"><i data-lucide="copy"></i><span>99</span></div>
+    <div>
+      <h2>Replicate this for a new client</h2>
+      <p>The end-to-end build is 7–11 days. The accuracy lift to ≥90% on both scorers is another 3 days using the Phase 10 methodology that took IC from 49% → 92%.</p>
+    </div>
+  </div>
+
+  <div class="diagram-wrap">
+    <div class="diagram-title"><i data-lucide="hammer"></i><span>Phase 1–9 · architecture build · 7–11 days</span></div>
+    <div class="mermaid-host">
+      <pre class="mermaid">
+flowchart LR
+  classDef p fill:#0a1f3d,stroke:#60a5fa,color:#dbeafe,stroke-width:1.5px
+  classDef o fill:#062e1d,stroke:#34d399,color:#d1fae5,stroke-width:1.5px
+  classDef opt fill:#2c1d05,stroke:#fbbf24,color:#fef3c7,stroke-width:1.5px
+
+  P0("Setup&lt;br&gt;Next.js + Supabase&lt;br&gt;0.5d"):::p
+  P1("Phase 1&lt;br&gt;route skeleton&lt;br&gt;auth · rate limit · usage row&lt;br&gt;0.5d"):::p
+  P2("Phase 2&lt;br&gt;system prompt + streaming&lt;br&gt;0.5d"):::p
+  P3("Phase 3&lt;br&gt;screenshot grounding&lt;br&gt;1d"):::p
+  P4("Phase 4&lt;br&gt;live DAX/SQL tool&lt;br&gt;1d"):::p
+  P5("Phase 5&lt;br&gt;semantic knowledge&lt;br&gt;0.5-2d"):::p
+  P6("Phase 6&lt;br&gt;per-tenant context&lt;br&gt;0.5d"):::p
+  P7("Phase 7&lt;br&gt;in-context guide&lt;br&gt;0.5-1d"):::p
+  P8("Phase 8 (optional)&lt;br&gt;recipe layer&lt;br&gt;1.5-2d"):::opt
+  P9("Phase 9 (optional)&lt;br&gt;two-model router&lt;br&gt;0.5d"):::opt
+  R("Production-ready&lt;br&gt;baseline ~50-65%&lt;br&gt;both scorers"):::o
+
+  P0 --> P1 --> P2 --> P3 --> P4 --> P5 --> P6 --> P7 --> P8 --> P9 --> R
+      </pre>
+    </div>
+  </div>
+
+  <div class="diagram-wrap">
+    <div class="diagram-title"><i data-lucide="trending-up"></i><span>Phase 10 · accuracy lift · 49% → 92% in 3 days</span></div>
+    <div class="mermaid-host">
+      <pre class="mermaid">
+flowchart LR
+  classDef before fill:#311220,stroke:#fb7185,color:#ffe4e6,stroke-width:1.5px
+  classDef batch fill:#0a1f3d,stroke:#60a5fa,color:#dbeafe,stroke-width:1.5px
+  classDef after fill:#062e1d,stroke:#34d399,color:#d1fae5,stroke-width:1.5px
+
+  S("baseline 49.4%"):::before
+  B1("batch 1 reliability + 3&lt;br&gt;+18.2pp · 67.6%"):::batch
+  B2("batch 2 recipe DAX fixes&lt;br&gt;+6.5pp · 74.1%"):::batch
+  B3("batch 3 MEASURE & SCOPE&lt;br&gt;+4.7pp · 78.8%"):::batch
+  B4("batch 4 scoring + DSG-006&lt;br&gt;+2.4pp · 81.2%"):::batch
+  B5("batch 5 +10 clarif recipes&lt;br&gt;+4.1pp · 85.3%"):::batch
+  B6("batch 6 +8 top-N recipes&lt;br&gt;+4.7pp · 90.0%"):::batch
+  B7("batch 7 DAX scorer + 2 matcher bugs&lt;br&gt;scorer switch · 90.0% DAX"):::batch
+  B8("batch 8 +9 recipes + YEAR HARD RULE&lt;br&gt;+1.7pp · 92.4% DAX"):::batch
+  B9("batch 9 +8 recipes + skipEmbedding + empty=empty&lt;br&gt;94.1% DAX · 91.8% answer"):::after
+
+  S --> B1 --> B2 --> B3 --> B4 --> B5 --> B6 --> B7 --> B8 --> B9
+      </pre>
+    </div>
+  </div>
+
+  <div class="patterns">
+    <div class="patterns-title"><i data-lucide="wand-2"></i><span>The four high-leverage prompt patterns IC discovered</span></div>
+    <div class="grid-2">
+      <div class="pattern">
+        <div class="pat-tag"><i data-lucide="clock"></i><span>Pattern A</span></div>
+        <div class="pat-name">TIME SCOPE HARD RULE</div>
+        <p>LLMs LOVE adding <code>YEAR(...)=N</code> filters when not asked. Write the rule explicitly + 8–10 real failure examples with corrected DAX. The LLM internalizes from concrete examples better than abstract rules.</p>
+      </div>
+      <div class="pattern">
+        <div class="pat-tag"><i data-lucide="ruler"></i><span>Pattern B</span></div>
+        <div class="pat-name">MEASURE PICKER table</div>
+        <p>For each pair of similarly-named measures the LLM confuses, add a numbered row: <code>USE: ...</code> / <code>NOT: ...</code>. Numbered list, not paragraph form — LLM treats each as a discrete rule.</p>
+      </div>
+      <div class="pattern">
+        <div class="pat-tag"><i data-lucide="layout-list"></i><span>Pattern C</span></div>
+        <div class="pat-name">OUTPUT SHAPE rules</div>
+        <p>The wrap-up model needs explicit shape guidance: list rows when user asked to LIST/SHOW; 1-2 sentences for scalar; 2-4 sentences calling out top 2-3 for multi-row. Without this it picks shape randomly.</p>
+      </div>
+      <div class="pattern">
+        <div class="pat-tag"><i data-lucide="circle-check-big"></i><span>Pattern D</span></div>
+        <div class="pat-name">empty=empty scorer rule</div>
+        <p>When CSV expected reads "(no rows)" and BOT correctly says "couldn't find" — that's a SEMANTIC MATCH, not <code>no_data</code>. Recovered +5 questions in IC's Phase 8 alone.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== EVALUATION ================== -->
+<section class="section deep" id="evaluation">
+  <div class="deep-head">
+    <div class="deep-num"><i data-lucide="gauge"></i><span>EVAL</span></div>
+    <div>
+      <h2>Two scorers, in parallel</h2>
+      <p>Single-scorer evaluation is misleading. You need both — they answer different questions.</p>
+    </div>
+  </div>
+
+  <div class="grid-2 score-grid">
+    <article class="score-card score-a">
+      <div class="score-tag"><i data-lucide="user-check"></i><span>SCORER A</span></div>
+      <div class="score-name">Answer-based</div>
+      <div class="score-q">"Did the user see the right number?"</div>
+      <ul>
+        <li><b>What it does</b> — extract first numeric token, compare ±0.5% / ±5%</li>
+        <li><b>Tiers</b> — <code>exact · close · different · no_dax · no_data</code></li>
+        <li><b>Good at</b> — UX proxy, spotting major regressions</li>
+        <li><b>Bad at</b> — data drift, multi-row first-token brittleness, equivalent measures</li>
+        <li><b>Latest</b> — 91.8% (156/170)</li>
+      </ul>
+    </article>
+    <article class="score-card score-b">
+      <div class="score-tag"><i data-lucide="brain-circuit"></i><span>SCORER B</span></div>
+      <div class="score-name">DAX-similarity</div>
+      <div class="score-q">"Did the BOT reason correctly?"</div>
+      <ul>
+        <li><b>What it does</b> — compare structural features: measures, columns, TOPN/sort, equivalence map</li>
+        <li><b>Tiers</b> — <code>MATCH · PARTIAL · WRONG_MEASURE · NO_DAX</code></li>
+        <li><b>Good at</b> — data-drift-immune, regression signal, per-failure diagnostics</li>
+        <li><b>Bad at</b> — same shape ≠ right answer, requires reference DAX</li>
+        <li><b>Latest</b> — 94.1% (160/170)</li>
+      </ul>
+    </article>
+  </div>
+
+  <div class="callout">
+    <div class="callout-tag"><i data-lucide="git-compare"></i><span>When the two disagree, DAX-similarity is the more meaningful number for evaluating CHANGES</span></div>
+    Use answer-similarity to evaluate USER EXPERIENCE. After IC's Phase 6 they decoupled: DAX moved 90% → 94%, answer stayed 81–85%. The gap was scorer artifacts (decimal-vs-percent format, multi-row first-token brittleness, ICAU-specific entities).
+  </div>
+</section>
+
+<!-- ================== POSTMORTEMS ================== -->
+<section class="section deep section-dark" id="postmortems">
+  <div class="deep-head">
+    <div class="deep-num"><i data-lucide="bug"></i><span>PM</span></div>
+    <div>
+      <h2>Postmortems &amp; silent-failure modes</h2>
+      <p>Real bugs that shipped to production, the silent symptom, and the observability that would have caught them earlier. Build CI for these from day one if you can.</p>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <article class="pm-card">
+      <div class="pm-head">
+        <i data-lucide="bug" class="pm-ico"></i>
+        <div>
+          <div class="pm-date">2026-05-06</div>
+          <div class="pm-name">Recipe matcher silent failures</div>
+        </div>
+      </div>
+      <p><b>Symptom:</b> two latent matcher bugs silently degraded accuracy by ~5pp for weeks. Both presented identically: <code>recipe_id=NULL, matcher_method=NULL, error=NULL</code>.</p>
+      <p><b>Cause 1:</b> optional named-group spread overwrites defaults. <code>(?&lt;N&gt;\d+)?</code> sets <code>m.groups.N = undefined</code>, spread <code>{...defaults, ...m.groups}</code> destroys the default.</p>
+      <p><b>Cause 2:</b> missing context placeholders not in <code>defaults</code> or <code>contextPlaceholders()</code>.</p>
+      <p><b>Fix:</b> migration 010 added <code>recipe_skip_reason</code> + <code>intent_classes</code>. Bugs visible in 30s of SQL after that.</p>
+    </article>
+
+    <article class="pm-card">
+      <div class="pm-head">
+        <i data-lucide="alert-octagon" class="pm-ico"></i>
+        <div>
+          <div class="pm-date">2026-05-07</div>
+          <div class="pm-name">Demo project notes NULL</div>
+        </div>
+      </div>
+      <p><b>Symptom:</b> demo data generator produced rows with <code>None</code> in text fields because Faker doesn't have domain text generators.</p>
+      <p><b>Fix:</b> pre-launch visual smoke test — display surfaces flagged blank rows during demo prep.</p>
+      <p><b>Lesson:</b> don't trust generators silently; always run a 1-row visual check before demos.</p>
+    </article>
+  </div>
+
+  <div class="bug-table-wrap">
+    <div class="bug-table-title"><i data-lucide="list-x"></i><span>The bug patterns that cost the most time</span></div>
+    <table class="bug-table">
+      <thead><tr><th>Bug</th><th>Impact</th><th>Detection</th></tr></thead>
+      <tbody>
+        <tr><td>Optional named-group spread overwrites defaults</td><td>Recipes silently fail · ~5pp accuracy loss · latent for weeks</td><td><code>recipe_skip_reason</code> shows "missing placeholder: {N}"</td></tr>
+        <tr><td>Missing context placeholders</td><td>Recipe silently fails</td><td>Same as above</td></tr>
+        <tr><td>Embedding fallback over-matches</td><td>Wrong recipe fires, returns wrong measure</td><td>DAX-similarity scorer flags it; tighten with <code>skipEmbedding: true</code></td></tr>
+        <tr><td>Synthetic-data NULL fields</td><td>Display surfaces blank in demos</td><td>Pre-launch visual smoke test</td></tr>
+        <tr><td>Stale CSV expected values</td><td>False-positive failures, wasted triage</td><td>Refresh CSVs before each major retest</td></tr>
+        <tr><td>GLM-4.5V XML tool-call leak</td><td>User sees raw <code>&lt;arg_value&gt;</code> markup</td><td>250-char probe in <code>tool-call-recovery.ts</code></td></tr>
+        <tr><td>GLM-4.5V empty <code>arguments</code></td><td>Wasted tool round + 3-5s + ~$0.001</td><td>Schema <code>minLength: 10</code> + early reject in <code>dispatchTool</code></td></tr>
+        <tr><td>Hallucinated numbers w/ no DAX</td><td>Confident wrong answers (one off by 8.5×)</td><td>Hallucination guard fires correction round</td></tr>
+        <tr><td>Image leak past round 0</td><td>2× cost per subsequent round</td><td>Runtime assertion logs <code>[BUG] image_url leaked</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================== FOOTER ================== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="logo-mark"><i data-lucide="sparkles"></i></span>
+      <div>
+        <div class="footer-title">Insightful BOT</div>
+        <div class="footer-tag">consolidated documentation</div>
+      </div>
+    </div>
+    <div class="footer-meta">
+      <div>Sources: <code>docs/copilot/00-OVERVIEW.md</code> through <code>99-replication-guide.md</code> · <code>evaluation-methodology.md</code> · <code>postmortems/</code></div>
+      <div>Generated 2026-05-08 · all numbers and behaviour cross-referenced to documented snapshots.</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ================== LIGHTBOX ================== -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+  <div class="lightbox-toolbar" role="toolbar" aria-label="Diagram controls">
+    <button class="lb-btn" id="lbZoomOut" title="Zoom out (-)" aria-label="Zoom out">
+      <i data-lucide="zoom-out"></i>
+    </button>
+    <span class="lb-zoom-level" id="lbZoomLevel">100%</span>
+    <button class="lb-btn" id="lbZoomIn" title="Zoom in (+)" aria-label="Zoom in">
+      <i data-lucide="zoom-in"></i>
+    </button>
+    <button class="lb-btn" id="lbReset" title="Reset zoom (0)" aria-label="Reset">
+      <i data-lucide="maximize"></i>
+    </button>
+    <span class="lb-divider"></span>
+    <button class="lb-btn lb-close" id="lbClose" title="Close (Esc)" aria-label="Close">
+      <i data-lucide="x"></i>
+    </button>
+  </div>
+  <div class="lightbox-stage" id="lightboxStage">
+    <div class="lightbox-canvas" id="lightboxCanvas"></div>
+  </div>
+  <div class="lightbox-hint">
+    <i data-lucide="mouse"></i>
+    <span>Scroll to zoom · Drag to pan · Esc to close</span>
+  </div>
+</div>
+
+<!-- ================== SCRIPTS ================== -->
+<!-- Lucide icons (UMD) -->
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<!-- Mermaid v11 (UMD — synchronous, no ESM file:// issues) -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+
+<!-- App logic: Mermaid init + Lucide bootstrap + theme toggle + nav -->
+<script src="app.js"></script>
+
+</body>
+</html>

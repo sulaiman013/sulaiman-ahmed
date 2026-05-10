@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Story — How Sarah Stopped Fighting Her Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800;9..144,900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="story.css" />
+</head>
+<body class="story-page">
+
+<!-- progress bar -->
+<div class="reading-progress" id="readingProgress"></div>
+
+<!-- top bar -->
+<header class="topbar story-topbar">
+  <div class="topbar-inner">
+    <a href="index.html" class="brand">
+      <span class="logo-mark"><i data-lucide="sparkles"></i></span>
+      <div class="brand-text">
+        <span class="brand-title">Insightful BOT</span>
+        <span class="brand-sub">The Story</span>
+      </div>
+    </a>
+    <nav class="topnav story-topnav">
+      <a href="#prologue"><i data-lucide="book"></i><span>Prologue</span></a>
+      <a href="#chapters"><i data-lucide="list"></i><span>Chapters</span></a>
+      <a href="#epilogue"><i data-lucide="flag"></i><span>Epilogue</span></a>
+      <a href="index.html" class="link-tech"><i data-lucide="cpu"></i><span>Technical version</span></a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <i data-lucide="moon"></i>
+    </button>
+  </div>
+</header>
+
+<!-- ================== HERO ================== -->
+<section class="story-hero" id="prologue">
+  <div class="story-hero-inner">
+    <div class="story-eyebrow">
+      <i data-lucide="bookmark"></i>
+      <span>A 10-chapter story · about 12 minutes to read</span>
+    </div>
+    <h1 class="story-title">
+      How <span class="grad">Sarah</span><br/>stopped fighting<br/>her dashboard.
+    </h1>
+    <p class="story-deck">
+      A franchise owner had every number she could ever need — and no time to find any of them.
+      This is the story of what we built, why we built it that way,
+      and what each piece quietly fixed.
+    </p>
+
+    <div class="story-meta">
+      <div class="meta-item">
+        <i data-lucide="user-round"></i>
+        <div><b>Protagonist</b><span>Sarah Watson · franchise owner</span></div>
+      </div>
+      <div class="meta-item">
+        <i data-lucide="building"></i>
+        <div><b>Setting</b><span>Inspired Closets Austin · 12 designers · ~$15M/yr</span></div>
+      </div>
+      <div class="meta-item">
+        <i data-lucide="target"></i>
+        <div><b>The question</b><span>"How are we doing?" — answered in seconds, not hours</span></div>
+      </div>
+    </div>
+
+    <a href="#ch1" class="story-cta">
+      <span>Begin Chapter 1</span><i data-lucide="arrow-down"></i>
+    </a>
+  </div>
+</section>
+
+<!-- ================== CHAPTER NAV ================== -->
+<aside class="chapter-rail" id="chapters">
+  <div class="rail-title">Chapters</div>
+  <ol class="rail-list">
+    <li><a href="#ch1"><span class="rl-num">01</span><span class="rl-name">Monday morning</span></a></li>
+    <li><a href="#ch2"><span class="rl-num">02</span><span class="rl-name">"Look at this with me"</span></a></li>
+    <li><a href="#ch3"><span class="rl-num">03</span><span class="rl-name">Numbers off-screen</span></a></li>
+    <li><a href="#ch4"><span class="rl-num">04</span><span class="rl-name">A specialist for each job</span></a></li>
+    <li><a href="#ch5"><span class="rl-num">05</span><span class="rl-name">Don't make stuff up</span></a></li>
+    <li><a href="#ch6"><span class="rl-num">06</span><span class="rl-name">"She means Alyssa Jordan"</span></a></li>
+    <li><a href="#ch7"><span class="rl-num">07</span><span class="rl-name">The built-in tour guide</span></a></li>
+    <li><a href="#ch8"><span class="rl-num">08</span><span class="rl-name">Same question, same answer</span></a></li>
+    <li><a href="#ch9"><span class="rl-num">09</span><span class="rl-name">A black box recorder</span></a></li>
+    <li><a href="#ch10"><span class="rl-num">10</span><span class="rl-name">Three days from half-right to trusted</span></a></li>
+  </ol>
+</aside>
+
+<!-- ================== CH 1 ================== -->
+<article class="chapter" id="ch1">
+  <header class="chapter-head">
+    <div class="chapter-num">Chapter 1</div>
+    <h2 class="chapter-title">"How are we doing this month?"</h2>
+    <div class="chapter-sub">A simple question. A four-minute answer.</div>
+  </header>
+  <div class="chapter-body">
+    <p class="dropcap">
+      It's a Monday in May. Sarah Watson opens her laptop on the kitchen counter while the coffee finishes brewing. She runs <em>Inspired Closets Austin</em> — twelve designers, eighty active projects, leads coming in from Google, Houzz, Instagram, the showroom, and a small army of word-of-mouth referrals.
+    </p>
+    <p>
+      She has Power BI. She has <strong>seven report pages</strong>. Each page has roughly twelve charts. Each chart has filters, tooltips, drill-throughs. Every number she could ever want is in there, somewhere.
+    </p>
+    <p>
+      All she wants to know this morning is one thing: <em>are we on track?</em>
+    </p>
+    <p>
+      So she opens the Pipeline page, finds the YTD revenue card, mentally compares it to where she thinks they were last month, switches to the Designer Performance page to see who's leading, gets distracted by a flat KPI on Lead Conversion, follows that to the Lead Source page, forgets what she was originally comparing, and four minutes later she's lost in a thicket of slicers.
+    </p>
+
+    <div class="chapter-shot">
+      <div class="chapter-shot-frame">
+        <img src="img/pipeline-overview.png" alt="The Pipeline Report — sixteen visuals, twelve slicers, four KPIs across the top." />
+      </div>
+      <div class="chapter-shot-caption">
+        The <b>Pipeline Report</b> on a Monday morning — five KPI cards across the top, four slicer panels, two charts below the fold, a project-details table further down. Multiply this by seven pages.
+      </div>
+    </div>
+
+    <blockquote>
+      "I don't need a report. I need someone who can <em>read</em> the report for me."
+    </blockquote>
+    <p>
+      That sentence — said with a sigh, into a half-empty coffee mug — was the entire product brief.
+    </p>
+  </div>
+  <div class="result">
+    <div class="result-tag"><i data-lucide="alert-circle"></i><span>What was missing</span></div>
+    <div class="result-text">A way to <b>ask the dashboard a question</b> — and get a real answer, in plain language, without hunting through pages.</div>
+  </div>
+</article>
+
+<!-- ================== CH 2 ================== -->
+<article class="chapter ch-alt" id="ch2">
+  <header class="chapter-head">
+    <div class="chapter-num">Chapter 2</div>
+    <h2 class="chapter-title">"Just look at this with me."</h2>
+    <div class="chapter-sub">The first version was the simplest one — and it was already useful.</div>
+  </header>
+  <div class="chapter-body">
+    <p class="dropcap">
+      Imagine pointing at a chart on your monitor and asking a friend, <em>"What does this even mean? Why is it lower than last week?"</em> Your friend looks at what you're looking at, reads it, and answers in plain English.
+    </p>
+    <p>
+      That was version one.
+    </p>
+    <p>
+      Sarah hits a <strong>Capture</strong> button. The browser asks permission to share her screen — once, at the start of the session — and from then on, every time she asks a question, the system silently grabs whatever's on her dashboard right now and sends it along with the question to an AI that can <em>see</em> images.
+    </p>
+    <p>
+      So she could finally type things like:
+    </p>
+    <ul class="quote-list">
+      <li>"Why is this Sold KPI lower than last week?"</li>
+      <li>"What's unusual on this page?"</li>
+      <li>"Summarize what I'm looking at in three bullets."</li>
+    </ul>
+    <p>
+      And the AI would answer — based on exactly what was visible on her screen, not some abstract dataset somewhere.
+    </p>
+
+    <div class="chapter-shot">
+      <div class="chapter-shot-frame">
+        <img src="img/ai-summary.png" alt="The AI side-pane reading Sarah's dashboard — bold metrics, callouts, all summarized in five bullets." />
+      </div>
+      <div class="chapter-shot-caption">
+        Sarah hits <b>"Summarize this view"</b>. The assistant reads the screenshot of whatever's currently in front of her and writes back a clean five-bullet rundown — total bid amount, headline metrics, the top three designers showing, and what's worth digging into.
+      </div>
+    </div>
+
+    <p>
+      It was magical. It also had a ceiling. The AI could only describe what was already on the screen. If Sarah wanted a number that wasn't visible — say, total revenue across <em>all</em> branches, or last quarter's performance — it couldn't help her. It was a brilliant pair of eyes, but no hands to look anything up.
+    </p>
+  </div>
+  <div class="result">
+    <div class="result-tag"><i data-lucide="check-circle-2"></i><span>What this gave her</span></div>
+    <div class="result-text">Instant context for every question, without typing a single number into a query. Roughly <b>one in five</b> of her questions could be answered this way alone.</div>
+  </div>
+</article>
+
+<!-- ================== CH 3 ================== -->
+<article class="chapter" id="ch3">
+  <header class="chapter-head">
+    <div class="chapter-num">Chapter 3</div>
+    <h2 class="chapter-title">"What about numbers I don't see?"</h2>
+    <div class="chapter-sub">The assistant needed hands, not just eyes.</div>
+  </header>
+  <div class="chapter-body">
+    <p class="dropcap">
+      Within a week, Sarah's questions evolved past what was on screen. <em>"What's our YTD revenue?" "How is Marcus tracking versus this time last year?"</em> Numbers that lived in the data, not on the current page.
+    </p>
+    <p>
+      So we taught the assistant a new trick: it could now <em>look things up</em> for itself.
+    </p>
+    <p>
+      When it sees a question it can't answer from the screenshot alone, it writes a small query, runs it against the actual database powering Sarah's reports, gets back a fresh answer, and then explains it. This all happens in about eight seconds. Sarah sees a small <em>"Looking up live data…"</em> indicator while it's working.
+    </p>
+    <p>
+      Now the questions she could ask had no ceiling:
+    </p>
+    <ul class="quote-list">
+      <li>"What's our total revenue this year?"</li>
+      <li>"Top five lead sources by revenue, last 30 days."</li>
+      <li>"How many appointments did we run last week, and how many converted?"</li>
+    </ul>
+    <p>
+      The assistant could now reach into the same warehouse her dashboards were built on, ask it a fresh question on her behalf, and come back with a real number — not a paraphrase of what was visible.
+    </p>
+
+    <div class="chapter-shot">
+      <div class="chapter-shot-frame">
+        <img src="img/ai-summary-detail.png" alt="The AI returning a detailed summary with bold numbers, callouts, and contextual notes from a live database query." />
+      </div>
+      <div class="chapter-shot-caption">
+        A live response — every bolded figure here was pulled fresh from the warehouse. Notice the callout near the bottom: <i>"the current view shows the top 3 designers… though specific performance numbers are not displayed in this rendering."</i> The AI knows what the data says <b>and</b> what the chart is showing — and it points out the gap.
+      </div>
+    </div>
+
+    <p>
+      This was the moment the BOT stopped being a clever toy and started being a tool Sarah opened first thing every morning, before the dashboards.
+    </p>
+  </div>
+  <div class="result">
+    <div class="result-tag"><i data-lucide="check-circle-2"></i><span>What this gave her</span></div>
+    <div class="result-text">Coverage jumped from <b>one in five questions</b> to roughly <b>nineteen in twenty</b>. Anything her data could answer, the BOT could now answer.</div>
+  </div>
+</article>
+
+<!-- ================== CH 4 ================== -->
+<article class="chapter ch-alt" id="ch4">
+  <header class="chapter-head">
+    <div class="chapter-num">Chapter 4</div>
+    <h2 class="chapter-title">A specialist for each job.</h2>
+    <div class="chapter-sub">Why we use two AI models, not one.</div>
+  </header>
+  <div class="chapter-body">
+    <p class="dropcap">
+      Reading a screenshot well and writing precise database queries are two different skills. The biggest, most expensive AIs are good at both. But you pay full price every time you use them, even when the task is simple.
+    </p>
+    <p>
+      So instead, we use two specialists.
+    </p>
+    <p>
+      Think of it as a translator and a librarian. When Sarah's screen is involved, the <strong>translator</strong> takes a look — that's a vision-trained AI, exceptional at reading charts and small numbers off a screenshot. When it's time to actually look something up in the warehouse, the <strong>librarian</strong> takes over — a different AI, smaller and faster, that's been carefully chosen because it writes correct queries on the first try.
+    </p>
+    <p>
+      Each round of the conversation is automatically routed to whichever specialist is right for it. Sarah never sees the handoff. She just sees a smooth, conversational answer.
+    </p>
+    <blockquote>
+      "Use the right tool for the right job" is older than software. It just took a long time to apply it to AI conversations.
+    </blockquote>
+    <p>
+      The cost savings are not small. A frontier model that does both jobs well charges roughly five to twenty times more per question. By splitting the work, we pay frontier prices only when we actually need them.
+    </p>
+  </div>
+  <div class="result">
+    <div class="result-tag"><i data-lucide="check-circle-2"></i><span>What this gave her</span></div>
+    <div class="result-text">Roughly <b>half the per-question cost</b>, and noticeably faster answers, with no loss of quality.</div>
+  </div>
+</article>
+
+<!-- ================== CH 5 ================== -->
+<article class="chapter" id="ch5">
+  <header class="chapter-head">
+    <div class="chapter-num">Chapter 5</div>
+    <h2 class="chapter-title">"Don't make stuff up."</h2>
+    <div class="chapter-sub">Teaching the assistant the business vocabulary.</div>
+  </header>
+  <div class="chapter-body">
+    <p class="dropcap">
+      Early on, Sarah asked: <em>"Show me revenue by lead source group."</em> The assistant confidently answered with a number — pulled from a column that didn't exist.
+    </p>
+    <p>
+      It hadn't lied on purpose. Modern AIs are pattern-matchers. When asked about something they don't fully understand, they sometimes invent plausible-sounding details to fill the gap. In a chatbot for casual conversation, that's harmless. In a tool that owners use to make decisions about staffing and revenue, it's a disaster.
+    </p>
+    <p>
+      The fix was structural, not clever.
+    </p>
+    <p>
+      Before the assistant answers <em>any</em> question, we hand it a complete, accurate map of Sarah's actual data: every table that exists, every column inside each table, every metric and how it's calculated, and a few hints about what each one means in plain English.
+    </p>
+    <p>
+      Like giving a brand-new analyst the company glossary on day one — and asking them, gently but firmly, <em>"Please only use what's actually in here."</em>
+    </p>
+    <p>
+      After this change, the BOT effectively stopped inventing column names. The handful of questions that still failed failed for the right reason: the data genuinely didn't have an answer.
+    </p>
+  </div>
+  <div class="result">
+    <div class="result-tag"><i data-lucide="check-circle-2"></i><span>What this gave her</span></div>
+    <div class="result-text">Hallucinated column and metric names dropped to <b>essentially zero</b>. Wrong answers became something Sarah noticed once a week instead of three times a day.</div>
+  </div>
+</article>
+
+<!-- ================== CH 6 ================== -->
+<article class="chapter ch-alt" id="ch6">
+  <header class="chapter-head">
+    <div class="chapter-num">Chapter 6</div>
+    <h2 class="chapter-title">"She means Alyssa Jordan."</h2>
+    <div class="chapter-sub">Knowing the team by first name.</div>
+  </header>
+  <div class="chapter-body">
+    <p class="dropcap">
+      Sarah doesn't say "Alyssa Jordan." She says "Alyssa." She says "Marcus." She says "the new girl." This is how she talks about her team, every day.
+    </p>
+    <p>
+      The first version of the BOT had no idea who any of these people were. So when Sarah asked <em>"How is Alyssa doing this month?"</em>, the assistant would either guess wrong, ask her for the full name, or — worse — confidently make up a number that didn't apply to anyone real.
+    </p>
+    <p>
+      The fix is what any new hire gets in their first week: a <strong>roster</strong>.
+    </p>
+    <p>
+      Once a month, a small script reads Sarah's actual database and writes down the real, current state of <em>her</em> branch: the names of every active designer, the lead sources she's actually using, the cities her customers come from, rough volume per person. It's a snapshot — not the live data — but enough to <em>recognize</em> a name when Sarah uses one.
+    </p>
+    <p>
+      Now when she asks <em>"How is Alyssa doing?"</em>, the assistant knows immediately: <strong>Alyssa Jordan, top designer, around 1,200 projects to date.</strong> It can use the right name in its database query, and Sarah gets the right answer the first time.
+    </p>
+
+    <div class="chapter-shot">
+      <div class="chapter-shot-frame">
+        <img src="img/ai-top-designers.png" alt="Sarah asks 'who are my top 3 designers' — the AI returns Alyssa Jordan, Beth Cloutier, Catherine Meyer." />
+      </div>
+      <div class="chapter-shot-caption">
+        <b>"who are my top 3 designers?"</b> — the assistant returns the three actual people on Sarah's roster: <b>Alyssa Jordan, Beth Cloutier, Catherine Meyer</b>. Then it offers to dig deeper if Sarah wants to compare their performance. The names came from the snapshot; the ranking came from a live query a half-second earlier.
+      </div>
+    </div>
+
+    <blockquote>
+      The assistant uses the snapshot only to <em>recognize</em>. Every actual number still comes from a fresh, live query. The roster tells it who Alyssa is; the warehouse tells it how she's doing this morning.
+    </blockquote>
+  </div>
+  <div class="result">
+    <div class="result-tag"><i data-lucide="check-circle-2"></i><span>What this gave her</span></div>
+    <div class="result-text">"Loose name" questions — the way humans actually talk — now get a correct answer on the first try, instead of two rounds of "do you mean…?"</div>
+  </div>
+</article>
+
+<!-- ================== CH 7 ================== -->
+<article class="chapter" id="ch7">
+  <header class="chapter-head">
+    <div class="chapter-num">Chapter 7</div>
+    <h2 class="chapter-title">The built-in tour guide.</h2>
+    <div class="chapter-sub">Some questions aren't about data. They're about the report itself.</div>
+  </header>
+  <div class="chapter-body">
+    <p class="dropcap">
+      Not every question Sarah asks is a numerical one. Sometimes she just wants to know <em>where to look</em>.
+    </p>
+    <ul class="quote-list">
+      <li>"Where do I see lead conversion rates?"</li>
+      <li>"What's the difference between the Pipeline page and the Designer page?"</li>
+      <li>"When should I use the Sales Funnel page?"</li>
+    </ul>
+    <p>
+      Those are navigation questions, not data questions. Running a query against the warehouse won't help. What helps is a real, written user manual for the report — something most BI tools don't bother to ship.
+    </p>
+    <p>
+      So we wrote one. A short, plain-English description of every page: what it shows, when to use it, what each visual means, what a "good" or "bad" reading looks like. Then — and this is the trick — we used that <strong>same</strong> document two ways:
+    </p>
+
+    <div class="chapter-shots-pair">
+      <div class="chapter-shot">
+        <div class="chapter-shot-frame">
+          <img src="img/guide-pages-list.png" alt="Guide drawer showing the list of report pages with descriptions." />
+        </div>
+        <div class="chapter-shot-caption">
+          The <b>Guide drawer</b> on the right — every page of the report has a one-line description and a "what to read first" hint.
+        </div>
+      </div>
+      <div class="chapter-shot">
+        <div class="chapter-shot-frame">
+          <img src="img/guide-page-detail.png" alt="Guide drawer drilled into a single page — slicers and visuals explained." />
+        </div>
+        <div class="chapter-shot-caption">
+          Drill into <b>Pipeline Report</b> and you get an explanation of every slicer and visual on that page — written for humans, not engineers.
+        </div>
+      </div>
+    </div>
+    <ol class="numbered-list">
+      <li><strong>For Sarah</strong>, the document powers a help drawer inside the portal. Think contextual hints right where she's looking.</li>
+      <li><strong>For the assistant</strong>, the same text is quietly attached to every question it sees. So when Sarah asks "where do I find lead conversion?", the BOT can answer accurately — citing the real page name, not inventing one.</li>
+    </ol>
+    <p>
+      Single source, two surfaces. If we update the manual, the human-facing help drawer and the AI's knowledge update together. They can never disagree.
+    </p>
+  </div>
+  <div class="result">
+    <div class="result-tag"><i data-lucide="check-circle-2"></i><span>What this gave her</span></div>
+    <div class="result-text">Navigation questions now get a real, accurate answer in plain English — including the specific page name — instead of a guess or a redirect.</div>
+  </div>
+</article>
+
+<!-- ================== CH 8 ================== -->
+<article class="chapter ch-alt" id="ch8">
+  <header class="chapter-head">
+    <div class="chapter-num">Chapter 8</div>
+    <h2 class="chapter-title">"Same question, same answer."</h2>
+    <div class="chapter-sub">A subtle, dangerous bug, and the recipe book that fixed it.</div>
+  </header>
+  <div class="chapter-body">
+    <p class="dropcap">
+      One Friday, Sarah noticed something odd. She'd asked <em>"What's our YTD revenue?"</em> on Monday and got <strong>$8,412,118</strong>. She asked it again on Friday and got <strong>$8,412,121</strong>. Both numbers were technically correct. The data hadn't changed in any meaningful way.
+    </p>
+    <p>
+      What had changed was the <em>query</em> the AI wrote to fetch the answer.
+    </p>
+    <p>
+      Each time, the AI invented its own slightly different way to answer the same question. The numbers were both right, but they weren't <em>identical</em>. For a CFO, this is unacceptable.
+    </p>
+    <p>
+      The fix was old-school engineering, not new AI: we wrote a small <strong>recipe book</strong>.
+    </p>
+    <p>
+      For the forty-seven most-asked question shapes (revenue this month, top designers this quarter, conversion rate this week, etc.), we hand-wrote the exact query that should answer each one. When Sarah asks one of those questions, the system <em>recognizes the shape</em> instantly, skips the AI entirely, runs the pre-written query, and returns the result.
+    </p>
+    <ul class="quote-list">
+      <li>Same question → <strong>byte-for-byte identical query</strong> → same number, every single time.</li>
+      <li>About <strong>fifty times cheaper</strong> per question, since we're not paying an AI to think.</li>
+      <li>About <strong>three times faster</strong> — the answer streams back in under five seconds.</li>
+    </ul>
+    <p>
+      For everything else — the long tail of one-off, creative, situation-specific questions — the AI still does its full job. The recipe book just handles the boring, frequent ones. About <strong>one in four</strong> questions hits a recipe today.
+    </p>
+  </div>
+  <div class="result">
+    <div class="result-tag"><i data-lucide="check-circle-2"></i><span>What this gave her</span></div>
+    <div class="result-text">Routine questions are now <b>perfectly consistent and noticeably faster</b>. Sarah trusts the numbers because she's seeing the same number twice in a row.</div>
+  </div>
+</article>
+
+<!-- ================== CH 9 ================== -->
+<article class="chapter" id="ch9">
+  <header class="chapter-head">
+    <div class="chapter-num">Chapter 9</div>
+    <h2 class="chapter-title">A black box recorder.</h2>
+    <div class="chapter-sub">If you can't see what your assistant did, you can't trust it.</div>
+  </header>
+  <div class="chapter-body">
+    <p class="dropcap">
+      Every airplane has a black box. Every conversation Sarah has with the BOT has the equivalent: a small, durable record of <em>what was asked, how it was answered, what data was looked up, how long it took, and what it cost</em>.
+    </p>
+    <p>
+      Why does this matter? Two reasons:
+    </p>
+    <p>
+      <strong>First, when something goes wrong</strong> — a number looks fishy, an answer reads strangely — we can pull up the exact transcript and replay it. No guesswork. No "we'll have to reproduce it on our end." We watch the flight recorder.
+    </p>
+    <p>
+      <strong>Second, the recordings teach us what to build next.</strong> The most-asked questions become candidates for the recipe book. The most-misunderstood phrasings teach us where to tighten the system prompt. Every question Sarah asks is, quietly, making the next version of the assistant a little better.
+    </p>
+    <blockquote>
+      Privacy matters. The chat text — the actual words of every conversation — is automatically deleted after seven days. Long enough to debug a complaint. Short enough to never become a privacy liability.
+    </blockquote>
+    <p>
+      Numbers are kept longer (latency, cost, did the answer succeed) because those are aggregate metrics, not personal content. We can know that "questions about lead conversion took 4.2 seconds on average last month" without storing anyone's actual conversation.
+    </p>
+  </div>
+  <div class="result">
+    <div class="result-tag"><i data-lucide="check-circle-2"></i><span>What this gave the team</span></div>
+    <div class="result-text">When a user complains, we can <b>reproduce exactly what they saw</b>. When a metric drifts, we know within hours instead of weeks. The next improvement is always informed by real usage, not guesswork.</div>
+  </div>
+</article>
+
+<!-- ================== CH 10 ================== -->
+<article class="chapter ch-alt" id="ch10">
+  <header class="chapter-head">
+    <div class="chapter-num">Chapter 10</div>
+    <h2 class="chapter-title">Three days from half-right to trusted.</h2>
+    <div class="chapter-sub">When the architecture is finished and the real work begins.</div>
+  </header>
+  <div class="chapter-body">
+    <p class="dropcap">
+      The architecture you've just read about took roughly seven to eleven days to build. At the end of those eleven days, the BOT was technically working. Every layer was in place. Every diagram in the technical document was accurate.
+    </p>
+    <p>
+      And it answered <strong>49% of questions correctly</strong>.
+    </p>
+    <p>
+      That's the secret most engineering write-ups skip. A working system is not a trusted system. The remaining gap — from "it answers" to "you can rely on it" — is its own discipline, and it's where most BI assistants quietly fail.
+    </p>
+    <p>
+      We approached it like a doctor diagnosing a patient. We assembled <strong>170 reference questions</strong> with known correct answers, ran them through the BOT, and clustered the failures by pattern, not by symptom. Then we fixed the pattern, retested, and moved to the next cluster.
+    </p>
+    <p>
+      Eight focused batches over three days. Each one targeted a specific kind of failure — the AI guessing at year filters when none was asked for, picking the wrong of two similarly-named metrics, summarizing a result when it should have listed it, scoring a "no rows" answer as wrong when it was actually right. None of these were dramatic bugs. Each one was a quiet, repeated mistake.
+    </p>
+    <p>
+      Three days later, the same 170 questions scored <strong>92%</strong>. Validated again across all seven of the franchise's branches. Production-ready.
+    </p>
+    <blockquote>
+      The architecture gets you to "working." The methodology gets you to "trusted." They are not the same thing, and skipping the second one is the most common reason BI chatbots feel like a demo that never grew up.
+    </blockquote>
+  </div>
+  <div class="result">
+    <div class="result-tag"><i data-lucide="trending-up"></i><span>The before-and-after</span></div>
+    <div class="result-text">Started at <b>49%</b>. Ended at <b>92%</b>. Three days. The same architecture; just patiently watched and patiently corrected.</div>
+  </div>
+</article>
+
+<!-- ================== EPILOGUE ================== -->
+<article class="chapter chapter-epilogue" id="epilogue">
+  <header class="chapter-head">
+    <div class="chapter-num">Epilogue</div>
+    <h2 class="chapter-title">Sarah's Monday morning, six months later.</h2>
+  </header>
+  <div class="chapter-body">
+    <p class="dropcap">
+      It's a Monday in November. Sarah opens her laptop on the kitchen counter while the coffee finishes brewing.
+    </p>
+    <p>
+      She types one sentence into the assistant: <em>"How are we tracking this month?"</em>
+    </p>
+    <p>
+      Two seconds later, she has a five-bullet summary: revenue versus last month, top three designers, lead conversion trend, anything unusual on the page, what to dig into first. She scrolls through it, taps one of the bullets to ask a follow-up — <em>"Why is conversion off?"</em> — and gets a real, decomposed answer. Not "it's down 4%." A real answer: which lead source dropped, by how much, when it started.
+    </p>
+    <p>
+      The whole exchange takes ninety seconds.
+    </p>
+
+    <div class="chapter-shot">
+      <div class="chapter-shot-frame">
+        <img src="img/ai-summary.png" alt="The morning summary — bold metrics, callouts, a recommendation of what to investigate first." />
+      </div>
+      <div class="chapter-shot-caption">
+        Sarah's Monday morning, six months later. One question, ninety seconds, every relevant number — and a recommendation of what to investigate first.
+      </div>
+    </div>
+
+    <p>
+      What used to be a four-minute hunt through seven dashboard pages is now a one-question conversation. Sarah's still using Power BI; she just stopped fighting it.
+    </p>
+    <div class="numbers-row">
+      <div class="num-card">
+        <div class="num-big">92%</div>
+        <div class="num-lbl">of questions answered correctly</div>
+      </div>
+      <div class="num-card">
+        <div class="num-big">$0.0024</div>
+        <div class="num-lbl">average cost per question</div>
+      </div>
+      <div class="num-card">
+        <div class="num-big">~2.6s</div>
+        <div class="num-lbl">typical response time</div>
+      </div>
+      <div class="num-card">
+        <div class="num-big">7 / 7</div>
+        <div class="num-lbl">branches running it in production</div>
+      </div>
+    </div>
+    <p>
+      None of those numbers individually mean much to Sarah. Together, they mean she gets her Monday morning back.
+    </p>
+  </div>
+
+  <div class="post-cta">
+    <div class="post-cta-eyebrow">Want the deeper version?</div>
+    <h3>Every chapter of this story has an engineering deep-dive behind it.</h3>
+    <p>If you're an engineer, architect, or technical buyer, the technical version of this site walks through every layer, the failure modes, the cost math, and the exact replication steps for a new client.</p>
+    <a href="index.html" class="story-cta">
+      <span>Open the technical version</span>
+      <i data-lucide="arrow-right"></i>
+    </a>
+  </div>
+</article>
+
+<!-- ================== STORY LIGHTBOX (image-only) ================== -->
+<div class="story-lb" id="storyLb" aria-hidden="true">
+  <div class="story-lb-backdrop" id="storyLbBackdrop"></div>
+  <button class="story-lb-close" id="storyLbClose" aria-label="Close (Esc)"><i data-lucide="x"></i></button>
+  <div class="story-lb-stage">
+    <img id="storyLbImg" alt="" />
+  </div>
+  <div class="story-lb-caption" id="storyLbCaption"></div>
+</div>
+
+<!-- ================== FOOTER ================== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="logo-mark"><i data-lucide="sparkles"></i></span>
+      <div>
+        <div class="footer-title">Insightful BOT — The Story</div>
+        <div class="footer-tag">A 10-chapter narrative · for everyone, not just engineers</div>
+      </div>
+    </div>
+    <div class="footer-meta">
+      <div>Sarah Watson is a composite of real Inspired Closets franchise owners. The dates, models, and numbers are real.</div>
+      <div>Written 2026-05-08 · companion to <a href="index.html">the technical reference</a>.</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ================== SCRIPTS ================== -->
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<script>
+  // Lucide
+  if (window.lucide) window.lucide.createIcons();
+
+  // Reading progress bar
+  (function () {
+    const bar = document.getElementById('readingProgress');
+    if (!bar) return;
+    function update() {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+      bar.style.width = pct + '%';
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+
+  // Theme toggle (mirrors main page)
+  (function () {
+    const root = document.documentElement;
+    const stored = localStorage.getItem('ic-theme');
+    if (stored === 'light') root.setAttribute('data-theme', 'light');
+    const t = document.getElementById('themeToggle');
+    function setIco() {
+      if (!t) return;
+      const isLight = root.getAttribute('data-theme') === 'light';
+      t.innerHTML = `<i data-lucide="${isLight ? 'sun' : 'moon'}"></i>`;
+      if (window.lucide) window.lucide.createIcons();
+    }
+    setIco();
+    if (t) t.addEventListener('click', () => {
+      const cur = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+      const next = cur === 'light' ? 'dark' : 'light';
+      if (next === 'light') root.setAttribute('data-theme', 'light');
+      else root.removeAttribute('data-theme');
+      localStorage.setItem('ic-theme', next);
+      setIco();
+    });
+  })();
+
+  // Story lightbox — click any .chapter-shot to open the image fullscreen
+  (function () {
+    const lb = document.getElementById('storyLb');
+    const lbImg = document.getElementById('storyLbImg');
+    const lbCap = document.getElementById('storyLbCaption');
+    const lbClose = document.getElementById('storyLbClose');
+    const lbBd = document.getElementById('storyLbBackdrop');
+    if (!lb || !lbImg) return;
+
+    function open(src, caption) {
+      lbImg.src = src;
+      lbImg.alt = caption || '';
+      lbCap.textContent = caption || '';
+      lbCap.style.display = caption ? '' : 'none';
+      lb.classList.add('is-open');
+      lb.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('lb-open');
+    }
+    function close() {
+      lb.classList.remove('is-open');
+      lb.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('lb-open');
+      setTimeout(() => { lbImg.src = ''; }, 200);
+    }
+
+    document.querySelectorAll('.chapter-shot').forEach(shot => {
+      shot.addEventListener('click', (e) => {
+        if (window.getSelection && String(window.getSelection()).length) return;
+        const img = shot.querySelector('img');
+        const cap = shot.querySelector('.chapter-shot-caption');
+        if (!img) return;
+        open(img.src, cap ? cap.textContent.trim() : '');
+      });
+    });
+    lbClose.addEventListener('click', close);
+    lbBd.addEventListener('click', close);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lb.classList.contains('is-open')) close();
+    });
+  })();
+
+  // Active chapter rail highlighting
+  (function () {
+    const links = Array.from(document.querySelectorAll('.rail-list a'));
+    const targets = links.map(a => ({ a, el: document.getElementById(a.getAttribute('href').slice(1)) })).filter(x => x.el);
+    function update() {
+      const pos = window.scrollY + 200;
+      let active = null;
+      for (const t of targets) if (t.el.offsetTop <= pos) active = t.a;
+      links.forEach(a => a.classList.toggle('active', a === active));
+    }
+    let raf = 0;
+    window.addEventListener('scroll', () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => { raf = 0; update(); });
+    }, { passive: true });
+    update();
+  })();
+</script>
+
+</body>
+</html>

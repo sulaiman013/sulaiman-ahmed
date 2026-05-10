@@ -119,6 +119,22 @@ const caseStudies: CaseStudy[] = [
     link: "/case-study/icla-analytics",
   },
   {
+    id: "powerbi-ai-assistant-architecture",
+    title: "Took a Custom Power BI AI Assistant from 49% to 92% Accuracy",
+    subtitle: "Architecture & Replication Guide",
+    description:
+      "Built a multi-modal BI assistant that routes between text-to-DAX, screenshot vision, and report-guide grounding through one Edge endpoint. Validated across 7 tenants. ~88% cost reduction post-optimization. Includes the full system map, the 7-layer onion architecture, the deterministic recipe layer, and the 9-phase replication playbook.",
+    icon: Sparkles,
+    color: "purple",
+    tags: ["OpenRouter", "Power BI", "DAX", "Vector DB", "Vision LLM", "Edge Runtime", "Recipe Layer"],
+    metrics: [
+      { icon: Target, value: "91.8%", label: "Answer Accuracy" },
+      { icon: DollarSign, value: "$0.0024", label: "Avg Cost / Call" },
+      { icon: Zap, value: "27.6%", label: "Recipe Hit Rate" },
+    ],
+    link: "/case-study/powerbi-ai-assistant-architecture",
+  },
+  {
     id: "remax-login-portal",
     title: "Saved $1,000+/Year in Licensing Costs",
     subtitle: "Custom Login Portal: RE/MAX Properties",

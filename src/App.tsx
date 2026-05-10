@@ -31,6 +31,7 @@ import REMAXCaseStudy from "./pages/REMAXCaseStudy";
 import MitronBankCaseStudy from "./pages/MitronBankCaseStudy";
 import BusinessInsights360CaseStudy from "./pages/BusinessInsights360CaseStudy";
 import PBIReportingPortfolioCaseStudy from "./pages/PBIReportingPortfolioCaseStudy";
+import PowerBIAIAssistantArchitectureCaseStudy from "./pages/PowerBIAIAssistantArchitectureCaseStudy";
 import PowerBIExpertWebappCaseStudy from "./pages/PowerBIExpertWebappCaseStudy";
 import PowerBIMCPCaseStudy from "./pages/PowerBIMCPCaseStudy";
 import AirtableMCPCaseStudy from "./pages/AirtableMCPCaseStudy";
@@ -75,6 +76,7 @@ const App = () => (
             <Route path="/case-study/mitron-bank" element={<MitronBankCaseStudy />} />
             <Route path="/case-study/business-insights-360" element={<BusinessInsights360CaseStudy />} />
             <Route path="/case-study/pbi-reporting-portfolio" element={<PBIReportingPortfolioCaseStudy />} />
+            <Route path="/case-study/powerbi-ai-assistant-architecture" element={<PowerBIAIAssistantArchitectureCaseStudy />} />
             <Route path="/case-study/powerbi-expert-webapp" element={<PowerBIExpertWebappCaseStudy />} />
             <Route path="/case-study/powerbi-mcp" element={<PowerBIMCPCaseStudy />} />
             <Route path="/case-study/airtable-mcp" element={<AirtableMCPCaseStudy />} />
