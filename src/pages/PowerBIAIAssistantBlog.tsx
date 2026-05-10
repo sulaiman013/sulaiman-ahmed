@@ -179,6 +179,17 @@ export default function PowerBIAIAssistantBlog() {
               engineering team can ship in two weeks.
             </p>
 
+            <Callout type="info">
+              <strong>Want to replicate this yourself?</strong> The full architecture deep-dive lives in the
+              companion case study:{" "}
+              <Link to="/case-study/powerbi-ai-assistant-architecture" className="text-primary underline underline-offset-2 hover:brightness-110">
+                Custom Power BI AI Assistant: Architecture & Replication Guide
+              </Link>
+              . It covers the 7-layer onion, every request path, the deterministic recipe layer, the cost math,
+              and a 9-phase replication playbook with every postmortem. This blog is the why and what. The case
+              study is the how.
+            </Callout>
+
             {/* ========== SECTION 3: PLUS POINT #1 - COST ========== */}
             <div className="blog-divider" />
 
@@ -587,6 +598,16 @@ export default function PowerBIAIAssistantBlog() {
               from machinery you can only build yourself.
             </Callout>
 
+            <p>
+              If you want to walk this same trajectory on your own data, the full replication runbook is in the{" "}
+              <Link to="/case-study/powerbi-ai-assistant-architecture" className="text-primary underline underline-offset-2 hover:brightness-110">
+                companion case study
+              </Link>
+              . It covers each of the 7 problems with code paths, the recipe authoring loop, the two-scorer
+              evaluation methodology, and the multi-tenant per-user testing trick. Roughly 7 to 11 days of work
+              from skeleton to 90 percent accuracy.
+            </p>
+
             {/* ========== SECTION 6: THE LIMITATION (RLS) ========== */}
             <div className="blog-divider" />
 
@@ -724,6 +745,16 @@ export default function PowerBIAIAssistantBlog() {
                 takes one afternoon and you will learn more about whether you want to build this than reading
                 any number of blog posts.
               </li>
+              <li>
+                <strong>Read the architecture and replication guide.</strong>{" "}
+                <Link to="/case-study/powerbi-ai-assistant-architecture" className="text-primary underline underline-offset-2 hover:brightness-110">
+                  Custom Power BI AI Assistant: Architecture & Replication Guide
+                </Link>{" "}
+                is the companion case study to this blog. It walks through every layer of the onion, the
+                deterministic recipe layer, the two-scorer evaluation methodology, the cost economics, and a
+                9-phase replication playbook. If you decide to build, this is the runbook to keep open in a
+                second tab.
+              </li>
             </ol>
 
             {/* ========== CLOSING ========== */}
@@ -807,6 +838,12 @@ export default function PowerBIAIAssistantBlog() {
 
           {/* Resource links */}
           <div className="flex flex-wrap gap-3 mt-10 mb-4 max-w-3xl mx-auto">
+            <Link
+              to="/case-study/powerbi-ai-assistant-architecture"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm text-primary-foreground bg-primary hover:brightness-110 transition-all"
+            >
+              <ExternalLink className="h-4 w-4" /> Full Architecture & Replication Guide
+            </Link>
             <a
               href="https://www.microsoft.com/en-us/microsoft-365-copilot/pricing"
               target="_blank"
