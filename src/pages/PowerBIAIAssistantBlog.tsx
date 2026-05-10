@@ -528,6 +528,53 @@ export default function PowerBIAIAssistantBlog() {
               per call. About 3 times faster.
             </p>
 
+            <h3>Slow path vs fast path: the main difference in one line</h3>
+
+            <p>
+              <strong>The slow path is generative. The fast path is lookup.</strong> That one decision cascades
+              into everything else.
+            </p>
+
+            <ul>
+              <li><strong>Slow path</strong> (~70 percent of calls): the AI itself writes the DAX query from scratch every time. Vision model reads the screenshot if there is one, then a query-specialist model picks a measure and writes the DAX, runs it, and narrates the result. Flexible. Can answer anything in your model. ~$0.0014 per call. 8 to 15 seconds. Same question can produce slightly different DAX on different days.</li>
+              <li><strong>Fast path</strong> (~30 percent of calls): a pre-LLM matcher checks the question against your pre-written recipes (regex first, then a vector-database embedding fallback). On a hit, the AI is bypassed entirely. The hand-curated DAX runs, and a tiny wrap-up call just narrates the result in plain English. ~$0.00018 per call. 2.5 to 5 seconds. Same question to same DAX to same number, every time.</li>
+            </ul>
+
+            <div className="overflow-x-auto">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Dimension</th>
+                    <th>Slow path</th>
+                    <th>Fast path</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Who writes the query</strong></td><td>The AI, fresh every time</td><td className="text-primary font-semibold">Pre-written recipe</td></tr>
+                  <tr><td><strong>Cost per call</strong></td><td>~$0.0014</td><td className="text-primary font-semibold">~$0.00018 (50x cheaper)</td></tr>
+                  <tr><td><strong>Latency</strong></td><td>8 to 15 seconds</td><td className="text-primary font-semibold">2.5 to 5 seconds (3x faster)</td></tr>
+                  <tr><td><strong>Determinism</strong></td><td>Same question may vary</td><td className="text-primary font-semibold">Same question to same answer, always</td></tr>
+                  <tr><td><strong>Coverage</strong></td><td>Anything in the model</td><td>Only the question shapes you pre-wrote</td></tr>
+                  <tr><td><strong>When it fires</strong></td><td>Long tail, paraphrases, screenshots</td><td>Top 30 most-asked questions</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>
+              You need both. The fast path is a deterministic shortcut for the most-asked questions, the ones
+              owners notice when answers vary. The slow path catches everything else, including new questions
+              you have not seen before. The recipe layer sits <strong>in front of</strong> the slow path. Every
+              request tries the matcher first. On a miss, it falls through to the LLM-driven slow path
+              unchanged.
+            </p>
+
+            <Callout type="tip">
+              <strong>The real reason to ship the fast path is not cost.</strong> It is trust. Owners catch one
+              wrong number and they stop trusting the assistant for weeks. Ship the recipe layer for your top 30
+              questions and that risk goes to zero on those questions, forever. The 50x cost reduction is a
+              bonus.
+            </Callout>
+
             <ImageLightbox
               src={`${IMG}/07-recipe-layer-flow.png`}
               alt="Four-stage flow: regex pass, embedding search via Upstash + BAAI bge-large with cosine threshold 0.90, run pre-written DAX, narrate result. On match the call is fast and deterministic; on miss it falls through to the two-model AI pipeline."

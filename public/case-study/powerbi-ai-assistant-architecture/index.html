@@ -292,6 +292,69 @@ flowchart LR
     </div>
   </div>
 
+  <!-- ============ SLOW vs FAST: the headline difference ============ -->
+  <div class="diagram-wrap" style="margin-top: 36px;">
+    <div class="diagram-title">
+      <i data-lucide="git-fork"></i><span>The main difference in one line</span>
+    </div>
+    <div style="padding: 22px 24px 6px; border-radius: 14px; background: linear-gradient(180deg, rgba(34,211,238,0.05), rgba(251,191,36,0.04)); border: 1px solid rgba(255,255,255,0.06);">
+      <p style="margin: 0 0 18px; font-size: 17px; line-height: 1.55; color: rgba(255,255,255,0.92);">
+        <b style="color: #22d3ee;">The slow path is generative.</b> The AI itself writes the DAX query from scratch every time.
+        <b style="color: #fbbf24;">The fast path is lookup.</b> A pre-LLM matcher finds a hand-curated recipe and runs it directly.
+        That single decision &mdash; <i>who writes the query</i> &mdash; cascades into everything else.
+      </p>
+      <table class="hub-table" style="width: 100%; border-collapse: collapse; margin-bottom: 10px;">
+        <thead>
+          <tr>
+            <th style="text-align: left; padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.08); color: rgba(255,255,255,0.65); font-weight: 600; font-size: 13px;">Dimension</th>
+            <th style="text-align: left; padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.08); color: #fbbf24; font-weight: 700; font-size: 13px;"><i data-lucide="waves" style="width:14px;height:14px;vertical-align:-2px;margin-right:6px;"></i>Slow path</th>
+            <th style="text-align: left; padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.08); color: #22d3ee; font-weight: 700; font-size: 13px;"><i data-lucide="zap" style="width:14px;height:14px;vertical-align:-2px;margin-right:6px;"></i>Fast path</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); font-weight: 600;">Who writes the DAX</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: rgba(255,255,255,0.78);">The AI, fresh every time</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: rgba(255,255,255,0.92);"><b>Pre-written recipe</b></td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); font-weight: 600;">Cost per call</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: rgba(255,255,255,0.78);">~$0.0014 (post-opt) &middot; up to $0.018 with image</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: #34d399;"><b>~$0.00018 &mdash; 50&times; cheaper</b></td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); font-weight: 600;">Latency</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: rgba(255,255,255,0.78);">8 &ndash; 25 seconds</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: #34d399;"><b>2.5 &ndash; 5 seconds &mdash; 3&times; faster</b></td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); font-weight: 600;">Determinism</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: rgba(255,255,255,0.78);">Same question may produce slightly different DAX</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: rgba(255,255,255,0.92);"><b>Same question &rarr; same DAX &rarr; same number, always</b></td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); font-weight: 600;">Coverage</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: rgba(255,255,255,0.78);">Anything in the semantic model</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: rgba(255,255,255,0.78);">Only the question shapes you pre-wrote</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 12px; font-weight: 600;">Production hit rate</td>
+            <td style="padding: 10px 12px; color: rgba(255,255,255,0.78);">~70% of calls (long tail, paraphrases, image questions)</td>
+            <td style="padding: 10px 12px; color: rgba(255,255,255,0.92);"><b>27.6% of calls</b> (top-frequency questions)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin: 16px 0 4px; font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.78);">
+      You need both. The fast path catches the questions owners notice when answers vary &mdash; the highest-frequency 30%
+      where determinism is non-negotiable. The slow path catches everything else, including new shapes you have not pre-authored.
+      The recipe layer sits <b>in front of</b> the slow path: every request tries the matcher first, falls through to the LLM-driven path on a miss.
+    </p>
+    <p style="margin: 8px 0 0; font-size: 14px; line-height: 1.6; color: #fde68a; font-style: italic;">
+      The real reason to ship the fast path is not cost. It is <b>trust</b>. The 50&times; cost reduction is a bonus.
+    </p>
+  </div>
+
   <div class="two-col-diagrams">
     <div class="diagram-card">
       <div class="diagram-card-head fast-head">
