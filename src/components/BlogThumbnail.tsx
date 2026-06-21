@@ -18,7 +18,7 @@ export default function BlogThumbnail() {
         {/* Left side */}
         <div className="flex-1 min-w-0 pt-4">
           <div className="flex items-center gap-2 mb-3">
-            <span className="px-2 py-0.5 rounded-xs font-mono text-[10px] font-medium uppercase tracking-wider bg-accent-brand-soft text-accent-brand-strong border border-border">
+            <span className="px-2 py-0.5 rounded-xs font-mono text-[10px] font-medium uppercase tracking-wider bg-rose-100 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 border border-border">
               Benchmark
             </span>
             <span className="px-2 py-0.5 rounded-xs font-mono text-[10px] font-medium uppercase tracking-wider bg-background border border-border text-foreground-muted">
@@ -71,7 +71,7 @@ export default function BlogThumbnail() {
 
           {/* Result */}
           <div className="text-center">
-            <div className="font-serif text-3xl md:text-4xl font-normal text-accent-brand-strong leading-none">2.5x</div>
+            <div className="font-serif text-3xl md:text-4xl font-normal text-rose-700 dark:text-rose-300 leading-none">2.5x</div>
             <div className="font-mono text-[10px] text-foreground-subtle font-medium uppercase tracking-wider mt-1">Faster</div>
           </div>
         </div>

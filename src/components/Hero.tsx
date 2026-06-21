@@ -19,7 +19,7 @@ const Hero = () => {
           <div className="space-y-7">
             <div className="inline-flex items-center gap-2 rounded-pill border border-accent-brand/30 bg-accent-brand-soft/70 px-3 py-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-accent-brand-strong">
               <span className="h-1.5 w-1.5 rounded-pill bg-accent-brand" />
-              Writing about data, from Dhaka
+              Blogs about data, from Dhaka
             </div>
 
             <h1 className="font-serif text-display-lg sm:text-display-xl leading-[1.02] tracking-tight text-foreground">
@@ -34,7 +34,7 @@ const Hero = () => {
             <div className="flex flex-wrap gap-3 pt-2">
               <Button size="lg" asChild className="group">
                 <Link to="/blog">
-                  Read the writing
+                  Read the blogs
                   <ArrowRight className="ml-1 h-4 w-4 transition-transform duration-fast ease-out-quart group-hover:translate-x-1" />
                 </Link>
               </Button>

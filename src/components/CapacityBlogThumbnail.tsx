@@ -20,7 +20,7 @@ export default function CapacityBlogThumbnail() {
         {/* Left side */}
         <div className="flex-1 min-w-0 pt-6">
           <div className="flex items-center gap-2 mb-3">
-            <span className="px-2 py-0.5 rounded-pill text-[10px] font-semibold uppercase tracking-wider bg-accent-brand-soft text-accent-brand-strong">
+            <span className="px-2 py-0.5 rounded-pill text-[10px] font-semibold uppercase tracking-wider bg-emerald-100 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300">
               Part 1 of 2
             </span>
             <span className="px-2 py-0.5 rounded-pill text-[10px] font-semibold uppercase tracking-wider border border-border text-foreground-muted">
@@ -41,8 +41,8 @@ export default function CapacityBlogThumbnail() {
           <div className="flex items-center gap-3 md:gap-4">
             {/* CU Pool */}
             <div className="text-center">
-              <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-accent-brand-soft border border-border-strong flex items-center justify-center">
-                <span className="text-accent-brand-strong text-sm md:text-base font-bold font-mono">CU</span>
+              <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-emerald-100 dark:bg-emerald-950/40 border border-border-strong flex items-center justify-center">
+                <span className="text-emerald-700 dark:text-emerald-300 text-sm md:text-base font-bold font-mono">CU</span>
               </div>
               <span className="text-foreground-subtle text-[10px] font-medium mt-1 block">Pool</span>
             </div>
@@ -74,7 +74,7 @@ export default function CapacityBlogThumbnail() {
 
           {/* Key stat */}
           <div className="text-center">
-            <div className="text-2xl md:text-3xl font-bold font-mono text-accent-brand-strong">F2-F2048</div>
+            <div className="text-2xl md:text-3xl font-bold font-mono text-emerald-700 dark:text-emerald-300">F2-F2048</div>
             <div className="text-[10px] text-foreground-subtle font-medium uppercase tracking-wider mt-1">SKU Range</div>
           </div>
         </div>

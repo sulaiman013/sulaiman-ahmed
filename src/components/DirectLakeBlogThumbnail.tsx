@@ -9,14 +9,14 @@ export default function DirectLakeBlogThumbnail() {
         className="absolute inset-0 opacity-[0.05]"
         style={{
           backgroundImage:
-            "linear-gradient(var(--accent-brand) 1px, transparent 1px), linear-gradient(90deg, var(--accent-brand) 1px, transparent 1px)",
+            "linear-gradient(var(--foreground) 1px, transparent 1px), linear-gradient(90deg, var(--foreground) 1px, transparent 1px)",
           backgroundSize: "40px 40px",
         }}
       />
 
       {/* Ambient accent wash, single committed color */}
-      <div className="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-accent-brand-soft blur-[80px]" />
-      <div className="absolute -bottom-16 -left-16 w-48 h-48 rounded-full bg-accent-brand-soft blur-[60px]" />
+      <div className="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-sky-100 dark:bg-sky-950/40 blur-[80px]" />
+      <div className="absolute -bottom-16 -left-16 w-48 h-48 rounded-full bg-sky-100 dark:bg-sky-950/40 blur-[60px]" />
 
       {/* Fabric icon, top left */}
       <div className="absolute top-3 left-4 z-20 flex items-center gap-2">
@@ -35,7 +35,7 @@ export default function DirectLakeBlogThumbnail() {
         {/* Left side */}
         <div className="flex-1 min-w-0 pt-5">
           <div className="flex items-center gap-2 mb-3">
-            <span className="px-2 py-0.5 rounded-xs font-mono text-[10px] font-semibold uppercase tracking-wider bg-accent-brand-soft text-accent-brand-strong border border-border">
+            <span className="px-2 py-0.5 rounded-xs font-mono text-[10px] font-semibold uppercase tracking-wider bg-sky-100 dark:bg-sky-950/40 text-sky-700 dark:text-sky-300 border border-border">
               Complete Guide
             </span>
             <span className="px-2 py-0.5 rounded-xs font-mono text-[10px] font-semibold uppercase tracking-wider bg-background border border-border text-foreground-muted">
@@ -55,14 +55,14 @@ export default function DirectLakeBlogThumbnail() {
           <div className="flex flex-col items-center gap-1.5">
             {/* Storage modes */}
             <div className="flex items-center gap-2">
-              <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-sm border border-border bg-accent-brand-soft">
+              <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-sm border border-border bg-sky-100 dark:bg-sky-950/40">
                 <img
                   src={`${ICONS}/semantic_model.svg`}
                   alt="Semantic Model"
                   className="w-4 h-4 opacity-80"
                 />
                 <div className="text-center">
-                  <div className="text-[10px] font-bold text-accent-brand-strong">Direct Lake</div>
+                  <div className="text-[10px] font-bold text-sky-700 dark:text-sky-300">Direct Lake</div>
                   <div className="font-mono text-[8px] text-foreground-muted">&lt; 1 second</div>
                 </div>
               </div>
@@ -106,7 +106,7 @@ export default function DirectLakeBlogThumbnail() {
 
           {/* Key concept */}
           <div className="text-center">
-            <div className="font-mono text-xl md:text-2xl font-bold text-accent-brand-strong">
+            <div className="font-mono text-xl md:text-2xl font-bold text-sky-700 dark:text-sky-300">
               ~2 sec
             </div>
             <div className="font-mono text-[10px] text-foreground-muted uppercase tracking-wider">

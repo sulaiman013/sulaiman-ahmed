@@ -20,7 +20,7 @@ export default function FabricAppsBlogThumbnail() {
         {/* Left side */}
         <div className="flex-1 min-w-0 pt-5">
           <div className="flex items-center gap-2 mb-3">
-            <span className="px-2 py-0.5 rounded-xs font-mono text-[10px] font-medium uppercase tracking-wider bg-accent-brand-soft text-accent-brand-strong border border-border">
+            <span className="px-2 py-0.5 rounded-xs font-mono text-[10px] font-medium uppercase tracking-wider bg-teal-100 dark:bg-teal-950/40 text-teal-700 dark:text-teal-300 border border-border">
               Fabric Apps
             </span>
             <span className="px-2 py-0.5 rounded-xs font-mono text-[10px] font-medium uppercase tracking-wider bg-background border border-border text-foreground-muted">
@@ -49,14 +49,14 @@ export default function FabricAppsBlogThumbnail() {
                 <div className="font-mono text-[8px] text-foreground-subtle">mirror</div>
               </div>
               <div className="text-foreground-subtle text-xs">&#8594;</div>
-              <div className="px-2.5 py-1.5 rounded-md border border-border bg-accent-brand-soft text-center">
-                <div className="font-mono text-[10px] font-medium text-accent-brand-strong">Read</div>
-                <div className="font-mono text-[8px] text-accent-brand-strong/70">App</div>
+              <div className="px-2.5 py-1.5 rounded-md border border-border bg-teal-100 dark:bg-teal-950/40 text-center">
+                <div className="font-mono text-[10px] font-medium text-teal-700 dark:text-teal-300">Read</div>
+                <div className="font-mono text-[8px] text-teal-700 dark:text-teal-300/70">App</div>
               </div>
             </div>
             <div className="font-mono text-foreground-subtle text-[10px] uppercase tracking-wider">translytical loop</div>
             <div className="flex items-center gap-2 px-3 py-1 rounded-sm border border-border bg-background font-mono">
-              <span className="text-[10px] text-accent-brand-strong font-medium">$</span>
+              <span className="text-[10px] text-teal-700 dark:text-teal-300 font-medium">$</span>
               <span className="text-[10px] text-foreground-muted">npx rayfin up</span>
             </div>
           </div>
@@ -66,7 +66,7 @@ export default function FabricAppsBlogThumbnail() {
 
           {/* Key concept */}
           <div className="text-center">
-            <div className="font-serif text-2xl md:text-3xl font-normal text-accent-brand-strong leading-none">2 apps</div>
+            <div className="font-serif text-2xl md:text-3xl font-normal text-teal-700 dark:text-teal-300 leading-none">2 apps</div>
             <div className="font-mono text-[10px] text-foreground-subtle font-medium uppercase tracking-wider mt-1">One<br/>Source of Truth</div>
           </div>
         </div>

@@ -8,20 +8,20 @@ export default function CostBlogThumbnail() {
         className="absolute inset-0 opacity-[0.06]"
         style={{
           backgroundImage:
-            "linear-gradient(oklch(var(--accent-brand) / 0.4) 1px, transparent 1px), linear-gradient(90deg, oklch(var(--accent-brand) / 0.4) 1px, transparent 1px)",
+            "linear-gradient(oklch(var(--foreground) / 0.4) 1px, transparent 1px), linear-gradient(90deg, oklch(var(--foreground) / 0.4) 1px, transparent 1px)",
           backgroundSize: "40px 40px",
         }}
       />
 
       {/* Ambient accent washes */}
-      <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-accent-brand-soft blur-[80px]" />
-      <div className="absolute -bottom-16 -left-16 w-48 h-48 rounded-full bg-accent-brand-soft/60 blur-[60px]" />
-      <div className="absolute top-1/2 left-1/3 w-72 h-36 rounded-full bg-accent-brand-soft/40 blur-[100px]" />
+      <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-amber-100 dark:bg-amber-950/40 blur-[80px]" />
+      <div className="absolute -bottom-16 -left-16 w-48 h-48 rounded-full bg-amber-100 dark:bg-amber-950/40/60 blur-[60px]" />
+      <div className="absolute top-1/2 left-1/3 w-72 h-36 rounded-full bg-amber-100 dark:bg-amber-950/40/40 blur-[100px]" />
 
       {/* Glowing Fabric icon - top left */}
       <div className="absolute top-3 left-4 z-20 flex items-center gap-2">
         <div className="relative">
-          <div className="absolute inset-0 blur-md bg-accent-brand/30 rounded-full scale-150" />
+          <div className="absolute inset-0 blur-md bg-amber-500/30 rounded-full scale-150" />
           <img
             src="/blog/icons/fabric.svg"
             alt="Microsoft Fabric"
@@ -38,7 +38,7 @@ export default function CostBlogThumbnail() {
         {/* Left side */}
         <div className="flex-1 min-w-0 pt-4">
           <div className="flex items-center gap-2 mb-3">
-            <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-accent-brand-soft text-accent-brand-strong border border-border">
+            <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-amber-100 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border border-border">
               Part 2 of 2
             </span>
             <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-background-elevated text-foreground-muted border border-border">
@@ -46,7 +46,7 @@ export default function CostBlogThumbnail() {
             </span>
           </div>
           <h3 className="font-serif text-foreground text-lg md:text-xl lg:text-2xl font-normal leading-tight mb-2 line-clamp-2">
-            The Compute <em className="italic font-normal text-accent-brand-strong">Showdown</em>
+            The Compute <em className="italic font-normal text-amber-700 dark:text-amber-300">Showdown</em>
           </h3>
           <p className="text-foreground-muted text-xs md:text-sm line-clamp-1">
             Which Tool Gives You the Most Bang for Your CU Buck?
@@ -80,7 +80,7 @@ export default function CostBlogThumbnail() {
             </div>
             {/* VS badge centered on the grid */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-background-elevated border border-border-strong flex items-center justify-center">
-              <span className="text-[8px] font-black text-accent-brand-strong uppercase">
+              <span className="text-[8px] font-black text-amber-700 dark:text-amber-300 uppercase">
                 VS
               </span>
             </div>
@@ -91,7 +91,7 @@ export default function CostBlogThumbnail() {
 
           {/* Key stat */}
           <div className="text-center">
-            <div className="font-mono text-2xl md:text-3xl font-black text-accent-brand-strong">
+            <div className="font-mono text-2xl md:text-3xl font-black text-amber-700 dark:text-amber-300">
               3.4x
             </div>
             <div className="text-[10px] text-foreground-muted font-medium uppercase tracking-wider">

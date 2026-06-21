@@ -30,6 +30,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { getCaseStudyTheme } from "@/lib/cardThemes";
 
 interface Metric {
   icon: LucideIcon;
@@ -282,38 +283,30 @@ const petProjects: CaseStudy[] = [
   },
 ];
 
-// Unified brand-accent scheme. The card identity now comes from the
-// icon + content, not from a per-card color. Tokens cascade to both
-// light and dark modes so contrast stays accessible everywhere.
-const cardTheme = {
-  border: "border-border hover:border-border-strong",
-  text: "text-accent-brand-strong dark:text-accent-brand",
-  badge: "bg-accent-brand-soft text-accent-brand-strong dark:bg-accent-brand-soft/60 dark:text-accent-brand",
-};
-
 function CaseStudyCard({ study }: { study: CaseStudy }) {
   const hasDetailPage = !!study.link;
+  const theme = getCaseStudyTheme(study.id);
 
   const inner = (
     <Card
-      className={`h-full bg-background-elevated ${cardTheme.border} transition-all duration-fast ease-out-quart hover:shadow-soft hover:-translate-y-0.5`}
+      className={`h-full bg-background-elevated border-border ${theme.hoverBorder} transition-all duration-fast ease-out-quart hover:shadow-soft hover:-translate-y-0.5`}
     >
       <CardHeader>
         <div className="flex items-start justify-between mb-4">
           <div
-            className={`w-14 h-14 rounded-xl ${cardTheme.badge} flex items-center justify-center`}
+            className={`w-14 h-14 rounded-xl ${theme.iconBg} flex items-center justify-center`}
           >
-            <study.icon className={`h-7 w-7 ${cardTheme.text}`} aria-hidden="true" />
+            <study.icon className={`h-7 w-7 ${theme.iconText}`} aria-hidden="true" />
           </div>
           {hasDetailPage && (
             <ArrowRight
-              className="h-5 w-5 text-accent-brand opacity-60 transition-all duration-fast ease-out-quart group-hover:translate-x-0.5 group-hover:opacity-100"
+              className={`h-5 w-5 ${theme.accent} opacity-60 transition-all duration-fast ease-out-quart group-hover:translate-x-0.5 group-hover:opacity-100`}
               aria-hidden="true"
             />
           )}
         </div>
         <CardTitle className="text-h3 font-bold leading-tight mb-2 text-foreground">{study.title}</CardTitle>
-        <p className={`text-sm font-medium ${cardTheme.text}`}>{study.subtitle}</p>
+        <p className={`text-sm font-medium ${theme.accent}`}>{study.subtitle}</p>
       </CardHeader>
       <CardContent className="space-y-6">
         <p className="text-foreground-muted text-sm leading-relaxed">{study.description}</p>
@@ -321,9 +314,9 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
         {/* Metrics */}
         <div className="grid grid-cols-3 gap-3">
           {study.metrics.map((metric) => (
-            <div key={metric.label} className="text-center p-3 rounded-lg bg-background-elevated">
-              <metric.icon className={`h-4 w-4 ${cardTheme.text} mx-auto mb-1`} aria-hidden="true" />
-              <div className={`font-serif text-lg font-medium leading-tight ${cardTheme.text}`}>{metric.value}</div>
+            <div key={metric.label} className="text-center p-3 rounded-lg bg-background">
+              <metric.icon className={`h-4 w-4 ${theme.accent} mx-auto mb-1`} aria-hidden="true" />
+              <div className={`font-serif text-lg font-medium leading-tight ${theme.accentStrong}`}>{metric.value}</div>
               <div className="text-xs text-foreground-muted">{metric.label}</div>
             </div>
           ))}
@@ -342,7 +335,7 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
         <div className="flex items-center gap-3">
           {hasDetailPage && (
             <span
-              className={`flex items-center gap-2 text-sm font-medium ${cardTheme.text} group-hover:gap-3 transition-all`}
+              className={`flex items-center gap-2 text-sm font-medium ${theme.accent} group-hover:gap-3 transition-all`}
             >
               View Full Case Study
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -356,7 +349,7 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-background-elevated text-foreground-muted hover:text-accent-brand hover:bg-accent-brand-soft transition-colors"
+                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-background text-foreground-muted hover:${theme.accent} transition-colors`}
                 >
                   <Github className="h-3.5 w-3.5" aria-hidden="true" /> GitHub
                 </a>
@@ -367,7 +360,7 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-background-elevated text-foreground-muted hover:text-accent-brand hover:bg-accent-brand-soft transition-colors"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-background text-foreground-muted hover:text-foreground transition-colors"
                 >
                   <Youtube className="h-3.5 w-3.5" aria-hidden="true" /> Demo
                 </a>
@@ -392,17 +385,18 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
 
 function PetProjectCard({ study }: { study: CaseStudy }) {
   const hasDetailPage = !!study.link;
+  const theme = getCaseStudyTheme(study.id);
 
   const inner = (
     <Card
-      className={`h-full bg-background-elevated ${cardTheme.border} transition-all duration-fast ease-out-quart hover:shadow-soft hover:-translate-y-0.5`}
+      className={`h-full bg-background-elevated border-border ${theme.hoverBorder} transition-all duration-fast ease-out-quart hover:shadow-soft hover:-translate-y-0.5`}
     >
       <CardHeader>
         <div className="flex items-start justify-between mb-4">
           <div
-            className={`w-14 h-14 rounded-xl ${cardTheme.badge} flex items-center justify-center`}
+            className={`w-14 h-14 rounded-xl ${theme.iconBg} flex items-center justify-center`}
           >
-            <study.icon className={`h-7 w-7 ${cardTheme.text}`} aria-hidden="true" />
+            <study.icon className={`h-7 w-7 ${theme.iconText}`} aria-hidden="true" />
           </div>
           <div className="flex items-center gap-2">
             <Badge variant="outline" className="text-[10px] font-bold uppercase tracking-wider">
@@ -410,14 +404,14 @@ function PetProjectCard({ study }: { study: CaseStudy }) {
             </Badge>
             {hasDetailPage && (
               <ArrowRight
-                className="h-5 w-5 text-accent-brand opacity-60 transition-all duration-fast ease-out-quart group-hover:translate-x-0.5 group-hover:opacity-100"
+                className={`h-5 w-5 ${theme.accent} opacity-60 transition-all duration-fast ease-out-quart group-hover:translate-x-0.5 group-hover:opacity-100`}
                 aria-hidden="true"
               />
             )}
           </div>
         </div>
         <CardTitle className="text-h3 font-bold leading-tight mb-2 text-foreground">{study.title}</CardTitle>
-        <p className={`text-sm font-medium ${cardTheme.text}`}>{study.subtitle}</p>
+        <p className={`text-sm font-medium ${theme.accent}`}>{study.subtitle}</p>
       </CardHeader>
       <CardContent className="space-y-6">
         <p className="text-foreground-muted text-sm leading-relaxed">{study.description}</p>
@@ -425,9 +419,9 @@ function PetProjectCard({ study }: { study: CaseStudy }) {
         {/* Metrics */}
         <div className="grid grid-cols-3 gap-3">
           {study.metrics.map((metric) => (
-            <div key={metric.label} className="text-center p-3 rounded-lg bg-background-elevated">
-              <metric.icon className={`h-4 w-4 ${cardTheme.text} mx-auto mb-1`} aria-hidden="true" />
-              <div className={`font-serif text-lg font-medium leading-tight ${cardTheme.text}`}>{metric.value}</div>
+            <div key={metric.label} className="text-center p-3 rounded-lg bg-background">
+              <metric.icon className={`h-4 w-4 ${theme.accent} mx-auto mb-1`} aria-hidden="true" />
+              <div className={`font-serif text-lg font-medium leading-tight ${theme.accentStrong}`}>{metric.value}</div>
               <div className="text-xs text-foreground-muted">{metric.label}</div>
             </div>
           ))}
@@ -446,7 +440,7 @@ function PetProjectCard({ study }: { study: CaseStudy }) {
         <div className="flex items-center gap-2 pt-1">
           {hasDetailPage && (
             <span
-              className={`flex items-center gap-2 text-sm font-medium ${cardTheme.text} group-hover:gap-3 transition-all`}
+              className={`flex items-center gap-2 text-sm font-medium ${theme.accent} group-hover:gap-3 transition-all`}
             >
               View Full Case Study
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -459,7 +453,7 @@ function PetProjectCard({ study }: { study: CaseStudy }) {
                   href={study.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium ${cardTheme.badge} hover:opacity-80 transition-opacity`}
+                  className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium ${theme.badge} hover:opacity-80 transition-opacity`}
                 >
                   <Github className="h-4 w-4" aria-hidden="true" /> View Source
                 </a>
@@ -469,7 +463,7 @@ function PetProjectCard({ study }: { study: CaseStudy }) {
                   href={study.youtube}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium bg-background-elevated text-foreground-muted hover:text-accent-brand hover:bg-accent-brand-soft transition-colors"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium bg-background text-foreground-muted hover:text-foreground transition-colors"
                 >
                   <Youtube className="h-4 w-4" aria-hidden="true" /> Watch Demo
                 </a>

@@ -20,7 +20,7 @@ const socialLinks = [
 ];
 
 const footerNav = [
-  { to: "/blog", label: "Writing" },
+  { to: "/blog", label: "Blogs" },
   { to: "/case-study", label: "Case Studies" },
   { to: "/about", label: "About" },
 ];

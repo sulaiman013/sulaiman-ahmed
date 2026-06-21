@@ -28,11 +28,11 @@ const NotFound = () => {
             </h1>
             <p className="mt-6 text-body-lg text-foreground-muted">
               That page isn't here. It may have moved, or it never existed. The
-              writing index is the best place to land instead.
+              blog index is the best place to land instead.
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <Button asChild>
-                <Link to="/blog">Read the writing</Link>
+                <Link to="/blog">Read the blogs</Link>
               </Button>
               <Button asChild variant="ghost">
                 <Link to="/">Back to home</Link>

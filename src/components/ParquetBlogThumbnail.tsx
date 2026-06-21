@@ -20,7 +20,7 @@ export default function ParquetBlogThumbnail() {
         {/* Left side */}
         <div className="flex-1 min-w-0 pt-4">
           <div className="flex items-center gap-2 mb-3">
-            <span className="px-2 py-0.5 rounded-xs font-mono text-[10px] font-medium uppercase tracking-wider bg-accent-brand-soft text-accent-brand-strong border border-border">
+            <span className="px-2 py-0.5 rounded-xs font-mono text-[10px] font-medium uppercase tracking-wider bg-orange-100 dark:bg-orange-950/40 text-orange-700 dark:text-orange-300 border border-border">
               Deep Dive
             </span>
             <span className="px-2 py-0.5 rounded-xs font-mono text-[10px] font-medium uppercase tracking-wider bg-background border border-border text-foreground-muted">
@@ -69,7 +69,7 @@ export default function ParquetBlogThumbnail() {
 
           {/* Key stat */}
           <div className="text-center">
-            <div className="font-serif text-3xl md:text-4xl font-normal text-accent-brand-strong leading-none">78.6%</div>
+            <div className="font-serif text-3xl md:text-4xl font-normal text-orange-700 dark:text-orange-300 leading-none">78.6%</div>
             <div className="font-mono text-[10px] text-foreground-subtle font-medium uppercase tracking-wider mt-1">Iceberg<br/>Adoption</div>
           </div>
         </div>

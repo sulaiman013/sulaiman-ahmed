@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
+import { getBlogTheme, getCaseStudyTheme } from "@/lib/cardThemes";
 
 const latestPosts = [
   {
@@ -63,18 +64,18 @@ const Index = () => (
         <div className="mx-auto max-w-page">
           <header className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="mb-3 text-caption uppercase tracking-[0.12em] text-accent-brand-strong">
-                Latest writing
+              <p className="mb-3 text-caption uppercase tracking-[0.12em] text-foreground-subtle">
+                Latest blogs
               </p>
               <h2 className="font-serif text-display-md tracking-tight text-foreground">
-                Fresh from <em className="italic font-normal text-accent-brand-strong">the field</em>
+                Fresh from <em className="italic font-normal">the field</em>
               </h2>
             </div>
             <Link
               to="/blog"
-              className="group inline-flex items-center gap-1.5 text-body-sm font-medium text-foreground-muted transition-colors duration-fast hover:text-accent-brand"
+              className="group inline-flex items-center gap-1.5 text-body-sm font-medium text-foreground-muted transition-colors duration-fast hover:text-foreground"
             >
-              All writing
+              All blogs
               <ArrowRight
                 className="h-4 w-4 transition-transform duration-fast ease-out-quart group-hover:translate-x-0.5"
                 aria-hidden="true"
@@ -83,49 +84,52 @@ const Index = () => (
           </header>
 
           <div className="grid gap-6 md:grid-cols-3">
-            {latestPosts.map((post) => (
-              <article key={post.slug} className="group">
-                <Link
-                  to={`/blog/${post.slug}`}
-                  className="block h-full rounded-xl border border-border bg-background-elevated p-7 transition-colors duration-fast ease-out-quart hover:border-border-strong"
-                >
-                  <p className="mb-4 text-caption uppercase tracking-wider text-foreground-subtle">
-                    {post.eyebrow}
-                  </p>
-                  <h3 className="mb-3 font-serif text-h2 font-normal leading-tight text-foreground transition-colors duration-fast group-hover:text-accent-brand-strong">
-                    {post.title}
-                  </h3>
-                  <p className="mb-5 line-clamp-3 text-body-sm leading-relaxed text-foreground-muted">
-                    {post.excerpt}
-                  </p>
-                  <div className="flex items-center justify-between text-caption text-foreground-subtle">
-                    <span>{post.readTime}</span>
-                    <ArrowRight
-                      className="h-4 w-4 text-accent-brand opacity-60 transition-all duration-fast ease-out-quart group-hover:translate-x-0.5 group-hover:opacity-100"
-                      aria-hidden="true"
-                    />
-                  </div>
-                </Link>
-              </article>
-            ))}
+            {latestPosts.map((post) => {
+              const theme = getBlogTheme(post.slug);
+              return (
+                <article key={post.slug} className="group">
+                  <Link
+                    to={`/blog/${post.slug}`}
+                    className={`block h-full rounded-xl border border-border bg-background-elevated p-7 transition-colors duration-fast ease-out-quart ${theme.hoverBorder}`}
+                  >
+                    <p className={`mb-4 text-caption uppercase tracking-wider ${theme.accent}`}>
+                      {post.eyebrow}
+                    </p>
+                    <h3 className="mb-3 font-serif text-h2 font-normal leading-tight text-foreground">
+                      {post.title}
+                    </h3>
+                    <p className="mb-5 line-clamp-3 text-body-sm leading-relaxed text-foreground-muted">
+                      {post.excerpt}
+                    </p>
+                    <div className="flex items-center justify-between text-caption text-foreground-subtle">
+                      <span>{post.readTime}</span>
+                      <ArrowRight
+                        className={`h-4 w-4 ${theme.accent} opacity-60 transition-all duration-fast ease-out-quart group-hover:translate-x-0.5 group-hover:opacity-100`}
+                        aria-hidden="true"
+                      />
+                    </div>
+                  </Link>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      <section className="section-padding border-t border-border bg-accent-brand-soft/30">
+      <section className="section-padding border-t border-border bg-background-elevated/40">
         <div className="mx-auto max-w-page">
           <header className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="mb-3 text-caption uppercase tracking-[0.12em] text-accent-brand-strong">
+              <p className="mb-3 text-caption uppercase tracking-[0.12em] text-foreground-subtle">
                 Selected work
               </p>
               <h2 className="font-serif text-display-md tracking-tight text-foreground">
-                Cases where <em className="italic font-normal text-accent-brand-strong">data moved the needle</em>
+                Cases where <em className="italic font-normal">data moved the needle</em>
               </h2>
             </div>
             <Link
               to="/case-study"
-              className="group inline-flex items-center gap-1.5 text-body-sm font-medium text-foreground-muted transition-colors duration-fast hover:text-accent-brand"
+              className="group inline-flex items-center gap-1.5 text-body-sm font-medium text-foreground-muted transition-colors duration-fast hover:text-foreground"
             >
               All case studies
               <ArrowRight
@@ -136,35 +140,38 @@ const Index = () => (
           </header>
 
           <div className="grid gap-6 md:grid-cols-2">
-            {featuredCases.map((cs) => (
-              <article key={cs.slug} className="group">
-                <Link
-                  to={`/case-study/${cs.slug}`}
-                  className="block h-full rounded-xl border border-border bg-background p-7 transition-colors duration-fast ease-out-quart hover:border-border-strong"
-                >
-                  <div className="mb-5 flex items-start justify-between gap-6">
-                    <p className="text-caption uppercase tracking-wider text-foreground-subtle">{cs.eyebrow}</p>
-                    <div className="text-right">
-                      <p className="font-serif text-h1 font-medium leading-none text-accent-brand-strong">{cs.stat}</p>
-                      <p className="mt-1 text-caption uppercase tracking-wider text-foreground-subtle">
-                        {cs.statLabel}
-                      </p>
+            {featuredCases.map((cs) => {
+              const theme = getCaseStudyTheme(cs.slug);
+              return (
+                <article key={cs.slug} className="group">
+                  <Link
+                    to={`/case-study/${cs.slug}`}
+                    className={`block h-full rounded-xl border border-border bg-background p-7 transition-colors duration-fast ease-out-quart ${theme.hoverBorder}`}
+                  >
+                    <div className="mb-5 flex items-start justify-between gap-6">
+                      <p className={`text-caption uppercase tracking-wider ${theme.accent}`}>{cs.eyebrow}</p>
+                      <div className="text-right">
+                        <p className={`font-serif text-h1 font-medium leading-none ${theme.accentStrong}`}>{cs.stat}</p>
+                        <p className="mt-1 text-caption uppercase tracking-wider text-foreground-subtle">
+                          {cs.statLabel}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                  <h3 className="mb-3 font-serif text-h2 font-normal leading-tight text-foreground transition-colors duration-fast group-hover:text-accent-brand-strong">
-                    {cs.title}
-                  </h3>
-                  <p className="mb-5 text-body-sm leading-relaxed text-foreground-muted">{cs.excerpt}</p>
-                  <div className="flex items-center gap-2 text-body-sm font-medium text-accent-brand-strong">
-                    Read case study
-                    <ArrowRight
-                      className="h-4 w-4 opacity-60 transition-all duration-fast ease-out-quart group-hover:translate-x-0.5 group-hover:opacity-100"
-                      aria-hidden="true"
-                    />
-                  </div>
-                </Link>
-              </article>
-            ))}
+                    <h3 className="mb-3 font-serif text-h2 font-normal leading-tight text-foreground">
+                      {cs.title}
+                    </h3>
+                    <p className="mb-5 text-body-sm leading-relaxed text-foreground-muted">{cs.excerpt}</p>
+                    <div className={`flex items-center gap-2 text-body-sm font-medium ${theme.accent}`}>
+                      Read case study
+                      <ArrowRight
+                        className="h-4 w-4 opacity-60 transition-all duration-fast ease-out-quart group-hover:translate-x-0.5 group-hover:opacity-100"
+                        aria-hidden="true"
+                      />
+                    </div>
+                  </Link>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -172,14 +179,14 @@ const Index = () => (
       <section id="contact" className="section-padding border-t border-border">
         <div className="mx-auto max-w-prose text-center">
           <h2 className="mb-4 font-serif text-display-md tracking-tight text-foreground">
-            Got a project? <em className="italic font-normal text-accent-brand-strong">Let's talk.</em>
+            Got a project? <em className="italic font-normal">Let's talk.</em>
           </h2>
           <p className="mb-6 text-body-lg text-foreground-muted">
             I work with teams on Power BI, Microsoft Fabric, and the modern data stack. If something here resonates, send a note.
           </p>
           <a
             href="mailto:hello@sulaimanahmed.com"
-            className="inline-flex items-center gap-2 text-body-lg font-medium text-accent-brand-strong transition-colors duration-fast hover:text-accent-brand"
+            className="inline-flex items-center gap-2 text-body-lg font-medium text-foreground transition-colors duration-fast hover:text-foreground-muted"
           >
             hello@sulaimanahmed.com
             <ArrowRight className="h-4 w-4" aria-hidden="true" />

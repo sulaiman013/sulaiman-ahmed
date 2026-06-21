@@ -48,7 +48,7 @@ export default function MLVBlogThumbnail() {
             className="relative w-7 h-7"
           />
         </div>
-        <span className="text-caption font-semibold text-accent-brand tracking-wide">
+        <span className="text-caption font-semibold text-indigo-700 dark:text-indigo-300 tracking-wide">
           Microsoft Fabric
         </span>
       </div>
@@ -58,10 +58,10 @@ export default function MLVBlogThumbnail() {
         {/* Left side */}
         <div className="flex-1 min-w-0 pt-5">
           <div className="flex items-center gap-2 mb-3">
-            <span className="px-2 py-0.5 rounded-xs text-caption font-semibold uppercase tracking-wider bg-accent-brand-soft text-accent-brand-strong border border-border">
+            <span className="px-2 py-0.5 rounded-xs text-caption font-semibold uppercase tracking-wider bg-indigo-100 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border border-border">
               Preview Feature
             </span>
-            <span className="px-2 py-0.5 rounded-xs text-caption font-semibold uppercase tracking-wider bg-accent-brand-soft text-accent-brand-strong border border-border">
+            <span className="px-2 py-0.5 rounded-xs text-caption font-semibold uppercase tracking-wider bg-indigo-100 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border border-border">
               Lakehouse
             </span>
           </div>
@@ -95,17 +95,17 @@ export default function MLVBlogThumbnail() {
                 </div>
               </div>
               <div className="text-foreground-subtle text-body-sm">vs</div>
-              <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md border border-border-strong bg-accent-brand-soft">
+              <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md border border-border-strong bg-indigo-100 dark:bg-indigo-950/40">
                 <img
                   src={`${ICONS}/lakehouse.svg`}
                   alt="Lakehouse"
                   className="w-4 h-4 opacity-80"
                 />
                 <div className="text-center">
-                  <div className="text-caption font-semibold text-accent-brand-strong">
+                  <div className="text-caption font-semibold text-indigo-700 dark:text-indigo-300">
                     MLV
                   </div>
-                  <div className="text-[8px] text-accent-brand-strong/70">
+                  <div className="text-[8px] text-indigo-700 dark:text-indigo-300/70">
                     sub-second
                   </div>
                 </div>
@@ -116,14 +116,14 @@ export default function MLVBlogThumbnail() {
               &#9660; powered by &#9660;
             </div>
             {/* Optimal refresh */}
-            <div className="flex items-center gap-2 px-4 py-2 rounded-md border border-border-strong bg-accent-brand-soft">
+            <div className="flex items-center gap-2 px-4 py-2 rounded-md border border-border-strong bg-indigo-100 dark:bg-indigo-950/40">
               <img
                 src={`${SHARED}/delta_lake.svg`}
                 alt="Delta Lake"
                 className="w-4 h-4 opacity-80"
               />
               <div className="text-center">
-                <div className="text-caption font-semibold text-accent-brand-strong uppercase tracking-wider">
+                <div className="text-caption font-semibold text-indigo-700 dark:text-indigo-300 uppercase tracking-wider">
                   Optimal Refresh
                 </div>
                 <div className="text-[8px] text-foreground-muted mt-0.5">
@@ -138,7 +138,7 @@ export default function MLVBlogThumbnail() {
 
           {/* Key concept */}
           <div className="text-center">
-            <div className="font-mono text-h3 md:text-h2 font-bold text-accent-brand-strong">
+            <div className="font-mono text-h3 md:text-h2 font-bold text-indigo-700 dark:text-indigo-300">
               0 CU
             </div>
             <div className="text-caption text-foreground-muted font-medium uppercase tracking-wider">

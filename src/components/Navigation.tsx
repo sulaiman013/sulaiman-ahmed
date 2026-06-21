@@ -6,7 +6,7 @@ import { useTheme } from "@/hooks/useTheme";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { to: "/blog", label: "Writing" },
+  { to: "/blog", label: "Blogs" },
   { to: "/case-study", label: "Case Studies" },
   { to: "/about", label: "About" },
 ];
