@@ -220,7 +220,7 @@ const BlogPost = ({ slug }: BlogPostProps) => {
         <div className="mx-auto max-w-prose mt-16">
           <p className="text-body-sm text-foreground-muted">
             Got feedback on this post?{' '}
-            <a href="mailto:hello@sulaimanahmed.com" className="text-accent-brand">Email me</a>
+            <a href="mailto:sulaimanahmed013@gmail.com" className="text-accent-brand">Email me</a>
             {' '}or reply on{' '}
             <a href="https://www.linkedin.com/in/sulaimanahmed013/" className="text-accent-brand" target="_blank" rel="noopener noreferrer">LinkedIn</a>.
           </p>

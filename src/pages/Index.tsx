@@ -185,10 +185,10 @@ const Index = () => (
             I work with teams on Power BI, Microsoft Fabric, and the modern data stack. If something here resonates, send a note.
           </p>
           <a
-            href="mailto:hello@sulaimanahmed.com"
+            href="mailto:sulaimanahmed013@gmail.com"
             className="inline-flex items-center gap-2 text-body-lg font-medium text-foreground transition-colors duration-fast hover:text-foreground-muted"
           >
-            hello@sulaimanahmed.com
+            sulaimanahmed013@gmail.com
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </a>
         </div>
