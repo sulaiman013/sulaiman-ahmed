@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useId } from 'react';
 import mermaid from 'mermaid';
 
 interface SimpleMarkdownRendererProps {
@@ -7,14 +7,43 @@ interface SimpleMarkdownRendererProps {
 }
 
 const SimpleMarkdownRenderer: React.FC<SimpleMarkdownRendererProps> = ({ content, className = "" }) => {
-  const mermaidRef = useRef<number>(0);
+  const baseId = useId().replace(/:/g, '');
 
   useEffect(() => {
+    // Pull canonical token values from CSS vars so mermaid matches the design system.
+    const styles =
+      typeof window !== 'undefined' ? getComputedStyle(document.documentElement) : null;
+    const readVar = (name: string, fallback: string) =>
+      styles?.getPropertyValue(name)?.trim() || fallback;
+
+    const accentBrand = `oklch(${readVar('--accent-brand', '0.68 0.22 140')})`;
+    const accentSoft = `oklch(${readVar('--accent-soft', '0.92 0.07 140')})`;
+    const foreground = `oklch(${readVar('--foreground', '0.22 0.025 135')})`;
+    const foregroundMuted = `oklch(${readVar('--foreground-muted', '0.48 0.020 135')})`;
+    const background = `oklch(${readVar('--background', '0.975 0.022 130')})`;
+    const backgroundElevated = `oklch(${readVar('--background-elevated', '0.955 0.028 130')})`;
+    const border = `oklch(${readVar('--border', '0.88 0.020 130')})`;
+
     mermaid.initialize({
       startOnLoad: true,
-      theme: 'default',
+      theme: 'base',
       securityLevel: 'loose',
       fontFamily: 'inherit',
+      themeVariables: {
+        primaryColor: accentSoft,
+        primaryTextColor: foreground,
+        primaryBorderColor: accentBrand,
+        secondaryColor: backgroundElevated,
+        tertiaryColor: background,
+        lineColor: foregroundMuted,
+        textColor: foreground,
+        mainBkg: backgroundElevated,
+        background,
+        nodeBorder: border,
+        clusterBkg: background,
+        clusterBorder: border,
+        edgeLabelBackground: background,
+      },
     });
   }, []);
 
@@ -26,38 +55,22 @@ const SimpleMarkdownRenderer: React.FC<SimpleMarkdownRendererProps> = ({ content
 
     while (currentIndex < lines.length) {
       const line = lines[currentIndex].trim();
-      
+
       // Skip empty lines
       if (!line) {
         currentIndex++;
         continue;
       }
 
-      // Headers
+      // Headers — bare semantic tags; .blog-prose owns the styling.
       if (line.startsWith('# ')) {
-        elements.push(
-          <h1 key={currentIndex} className="text-4xl font-bold mt-8 mb-6 text-gray-900 dark:text-gray-100">
-            {line.substring(2)}
-          </h1>
-        );
+        elements.push(<h1 key={currentIndex}>{line.substring(2)}</h1>);
       } else if (line.startsWith('## ')) {
-        elements.push(
-          <h2 key={currentIndex} className="text-3xl font-bold mt-8 mb-5 text-gray-900 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700 pb-2">
-            {line.substring(3)}
-          </h2>
-        );
+        elements.push(<h2 key={currentIndex}>{line.substring(3)}</h2>);
       } else if (line.startsWith('### ')) {
-        elements.push(
-          <h3 key={currentIndex} className="text-2xl font-bold mt-6 mb-4 text-gray-900 dark:text-gray-100">
-            {line.substring(4)}
-          </h3>
-        );
+        elements.push(<h3 key={currentIndex}>{line.substring(4)}</h3>);
       } else if (line.startsWith('#### ')) {
-        elements.push(
-          <h4 key={currentIndex} className="text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-gray-100">
-            {line.substring(5)}
-          </h4>
-        );
+        elements.push(<h4 key={currentIndex}>{line.substring(5)}</h4>);
       }
       // Tables
       else if (line.includes('|') && lines[currentIndex + 1]?.includes('|') && lines[currentIndex + 1]?.includes('-')) {
@@ -77,10 +90,10 @@ const SimpleMarkdownRenderer: React.FC<SimpleMarkdownRendererProps> = ({ content
         elements.push(listResult.element);
         currentIndex = listResult.nextIndex - 1;
       }
-      // Blockquotes
+      // Blockquotes — bare; .blog-prose blockquote styles it.
       else if (line.startsWith('> ')) {
         elements.push(
-          <blockquote key={currentIndex} className="border-l-4 border-blue-500 pl-4 py-2 my-4 bg-gray-50 dark:bg-gray-800 italic">
+          <blockquote key={currentIndex}>
             {parseInlineFormatting(line.substring(2))}
           </blockquote>
         );
@@ -91,20 +104,23 @@ const SimpleMarkdownRenderer: React.FC<SimpleMarkdownRendererProps> = ({ content
         if (match) {
           const [, title, url] = match;
           elements.push(
-            <div key={currentIndex} className="my-8">
-              <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-lg">
+            <figure key={currentIndex} className="my-8">
+              <div className="rounded-lg overflow-hidden border border-border bg-background-elevated">
                 <iframe
                   src={url}
                   title={title}
-                  className="w-full border-0"
-                  style={{ height: '620px', background: '#0a0a1a' }}
+                  className="aspect-video w-full border-0"
                   loading="lazy"
+                  sandbox="allow-scripts allow-same-origin"
+                  referrerPolicy="no-referrer"
                 />
               </div>
               {title && (
-                <p className="text-center text-sm text-muted-foreground mt-3 italic">{title}</p>
+                <figcaption className="text-center text-body-sm text-foreground-muted mt-3 italic">
+                  {title}
+                </figcaption>
               )}
-            </div>
+            </figure>
           );
         }
       }
@@ -114,35 +130,33 @@ const SimpleMarkdownRenderer: React.FC<SimpleMarkdownRendererProps> = ({ content
         if (match) {
           const [, alt, url] = match;
           elements.push(
-            <div key={currentIndex} className="my-6">
+            <figure key={currentIndex} className="my-6">
               <img
                 src={url}
                 alt={alt}
-                className="w-full rounded-lg shadow-lg border border-gray-200 dark:border-gray-700"
+                className="w-full rounded-lg border border-border"
                 loading="lazy"
               />
               {alt && (
-                <p className="text-center text-sm text-muted-foreground mt-2 italic">{alt}</p>
+                <figcaption className="text-center text-body-sm text-foreground-muted mt-2 italic">
+                  {alt}
+                </figcaption>
               )}
-            </div>
+            </figure>
           );
         }
       }
       // Horizontal rule
       else if (line === '---' || line === '***') {
-        elements.push(
-          <hr key={currentIndex} className="border-t border-gray-300 dark:border-gray-600 my-8" />
-        );
+        elements.push(<hr key={currentIndex} />);
       }
       // Regular paragraphs
       else {
         elements.push(
-          <p key={currentIndex} className="mb-4 leading-relaxed text-gray-700 dark:text-gray-300">
-            {parseInlineFormatting(line)}
-          </p>
+          <p key={currentIndex}>{parseInlineFormatting(line)}</p>
         );
       }
-      
+
       currentIndex++;
     }
 
@@ -152,7 +166,7 @@ const SimpleMarkdownRenderer: React.FC<SimpleMarkdownRendererProps> = ({ content
   const parseTable = (lines: string[], startIndex: number) => {
     const tableLines: string[] = [];
     let currentIndex = startIndex;
-    
+
     // Collect all table lines
     while (currentIndex < lines.length && lines[currentIndex].includes('|')) {
       tableLines.push(lines[currentIndex]);
@@ -170,35 +184,31 @@ const SimpleMarkdownRenderer: React.FC<SimpleMarkdownRendererProps> = ({ content
     const headers = headerLine.split('|').map(cell => cell.trim()).filter(cell => cell);
 
     // Parse data rows
-    const rows = dataLines.map(line => 
+    const rows = dataLines.map(line =>
       line.split('|').map(cell => cell.trim()).filter(cell => cell)
     );
 
     const tableElement = (
-      <div key={startIndex} className="my-6 overflow-x-auto">
-        <table className="w-full border-collapse bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm">
-          <thead className="bg-gray-50 dark:bg-gray-800">
-            <tr>
-              {headers.map((header, index) => (
-                <th key={index} className="border border-gray-200 dark:border-gray-700 px-6 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">
-                  {parseInlineFormatting(header)}
-                </th>
+      <table key={startIndex}>
+        <thead>
+          <tr>
+            {headers.map((header, index) => (
+              <th key={index} scope="col">
+                {parseInlineFormatting(header)}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, rowIndex) => (
+            <tr key={rowIndex}>
+              {row.map((cell, cellIndex) => (
+                <td key={cellIndex}>{parseInlineFormatting(cell)}</td>
               ))}
             </tr>
-          </thead>
-          <tbody>
-            {rows.map((row, rowIndex) => (
-              <tr key={rowIndex} className={rowIndex % 2 === 0 ? 'bg-white dark:bg-gray-900' : 'bg-gray-50 dark:bg-gray-800'}>
-                {row.map((cell, cellIndex) => (
-                  <td key={cellIndex} className="border border-gray-200 dark:border-gray-700 px-6 py-4 text-sm text-gray-700 dark:text-gray-300">
-                    {parseInlineFormatting(cell)}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
     );
 
     return { element: tableElement, nextIndex: currentIndex };
@@ -218,10 +228,11 @@ const SimpleMarkdownRenderer: React.FC<SimpleMarkdownRendererProps> = ({ content
 
     // Check if it's a mermaid diagram
     if (language === 'mermaid') {
-      const mermaidId = `mermaid-${startIndex}-${Date.now()}`;
+      const mermaidId = `mermaid-${baseId}-${startIndex}`;
       const code = codeLines.join('\n');
-      
-      setTimeout(() => {
+
+      // Schedule a render once the node is mounted.
+      queueMicrotask(() => {
         const element = document.getElementById(mermaidId);
         if (element && code.trim()) {
           try {
@@ -232,14 +243,14 @@ const SimpleMarkdownRenderer: React.FC<SimpleMarkdownRendererProps> = ({ content
             console.error('Mermaid rendering error:', error);
           }
         }
-      }, 100);
+      });
 
       return {
         element: (
           <div key={startIndex} className="my-8 flex justify-center">
-            <div 
+            <div
               id={mermaidId}
-              className="mermaid bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm overflow-x-auto"
+              className="mermaid bg-background-elevated border border-border rounded-lg p-6 overflow-x-auto"
             >
               {code}
             </div>
@@ -250,13 +261,9 @@ const SimpleMarkdownRenderer: React.FC<SimpleMarkdownRendererProps> = ({ content
     }
 
     const codeElement = (
-      <div key={startIndex} className="my-6">
-        <pre className="bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg p-4 overflow-x-auto">
-          <code className={`language-${language} text-sm`}>
-            {codeLines.join('\n')}
-          </code>
-        </pre>
-      </div>
+      <pre key={startIndex}>
+        <code className={`language-${language}`}>{codeLines.join('\n')}</code>
+      </pre>
     );
 
     return { element: codeElement, nextIndex: currentIndex + 1 };
@@ -283,14 +290,11 @@ const SimpleMarkdownRenderer: React.FC<SimpleMarkdownRendererProps> = ({ content
     }
 
     const ListTag = isOrdered ? 'ol' : 'ul';
-    const listClassName = isOrdered ? 'list-decimal' : 'list-disc';
 
     const listElement = (
-      <ListTag key={startIndex} className={`${listClassName} pl-6 mb-4 space-y-2`}>
+      <ListTag key={startIndex}>
         {listItems.map((item, index) => (
-          <li key={index} className="mb-1">
-            {parseInlineFormatting(item)}
-          </li>
+          <li key={index}>{parseInlineFormatting(item)}</li>
         ))}
       </ListTag>
     );
@@ -299,23 +303,26 @@ const SimpleMarkdownRenderer: React.FC<SimpleMarkdownRendererProps> = ({ content
   };
 
   const parseInlineFormatting = (text: string): React.ReactNode => {
-    // Handle inline code first
-    text = text.replace(/`([^`]+)`/g, '<code class="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-sm font-mono">$1</code>');
-    
+    // Handle inline code first — bare <code>; .blog-prose styles it.
+    text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+
     // Handle bold
-    text = text.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold">$1</strong>');
-    
+    text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
     // Handle italic
-    text = text.replace(/\*(.*?)\*/g, '<em class="italic">$1</em>');
-    
-    // Handle links
-    text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">$1</a>');
+    text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
+
+    // Handle links — bare <a>; .blog-prose styles link color/underline via accent tokens.
+    text = text.replace(
+      /\[([^\]]+)\]\(([^)]+)\)/g,
+      '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>'
+    );
 
     return <span dangerouslySetInnerHTML={{ __html: text }} />;
   };
 
   return (
-    <div className={`prose prose-lg max-w-none ${className}`}>
+    <div className={`blog-prose ${className}`}>
       {parseMarkdown(content)}
     </div>
   );

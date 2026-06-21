@@ -16,14 +16,12 @@ import {
   Server,
   Lock,
   FileCode,
-  RefreshCw,
   Wrench,
   Eye,
   Terminal,
   GitBranch,
   CloudCog,
   Play,
-  Layers,
 } from "lucide-react";
 
 const PowerBIMCPCaseStudy = () => {
@@ -117,20 +115,20 @@ const PowerBIMCPCaseStudy = () => {
 
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="py-16 md:py-24 bg-gradient-to-b from-primary/10 via-primary/5 to-background">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm md:py-section bg-accent-brand-soft/40">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-2 mb-6">
                 <Badge variant="outline" className="text-xs">Pet Project</Badge>
-                <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                <ChevronRight aria-hidden="true" className="h-4 w-4 text-foreground-muted" />
                 <Badge variant="outline" className="text-xs">AI + Power BI</Badge>
               </div>
 
-              <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
-                <span className="text-primary">Power BI MCP Server:</span> Bridging AI Assistants with Enterprise Business Intelligence
+              <h1 className="font-serif text-display-lg font-normal mb-6 leading-tight text-foreground">
+                Power BI MCP Server: <em className="italic font-normal text-accent-brand-strong">bridging AI assistants</em> with enterprise business intelligence
               </h1>
 
-              <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-4xl">
+              <p className="text-body-lg text-foreground-muted mb-8 leading-relaxed max-w-4xl">
                 An enterprise-grade Model Context Protocol server enabling AI assistants like Claude to interact with
                 Microsoft Power BI through natural language: executing DAX queries, exploring models, and performing
                 safe bulk operations across Desktop and Cloud environments.
@@ -138,7 +136,7 @@ const PowerBIMCPCaseStudy = () => {
 
               <div className="flex flex-wrap gap-3 mb-6">
                 {techStack.map((tech, index) => (
-                  <Badge key={index} className="bg-primary/10 text-primary hover:bg-primary/20 px-3 py-1">
+                  <Badge key={index} className="bg-accent-brand-soft text-accent-brand-strong px-3 py-1">
                     {tech.name}
                   </Badge>
                 ))}
@@ -149,9 +147,9 @@ const PowerBIMCPCaseStudy = () => {
                   href="https://github.com/sulaiman013/powerbi-mcp"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-accent-brand text-accent-brand-foreground rounded-sm transition-colors duration-fast ease-out-quart"
                 >
-                  <GitBranch className="h-4 w-4" />
+                  <GitBranch aria-hidden="true" className="h-4 w-4" />
                   View on GitHub
                 </a>
                 <Badge variant="secondary" className="px-3 py-2">
@@ -163,18 +161,18 @@ const PowerBIMCPCaseStudy = () => {
         </section>
 
         {/* Key Results */}
-        <section className="py-12 bg-background border-y">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background border-y border-border">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="grid md:grid-cols-3 gap-8">
                 {keyResults.map((result, index) => (
                   <div key={index} className="text-center">
-                    <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                      <result.icon className="h-7 w-7 text-primary" />
+                    <div className="w-14 h-14 rounded-full bg-accent-brand-soft flex items-center justify-center mx-auto mb-4">
+                      <result.icon aria-hidden="true" className="h-7 w-7 text-accent-brand-strong" />
                     </div>
-                    <div className="text-3xl md:text-4xl font-bold text-primary mb-2">{result.value}</div>
-                    <div className="font-semibold mb-1">{result.label}</div>
-                    <div className="text-sm text-muted-foreground">{result.description}</div>
+                    <div className="font-serif text-display-md font-normal text-accent-brand-strong mb-2">{result.value}</div>
+                    <div className="text-h4 font-semibold mb-1">{result.label}</div>
+                    <div className="text-body-sm text-foreground-muted">{result.description}</div>
                   </div>
                 ))}
               </div>
@@ -183,18 +181,18 @@ const PowerBIMCPCaseStudy = () => {
         </section>
 
         {/* The Challenge */}
-        <section className="py-16 bg-muted/30">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background-elevated">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center">
-                  <AlertTriangle className="h-5 w-5 text-orange-500" />
+                <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                  <AlertTriangle aria-hidden="true" className="h-5 w-5 text-warning" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold">The Challenge</h2>
+                <h2 className="font-serif text-h2 font-normal text-foreground">The Challenge</h2>
               </div>
 
               <div className="mb-8">
-                <p className="text-lg text-muted-foreground leading-relaxed">
+                <p className="text-body-lg text-foreground-muted leading-relaxed">
                   Power BI is the industry-leading business intelligence platform, yet integrating AI assistants
                   with Power BI workflows has been nearly impossible. Developers face fragmented tooling,
                   dangerous API limitations, and no standardized way for AI to understand and interact with
@@ -204,15 +202,15 @@ const PowerBIMCPCaseStudy = () => {
 
               <div className="grid md:grid-cols-2 gap-6">
                 {challenges.map((challenge, index) => (
-                  <Card key={index} className="border-orange-500/20 bg-background">
+                  <Card key={index} className="bg-background transition-colors duration-fast ease-out-quart hover:border-border-strong">
                     <CardContent className="pt-6">
                       <div className="flex items-start gap-4">
-                        <div className="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center flex-shrink-0">
-                          <challenge.icon className="h-5 w-5 text-orange-500" />
+                        <div className="w-10 h-10 rounded-lg bg-accent-brand-soft flex items-center justify-center flex-shrink-0">
+                          <challenge.icon aria-hidden="true" className="h-5 w-5 text-warning" />
                         </div>
                         <div>
-                          <h3 className="font-semibold mb-2">{challenge.title}</h3>
-                          <p className="text-sm text-muted-foreground">{challenge.description}</p>
+                          <h3 className="text-h4 font-semibold mb-2">{challenge.title}</h3>
+                          <p className="text-body-sm text-foreground-muted">{challenge.description}</p>
                         </div>
                       </div>
                     </CardContent>
@@ -221,18 +219,18 @@ const PowerBIMCPCaseStudy = () => {
               </div>
 
               {/* Critical Problem Highlight */}
-              <Card className="mt-10 border-red-500/30 bg-red-500/5">
+              <Card className="mt-10 bg-background-elevated">
                 <CardContent className="pt-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-lg bg-red-500/10 flex items-center justify-center flex-shrink-0">
-                      <AlertTriangle className="h-6 w-6 text-red-500" />
+                    <div className="w-12 h-12 rounded-lg bg-accent-brand-soft flex items-center justify-center flex-shrink-0">
+                      <AlertTriangle aria-hidden="true" className="h-6 w-6 text-destructive" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-lg mb-2">The Breaking Point: TOM API Limitations</h3>
-                      <p className="text-muted-foreground mb-4">
+                      <h3 className="text-h3 font-bold mb-2">The Breaking Point: TOM API Limitations</h3>
+                      <p className="text-foreground-muted mb-4">
                         "Renaming a table via TOM breaks all report visuals referencing that table."
                       </p>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-body-sm text-foreground-muted">
                         This single limitation caused hours of manual fixes for every refactoring operation.
                         The V1-to-V2 evolution of this project specifically addressed this critical pain point
                         with a revolutionary PBIP-based approach.
@@ -246,19 +244,19 @@ const PowerBIMCPCaseStudy = () => {
         </section>
 
         {/* The Solution */}
-        <section className="py-16 bg-background">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center">
-                  <Target className="h-5 w-5 text-green-500" />
+                <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                  <Target aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold">The Solution</h2>
+                <h2 className="font-serif text-h2 font-normal text-foreground">The Solution</h2>
               </div>
 
               <div className="grid lg:grid-cols-2 gap-10">
                 <div>
-                  <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                  <p className="text-body-lg text-foreground-muted leading-relaxed mb-6">
                     I built an enterprise-grade <strong className="text-foreground">Model Context Protocol (MCP) server</strong> that
                     bridges AI assistants with Power BI, featuring a revolutionary three-tier connector architecture
                     and the industry's first PBIP-safe refactoring solution.
@@ -267,8 +265,8 @@ const PowerBIMCPCaseStudy = () => {
                   <div className="space-y-3">
                     {solutionFeatures.map((feature, index) => (
                       <div key={index} className="flex items-start gap-3">
-                        <CheckCircle2 className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
-                        <span className="text-sm">{feature}</span>
+                        <CheckCircle2 aria-hidden="true" className="h-5 w-5 text-accent-brand-strong mt-0.5 flex-shrink-0" />
+                        <span className="text-body-sm">{feature}</span>
                       </div>
                     ))}
                   </div>
@@ -276,65 +274,62 @@ const PowerBIMCPCaseStudy = () => {
 
                 {/* Three-Tier Architecture Visual */}
                 <div className="space-y-4">
-                  <Card className="border-blue-500/30 relative overflow-hidden">
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-blue-500" />
+                  <Card className="relative overflow-hidden transition-colors duration-fast ease-out-quart hover:border-border-strong">
                     <CardHeader className="pb-2">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center">
-                          <Terminal className="h-5 w-5 text-white" />
+                        <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                          <Terminal aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                         </div>
                         <div>
-                          <CardTitle className="text-lg">Desktop Connector</CardTitle>
-                          <p className="text-sm text-muted-foreground">ADOMD.NET</p>
+                          <CardTitle className="text-h4 font-semibold">Desktop Connector</CardTitle>
+                          <p className="text-body-sm text-foreground-muted">ADOMD.NET</p>
                         </div>
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm text-muted-foreground">Direct connection to local Power BI Desktop instances for development workflows</p>
+                      <p className="text-body-sm text-foreground-muted">Direct connection to local Power BI Desktop instances for development workflows</p>
                     </CardContent>
                   </Card>
 
                   <div className="flex justify-center">
-                    <ArrowRight className="h-6 w-6 text-muted-foreground rotate-90" />
+                    <ArrowRight aria-hidden="true" className="h-6 w-6 text-foreground-muted rotate-90" />
                   </div>
 
-                  <Card className="border-purple-500/30 relative overflow-hidden">
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-purple-500" />
+                  <Card className="relative overflow-hidden transition-colors duration-fast ease-out-quart hover:border-border-strong">
                     <CardHeader className="pb-2">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center">
-                          <CloudCog className="h-5 w-5 text-white" />
+                        <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                          <CloudCog aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                         </div>
                         <div>
-                          <CardTitle className="text-lg">XMLA Connector</CardTitle>
-                          <p className="text-sm text-muted-foreground">Power BI Service</p>
+                          <CardTitle className="text-h4 font-semibold">XMLA Connector</CardTitle>
+                          <p className="text-body-sm text-foreground-muted">Power BI Service</p>
                         </div>
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm text-muted-foreground">Cloud connectivity via XMLA endpoints for Premium/PPU workspaces</p>
+                      <p className="text-body-sm text-foreground-muted">Cloud connectivity via XMLA endpoints for Premium/PPU workspaces</p>
                     </CardContent>
                   </Card>
 
                   <div className="flex justify-center">
-                    <ArrowRight className="h-6 w-6 text-muted-foreground rotate-90" />
+                    <ArrowRight aria-hidden="true" className="h-6 w-6 text-foreground-muted rotate-90" />
                   </div>
 
-                  <Card className="border-green-500/30 relative overflow-hidden">
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-green-500" />
+                  <Card className="relative overflow-hidden transition-colors duration-fast ease-out-quart hover:border-border-strong">
                     <CardHeader className="pb-2">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center">
-                          <FileCode className="h-5 w-5 text-white" />
+                        <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                          <FileCode aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                         </div>
                         <div>
-                          <CardTitle className="text-lg">PBIP Connector</CardTitle>
-                          <p className="text-sm text-muted-foreground">Safe Refactoring</p>
+                          <CardTitle className="text-h4 font-semibold">PBIP Connector</CardTitle>
+                          <p className="text-body-sm text-foreground-muted">Safe Refactoring</p>
                         </div>
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm text-muted-foreground">Text-based editing that updates model AND report layers simultaneously</p>
+                      <p className="text-body-sm text-foreground-muted">Text-based editing that updates model AND report layers simultaneously</p>
                     </CardContent>
                   </Card>
                 </div>
@@ -344,14 +339,14 @@ const PowerBIMCPCaseStudy = () => {
         </section>
 
         {/* Before/After Comparison */}
-        <section className="py-16 bg-muted/30">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background-elevated">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center">
-                  <TrendingUp className="h-5 w-5 text-blue-500" />
+                <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                  <TrendingUp aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold">The Transformation</h2>
+                <h2 className="font-serif text-h2 font-normal text-foreground">The Transformation</h2>
               </div>
 
               <Card>
@@ -359,18 +354,18 @@ const PowerBIMCPCaseStudy = () => {
                   <div className="overflow-x-auto">
                     <table className="w-full">
                       <thead>
-                        <tr className="border-b bg-muted/50">
+                        <tr className="border-b border-border bg-background-elevated">
                           <th className="text-left p-4 font-semibold">Area</th>
-                          <th className="text-left p-4 font-semibold text-orange-500">Before</th>
-                          <th className="text-left p-4 font-semibold text-green-500">After</th>
+                          <th className="text-left p-4 font-semibold text-foreground-muted">Before</th>
+                          <th className="text-left p-4 font-semibold text-accent-brand-strong">After</th>
                         </tr>
                       </thead>
                       <tbody>
                         {beforeAfter.map((row, index) => (
-                          <tr key={index} className="border-b last:border-0">
+                          <tr key={index} className="border-b border-border last:border-0">
                             <td className="p-4 font-medium">{row.area}</td>
-                            <td className="p-4 text-sm text-muted-foreground">{row.before}</td>
-                            <td className="p-4 text-sm">{row.after}</td>
+                            <td className="p-4 text-body-sm text-foreground-muted">{row.before}</td>
+                            <td className="p-4 text-body-sm">{row.after}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -383,25 +378,25 @@ const PowerBIMCPCaseStudy = () => {
         </section>
 
         {/* Tool Categories */}
-        <section className="py-16 bg-background">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Wrench className="h-5 w-5 text-primary" />
+                <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                  <Wrench aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold">34 AI-Powered Tools</h2>
+                <h2 className="font-serif text-h2 font-normal text-foreground">34 AI-Powered Tools</h2>
               </div>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {toolCategories.map((category, index) => (
-                  <Card key={index} className="hover:border-primary/50 transition-colors">
+                  <Card key={index} className="transition-colors duration-fast ease-out-quart hover:border-border-strong">
                     <CardContent className="pt-6">
                       <div className="flex items-center justify-between mb-3">
-                        <h3 className="font-semibold">{category.name}</h3>
-                        <Badge variant="secondary" className="text-lg font-bold">{category.count}</Badge>
+                        <h3 className="text-h4 font-semibold">{category.name}</h3>
+                        <Badge variant="secondary" className="text-base font-bold">{category.count}</Badge>
                       </div>
-                      <p className="text-sm text-muted-foreground">{category.description}</p>
+                      <p className="text-body-sm text-foreground-muted">{category.description}</p>
                     </CardContent>
                   </Card>
                 ))}
@@ -411,54 +406,54 @@ const PowerBIMCPCaseStudy = () => {
         </section>
 
         {/* Technical Deep Dive */}
-        <section className="py-16 bg-muted/30">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background-elevated">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-purple-500/10 flex items-center justify-center">
-                  <Code2 className="h-5 w-5 text-purple-500" />
+                <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                  <Code2 aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold">Technical Innovation</h2>
+                <h2 className="font-serif text-h2 font-normal text-foreground">Technical Innovation</h2>
               </div>
 
               <Card className="mb-8">
                 <CardHeader>
-                  <CardTitle>The PBIP Breakthrough: Safe Refactoring</CardTitle>
+                  <CardTitle className="text-h3 font-bold">The PBIP Breakthrough: Safe Refactoring</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p className="text-muted-foreground">
+                  <p className="text-foreground-muted">
                     The key innovation is the PBIP (Power BI Project) connector that performs file-based editing,
                     simultaneously updating both the semantic model layer and report visual definitions. This is
                     something the native TOM API cannot achieve.
                   </p>
 
                   <div className="grid md:grid-cols-2 gap-4">
-                    <div className="flex items-start gap-3 p-4 rounded-lg bg-muted/50">
-                      <FileCode className="h-5 w-5 text-green-500 mt-0.5" />
+                    <div className="flex items-start gap-3 p-4 rounded-lg bg-background-elevated border border-border">
+                      <FileCode aria-hidden="true" className="h-5 w-5 text-accent-brand-strong mt-0.5" />
                       <div>
-                        <h4 className="font-semibold text-sm">TMDL Updates</h4>
-                        <p className="text-xs text-muted-foreground">Modifies Tabular Model Definition Language files</p>
+                        <h4 className="text-h4 font-semibold">TMDL Updates</h4>
+                        <p className="text-caption text-foreground-muted">Modifies Tabular Model Definition Language files</p>
                       </div>
                     </div>
-                    <div className="flex items-start gap-3 p-4 rounded-lg bg-muted/50">
-                      <Code2 className="h-5 w-5 text-blue-500 mt-0.5" />
+                    <div className="flex items-start gap-3 p-4 rounded-lg bg-background-elevated border border-border">
+                      <Code2 aria-hidden="true" className="h-5 w-5 text-accent-brand-strong mt-0.5" />
                       <div>
-                        <h4 className="font-semibold text-sm">DAX Rewriting</h4>
-                        <p className="text-xs text-muted-foreground">Regex-based expression updates with quote fixing</p>
+                        <h4 className="text-h4 font-semibold">DAX Rewriting</h4>
+                        <p className="text-caption text-foreground-muted">Regex-based expression updates with quote fixing</p>
                       </div>
                     </div>
-                    <div className="flex items-start gap-3 p-4 rounded-lg bg-muted/50">
-                      <Eye className="h-5 w-5 text-purple-500 mt-0.5" />
+                    <div className="flex items-start gap-3 p-4 rounded-lg bg-background-elevated border border-border">
+                      <Eye aria-hidden="true" className="h-5 w-5 text-accent-brand-strong mt-0.5" />
                       <div>
-                        <h4 className="font-semibold text-sm">Visual.json Sync</h4>
-                        <p className="text-xs text-muted-foreground">Updates all report visual bindings atomically</p>
+                        <h4 className="text-h4 font-semibold">Visual.json Sync</h4>
+                        <p className="text-caption text-foreground-muted">Updates all report visual bindings atomically</p>
                       </div>
                     </div>
-                    <div className="flex items-start gap-3 p-4 rounded-lg bg-muted/50">
-                      <Database className="h-5 w-5 text-amber-500 mt-0.5" />
+                    <div className="flex items-start gap-3 p-4 rounded-lg bg-background-elevated border border-border">
+                      <Database aria-hidden="true" className="h-5 w-5 text-accent-brand-strong mt-0.5" />
                       <div>
-                        <h4 className="font-semibold text-sm">Q&A Schema</h4>
-                        <p className="text-xs text-muted-foreground">Maintains natural language query mappings</p>
+                        <h4 className="text-h4 font-semibold">Q&A Schema</h4>
+                        <p className="text-caption text-foreground-muted">Maintains natural language query mappings</p>
                       </div>
                     </div>
                   </div>
@@ -468,27 +463,27 @@ const PowerBIMCPCaseStudy = () => {
               {/* Security Features */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Shield className="h-5 w-5 text-primary" />
+                  <CardTitle className="flex items-center gap-2 text-h3 font-bold">
+                    <Shield aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                     Enterprise Security & Compliance
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="grid md:grid-cols-3 gap-4">
-                    <div className="p-4 rounded-lg bg-muted/50 text-center">
+                    <div className="p-4 rounded-lg bg-background-elevated border border-border text-center">
                       <Badge className="mb-3">PII Detection</Badge>
-                      <p className="text-sm font-medium">Automatic Masking</p>
-                      <p className="text-xs text-muted-foreground mt-1">SSN, Credit Cards, Emails, Phone</p>
+                      <p className="text-body-sm font-medium">Automatic Masking</p>
+                      <p className="text-caption text-foreground-muted mt-1">SSN, Credit Cards, Emails, Phone</p>
                     </div>
-                    <div className="p-4 rounded-lg bg-muted/50 text-center">
+                    <div className="p-4 rounded-lg bg-background-elevated border border-border text-center">
                       <Badge className="mb-3">Audit Logging</Badge>
-                      <p className="text-sm font-medium">Complete Trail</p>
-                      <p className="text-xs text-muted-foreground mt-1">GDPR, HIPAA, SOC2 Ready</p>
+                      <p className="text-body-sm font-medium">Complete Trail</p>
+                      <p className="text-caption text-foreground-muted mt-1">GDPR, HIPAA, SOC2 Ready</p>
                     </div>
-                    <div className="p-4 rounded-lg bg-muted/50 text-center">
+                    <div className="p-4 rounded-lg bg-background-elevated border border-border text-center">
                       <Badge className="mb-3">Access Control</Badge>
-                      <p className="text-sm font-medium">Table & Column Level</p>
-                      <p className="text-xs text-muted-foreground mt-1">Configurable Policies</p>
+                      <p className="text-body-sm font-medium">Table & Column Level</p>
+                      <p className="text-caption text-foreground-muted mt-1">Configurable Policies</p>
                     </div>
                   </div>
                 </CardContent>
@@ -498,27 +493,27 @@ const PowerBIMCPCaseStudy = () => {
         </section>
 
         {/* Video Demos */}
-        <section className="py-16 bg-background">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center">
-                  <Play className="h-5 w-5 text-red-500" />
+                <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                  <Play aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold">See It In Action</h2>
+                <h2 className="font-serif text-h2 font-normal text-foreground">See It In Action</h2>
               </div>
 
-              <p className="text-muted-foreground mb-8">
+              <p className="text-foreground-muted mb-8">
                 Watch the evolution of Power BI MCP Server from V1 to V2, featuring the groundbreaking PBIP-safe refactoring capabilities.
               </p>
 
               <div className="grid md:grid-cols-2 gap-8">
                 {/* V1 Demo */}
-                <Card className="overflow-hidden shadow-xl">
-                  <CardHeader className="bg-muted/30 border-b">
+                <Card className="overflow-hidden">
+                  <CardHeader className="bg-background-elevated border-b border-border">
                     <div className="flex items-center justify-between">
-                      <CardTitle className="flex items-center gap-2">
-                        <Play className="h-5 w-5 text-red-500" />
+                      <CardTitle className="flex items-center gap-2 text-h4 font-semibold">
+                        <Play aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                         V1 Demonstration
                       </CardTitle>
                       <Badge variant="outline" className="text-xs">Original Release</Badge>
@@ -541,14 +536,14 @@ const PowerBIMCPCaseStudy = () => {
                 </Card>
 
                 {/* V2 Update */}
-                <Card className="overflow-hidden shadow-xl border-primary/30">
-                  <CardHeader className="bg-primary/5 border-b">
+                <Card className="overflow-hidden">
+                  <CardHeader className="bg-accent-brand-soft border-b border-border">
                     <div className="flex items-center justify-between">
-                      <CardTitle className="flex items-center gap-2">
-                        <Play className="h-5 w-5 text-red-500" />
+                      <CardTitle className="flex items-center gap-2 text-h4 font-semibold">
+                        <Play aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                         V2 Update
                       </CardTitle>
-                      <Badge className="text-xs bg-primary text-primary-foreground">Latest</Badge>
+                      <Badge className="text-xs bg-accent-brand text-accent-brand-foreground">Latest</Badge>
                     </div>
                   </CardHeader>
                   <CardContent className="p-0">
@@ -568,8 +563,8 @@ const PowerBIMCPCaseStudy = () => {
                 </Card>
               </div>
 
-              <div className="mt-6 p-4 rounded-lg bg-muted/30 text-center">
-                <p className="text-sm text-muted-foreground">
+              <div className="mt-6 p-4 rounded-lg bg-background-elevated border border-border text-center">
+                <p className="text-body-sm text-foreground-muted">
                   <strong className="text-foreground">V2 Highlights:</strong> PBIP-safe refactoring, automatic DAX rewriting, visual.json synchronization, and zero broken visuals during rename operations.
                 </p>
               </div>
@@ -578,11 +573,11 @@ const PowerBIMCPCaseStudy = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 bg-gradient-to-r from-primary/10 to-blue-500/10 border-t">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-accent-brand-soft/40 border-t border-border">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4">Ready to Supercharge Your Power BI Workflow?</h2>
-              <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
+              <h2 className="font-serif text-h2 font-normal text-foreground mb-4">Ready to supercharge your Power BI workflow?</h2>
+              <p className="text-foreground-muted mb-8 max-w-2xl mx-auto">
                 Transform how you interact with Power BI. Let AI assistants help you explore models, write DAX,
                 and safely refactor your semantic models through natural language.
               </p>
@@ -591,9 +586,9 @@ const PowerBIMCPCaseStudy = () => {
                   href="https://github.com/sulaiman013/powerbi-mcp"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-semibold"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-accent-brand text-accent-brand-foreground rounded-sm transition-colors duration-fast ease-out-quart font-semibold"
                 >
-                  <GitBranch className="h-5 w-5" />
+                  <GitBranch aria-hidden="true" className="h-5 w-5" />
                   Get Started on GitHub
                 </a>
               </div>

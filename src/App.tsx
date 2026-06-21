@@ -2,13 +2,11 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from "@/hooks/useTheme";
 import ScrollToTop from "@/components/ScrollToTop";
 import Index from "./pages/Index";
 import About from "./pages/About";
-import Portfolio from "./pages/Portfolio";
-import Experience from "./pages/Experience";
 import NotFound from "./pages/NotFound";
 
 // Blog (Supabase fallback + 7 static)
@@ -20,6 +18,7 @@ import ParquetTableFormatBlog from "./pages/ParquetTableFormatBlog";
 import MaterializedLakeViewsBlog from "./pages/MaterializedLakeViewsBlog";
 import DirectLakeBlog from "./pages/DirectLakeBlog";
 import PowerBIAIAssistantBlog from "./pages/PowerBIAIAssistantBlog";
+import FabricAppsRayfinBlog from "./pages/FabricAppsRayfinBlog";
 
 // Case studies (13 total)
 import CaseStudyGallery from "./pages/CaseStudyGallery";
@@ -51,11 +50,12 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<About />} />
-            <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/experience" element={<Experience />} />
+            <Route path="/portfolio" element={<Navigate to="/case-study" replace />} />
+            <Route path="/experience" element={<Navigate to="/about" replace />} />
 
-            {/* Blog: /blog listing + 7 static TSX routes BEFORE /blog/:slug */}
+            {/* Blog: /blog listing + static TSX routes BEFORE /blog/:slug */}
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/dashboards-to-data-apps-rayfin" element={<FabricAppsRayfinBlog />} />
             <Route path="/blog/custom-powerbi-ai-assistant-problems-and-solutions" element={<PowerBIAIAssistantBlog />} />
             <Route path="/blog/fabric-direct-lake-semantic-models" element={<DirectLakeBlog />} />
             <Route path="/blog/fabric-materialized-lake-views" element={<MaterializedLakeViewsBlog />} />

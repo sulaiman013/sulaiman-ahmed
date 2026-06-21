@@ -43,7 +43,6 @@ interface CaseStudy {
   subtitle: string;
   description: string;
   icon: LucideIcon;
-  color: string;
   tags: string[];
   metrics: Metric[];
   link?: string;
@@ -60,7 +59,6 @@ const caseStudies: CaseStudy[] = [
     description:
       "Achieved 99.999% P&L accuracy and 100% Balance Sheet verification by building an automated 3-tier Medallion Architecture that replaced manual QuickBooks exports and Excel reconciliation.",
     icon: GitBranch,
-    color: "green",
     tags: ["Power BI", "Python", "QuickBooks API", "DAX"],
     metrics: [
       { icon: Clock, value: "10+ hrs", label: "Saved Weekly" },
@@ -76,7 +74,6 @@ const caseStudies: CaseStudy[] = [
     description:
       "Identified high-risk customers before they left by unifying 4 siloed data systems into a single customer view and engineering 30+ ML features for proactive retention targeting.",
     icon: Brain,
-    color: "orange",
     tags: ["Databricks", "dbt", "Python", "scikit-learn", "Unity Catalog"],
     metrics: [
       { icon: DollarSign, value: "$5-6M", label: "Annual Impact" },
@@ -93,7 +90,6 @@ const caseStudies: CaseStudy[] = [
     description:
       "Eliminated month-end consolidation delays by building a real-time reporting platform that processes 120,846 transactions and enables drill-down from consolidated view to entity-level details.",
     icon: BarChart3,
-    color: "blue",
     tags: ["Power BI", "MySQL", "Python", "DAX"],
     metrics: [
       { icon: DollarSign, value: "$166.7M+", label: "Consolidated" },
@@ -109,7 +105,6 @@ const caseStudies: CaseStudy[] = [
     description:
       "Freed business-critical data trapped in a CRM with no API access by building an automated extraction pipeline, then added AI-powered natural language insights for instant business answers.",
     icon: Lock,
-    color: "orange",
     tags: ["Python", "Selenium", "MySQL", "Power BI", "MCP", "Claude AI"],
     metrics: [
       { icon: Clock, value: "30 min", label: "Data Freshness" },
@@ -125,7 +120,6 @@ const caseStudies: CaseStudy[] = [
     description:
       "Built a multi-modal BI assistant that routes between text-to-DAX, screenshot vision, and report-guide grounding through one Edge endpoint. Validated across 7 tenants. ~88% cost reduction post-optimization. Includes the full system map, the 7-layer onion architecture, the deterministic recipe layer, and the 9-phase replication playbook.",
     icon: Sparkles,
-    color: "purple",
     tags: ["OpenRouter", "Power BI", "DAX", "Vector DB", "Vision LLM", "Edge Runtime", "Recipe Layer"],
     metrics: [
       { icon: Target, value: "91.8%", label: "Answer Accuracy" },
@@ -141,7 +135,6 @@ const caseStudies: CaseStudy[] = [
     description:
       "Secure authentication system for Power BI reports with 4 user profiles and tailored data access for 50+ external agents without additional Pro licenses.",
     icon: Shield,
-    color: "amber",
     tags: ["Power BI", "Power Apps", "Azure Functions", "Row-Level Security"],
     metrics: [
       { icon: DollarSign, value: "$1K+", label: "Saved/Year" },
@@ -157,7 +150,6 @@ const caseStudies: CaseStudy[] = [
     description:
       "Mitron Bank, a legacy financial institution in Hyderabad, needed to launch a new credit card line. Analyzed 4,000 customers across 5 cities to classify demographics, identify top spending categories, and recommend card features that maximize adoption. Delivered a pilot analysis that secured the full project engagement.",
     icon: BarChart3,
-    color: "orange",
     tags: ["Power BI", "Python", "Excel", "Customer Segmentation", "Data Analysis"],
     metrics: [
       { icon: Users, value: "4,000", label: "Customers" },
@@ -175,7 +167,6 @@ const caseStudies: CaseStudy[] = [
     description:
       "Built a comprehensive Power BI analytics suite covering finance, sales, marketing, supply chain, and executive performance. Advanced data modeling with star schema, KPI tracking, and interactive drill-downs enabled leadership to make data-driven decisions across the entire organization.",
     icon: Layers,
-    color: "blue",
     tags: ["Power BI", "Data Modeling", "DAX", "KPIs", "Star Schema"],
     metrics: [
       { icon: Layers, value: "5", label: "Departments" },
@@ -193,7 +184,6 @@ const caseStudies: CaseStudy[] = [
     description:
       "Delivered three production Power BI solutions across different industries: (1) comprehensive financial statements with P&L, Balance Sheet, Cash Flow, and Aged Trial Balance; (2) NY state hospital cost and efficiency analytics for elective surgeries; (3) customer retention cohort analysis with monthly and weekly trends. End-to-end data modeling and interactive dashboard design for each domain.",
     icon: BarChart3,
-    color: "green",
     tags: ["Power BI", "DAX", "Data Modeling", "Financial Analysis", "Healthcare", "Retail"],
     metrics: [
       { icon: Layers, value: "3", label: "Industries" },
@@ -214,7 +204,6 @@ const petProjects: CaseStudy[] = [
     description:
       "Enabled non-technical users to query Power BI data in plain English by building an open-source AI assistant, eliminating per-user Copilot licensing costs while maintaining 100% data security.",
     icon: Bot,
-    color: "blue",
     tags: ["Python", "Flask", "Azure AI Foundry", "Ollama", "XMLA", "DAX"],
     metrics: [
       { icon: Clock, value: "70-80%", label: "Faster Queries" },
@@ -232,7 +221,6 @@ const petProjects: CaseStudy[] = [
     description:
       "Enabled Claude to execute DAX queries and explore Power BI models via natural language by building an open-source MCP server with 3 connection methods and enterprise-grade security.",
     icon: Bot,
-    color: "purple",
     tags: ["Python", "MCP", "ADOMD.NET", "XMLA", "TMDL"],
     metrics: [
       { icon: Wrench, value: "34", label: "AI Tools" },
@@ -250,7 +238,6 @@ const petProjects: CaseStudy[] = [
     description:
       "Enabled instant schema discovery and complex filtering without training by building an MCP server with 100% input validation that prevents accidental data corruption.",
     icon: Table,
-    color: "amber",
     tags: ["Python", "MCP", "pyairtable", "Claude Desktop"],
     metrics: [
       { icon: Wrench, value: "6", label: "Core Tools" },
@@ -267,7 +254,6 @@ const petProjects: CaseStudy[] = [
     description:
       "Reduced the SQL learning curve for analysts new to Fabric by building an MCP server that auto-generates queries from natural language with Azure AD authentication for enterprise compliance.",
     icon: Database,
-    color: "green",
     tags: ["Python", "MCP", "pyodbc", "MSAL", "OpenAI"],
     metrics: [
       { icon: Sparkles, value: "AI", label: "Query Gen" },
@@ -285,7 +271,6 @@ const petProjects: CaseStudy[] = [
     description:
       "Eliminated configuration errors by building a visual form builder with AI-powered code generation, reducing Microsoft Fabric workspace provisioning time by 90%.",
     icon: Settings,
-    color: "teal",
     tags: ["n8n", "Microsoft Fabric", "Azure AD", "OpenAI"],
     metrics: [
       { icon: Clock, value: "90%", label: "Time Saved" },
@@ -297,85 +282,49 @@ const petProjects: CaseStudy[] = [
   },
 ];
 
-const colorMap: Record<string, { bg: string; border: string; text: string; badge: string }> = {
-  blue: {
-    bg: "from-blue-500/10 to-blue-500/5",
-    border: "border-blue-500/30 hover:border-blue-500/50",
-    text: "text-blue-500",
-    badge: "bg-blue-500/10 text-blue-500",
-  },
-  purple: {
-    bg: "from-purple-500/10 to-purple-500/5",
-    border: "border-purple-500/30 hover:border-purple-500/50",
-    text: "text-purple-500",
-    badge: "bg-purple-500/10 text-purple-500",
-  },
-  amber: {
-    bg: "from-amber-500/10 to-amber-500/5",
-    border: "border-amber-500/30 hover:border-amber-500/50",
-    text: "text-amber-500",
-    badge: "bg-amber-500/10 text-amber-500",
-  },
-  green: {
-    bg: "from-green-500/10 to-green-500/5",
-    border: "border-green-500/30 hover:border-green-500/50",
-    text: "text-green-500",
-    badge: "bg-green-500/10 text-green-500",
-  },
-  teal: {
-    bg: "from-teal-500/10 to-teal-500/5",
-    border: "border-teal-500/30 hover:border-teal-500/50",
-    text: "text-teal-500",
-    badge: "bg-teal-500/10 text-teal-500",
-  },
-  orange: {
-    bg: "from-orange-500/10 to-orange-500/5",
-    border: "border-orange-500/30 hover:border-orange-500/50",
-    text: "text-orange-500",
-    badge: "bg-orange-500/10 text-orange-500",
-  },
-  rose: {
-    bg: "from-rose-500/10 to-rose-500/5",
-    border: "border-rose-500/30 hover:border-rose-500/50",
-    text: "text-rose-500",
-    badge: "bg-rose-500/10 text-rose-500",
-  },
+// Unified brand-accent scheme. The card identity now comes from the
+// icon + content, not from a per-card color. Tokens cascade to both
+// light and dark modes so contrast stays accessible everywhere.
+const cardTheme = {
+  border: "border-border hover:border-border-strong",
+  text: "text-accent-brand-strong dark:text-accent-brand",
+  badge: "bg-accent-brand-soft text-accent-brand-strong dark:bg-accent-brand-soft/60 dark:text-accent-brand",
 };
 
 function CaseStudyCard({ study }: { study: CaseStudy }) {
-  const colors = colorMap[study.color] || colorMap.blue;
   const hasDetailPage = !!study.link;
 
   const inner = (
     <Card
-      className={`h-full transition-all duration-300 ${colors.border} bg-gradient-to-br ${colors.bg} hover:shadow-xl hover:-translate-y-1`}
+      className={`h-full bg-background-elevated ${cardTheme.border} transition-all duration-fast ease-out-quart hover:shadow-soft hover:-translate-y-0.5`}
     >
       <CardHeader>
         <div className="flex items-start justify-between mb-4">
           <div
-            className={`w-14 h-14 rounded-xl ${colors.badge} flex items-center justify-center`}
+            className={`w-14 h-14 rounded-xl ${cardTheme.badge} flex items-center justify-center`}
           >
-            <study.icon className={`h-7 w-7 ${colors.text}`} />
+            <study.icon className={`h-7 w-7 ${cardTheme.text}`} aria-hidden="true" />
           </div>
           {hasDetailPage && (
             <ArrowRight
-              className={`h-5 w-5 ${colors.text} opacity-0 group-hover:opacity-100 transition-opacity`}
+              className="h-5 w-5 text-accent-brand opacity-60 transition-all duration-fast ease-out-quart group-hover:translate-x-0.5 group-hover:opacity-100"
+              aria-hidden="true"
             />
           )}
         </div>
-        <CardTitle className="text-xl mb-2 leading-tight">{study.title}</CardTitle>
-        <p className={`text-sm font-medium ${colors.text}`}>{study.subtitle}</p>
+        <CardTitle className="text-h3 font-bold leading-tight mb-2 text-foreground">{study.title}</CardTitle>
+        <p className={`text-sm font-medium ${cardTheme.text}`}>{study.subtitle}</p>
       </CardHeader>
       <CardContent className="space-y-6">
-        <p className="text-muted-foreground text-sm leading-relaxed">{study.description}</p>
+        <p className="text-foreground-muted text-sm leading-relaxed">{study.description}</p>
 
         {/* Metrics */}
         <div className="grid grid-cols-3 gap-3">
           {study.metrics.map((metric) => (
-            <div key={metric.label} className="text-center p-3 rounded-lg bg-background/50">
-              <metric.icon className={`h-4 w-4 ${colors.text} mx-auto mb-1`} />
-              <div className={`font-bold text-sm ${colors.text}`}>{metric.value}</div>
-              <div className="text-xs text-muted-foreground">{metric.label}</div>
+            <div key={metric.label} className="text-center p-3 rounded-lg bg-background-elevated">
+              <metric.icon className={`h-4 w-4 ${cardTheme.text} mx-auto mb-1`} aria-hidden="true" />
+              <div className={`font-serif text-lg font-medium leading-tight ${cardTheme.text}`}>{metric.value}</div>
+              <div className="text-xs text-foreground-muted">{metric.label}</div>
             </div>
           ))}
         </div>
@@ -393,10 +342,10 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
         <div className="flex items-center gap-3">
           {hasDetailPage && (
             <span
-              className={`flex items-center gap-2 text-sm font-medium ${colors.text} group-hover:gap-3 transition-all`}
+              className={`flex items-center gap-2 text-sm font-medium ${cardTheme.text} group-hover:gap-3 transition-all`}
             >
               View Full Case Study
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </span>
           )}
           {!hasDetailPage && (study.github || study.youtube) && (
@@ -407,9 +356,9 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-background/50 text-muted-foreground hover:text-foreground hover:bg-background transition-colors"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-background-elevated text-foreground-muted hover:text-accent-brand hover:bg-accent-brand-soft transition-colors"
                 >
-                  <Github className="h-3.5 w-3.5" /> GitHub
+                  <Github className="h-3.5 w-3.5" aria-hidden="true" /> GitHub
                 </a>
               )}
               {study.youtube && (
@@ -418,9 +367,9 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-background/50 text-muted-foreground hover:text-red-500 hover:bg-background transition-colors"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-background-elevated text-foreground-muted hover:text-accent-brand hover:bg-accent-brand-soft transition-colors"
                 >
-                  <Youtube className="h-3.5 w-3.5" /> Demo
+                  <Youtube className="h-3.5 w-3.5" aria-hidden="true" /> Demo
                 </a>
               )}
             </div>
@@ -442,19 +391,18 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
 }
 
 function PetProjectCard({ study }: { study: CaseStudy }) {
-  const colors = colorMap[study.color] || colorMap.blue;
   const hasDetailPage = !!study.link;
 
   const inner = (
     <Card
-      className={`h-full transition-all duration-300 ${colors.border} bg-gradient-to-br ${colors.bg} hover:shadow-xl hover:-translate-y-1`}
+      className={`h-full bg-background-elevated ${cardTheme.border} transition-all duration-fast ease-out-quart hover:shadow-soft hover:-translate-y-0.5`}
     >
       <CardHeader>
         <div className="flex items-start justify-between mb-4">
           <div
-            className={`w-14 h-14 rounded-xl ${colors.badge} flex items-center justify-center`}
+            className={`w-14 h-14 rounded-xl ${cardTheme.badge} flex items-center justify-center`}
           >
-            <study.icon className={`h-7 w-7 ${colors.text}`} />
+            <study.icon className={`h-7 w-7 ${cardTheme.text}`} aria-hidden="true" />
           </div>
           <div className="flex items-center gap-2">
             <Badge variant="outline" className="text-[10px] font-bold uppercase tracking-wider">
@@ -462,24 +410,25 @@ function PetProjectCard({ study }: { study: CaseStudy }) {
             </Badge>
             {hasDetailPage && (
               <ArrowRight
-                className={`h-5 w-5 ${colors.text} opacity-0 group-hover:opacity-100 transition-opacity`}
+                className="h-5 w-5 text-accent-brand opacity-60 transition-all duration-fast ease-out-quart group-hover:translate-x-0.5 group-hover:opacity-100"
+                aria-hidden="true"
               />
             )}
           </div>
         </div>
-        <CardTitle className="text-xl mb-2 leading-tight">{study.title}</CardTitle>
-        <p className={`text-sm font-medium ${colors.text}`}>{study.subtitle}</p>
+        <CardTitle className="text-h3 font-bold leading-tight mb-2 text-foreground">{study.title}</CardTitle>
+        <p className={`text-sm font-medium ${cardTheme.text}`}>{study.subtitle}</p>
       </CardHeader>
       <CardContent className="space-y-6">
-        <p className="text-muted-foreground text-sm leading-relaxed">{study.description}</p>
+        <p className="text-foreground-muted text-sm leading-relaxed">{study.description}</p>
 
         {/* Metrics */}
         <div className="grid grid-cols-3 gap-3">
           {study.metrics.map((metric) => (
-            <div key={metric.label} className="text-center p-3 rounded-lg bg-background/50">
-              <metric.icon className={`h-4 w-4 ${colors.text} mx-auto mb-1`} />
-              <div className={`font-bold text-sm ${colors.text}`}>{metric.value}</div>
-              <div className="text-xs text-muted-foreground">{metric.label}</div>
+            <div key={metric.label} className="text-center p-3 rounded-lg bg-background-elevated">
+              <metric.icon className={`h-4 w-4 ${cardTheme.text} mx-auto mb-1`} aria-hidden="true" />
+              <div className={`font-serif text-lg font-medium leading-tight ${cardTheme.text}`}>{metric.value}</div>
+              <div className="text-xs text-foreground-muted">{metric.label}</div>
             </div>
           ))}
         </div>
@@ -497,10 +446,10 @@ function PetProjectCard({ study }: { study: CaseStudy }) {
         <div className="flex items-center gap-2 pt-1">
           {hasDetailPage && (
             <span
-              className={`flex items-center gap-2 text-sm font-medium ${colors.text} group-hover:gap-3 transition-all`}
+              className={`flex items-center gap-2 text-sm font-medium ${cardTheme.text} group-hover:gap-3 transition-all`}
             >
               View Full Case Study
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </span>
           )}
           {!hasDetailPage && (
@@ -510,9 +459,9 @@ function PetProjectCard({ study }: { study: CaseStudy }) {
                   href={study.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium ${colors.badge} hover:opacity-80 transition-opacity`}
+                  className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium ${cardTheme.badge} hover:opacity-80 transition-opacity`}
                 >
-                  <Github className="h-4 w-4" /> View Source
+                  <Github className="h-4 w-4" aria-hidden="true" /> View Source
                 </a>
               )}
               {study.youtube && (
@@ -520,9 +469,9 @@ function PetProjectCard({ study }: { study: CaseStudy }) {
                   href={study.youtube}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium bg-red-500/10 text-red-500 hover:opacity-80 transition-opacity"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium bg-background-elevated text-foreground-muted hover:text-accent-brand hover:bg-accent-brand-soft transition-colors"
                 >
-                  <Youtube className="h-4 w-4" /> Watch Demo
+                  <Youtube className="h-4 w-4" aria-hidden="true" /> Watch Demo
                 </a>
               )}
             </>
@@ -549,16 +498,16 @@ export default function CaseStudiesPage() {
       <Navigation />
 
       {/* Hero */}
-      <section className="pt-20 py-16 md:py-24 bg-gradient-to-b from-primary/10 via-primary/5 to-background">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center">
+      <section className="pt-20 py-section-sm md:py-section">
+        <div className="max-w-page mx-auto px-6 md:px-12">
+          <div className="max-w-prose">
             <Badge variant="outline" className="text-xs mb-6">
               Portfolio
             </Badge>
-            <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
-              Data Engineering & AI Projects
+            <h1 className="font-serif text-display-md md:text-display-lg leading-tight tracking-tight text-foreground mb-6">
+              Data Engineering &amp; AI Projects
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-foreground-muted leading-relaxed">
               Each project shows the problem I solved, how I measured success, and the tools I used.
               Click any card for the full technical deep-dive.
             </p>
@@ -567,70 +516,61 @@ export default function CaseStudiesPage() {
       </section>
 
       {/* Case Studies */}
-      <section className="py-16 bg-background">
-        <div className="container mx-auto px-6">
-          <div className="max-w-6xl mx-auto">
-            <div className="mb-10">
-              <h2 className="text-2xl md:text-3xl font-bold mb-2">Case Studies</h2>
-              <p className="text-muted-foreground">
-                Client work and significant projects with measurable business impact.
-              </p>
-            </div>
-            <div className="grid md:grid-cols-2 gap-8">
-              {caseStudies.map((study) => (
-                <CaseStudyCard key={study.id} study={study} />
-              ))}
-            </div>
+      <section className="py-section-sm bg-background">
+        <div className="max-w-page mx-auto px-6 md:px-12">
+          <div className="mb-10">
+            <h2 className="font-serif text-h2 md:text-display-md text-foreground tracking-tight mb-2">
+              Case Studies
+            </h2>
+            <p className="text-foreground-muted">
+              Client work and significant projects with measurable business impact.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-8">
+            {caseStudies.map((study) => (
+              <CaseStudyCard key={study.id} study={study} />
+            ))}
           </div>
         </div>
       </section>
 
       {/* Pet Projects */}
-      <section className="py-16 bg-muted/20">
-        <div className="container mx-auto px-6">
-          <div className="max-w-6xl mx-auto">
-            <div className="mb-10">
-              <div className="flex items-center gap-3 mb-2">
-                <h2 className="text-2xl md:text-3xl font-bold">AI Exploration & Pet Projects</h2>
-                <Badge className="text-xs">Open Source</Badge>
-              </div>
-              <p className="text-muted-foreground max-w-2xl">
-                Side projects where I explore how AI can transform data workflows. Each one is
-                open-source with full code on GitHub. These reflect how I think about integrating AI
-                into everyday analytics work.
-              </p>
+      <section className="py-section-sm bg-background-elevated">
+        <div className="max-w-page mx-auto px-6 md:px-12">
+          <div className="mb-10">
+            <div className="flex items-center gap-3 mb-2">
+              <h2 className="font-serif text-h2 md:text-display-md text-foreground tracking-tight">
+                AI Exploration &amp; Pet Projects
+              </h2>
+              <Badge className="text-xs">Open Source</Badge>
             </div>
-            <div className="grid md:grid-cols-2 gap-8">
-              {petProjects.map((study) => (
-                <PetProjectCard key={study.id} study={study} />
-              ))}
-            </div>
+            <p className="text-foreground-muted max-w-2xl">
+              Side projects where I explore how AI can transform data workflows. Each one is
+              open-source with full code on GitHub. These reflect how I think about integrating AI
+              into everyday analytics work.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-8">
+            {petProjects.map((study) => (
+              <PetProjectCard key={study.id} study={study} />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Bottom CTA */}
-      <section className="py-16 bg-muted/30 border-t">
-        <div className="container mx-auto px-6">
-          <div className="max-w-3xl mx-auto text-center">
-            <Layers className="h-12 w-12 text-primary mx-auto mb-6" />
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">
-              Let's Build Something Together
-            </h2>
-            <p className="text-muted-foreground mb-6">
-              I solve data problems with Python, SQL, and cloud platforms. These projects show how I
-              think, build, and deliver results.
-            </p>
-            <div className="flex flex-wrap gap-3 justify-center">
-              {["Databricks", "Power BI", "dbt", "Python", "Microsoft Fabric", "AI/ML"].map(
-                (tech) => (
-                  <Badge key={tech} className="text-sm px-4 py-2">
-                    {tech}
-                  </Badge>
-                )
-              )}
-            </div>
-          </div>
+      {/* Bottom link block */}
+      <section className="py-section-sm border-t border-border">
+        <div className="max-w-page mx-auto px-6 md:px-12">
+          <p className="text-foreground-muted">
+            Want to talk about a project?{" "}
+            <Link
+              to="/contact"
+              className="text-accent-brand-strong underline decoration-accent-brand/50 underline-offset-2 hover:decoration-accent-brand transition-colors"
+            >
+              Get in touch
+            </Link>
+            .
+          </p>
         </div>
       </section>
 

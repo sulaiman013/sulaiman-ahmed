@@ -116,20 +116,20 @@ const FabricForgeCaseStudy = () => {
 
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="py-16 md:py-24 bg-gradient-to-b from-primary/10 via-primary/5 to-background">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm md:py-section bg-accent-brand-soft/40">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-2 mb-6">
                 <Badge variant="outline" className="text-xs">Pet Project</Badge>
-                <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                <ChevronRight aria-hidden="true" className="h-4 w-4 text-foreground-muted" />
                 <Badge variant="outline" className="text-xs">Microsoft Fabric Automation</Badge>
               </div>
 
-              <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
-                <span className="text-primary">FabricForge:</span> Visual Workspace Automation for Microsoft Fabric
+              <h1 className="font-serif text-display-lg font-normal mb-6 leading-tight text-foreground">
+                FabricForge: <em className="italic font-normal text-accent-brand-strong">visual workspace automation</em> for Microsoft Fabric
               </h1>
 
-              <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-4xl">
+              <p className="text-body-lg text-foreground-muted mb-8 leading-relaxed max-w-4xl">
                 A web-based visual form builder that transforms Microsoft Fabric workspace provisioning from
                 hours of manual configuration to minutes of automated deployment, with AI-powered code generation
                 and n8n workflow orchestration.
@@ -137,7 +137,7 @@ const FabricForgeCaseStudy = () => {
 
               <div className="flex flex-wrap gap-3 mb-6">
                 {techStack.map((tech, index) => (
-                  <Badge key={index} className="bg-primary/10 text-primary hover:bg-primary/20 px-3 py-1">
+                  <Badge key={index} className="bg-accent-brand-soft text-accent-brand-strong px-3 py-1">
                     {tech.name}
                   </Badge>
                 ))}
@@ -148,18 +148,18 @@ const FabricForgeCaseStudy = () => {
                   href="https://datacrafters.io/fabricforge/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-accent-brand text-accent-brand-foreground rounded-sm transition-colors duration-fast ease-out-quart"
                 >
-                  <ExternalLink className="h-4 w-4" />
+                  <ExternalLink aria-hidden="true" className="h-4 w-4" />
                   Try FabricForge
                 </a>
                 <a
                   href="https://datacrafters.io/microsoft-fabric-workspace-automation-with-fabricforge/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary/10 transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2 border border-border text-accent-brand-strong rounded-sm transition-colors duration-fast ease-out-quart hover:border-border-strong hover:bg-accent-brand-soft"
                 >
-                  <FileJson className="h-4 w-4" />
+                  <FileJson aria-hidden="true" className="h-4 w-4" />
                   Documentation
                 </a>
               </div>
@@ -168,18 +168,18 @@ const FabricForgeCaseStudy = () => {
         </section>
 
         {/* Key Results */}
-        <section className="py-12 bg-background border-y">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background border-y border-border">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="grid md:grid-cols-3 gap-8">
                 {keyResults.map((result, index) => (
                   <div key={index} className="text-center">
-                    <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                      <result.icon className="h-7 w-7 text-primary" />
+                    <div className="w-14 h-14 rounded-full bg-accent-brand-soft flex items-center justify-center mx-auto mb-4">
+                      <result.icon aria-hidden="true" className="h-7 w-7 text-accent-brand-strong" />
                     </div>
-                    <div className="text-3xl md:text-4xl font-bold text-primary mb-2">{result.value}</div>
-                    <div className="font-semibold mb-1">{result.label}</div>
-                    <div className="text-sm text-muted-foreground">{result.description}</div>
+                    <div className="font-serif text-display-md font-normal text-accent-brand-strong mb-2">{result.value}</div>
+                    <div className="text-h4 font-semibold mb-1">{result.label}</div>
+                    <div className="text-body-sm text-foreground-muted">{result.description}</div>
                   </div>
                 ))}
               </div>
@@ -188,18 +188,18 @@ const FabricForgeCaseStudy = () => {
         </section>
 
         {/* The Challenge */}
-        <section className="py-16 bg-muted/30">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background-elevated">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center">
-                  <AlertTriangle className="h-5 w-5 text-orange-500" />
+                <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                  <AlertTriangle aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold">The Challenge</h2>
+                <h2 className="font-serif text-h2 font-normal text-foreground">The challenge</h2>
               </div>
 
               <div className="mb-8">
-                <p className="text-lg text-muted-foreground leading-relaxed">
+                <p className="text-body-lg text-foreground-muted leading-relaxed">
                   Organizations adopting Microsoft Fabric face a significant bottleneck: provisioning workspaces,
                   lakehouses, and warehouses is a manual, time-consuming process. Data teams spend hours clicking
                   through UIs instead of building analytics solutions.
@@ -208,15 +208,15 @@ const FabricForgeCaseStudy = () => {
 
               <div className="grid md:grid-cols-2 gap-6">
                 {challenges.map((challenge, index) => (
-                  <Card key={index} className="border-orange-500/20 bg-background">
+                  <Card key={index} className="bg-background transition-colors duration-fast ease-out-quart hover:border-border-strong">
                     <CardContent className="pt-6">
                       <div className="flex items-start gap-4">
-                        <div className="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center flex-shrink-0">
-                          <challenge.icon className="h-5 w-5 text-orange-500" />
+                        <div className="w-10 h-10 rounded-md bg-accent-brand-soft flex items-center justify-center flex-shrink-0">
+                          <challenge.icon aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                         </div>
                         <div>
-                          <h3 className="font-semibold mb-2">{challenge.title}</h3>
-                          <p className="text-sm text-muted-foreground">{challenge.description}</p>
+                          <h3 className="text-h4 font-semibold mb-2 text-foreground">{challenge.title}</h3>
+                          <p className="text-body-sm text-foreground-muted">{challenge.description}</p>
                         </div>
                       </div>
                     </CardContent>
@@ -225,20 +225,20 @@ const FabricForgeCaseStudy = () => {
               </div>
 
               {/* Impact Stats */}
-              <Card className="mt-10 border-amber-500/30 bg-amber-500/5">
+              <Card className="mt-10 bg-background">
                 <CardContent className="pt-6">
                   <div className="grid md:grid-cols-3 gap-6 text-center">
                     <div>
-                      <div className="text-3xl font-bold text-amber-500 mb-1">1 Day</div>
-                      <div className="text-sm text-muted-foreground">Manual workspace setup time</div>
+                      <div className="font-serif text-display-md font-normal text-accent-brand-strong mb-1">1 Day</div>
+                      <div className="text-body-sm text-foreground-muted">Manual workspace setup time</div>
                     </div>
                     <div>
-                      <div className="text-3xl font-bold text-amber-500 mb-1">20+</div>
-                      <div className="text-sm text-muted-foreground">UI screens to navigate</div>
+                      <div className="font-serif text-display-md font-normal text-accent-brand-strong mb-1">20+</div>
+                      <div className="text-body-sm text-foreground-muted">UI screens to navigate</div>
                     </div>
                     <div>
-                      <div className="text-3xl font-bold text-amber-500 mb-1">High</div>
-                      <div className="text-sm text-muted-foreground">Error rate from manual config</div>
+                      <div className="font-serif text-display-md font-normal text-accent-brand-strong mb-1">High</div>
+                      <div className="text-body-sm text-foreground-muted">Error rate from manual config</div>
                     </div>
                   </div>
                 </CardContent>
@@ -248,20 +248,20 @@ const FabricForgeCaseStudy = () => {
         </section>
 
         {/* The Solution */}
-        <section className="py-16 bg-background">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center">
-                  <Target className="h-5 w-5 text-green-500" />
+                <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                  <Target aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold">The Solution</h2>
+                <h2 className="font-serif text-h2 font-normal text-foreground">The solution</h2>
               </div>
 
               <div className="grid lg:grid-cols-2 gap-10">
                 <div>
-                  <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                    I built <strong className="text-foreground">FabricForge</strong>, a web-based visual form builder
+                  <p className="text-body-lg text-foreground-muted leading-relaxed mb-6">
+                    I built <strong className="text-foreground font-semibold">FabricForge</strong>, a web-based visual form builder
                     that automates Microsoft Fabric provisioning through n8n workflows, featuring intelligent
                     validation, AI code generation, and template-based configuration.
                   </p>
@@ -269,8 +269,8 @@ const FabricForgeCaseStudy = () => {
                   <div className="space-y-3">
                     {solutionFeatures.map((feature, index) => (
                       <div key={index} className="flex items-start gap-3">
-                        <CheckCircle2 className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
-                        <span className="text-sm">{feature}</span>
+                        <CheckCircle2 aria-hidden="true" className="h-5 w-5 text-accent-brand-strong mt-0.5 flex-shrink-0" />
+                        <span className="text-body-sm text-foreground">{feature}</span>
                       </div>
                     ))}
                   </div>
@@ -278,65 +278,62 @@ const FabricForgeCaseStudy = () => {
 
                 {/* Architecture Visual */}
                 <div className="space-y-4">
-                  <Card className="border-blue-500/30 relative overflow-hidden">
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-blue-500" />
+                  <Card className="transition-colors duration-fast ease-out-quart hover:border-border-strong">
                     <CardHeader className="pb-2">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center">
-                          <Settings className="h-5 w-5 text-white" />
+                        <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                          <Settings aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                         </div>
                         <div>
-                          <CardTitle className="text-lg">Visual Form Builder</CardTitle>
-                          <p className="text-sm text-muted-foreground">Web Interface</p>
+                          <CardTitle className="text-h4 font-semibold">Visual Form Builder</CardTitle>
+                          <p className="text-body-sm text-foreground-muted">Web Interface</p>
                         </div>
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm text-muted-foreground">Configure workspaces, lakehouses, tables with 23 data types</p>
+                      <p className="text-body-sm text-foreground-muted">Configure workspaces, lakehouses, tables with 23 data types</p>
                     </CardContent>
                   </Card>
 
                   <div className="flex justify-center">
-                    <ArrowRight className="h-6 w-6 text-muted-foreground rotate-90" />
+                    <ArrowRight aria-hidden="true" className="h-6 w-6 text-foreground-subtle rotate-90" />
                   </div>
 
-                  <Card className="border-purple-500/30 relative overflow-hidden">
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-purple-500" />
+                  <Card className="transition-colors duration-fast ease-out-quart hover:border-border-strong">
                     <CardHeader className="pb-2">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center">
-                          <Workflow className="h-5 w-5 text-white" />
+                        <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                          <Workflow aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                         </div>
                         <div>
-                          <CardTitle className="text-lg">n8n Workflow</CardTitle>
-                          <p className="text-sm text-muted-foreground">Orchestration Engine</p>
+                          <CardTitle className="text-h4 font-semibold">n8n Workflow</CardTitle>
+                          <p className="text-body-sm text-foreground-muted">Orchestration Engine</p>
                         </div>
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm text-muted-foreground">Handles auth, API calls, validation, and error recovery</p>
+                      <p className="text-body-sm text-foreground-muted">Handles auth, API calls, validation, and error recovery</p>
                     </CardContent>
                   </Card>
 
                   <div className="flex justify-center">
-                    <ArrowRight className="h-6 w-6 text-muted-foreground rotate-90" />
+                    <ArrowRight aria-hidden="true" className="h-6 w-6 text-foreground-subtle rotate-90" />
                   </div>
 
-                  <Card className="border-green-500/30 relative overflow-hidden">
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-green-500" />
+                  <Card className="transition-colors duration-fast ease-out-quart hover:border-border-strong">
                     <CardHeader className="pb-2">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center">
-                          <Cloud className="h-5 w-5 text-white" />
+                        <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                          <Cloud aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                         </div>
                         <div>
-                          <CardTitle className="text-lg">Microsoft Fabric</CardTitle>
-                          <p className="text-sm text-muted-foreground">Target Platform</p>
+                          <CardTitle className="text-h4 font-semibold">Microsoft Fabric</CardTitle>
+                          <p className="text-body-sm text-foreground-muted">Target Platform</p>
                         </div>
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm text-muted-foreground">Workspaces, lakehouses, warehouses, notebooks deployed</p>
+                      <p className="text-body-sm text-foreground-muted">Workspaces, lakehouses, warehouses, notebooks deployed</p>
                     </CardContent>
                   </Card>
                 </div>
@@ -346,25 +343,25 @@ const FabricForgeCaseStudy = () => {
         </section>
 
         {/* Workflow Steps */}
-        <section className="py-16 bg-muted/30">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background-elevated">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-purple-500/10 flex items-center justify-center">
-                  <Workflow className="h-5 w-5 text-purple-500" />
+                <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                  <Workflow aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold">Automation Workflow</h2>
+                <h2 className="font-serif text-h2 font-normal text-foreground">Automation workflow</h2>
               </div>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {workflowSteps.map((step, index) => (
-                  <Card key={index} className="hover:border-primary/50 transition-colors relative">
-                    <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-sm font-bold text-primary">
+                  <Card key={index} className="bg-background transition-colors duration-fast ease-out-quart hover:border-border-strong relative">
+                    <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-accent-brand-soft flex items-center justify-center text-body-sm font-mono font-bold text-accent-brand-strong">
                       {index + 1}
                     </div>
                     <CardContent className="pt-6">
-                      <h3 className="font-semibold mb-2">{step.name}</h3>
-                      <p className="text-sm text-muted-foreground">{step.description}</p>
+                      <h3 className="text-h4 font-semibold mb-2 text-foreground">{step.name}</h3>
+                      <p className="text-body-sm text-foreground-muted">{step.description}</p>
                     </CardContent>
                   </Card>
                 ))}
@@ -374,14 +371,14 @@ const FabricForgeCaseStudy = () => {
         </section>
 
         {/* Before/After Comparison */}
-        <section className="py-16 bg-background">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center">
-                  <TrendingUp className="h-5 w-5 text-blue-500" />
+                <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                  <TrendingUp aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold">The Transformation</h2>
+                <h2 className="font-serif text-h2 font-normal text-foreground">The transformation</h2>
               </div>
 
               <Card>
@@ -389,18 +386,18 @@ const FabricForgeCaseStudy = () => {
                   <div className="overflow-x-auto">
                     <table className="w-full">
                       <thead>
-                        <tr className="border-b bg-muted/50">
-                          <th className="text-left p-4 font-semibold">Area</th>
-                          <th className="text-left p-4 font-semibold text-orange-500">Before</th>
-                          <th className="text-left p-4 font-semibold text-green-500">After</th>
+                        <tr className="border-b border-border bg-background-elevated">
+                          <th className="text-left p-4 text-caption font-semibold text-foreground uppercase tracking-wide">Area</th>
+                          <th className="text-left p-4 text-caption font-semibold text-foreground-muted uppercase tracking-wide">Before</th>
+                          <th className="text-left p-4 text-caption font-semibold text-accent-brand-strong uppercase tracking-wide">After</th>
                         </tr>
                       </thead>
                       <tbody>
                         {beforeAfter.map((row, index) => (
-                          <tr key={index} className="border-b last:border-0">
-                            <td className="p-4 font-medium">{row.area}</td>
-                            <td className="p-4 text-sm text-muted-foreground">{row.before}</td>
-                            <td className="p-4 text-sm">{row.after}</td>
+                          <tr key={index} className="border-b border-border last:border-0">
+                            <td className="p-4 text-body-sm font-medium text-foreground">{row.area}</td>
+                            <td className="p-4 text-body-sm text-foreground-muted">{row.before}</td>
+                            <td className="p-4 text-body-sm text-foreground">{row.after}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -413,127 +410,127 @@ const FabricForgeCaseStudy = () => {
         </section>
 
         {/* Key Capabilities */}
-        <section className="py-16 bg-muted/30">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background-elevated">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-purple-500/10 flex items-center justify-center">
-                  <Code2 className="h-5 w-5 text-purple-500" />
+                <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                  <Code2 aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold">Key Capabilities</h2>
+                <h2 className="font-serif text-h2 font-normal text-foreground">Key capabilities</h2>
               </div>
 
               <div className="grid md:grid-cols-2 gap-6 mb-8">
-                <Card>
+                <Card className="bg-background transition-colors duration-fast ease-out-quart hover:border-border-strong">
                   <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Sparkles className="h-5 w-5 text-purple-500" />
+                    <CardTitle className="flex items-center gap-2 text-h4 font-semibold">
+                      <Sparkles aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                       AI Code Generation
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-muted-foreground text-sm mb-4">
+                    <p className="text-foreground-muted text-body-sm mb-4">
                       OpenAI GPT models automatically generate PySpark notebook code based on your table definitions,
                       eliminating manual coding for table creation.
                     </p>
-                    <div className="p-3 rounded-lg bg-slate-900 text-slate-100 font-mono text-xs overflow-x-auto">
-                      <div className="text-slate-400"># AI-generated PySpark</div>
-                      <div className="text-green-400">df = spark.createDataFrame([], schema)</div>
-                      <div className="text-green-400">df.write.format("delta").saveAsTable("sales")</div>
+                    <div className="p-3 rounded-md bg-background-elevated border border-border font-mono text-xs overflow-x-auto">
+                      <div className="text-foreground-subtle"># AI-generated PySpark</div>
+                      <div className="text-accent-brand-strong">df = spark.createDataFrame([], schema)</div>
+                      <div className="text-accent-brand-strong">df.write.format("delta").saveAsTable("sales")</div>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card>
+                <Card className="bg-background transition-colors duration-fast ease-out-quart hover:border-border-strong">
                   <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <RefreshCw className="h-5 w-5 text-blue-500" />
+                    <CardTitle className="flex items-center gap-2 text-h4 font-semibold">
+                      <RefreshCw aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                       Idempotent Operations
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-muted-foreground text-sm mb-4">
+                    <p className="text-foreground-muted text-body-sm mb-4">
                       Intelligent duplicate detection ensures safe re-execution. Existing resources are skipped,
                       making the workflow safe to run multiple times.
                     </p>
-                    <div className="flex items-start gap-2 p-3 rounded-lg bg-muted/50">
-                      <CheckCircle2 className="h-4 w-4 text-green-500 mt-0.5" />
-                      <span className="text-sm">Re-run safely without creating duplicates</span>
+                    <div className="flex items-start gap-2 p-3 rounded-md bg-background-elevated border border-border">
+                      <CheckCircle2 aria-hidden="true" className="h-4 w-4 text-accent-brand-strong mt-0.5" />
+                      <span className="text-body-sm text-foreground">Re-run safely without creating duplicates</span>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card>
+                <Card className="bg-background transition-colors duration-fast ease-out-quart hover:border-border-strong">
                   <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <FileJson className="h-5 w-5 text-amber-500" />
+                    <CardTitle className="flex items-center gap-2 text-h4 font-semibold">
+                      <FileJson aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                       Template System
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-muted-foreground text-sm mb-4">
+                    <p className="text-foreground-muted text-body-sm mb-4">
                       Export configurations as JSON templates and import them for new environments. Standardize
                       workspace structures across your organization.
                     </p>
-                    <div className="flex items-start gap-2 p-3 rounded-lg bg-muted/50">
-                      <CheckCircle2 className="h-4 w-4 text-green-500 mt-0.5" />
-                      <span className="text-sm">Bronze/Silver/Gold lakehouse templates included</span>
+                    <div className="flex items-start gap-2 p-3 rounded-md bg-background-elevated border border-border">
+                      <CheckCircle2 aria-hidden="true" className="h-4 w-4 text-accent-brand-strong mt-0.5" />
+                      <span className="text-body-sm text-foreground">Bronze/Silver/Gold lakehouse templates included</span>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card>
+                <Card className="bg-background transition-colors duration-fast ease-out-quart hover:border-border-strong">
                   <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Shield className="h-5 w-5 text-green-500" />
+                    <CardTitle className="flex items-center gap-2 text-h4 font-semibold">
+                      <Shield aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                       Security First
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-muted-foreground text-sm mb-4">
+                    <p className="text-foreground-muted text-body-sm mb-4">
                       Browser-only execution with no server-side credential storage. OAuth2 tokens are transmitted
                       directly to your n8n instance.
                     </p>
-                    <div className="flex items-start gap-2 p-3 rounded-lg bg-muted/50">
-                      <CheckCircle2 className="h-4 w-4 text-green-500 mt-0.5" />
-                      <span className="text-sm">No credentials stored on external servers</span>
+                    <div className="flex items-start gap-2 p-3 rounded-md bg-background-elevated border border-border">
+                      <CheckCircle2 aria-hidden="true" className="h-4 w-4 text-accent-brand-strong mt-0.5" />
+                      <span className="text-body-sm text-foreground">No credentials stored on external servers</span>
                     </div>
                   </CardContent>
                 </Card>
               </div>
 
               {/* Use Case Example */}
-              <Card>
+              <Card className="bg-background">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Building2 className="h-5 w-5 text-primary" />
+                  <CardTitle className="flex items-center gap-2 text-h4 font-semibold">
+                    <Building2 aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                     Real-World Use Case: Multi-Department Analytics
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground mb-4">
+                  <p className="text-foreground-muted mb-4">
                     A retail organization needs standardized analytics environments for multiple departments:
                   </p>
                   <div className="grid md:grid-cols-3 gap-4">
-                    <div className="p-4 rounded-lg bg-muted/50 text-center">
-                      <Layers className="h-6 w-6 text-amber-500 mx-auto mb-2" />
-                      <div className="font-semibold text-sm">Bronze Layer</div>
-                      <div className="text-xs text-muted-foreground">Raw data ingestion</div>
+                    <div className="p-4 rounded-md bg-background-elevated border border-border text-center">
+                      <Layers aria-hidden="true" className="h-6 w-6 text-accent-brand-strong mx-auto mb-2" />
+                      <div className="text-h4 font-semibold text-body-sm text-foreground">Bronze Layer</div>
+                      <div className="text-caption text-foreground-muted">Raw data ingestion</div>
                     </div>
-                    <div className="p-4 rounded-lg bg-muted/50 text-center">
-                      <Layers className="h-6 w-6 text-slate-400 mx-auto mb-2" />
-                      <div className="font-semibold text-sm">Silver Layer</div>
-                      <div className="text-xs text-muted-foreground">Cleansed & validated</div>
+                    <div className="p-4 rounded-md bg-background-elevated border border-border text-center">
+                      <Layers aria-hidden="true" className="h-6 w-6 text-accent-brand-strong mx-auto mb-2" />
+                      <div className="text-h4 font-semibold text-body-sm text-foreground">Silver Layer</div>
+                      <div className="text-caption text-foreground-muted">Cleansed and validated</div>
                     </div>
-                    <div className="p-4 rounded-lg bg-muted/50 text-center">
-                      <Layers className="h-6 w-6 text-yellow-500 mx-auto mb-2" />
-                      <div className="font-semibold text-sm">Gold Layer</div>
-                      <div className="text-xs text-muted-foreground">Analytics-ready</div>
+                    <div className="p-4 rounded-md bg-background-elevated border border-border text-center">
+                      <Layers aria-hidden="true" className="h-6 w-6 text-accent-brand-strong mx-auto mb-2" />
+                      <div className="text-h4 font-semibold text-body-sm text-foreground">Gold Layer</div>
+                      <div className="text-caption text-foreground-muted">Analytics-ready</div>
                     </div>
                   </div>
-                  <p className="text-sm text-muted-foreground mt-4">
-                    With FabricForge, each new department workspace deploys in <strong className="text-foreground">5 minutes</strong> vs
-                    a <strong className="text-foreground">full day</strong> of manual work, with consistent structure guaranteed.
+                  <p className="text-body-sm text-foreground-muted mt-4">
+                    With FabricForge, each new department workspace deploys in <strong className="text-foreground font-semibold">5 minutes</strong> vs
+                    a <strong className="text-foreground font-semibold">full day</strong> of manual work, with consistent structure guaranteed.
                   </p>
                 </CardContent>
               </Card>
@@ -542,26 +539,26 @@ const FabricForgeCaseStudy = () => {
         </section>
 
         {/* Video Tutorial Series */}
-        <section className="py-16 bg-background">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center">
-                  <Play className="h-5 w-5 text-red-500" />
+                <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                  <Play aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold">Video Tutorial Series</h2>
+                <h2 className="font-serif text-h2 font-normal text-foreground">Video tutorial series</h2>
               </div>
 
-              <p className="text-muted-foreground mb-8">
+              <p className="text-body-lg text-foreground-muted mb-8">
                 Follow along with our comprehensive video series to get FabricForge up and running in your environment.
               </p>
 
               {/* Main Demo Video */}
-              <Card className="overflow-hidden shadow-xl mb-8">
-                <CardHeader className="bg-muted/30 border-b">
+              <Card className="overflow-hidden mb-8">
+                <CardHeader className="bg-background-elevated border-b border-border">
                   <div className="flex items-center justify-between">
-                    <CardTitle className="flex items-center gap-2">
-                      <Play className="h-5 w-5 text-red-500" />
+                    <CardTitle className="flex items-center gap-2 text-h4 font-semibold">
+                      <Play aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                       1. Getting Started with n8n
                     </CardTitle>
                     <Badge variant="outline" className="text-xs">Start Here</Badge>
@@ -586,9 +583,9 @@ const FabricForgeCaseStudy = () => {
               {/* Additional Videos Grid */}
               <div className="grid md:grid-cols-2 gap-6 mb-8">
                 <Card className="overflow-hidden">
-                  <CardHeader className="bg-muted/30 border-b py-3">
-                    <CardTitle className="flex items-center gap-2 text-base">
-                      <Play className="h-4 w-4 text-red-500" />
+                  <CardHeader className="bg-background-elevated border-b border-border py-3">
+                    <CardTitle className="flex items-center gap-2 text-body font-semibold">
+                      <Play aria-hidden="true" className="h-4 w-4 text-accent-brand-strong" />
                       2. Prerequisites and Setup
                     </CardTitle>
                   </CardHeader>
@@ -609,9 +606,9 @@ const FabricForgeCaseStudy = () => {
                 </Card>
 
                 <Card className="overflow-hidden">
-                  <CardHeader className="bg-muted/30 border-b py-3">
-                    <CardTitle className="flex items-center gap-2 text-base">
-                      <Play className="h-4 w-4 text-red-500" />
+                  <CardHeader className="bg-background-elevated border-b border-border py-3">
+                    <CardTitle className="flex items-center gap-2 text-body font-semibold">
+                      <Play aria-hidden="true" className="h-4 w-4 text-accent-brand-strong" />
                       3. Configuration Walkthrough
                     </CardTitle>
                   </CardHeader>
@@ -632,9 +629,9 @@ const FabricForgeCaseStudy = () => {
                 </Card>
 
                 <Card className="overflow-hidden">
-                  <CardHeader className="bg-muted/30 border-b py-3">
-                    <CardTitle className="flex items-center gap-2 text-base">
-                      <Play className="h-4 w-4 text-red-500" />
+                  <CardHeader className="bg-background-elevated border-b border-border py-3">
+                    <CardTitle className="flex items-center gap-2 text-body font-semibold">
+                      <Play aria-hidden="true" className="h-4 w-4 text-accent-brand-strong" />
                       4. Workflow Execution
                     </CardTitle>
                   </CardHeader>
@@ -655,9 +652,9 @@ const FabricForgeCaseStudy = () => {
                 </Card>
 
                 <Card className="overflow-hidden">
-                  <CardHeader className="bg-muted/30 border-b py-3">
-                    <CardTitle className="flex items-center gap-2 text-base">
-                      <Play className="h-4 w-4 text-red-500" />
+                  <CardHeader className="bg-background-elevated border-b border-border py-3">
+                    <CardTitle className="flex items-center gap-2 text-body font-semibold">
+                      <Play aria-hidden="true" className="h-4 w-4 text-accent-brand-strong" />
                       5. Debugging and Troubleshooting
                     </CardTitle>
                   </CardHeader>
@@ -679,25 +676,25 @@ const FabricForgeCaseStudy = () => {
               </div>
 
               {/* N8N Workflow Download */}
-              <Card className="border-primary/30 bg-primary/5">
+              <Card className="bg-accent-brand-soft/40">
                 <CardContent className="pt-6">
                   <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                        <Download className="h-6 w-6 text-primary" />
+                      <div className="w-12 h-12 rounded-lg bg-accent-brand-soft flex items-center justify-center">
+                        <Download aria-hidden="true" className="h-6 w-6 text-accent-brand-strong" />
                       </div>
                       <div>
-                        <h3 className="font-semibold">Download N8N Workflow</h3>
-                        <p className="text-sm text-muted-foreground">Get the complete n8n workflow script to import into your instance</p>
+                        <h3 className="text-h4 font-semibold text-foreground">Download N8N Workflow</h3>
+                        <p className="text-body-sm text-foreground-muted">Get the complete n8n workflow script to import into your instance</p>
                       </div>
                     </div>
                     <a
                       href="https://drive.google.com/drive/folders/1GMtyOL_a-cujlBtIzVQKCMlepWeybFFO"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-semibold"
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-accent-brand text-accent-brand-foreground rounded-sm transition-colors duration-fast ease-out-quart font-medium"
                     >
-                      <Download className="h-5 w-5" />
+                      <Download aria-hidden="true" className="h-5 w-5" />
                       Download Workflow
                     </a>
                   </div>
@@ -708,11 +705,11 @@ const FabricForgeCaseStudy = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 bg-gradient-to-r from-primary/10 to-blue-500/10 border-t">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-accent-brand-soft/40 border-t border-border">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4">Ready to Automate Your Fabric Provisioning?</h2>
-              <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
+              <h2 className="font-serif text-h2 font-normal mb-4 text-foreground">Ready to automate your Fabric provisioning?</h2>
+              <p className="text-body-lg text-foreground-muted mb-8 max-w-2xl mx-auto">
                 Stop spending days on manual workspace setup. FabricForge lets you provision complete
                 Microsoft Fabric environments in minutes with enterprise-grade consistency.
               </p>
@@ -721,9 +718,9 @@ const FabricForgeCaseStudy = () => {
                   href="https://datacrafters.io/fabricforge/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-semibold"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-accent-brand text-accent-brand-foreground rounded-sm transition-colors duration-fast ease-out-quart font-medium"
                 >
-                  <Play className="h-5 w-5" />
+                  <Play aria-hidden="true" className="h-5 w-5" />
                   Try FabricForge Now
                 </a>
               </div>

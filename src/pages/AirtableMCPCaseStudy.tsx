@@ -16,9 +16,6 @@ import {
   Lock,
   Search,
   GitBranch,
-  Table,
-  Filter,
-  Calculator,
   FileJson,
   Wrench,
   MessageSquare
@@ -113,20 +110,20 @@ const AirtableMCPCaseStudy = () => {
 
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="py-16 md:py-24 bg-gradient-to-b from-primary/10 via-primary/5 to-background">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm md:py-section bg-accent-brand-soft/40">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-2 mb-6">
                 <Badge variant="outline" className="text-xs">Pet Project</Badge>
-                <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                <ChevronRight aria-hidden="true" className="h-4 w-4 text-foreground-muted" />
                 <Badge variant="outline" className="text-xs">AI + Airtable</Badge>
               </div>
 
-              <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
-                <span className="text-primary">Airtable MCP Server:</span> Natural Language Database Operations for AI Assistants
+              <h1 className="font-serif text-display-lg font-normal mb-6 leading-tight text-foreground">
+                Airtable MCP Server: <em className="italic font-normal text-accent-brand-strong">natural language database operations</em> for AI assistants
               </h1>
 
-              <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-4xl">
+              <p className="text-body-lg text-foreground-muted mb-8 leading-relaxed max-w-4xl">
                 A security-first Model Context Protocol server enabling AI assistants to interact with Airtable databases
                 through natural language: performing advanced filtering, aggregations, and schema discovery without
                 writing a single formula.
@@ -134,7 +131,7 @@ const AirtableMCPCaseStudy = () => {
 
               <div className="flex flex-wrap gap-3 mb-6">
                 {techStack.map((tech, index) => (
-                  <Badge key={index} className="bg-primary/10 text-primary hover:bg-primary/20 px-3 py-1">
+                  <Badge key={index} className="bg-accent-brand-soft text-accent-brand-strong px-3 py-1">
                     {tech.name}
                   </Badge>
                 ))}
@@ -145,9 +142,9 @@ const AirtableMCPCaseStudy = () => {
                   href="https://github.com/sulaiman013/AIRTABLE-MCP"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-accent-brand text-accent-brand-foreground rounded-sm transition-colors duration-fast ease-out-quart"
                 >
-                  <GitBranch className="h-4 w-4" />
+                  <GitBranch aria-hidden="true" className="h-4 w-4" />
                   View on GitHub
                 </a>
                 <Badge variant="secondary" className="px-3 py-2">
@@ -159,18 +156,18 @@ const AirtableMCPCaseStudy = () => {
         </section>
 
         {/* Key Results */}
-        <section className="py-12 bg-background border-y">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background border-y border-border">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="grid md:grid-cols-3 gap-8">
                 {keyResults.map((result, index) => (
                   <div key={index} className="text-center">
-                    <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                      <result.icon className="h-7 w-7 text-primary" />
+                    <div className="w-14 h-14 rounded-full bg-accent-brand-soft flex items-center justify-center mx-auto mb-4">
+                      <result.icon aria-hidden="true" className="h-7 w-7 text-accent-brand-strong" />
                     </div>
-                    <div className="text-3xl md:text-4xl font-bold text-primary mb-2">{result.value}</div>
-                    <div className="font-semibold mb-1">{result.label}</div>
-                    <div className="text-sm text-muted-foreground">{result.description}</div>
+                    <div className="font-mono text-3xl md:text-4xl font-bold text-accent-brand-strong mb-2">{result.value}</div>
+                    <div className="font-semibold mb-1 text-foreground">{result.label}</div>
+                    <div className="text-body-sm text-foreground-muted">{result.description}</div>
                   </div>
                 ))}
               </div>
@@ -179,18 +176,18 @@ const AirtableMCPCaseStudy = () => {
         </section>
 
         {/* The Challenge */}
-        <section className="py-16 bg-muted/30">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background-elevated">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center">
-                  <AlertTriangle className="h-5 w-5 text-orange-500" />
+                <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                  <AlertTriangle aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold">The Challenge</h2>
+                <h2 className="font-serif text-h2 font-normal text-foreground">The Challenge</h2>
               </div>
 
               <div className="mb-8">
-                <p className="text-lg text-muted-foreground leading-relaxed">
+                <p className="text-body-lg text-foreground-muted leading-relaxed max-w-prose">
                   Airtable is a powerful low-code database platform, but accessing and analyzing data programmatically
                   requires learning complex formula syntax. Teams needed a way to query their Airtable data using
                   natural language while maintaining enterprise-grade security.
@@ -199,15 +196,15 @@ const AirtableMCPCaseStudy = () => {
 
               <div className="grid md:grid-cols-2 gap-6">
                 {challenges.map((challenge, index) => (
-                  <Card key={index} className="border-orange-500/20 bg-background">
+                  <Card key={index}>
                     <CardContent className="pt-6">
                       <div className="flex items-start gap-4">
-                        <div className="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center flex-shrink-0">
-                          <challenge.icon className="h-5 w-5 text-orange-500" />
+                        <div className="w-10 h-10 rounded-md bg-accent-brand-soft flex items-center justify-center flex-shrink-0">
+                          <challenge.icon aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                         </div>
                         <div>
-                          <h3 className="font-semibold mb-2">{challenge.title}</h3>
-                          <p className="text-sm text-muted-foreground">{challenge.description}</p>
+                          <h3 className="font-sans text-h4 font-semibold mb-2 text-foreground">{challenge.title}</h3>
+                          <p className="text-body-sm text-foreground-muted">{challenge.description}</p>
                         </div>
                       </div>
                     </CardContent>
@@ -219,20 +216,20 @@ const AirtableMCPCaseStudy = () => {
         </section>
 
         {/* The Solution */}
-        <section className="py-16 bg-background">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center">
-                  <Target className="h-5 w-5 text-green-500" />
+                <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                  <Target aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold">The Solution</h2>
+                <h2 className="font-serif text-h2 font-normal text-foreground">The Solution</h2>
               </div>
 
               <div className="grid lg:grid-cols-2 gap-10">
                 <div>
-                  <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                    I built a <strong className="text-foreground">security-first MCP server</strong> that bridges
+                  <p className="text-body-lg text-foreground-muted leading-relaxed mb-6">
+                    I built a <strong className="text-foreground font-semibold">security-first MCP server</strong> that bridges
                     AI assistants with Airtable, featuring intelligent date parsing, comprehensive aggregations,
                     and multiple layers of input validation.
                   </p>
@@ -240,8 +237,8 @@ const AirtableMCPCaseStudy = () => {
                   <div className="space-y-3">
                     {solutionFeatures.map((feature, index) => (
                       <div key={index} className="flex items-start gap-3">
-                        <CheckCircle2 className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
-                        <span className="text-sm">{feature}</span>
+                        <CheckCircle2 aria-hidden="true" className="h-5 w-5 text-accent-brand-strong mt-0.5 flex-shrink-0" />
+                        <span className="text-body-sm text-foreground">{feature}</span>
                       </div>
                     ))}
                   </div>
@@ -249,65 +246,62 @@ const AirtableMCPCaseStudy = () => {
 
                 {/* Architecture Visual */}
                 <div className="space-y-4">
-                  <Card className="border-amber-500/30 relative overflow-hidden">
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-amber-500" />
+                  <Card>
                     <CardHeader className="pb-2">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-amber-500 flex items-center justify-center">
-                          <Search className="h-5 w-5 text-white" />
+                        <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                          <Search aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                         </div>
                         <div>
-                          <CardTitle className="text-lg">Query Layer</CardTitle>
-                          <p className="text-sm text-muted-foreground">Natural Language Processing</p>
+                          <CardTitle className="text-h4">Query Layer</CardTitle>
+                          <p className="text-body-sm text-foreground-muted">Natural Language Processing</p>
                         </div>
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm text-muted-foreground">Intelligent date parsing and filter translation</p>
+                      <p className="text-body-sm text-foreground-muted">Intelligent date parsing and filter translation</p>
                     </CardContent>
                   </Card>
 
                   <div className="flex justify-center">
-                    <ArrowRight className="h-6 w-6 text-muted-foreground rotate-90" />
+                    <ArrowRight aria-hidden="true" className="h-6 w-6 text-foreground-subtle rotate-90" />
                   </div>
 
-                  <Card className="border-red-500/30 relative overflow-hidden">
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-red-500" />
+                  <Card>
                     <CardHeader className="pb-2">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-red-500 flex items-center justify-center">
-                          <Shield className="h-5 w-5 text-white" />
+                        <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                          <Shield aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                         </div>
                         <div>
-                          <CardTitle className="text-lg">Security Layer</CardTitle>
-                          <p className="text-sm text-muted-foreground">Validation & Sanitization</p>
+                          <CardTitle className="text-h4">Security Layer</CardTitle>
+                          <p className="text-body-sm text-foreground-muted">Validation & Sanitization</p>
                         </div>
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm text-muted-foreground">XSS/injection blocking, ID format validation, type checking</p>
+                      <p className="text-body-sm text-foreground-muted">XSS/injection blocking, ID format validation, type checking</p>
                     </CardContent>
                   </Card>
 
                   <div className="flex justify-center">
-                    <ArrowRight className="h-6 w-6 text-muted-foreground rotate-90" />
+                    <ArrowRight aria-hidden="true" className="h-6 w-6 text-foreground-subtle rotate-90" />
                   </div>
 
-                  <Card className="border-green-500/30 relative overflow-hidden">
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-green-500" />
+                  <Card>
                     <CardHeader className="pb-2">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center">
-                          <Database className="h-5 w-5 text-white" />
+                        <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                          <Database aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                         </div>
                         <div>
-                          <CardTitle className="text-lg">Data Layer</CardTitle>
-                          <p className="text-sm text-muted-foreground">pyairtable SDK</p>
+                          <CardTitle className="text-h4">Data Layer</CardTitle>
+                          <p className="text-body-sm text-foreground-muted">pyairtable SDK</p>
                         </div>
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm text-muted-foreground">Secure API communication with Airtable databases</p>
+                      <p className="text-body-sm text-foreground-muted">Secure API communication with Airtable databases</p>
                     </CardContent>
                   </Card>
                 </div>
@@ -317,14 +311,14 @@ const AirtableMCPCaseStudy = () => {
         </section>
 
         {/* Before/After Comparison */}
-        <section className="py-16 bg-muted/30">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background-elevated">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center">
-                  <TrendingUp className="h-5 w-5 text-blue-500" />
+                <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                  <TrendingUp aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold">The Transformation</h2>
+                <h2 className="font-serif text-h2 font-normal text-foreground">The Transformation</h2>
               </div>
 
               <Card>
@@ -332,18 +326,18 @@ const AirtableMCPCaseStudy = () => {
                   <div className="overflow-x-auto">
                     <table className="w-full">
                       <thead>
-                        <tr className="border-b bg-muted/50">
-                          <th className="text-left p-4 font-semibold">Area</th>
-                          <th className="text-left p-4 font-semibold text-orange-500">Before</th>
-                          <th className="text-left p-4 font-semibold text-green-500">After</th>
+                        <tr className="border-b border-border bg-background">
+                          <th className="text-left p-4 font-semibold text-foreground">Area</th>
+                          <th className="text-left p-4 font-semibold text-foreground-muted">Before</th>
+                          <th className="text-left p-4 font-semibold text-accent-brand-strong">After</th>
                         </tr>
                       </thead>
                       <tbody>
                         {beforeAfter.map((row, index) => (
-                          <tr key={index} className="border-b last:border-0">
-                            <td className="p-4 font-medium">{row.area}</td>
-                            <td className="p-4 text-sm text-muted-foreground">{row.before}</td>
-                            <td className="p-4 text-sm">{row.after}</td>
+                          <tr key={index} className="border-b border-border last:border-0">
+                            <td className="p-4 font-medium text-foreground">{row.area}</td>
+                            <td className="p-4 text-body-sm text-foreground-muted">{row.before}</td>
+                            <td className="p-4 text-body-sm text-foreground">{row.after}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -356,24 +350,24 @@ const AirtableMCPCaseStudy = () => {
         </section>
 
         {/* Core Tools */}
-        <section className="py-16 bg-background">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Wrench className="h-5 w-5 text-primary" />
+                <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                  <Wrench aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold">6 Core Tools</h2>
+                <h2 className="font-serif text-h2 font-normal text-foreground">6 Core Tools</h2>
               </div>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {coreTools.map((tool, index) => (
-                  <Card key={index} className="hover:border-primary/50 transition-colors">
+                  <Card key={index} className="hover:border-border-strong">
                     <CardContent className="pt-6">
                       <div className="flex items-center gap-2 mb-3">
-                        <code className="text-sm font-mono bg-muted px-2 py-1 rounded">{tool.name}</code>
+                        <code className="font-mono text-body-sm bg-background-elevated text-accent-brand-strong px-2 py-1 rounded-xs">{tool.name}</code>
                       </div>
-                      <p className="text-sm text-muted-foreground">{tool.description}</p>
+                      <p className="text-body-sm text-foreground-muted">{tool.description}</p>
                     </CardContent>
                   </Card>
                 ))}
@@ -383,14 +377,14 @@ const AirtableMCPCaseStudy = () => {
         </section>
 
         {/* Security Architecture */}
-        <section className="py-16 bg-muted/30">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background-elevated">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-purple-500/10 flex items-center justify-center">
-                  <Code2 className="h-5 w-5 text-purple-500" />
+                <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                  <Code2 aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold">Security Architecture</h2>
+                <h2 className="font-serif text-h2 font-normal text-foreground">Security Architecture</h2>
               </div>
 
               <Card className="mb-8">
@@ -398,38 +392,38 @@ const AirtableMCPCaseStudy = () => {
                   <CardTitle>Multi-Layer Input Validation</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p className="text-muted-foreground">
+                  <p className="text-body text-foreground-muted">
                     The server implements defense-in-depth security with multiple validation layers protecting
                     against common attack vectors while maintaining usability.
                   </p>
 
                   <div className="grid md:grid-cols-2 gap-4">
-                    <div className="flex items-start gap-3 p-4 rounded-lg bg-muted/50">
-                      <Lock className="h-5 w-5 text-red-500 mt-0.5" />
+                    <div className="flex items-start gap-3 p-4 rounded-md bg-background">
+                      <Lock aria-hidden="true" className="h-5 w-5 text-accent-brand-strong mt-0.5 flex-shrink-0" />
                       <div>
-                        <h4 className="font-semibold text-sm">ID Format Validation</h4>
-                        <p className="text-xs text-muted-foreground">Base IDs must start with "app", table IDs with "tbl"</p>
+                        <h4 className="font-sans text-body-sm font-semibold text-foreground">ID Format Validation</h4>
+                        <p className="text-caption text-foreground-muted">Base IDs must start with "app", table IDs with "tbl"</p>
                       </div>
                     </div>
-                    <div className="flex items-start gap-3 p-4 rounded-lg bg-muted/50">
-                      <Shield className="h-5 w-5 text-amber-500 mt-0.5" />
+                    <div className="flex items-start gap-3 p-4 rounded-md bg-background">
+                      <Shield aria-hidden="true" className="h-5 w-5 text-accent-brand-strong mt-0.5 flex-shrink-0" />
                       <div>
-                        <h4 className="font-semibold text-sm">Injection Blocking</h4>
-                        <p className="text-xs text-muted-foreground">XSS and SQL injection pattern detection</p>
+                        <h4 className="font-sans text-body-sm font-semibold text-foreground">Injection Blocking</h4>
+                        <p className="text-caption text-foreground-muted">XSS and SQL injection pattern detection</p>
                       </div>
                     </div>
-                    <div className="flex items-start gap-3 p-4 rounded-lg bg-muted/50">
-                      <FileJson className="h-5 w-5 text-blue-500 mt-0.5" />
+                    <div className="flex items-start gap-3 p-4 rounded-md bg-background">
+                      <FileJson aria-hidden="true" className="h-5 w-5 text-accent-brand-strong mt-0.5 flex-shrink-0" />
                       <div>
-                        <h4 className="font-semibold text-sm">Type Checking</h4>
-                        <p className="text-xs text-muted-foreground">Strong typing prevents confusion attacks</p>
+                        <h4 className="font-sans text-body-sm font-semibold text-foreground">Type Checking</h4>
+                        <p className="text-caption text-foreground-muted">Strong typing prevents confusion attacks</p>
                       </div>
                     </div>
-                    <div className="flex items-start gap-3 p-4 rounded-lg bg-muted/50">
-                      <AlertTriangle className="h-5 w-5 text-purple-500 mt-0.5" />
+                    <div className="flex items-start gap-3 p-4 rounded-md bg-background">
+                      <AlertTriangle aria-hidden="true" className="h-5 w-5 text-accent-brand-strong mt-0.5 flex-shrink-0" />
                       <div>
-                        <h4 className="font-semibold text-sm">Error Sanitization</h4>
-                        <p className="text-xs text-muted-foreground">Prevents information disclosure in error messages</p>
+                        <h4 className="font-sans text-body-sm font-semibold text-foreground">Error Sanitization</h4>
+                        <p className="text-caption text-foreground-muted">Prevents information disclosure in error messages</p>
                       </div>
                     </div>
                   </div>
@@ -440,11 +434,11 @@ const AirtableMCPCaseStudy = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 bg-gradient-to-r from-primary/10 to-blue-500/10 border-t">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-accent-brand-soft/40 border-t border-border">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4">Ready to Query Airtable with Natural Language?</h2>
-              <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
+              <h2 className="font-serif text-h2 font-normal mb-4 text-foreground">Ready to query Airtable with <em className="italic font-normal text-accent-brand-strong">natural language</em>?</h2>
+              <p className="text-body text-foreground-muted mb-8 max-w-2xl mx-auto">
                 Transform how your team interacts with Airtable data. Let AI assistants handle the complexity
                 while you focus on insights and decision-making.
               </p>
@@ -453,17 +447,17 @@ const AirtableMCPCaseStudy = () => {
                   href="https://github.com/sulaiman013/AIRTABLE-MCP"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-semibold"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-accent-brand text-accent-brand-foreground rounded-sm transition-colors duration-fast ease-out-quart font-semibold"
                 >
-                  <GitBranch className="h-5 w-5" />
+                  <GitBranch aria-hidden="true" className="h-5 w-5" />
                   Get Started on GitHub
                 </a>
               </div>
               <div className="flex flex-wrap gap-3 justify-center mt-6">
-                <Badge className="text-sm px-4 py-2">Natural Language</Badge>
-                <Badge className="text-sm px-4 py-2">Security-First</Badge>
-                <Badge className="text-sm px-4 py-2">Claude Integration</Badge>
-                <Badge className="text-sm px-4 py-2">Aggregations</Badge>
+                <Badge className="text-body-sm px-4 py-2">Natural Language</Badge>
+                <Badge className="text-body-sm px-4 py-2">Security-First</Badge>
+                <Badge className="text-body-sm px-4 py-2">Claude Integration</Badge>
+                <Badge className="text-body-sm px-4 py-2">Aggregations</Badge>
               </div>
             </div>
           </div>

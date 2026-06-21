@@ -10,7 +10,6 @@ import {
   AlertTriangle,
   ArrowRight,
   Target,
-  Shield,
   ChevronRight,
   Bot,
   MessageSquare,
@@ -18,7 +17,6 @@ import {
   Key,
   Cloud,
   Sparkles,
-  Terminal,
   FileCode,
   Layers,
   Play
@@ -113,20 +111,20 @@ const FabricSQLAssistantCaseStudy = () => {
 
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="py-16 md:py-24 bg-gradient-to-b from-primary/10 via-primary/5 to-background">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm md:py-section bg-accent-brand-soft/40">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-2 mb-6">
                 <Badge variant="outline" className="text-xs">Pet Project</Badge>
-                <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                <ChevronRight aria-hidden="true" className="h-4 w-4 text-foreground-muted" />
                 <Badge variant="outline" className="text-xs">AI + Microsoft Fabric</Badge>
               </div>
 
-              <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
-                <span className="text-primary">Fabric SQL Assistant:</span> Natural Language Queries for Microsoft Fabric
+              <h1 className="font-serif text-display-lg font-normal mb-6 leading-tight text-foreground">
+                Fabric SQL Assistant: <em className="italic font-normal text-accent-brand-strong">natural language queries</em> for Microsoft Fabric
               </h1>
 
-              <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-4xl">
+              <p className="text-body-lg text-foreground-muted mb-8 leading-relaxed max-w-4xl">
                 An MCP server that enables Claude Desktop to interact with Microsoft Fabric SQL databases through
                 natural language: translating plain English questions into SQL queries and returning actionable insights
                 without writing a single line of code.
@@ -134,7 +132,7 @@ const FabricSQLAssistantCaseStudy = () => {
 
               <div className="flex flex-wrap gap-3 mb-6">
                 {techStack.map((tech, index) => (
-                  <Badge key={index} className="bg-primary/10 text-primary hover:bg-primary/20 px-3 py-1">
+                  <Badge key={index} className="bg-accent-brand-soft text-accent-brand-strong px-3 py-1">
                     {tech.name}
                   </Badge>
                 ))}
@@ -145,9 +143,9 @@ const FabricSQLAssistantCaseStudy = () => {
                   href="https://github.com/sulaiman013/Fabric-SQL-Assistant"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-accent-brand text-accent-brand-foreground rounded-sm transition-colors duration-fast ease-out-quart"
                 >
-                  <GitBranch className="h-4 w-4" />
+                  <GitBranch aria-hidden="true" className="h-4 w-4" />
                   View on GitHub
                 </a>
                 <Badge variant="secondary" className="px-3 py-2">
@@ -159,18 +157,18 @@ const FabricSQLAssistantCaseStudy = () => {
         </section>
 
         {/* Key Results */}
-        <section className="py-12 bg-background border-y">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background border-y border-border">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="grid md:grid-cols-3 gap-8">
                 {keyResults.map((result, index) => (
                   <div key={index} className="text-center">
-                    <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                      <result.icon className="h-7 w-7 text-primary" />
+                    <div className="w-14 h-14 rounded-full bg-accent-brand-soft flex items-center justify-center mx-auto mb-4">
+                      <result.icon aria-hidden="true" className="h-7 w-7 text-accent-brand-strong" />
                     </div>
-                    <div className="text-3xl md:text-4xl font-bold text-primary mb-2">{result.value}</div>
-                    <div className="font-semibold mb-1">{result.label}</div>
-                    <div className="text-sm text-muted-foreground">{result.description}</div>
+                    <div className="font-serif text-display-md font-normal text-accent-brand-strong mb-2">{result.value}</div>
+                    <div className="text-h4 font-semibold mb-1">{result.label}</div>
+                    <div className="text-body-sm text-foreground-muted">{result.description}</div>
                   </div>
                 ))}
               </div>
@@ -179,18 +177,18 @@ const FabricSQLAssistantCaseStudy = () => {
         </section>
 
         {/* The Challenge */}
-        <section className="py-16 bg-muted/30">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background-elevated">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center">
-                  <AlertTriangle className="h-5 w-5 text-orange-500" />
+                <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                  <AlertTriangle aria-hidden="true" className="h-5 w-5 text-warning" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold">The Challenge</h2>
+                <h2 className="font-serif text-h2 font-normal text-foreground">The Challenge</h2>
               </div>
 
               <div className="mb-8">
-                <p className="text-lg text-muted-foreground leading-relaxed">
+                <p className="text-body-lg text-foreground-muted leading-relaxed">
                   Microsoft Fabric is a powerful unified analytics platform, but accessing data requires SQL expertise
                   and complex authentication setup. Business users often wait for data teams to write queries,
                   creating bottlenecks and delays in decision-making.
@@ -199,15 +197,15 @@ const FabricSQLAssistantCaseStudy = () => {
 
               <div className="grid md:grid-cols-2 gap-6">
                 {challenges.map((challenge, index) => (
-                  <Card key={index} className="border-orange-500/20 bg-background">
+                  <Card key={index} className="bg-background transition-colors duration-fast ease-out-quart hover:border-border-strong">
                     <CardContent className="pt-6">
                       <div className="flex items-start gap-4">
-                        <div className="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center flex-shrink-0">
-                          <challenge.icon className="h-5 w-5 text-orange-500" />
+                        <div className="w-10 h-10 rounded-md bg-accent-brand-soft flex items-center justify-center flex-shrink-0">
+                          <challenge.icon aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                         </div>
                         <div>
-                          <h3 className="font-semibold mb-2">{challenge.title}</h3>
-                          <p className="text-sm text-muted-foreground">{challenge.description}</p>
+                          <h3 className="text-h4 font-semibold mb-2 text-foreground">{challenge.title}</h3>
+                          <p className="text-body-sm text-foreground-muted">{challenge.description}</p>
                         </div>
                       </div>
                     </CardContent>
@@ -219,20 +217,20 @@ const FabricSQLAssistantCaseStudy = () => {
         </section>
 
         {/* The Solution */}
-        <section className="py-16 bg-background">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center">
-                  <Target className="h-5 w-5 text-green-500" />
+                <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                  <Target aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold">The Solution</h2>
+                <h2 className="font-serif text-h2 font-normal text-foreground">The Solution</h2>
               </div>
 
               <div className="grid lg:grid-cols-2 gap-10">
                 <div>
-                  <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                    I built an <strong className="text-foreground">MCP server</strong> that bridges Claude Desktop
+                  <p className="text-body-lg text-foreground-muted leading-relaxed mb-6">
+                    I built an <strong className="text-foreground font-semibold">MCP server</strong> that bridges Claude Desktop
                     with Microsoft Fabric, using OpenAI for intelligent query generation and MSAL for seamless
                     Azure AD authentication.
                   </p>
@@ -240,8 +238,8 @@ const FabricSQLAssistantCaseStudy = () => {
                   <div className="space-y-3">
                     {solutionFeatures.map((feature, index) => (
                       <div key={index} className="flex items-start gap-3">
-                        <CheckCircle2 className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
-                        <span className="text-sm">{feature}</span>
+                        <CheckCircle2 aria-hidden="true" className="h-5 w-5 text-accent-brand-strong mt-0.5 flex-shrink-0" />
+                        <span className="text-body-sm text-foreground">{feature}</span>
                       </div>
                     ))}
                   </div>
@@ -249,65 +247,62 @@ const FabricSQLAssistantCaseStudy = () => {
 
                 {/* Architecture Visual */}
                 <div className="space-y-4">
-                  <Card className="border-blue-500/30 relative overflow-hidden">
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-blue-500" />
+                  <Card className="transition-colors duration-fast ease-out-quart hover:border-border-strong">
                     <CardHeader className="pb-2">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center">
-                          <MessageSquare className="h-5 w-5 text-white" />
+                        <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                          <MessageSquare aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                         </div>
                         <div>
-                          <CardTitle className="text-lg">Claude Desktop</CardTitle>
-                          <p className="text-sm text-muted-foreground">Natural Language Input</p>
+                          <CardTitle className="text-h4 font-semibold text-foreground">Claude Desktop</CardTitle>
+                          <p className="text-body-sm text-foreground-muted">Natural Language Input</p>
                         </div>
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm text-muted-foreground">User asks questions in plain English</p>
+                      <p className="text-body-sm text-foreground-muted">User asks questions in plain English</p>
                     </CardContent>
                   </Card>
 
                   <div className="flex justify-center">
-                    <ArrowRight className="h-6 w-6 text-muted-foreground rotate-90" />
+                    <ArrowRight aria-hidden="true" className="h-6 w-6 text-foreground-subtle rotate-90" />
                   </div>
 
-                  <Card className="border-purple-500/30 relative overflow-hidden">
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-purple-500" />
+                  <Card className="transition-colors duration-fast ease-out-quart hover:border-border-strong">
                     <CardHeader className="pb-2">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center">
-                          <Sparkles className="h-5 w-5 text-white" />
+                        <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                          <Sparkles aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                         </div>
                         <div>
-                          <CardTitle className="text-lg">OpenAI LLM</CardTitle>
-                          <p className="text-sm text-muted-foreground">Query Translation</p>
+                          <CardTitle className="text-h4 font-semibold text-foreground">OpenAI LLM</CardTitle>
+                          <p className="text-body-sm text-foreground-muted">Query Translation</p>
                         </div>
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm text-muted-foreground">Converts natural language to optimized SQL</p>
+                      <p className="text-body-sm text-foreground-muted">Converts natural language to optimized SQL</p>
                     </CardContent>
                   </Card>
 
                   <div className="flex justify-center">
-                    <ArrowRight className="h-6 w-6 text-muted-foreground rotate-90" />
+                    <ArrowRight aria-hidden="true" className="h-6 w-6 text-foreground-subtle rotate-90" />
                   </div>
 
-                  <Card className="border-green-500/30 relative overflow-hidden">
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-green-500" />
+                  <Card className="transition-colors duration-fast ease-out-quart hover:border-border-strong">
                     <CardHeader className="pb-2">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center">
-                          <Database className="h-5 w-5 text-white" />
+                        <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                          <Database aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                         </div>
                         <div>
-                          <CardTitle className="text-lg">Microsoft Fabric</CardTitle>
-                          <p className="text-sm text-muted-foreground">SQL Endpoint</p>
+                          <CardTitle className="text-h4 font-semibold text-foreground">Microsoft Fabric</CardTitle>
+                          <p className="text-body-sm text-foreground-muted">SQL Endpoint</p>
                         </div>
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm text-muted-foreground">Executes queries via pyodbc with Azure AD auth</p>
+                      <p className="text-body-sm text-foreground-muted">Executes queries via pyodbc with Azure AD auth</p>
                     </CardContent>
                   </Card>
                 </div>
@@ -317,33 +312,33 @@ const FabricSQLAssistantCaseStudy = () => {
         </section>
 
         {/* Before/After Comparison */}
-        <section className="py-16 bg-muted/30">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background-elevated">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center">
-                  <TrendingUp className="h-5 w-5 text-blue-500" />
+                <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                  <TrendingUp aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold">The Transformation</h2>
+                <h2 className="font-serif text-h2 font-normal text-foreground">The Transformation</h2>
               </div>
 
-              <Card>
+              <Card className="bg-background">
                 <CardContent className="p-0">
                   <div className="overflow-x-auto">
                     <table className="w-full">
                       <thead>
-                        <tr className="border-b bg-muted/50">
-                          <th className="text-left p-4 font-semibold">Area</th>
-                          <th className="text-left p-4 font-semibold text-orange-500">Before</th>
-                          <th className="text-left p-4 font-semibold text-green-500">After</th>
+                        <tr className="border-b border-border bg-background-elevated">
+                          <th className="text-left p-4 text-caption font-medium uppercase tracking-wide text-foreground-muted">Area</th>
+                          <th className="text-left p-4 text-caption font-medium uppercase tracking-wide text-foreground-muted">Before</th>
+                          <th className="text-left p-4 text-caption font-medium uppercase tracking-wide text-accent-brand-strong">After</th>
                         </tr>
                       </thead>
                       <tbody>
                         {beforeAfter.map((row, index) => (
-                          <tr key={index} className="border-b last:border-0">
-                            <td className="p-4 font-medium">{row.area}</td>
-                            <td className="p-4 text-sm text-muted-foreground">{row.before}</td>
-                            <td className="p-4 text-sm">{row.after}</td>
+                          <tr key={index} className="border-b border-border last:border-0">
+                            <td className="p-4 text-body-sm font-semibold text-foreground">{row.area}</td>
+                            <td className="p-4 text-body-sm text-foreground-muted">{row.before}</td>
+                            <td className="p-4 text-body-sm text-foreground">{row.after}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -356,25 +351,25 @@ const FabricSQLAssistantCaseStudy = () => {
         </section>
 
         {/* Core Components */}
-        <section className="py-16 bg-background">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Layers className="h-5 w-5 text-primary" />
+                <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                  <Layers aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold">Core Components</h2>
+                <h2 className="font-serif text-h2 font-normal text-foreground">Core Components</h2>
               </div>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {coreComponents.map((component, index) => (
-                  <Card key={index} className="hover:border-primary/50 transition-colors">
+                  <Card key={index} className="transition-colors duration-fast ease-out-quart hover:border-border-strong">
                     <CardContent className="pt-6">
                       <div className="flex items-center gap-2 mb-3">
-                        <FileCode className="h-4 w-4 text-primary" />
-                        <code className="text-sm font-mono bg-muted px-2 py-1 rounded">{component.name}</code>
+                        <FileCode aria-hidden="true" className="h-4 w-4 text-accent-brand-strong" />
+                        <code className="text-code font-mono bg-background-elevated text-accent-brand-strong px-2 py-1 rounded-xs">{component.name}</code>
                       </div>
-                      <p className="text-sm text-muted-foreground">{component.description}</p>
+                      <p className="text-body-sm text-foreground-muted">{component.description}</p>
                     </CardContent>
                   </Card>
                 ))}
@@ -384,21 +379,21 @@ const FabricSQLAssistantCaseStudy = () => {
         </section>
 
         {/* Video Demo */}
-        <section className="py-16 bg-muted/30">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background-elevated">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center">
-                  <Play className="h-5 w-5 text-red-500" />
+                <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                  <Play aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold">See It In Action</h2>
+                <h2 className="font-serif text-h2 font-normal text-foreground">See It In Action</h2>
               </div>
 
-              <Card className="overflow-hidden shadow-xl">
-                <CardHeader className="bg-muted/30 border-b">
+              <Card className="overflow-hidden bg-background">
+                <CardHeader className="bg-background-elevated border-b border-border">
                   <div className="flex items-center justify-between">
-                    <CardTitle className="flex items-center gap-2">
-                      <Play className="h-5 w-5 text-red-500" />
+                    <CardTitle className="text-h4 font-semibold text-foreground flex items-center gap-2">
+                      <Play aria-hidden="true" className="h-5 w-5 text-accent-brand-strong" />
                       Fabric SQL Assistant Demo
                     </CardTitle>
                     <Badge variant="outline" className="text-xs">Video Tutorial</Badge>
@@ -420,7 +415,7 @@ const FabricSQLAssistantCaseStudy = () => {
                 </CardContent>
               </Card>
 
-              <p className="text-center text-muted-foreground mt-4">
+              <p className="text-center text-body-sm text-foreground-muted mt-4">
                 Watch how natural language queries are translated into SQL and executed against Microsoft Fabric in real-time.
               </p>
             </div>
@@ -428,11 +423,13 @@ const FabricSQLAssistantCaseStudy = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 bg-gradient-to-r from-primary/10 to-blue-500/10 border-t">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-accent-brand-soft/40 border-t border-border">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4">Ready to Query Fabric with Natural Language?</h2>
-              <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
+              <h2 className="font-serif text-h2 font-normal mb-4 text-foreground">
+                Ready to query Fabric with <em className="italic font-normal text-accent-brand-strong">natural language</em>?
+              </h2>
+              <p className="text-body-lg text-foreground-muted mb-8 max-w-2xl mx-auto">
                 Unlock the power of Microsoft Fabric for everyone on your team. No SQL expertise required: just
                 ask questions and get answers.
               </p>
@@ -441,9 +438,9 @@ const FabricSQLAssistantCaseStudy = () => {
                   href="https://github.com/sulaiman013/Fabric-SQL-Assistant"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-semibold"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-accent-brand text-accent-brand-foreground rounded-sm transition-colors duration-fast ease-out-quart font-semibold"
                 >
-                  <GitBranch className="h-5 w-5" />
+                  <GitBranch aria-hidden="true" className="h-5 w-5" />
                   Get Started on GitHub
                 </a>
               </div>

@@ -4,22 +4,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
   TrendingUp,
-  Database,
   Globe,
   CheckCircle2,
   Code2,
   AlertTriangle,
-  ArrowRight,
-  Zap,
-  Target,
   Shield,
   ChevronRight,
-  Bot,
-  Server,
   Lock,
   FileCode,
-  Wrench,
-  Terminal,
   GitBranch,
   CloudCog,
   Play,
@@ -66,7 +58,7 @@ const PowerBIExpertWebappCaseStudy = () => {
     "Multi-provider LLM support: Azure Claude, Azure OpenAI, Ollama (local)",
     "Automatic USERELATIONSHIP handling for inactive relationships",
     "Interactive PBIP rename tools with automatic reference updates",
-    "Schema-only transmission — actual row data never sent to AI",
+    "Schema-only transmission, actual row data never sent to AI",
     "Tamper-evident audit logging with HMAC signatures and hash chains"
   ];
 
@@ -116,12 +108,12 @@ const PowerBIExpertWebappCaseStudy = () => {
     {
       icon: Users,
       title: "ISV/SaaS Product Enhancement",
-      description: "White-label and integrate into your product — charge premium for an 'AI Analytics' tier"
+      description: "White-label and integrate into your product, charge premium for an 'AI Analytics' tier"
     },
     {
       icon: Shield,
       title: "Regulated Industries",
-      description: "Deploy with Ollama for banks, healthcare, government — 100% air-gapped operation"
+      description: "Deploy with Ollama for banks, healthcare, government, 100% air-gapped operation"
     },
     {
       icon: Cpu,
@@ -136,26 +128,26 @@ const PowerBIExpertWebappCaseStudy = () => {
 
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="py-16 md:py-24 bg-gradient-to-b from-primary/10 via-primary/5 to-background">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm md:py-section bg-accent-brand-soft/40">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-2 mb-6">
                 <Badge variant="outline" className="text-xs">Pet Project</Badge>
-                <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                <ChevronRight className="h-4 w-4 text-foreground-subtle" />
                 <Badge variant="outline" className="text-xs">AI & Analytics</Badge>
               </div>
 
-              <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
-                <span className="text-primary">Power BI Expert Webapp:</span> Enterprise AI Assistant Without the Enterprise Price Tag
+              <h1 className="font-serif text-display-lg mb-6 leading-tight text-foreground">
+                Power BI Expert Webapp: enterprise AI assistance, <em className="italic font-normal">without</em> the enterprise price tag
               </h1>
 
-              <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-4xl">
+              <p className="text-body-lg text-foreground-muted mb-8 leading-relaxed max-w-prose">
                 An open-source, white-label AI chat layer for Power BI that organizations can customize and embed into their own applications, enabling natural language analytics without Microsoft Copilot's licensing barriers.
               </p>
 
               <div className="flex flex-wrap gap-3 mb-6">
                 {techStack.map((tech, index) => (
-                  <Badge key={index} className="bg-primary/10 text-primary hover:bg-primary/20 px-3 py-1">
+                  <Badge key={index} className="bg-accent-brand-soft text-accent-brand-strong hover:bg-accent-brand-soft px-3 py-1">
                     {tech.name}
                   </Badge>
                 ))}
@@ -166,7 +158,7 @@ const PowerBIExpertWebappCaseStudy = () => {
                   href="https://github.com/sulaiman013/powerbi-expert-app"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-accent-brand text-accent-brand-foreground rounded-md transition-colors duration-fast ease-out-quart hover:bg-accent-brand-strong"
                 >
                   <GitBranch className="h-4 w-4" />
                   View on GitHub
@@ -175,7 +167,7 @@ const PowerBIExpertWebappCaseStudy = () => {
                   href="https://youtu.be/5gNa9BUJ4r8"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2 border border-border-strong bg-background-elevated text-foreground rounded-md transition-colors duration-fast ease-out-quart hover:border-border-strong hover:bg-background"
                 >
                   <Play className="h-4 w-4" />
                   Watch Demo
@@ -189,18 +181,18 @@ const PowerBIExpertWebappCaseStudy = () => {
         </section>
 
         {/* Key Results */}
-        <section className="py-12 bg-background border-y">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background border-y border-border">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="grid md:grid-cols-3 gap-8">
                 {keyResults.map((result, index) => (
                   <div key={index} className="text-center">
-                    <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                      <result.icon className="h-7 w-7 text-primary" />
+                    <div className="w-14 h-14 rounded-full bg-accent-brand-soft flex items-center justify-center mx-auto mb-4">
+                      <result.icon className="h-7 w-7 text-accent-brand-strong" />
                     </div>
-                    <div className="text-3xl md:text-4xl font-bold text-primary mb-2">{result.value}</div>
-                    <div className="font-semibold mb-1">{result.label}</div>
-                    <div className="text-sm text-muted-foreground">{result.description}</div>
+                    <div className="font-mono text-3xl md:text-4xl font-bold text-accent-brand-strong mb-2">{result.value}</div>
+                    <div className="text-h4 font-semibold mb-1">{result.label}</div>
+                    <div className="text-body-sm text-foreground-muted">{result.description}</div>
                   </div>
                 ))}
               </div>
@@ -209,18 +201,18 @@ const PowerBIExpertWebappCaseStudy = () => {
         </section>
 
         {/* The Challenge */}
-        <section className="py-16 bg-muted/30">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background-elevated">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center">
-                  <AlertTriangle className="h-5 w-5 text-orange-500" />
+                <div className="w-10 h-10 rounded-full bg-background-elevated border border-border flex items-center justify-center">
+                  <AlertTriangle className="h-5 w-5 text-warning" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold">The Challenge</h2>
+                <h2 className="font-serif text-h2 text-foreground">The Challenge</h2>
               </div>
 
               <div className="mb-8">
-                <p className="text-lg text-muted-foreground leading-relaxed">
+                <p className="text-body-lg text-foreground-muted leading-relaxed max-w-prose">
                   Microsoft Copilot for Power BI promises AI-powered analytics, but the reality is a significant barrier:
                   Premium/Fabric capacity requirement plus $30/user/month. For organizations with hundreds of users on
                   Pro licenses, or those in regulated industries that cannot use cloud AI, there was no viable option.
@@ -229,15 +221,15 @@ const PowerBIExpertWebappCaseStudy = () => {
 
               <div className="grid md:grid-cols-2 gap-6">
                 {challenges.map((challenge, index) => (
-                  <Card key={index} className="border-orange-500/20 bg-background">
+                  <Card key={index} className="bg-background transition-colors duration-fast ease-out-quart hover:border-border-strong">
                     <CardContent className="pt-6">
                       <div className="flex items-start gap-4">
-                        <div className="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center flex-shrink-0">
-                          <challenge.icon className="h-5 w-5 text-orange-500" />
+                        <div className="w-10 h-10 rounded-lg bg-background-elevated border border-border flex items-center justify-center flex-shrink-0">
+                          <challenge.icon className="h-5 w-5 text-foreground-muted" />
                         </div>
                         <div>
-                          <h3 className="font-semibold mb-2">{challenge.title}</h3>
-                          <p className="text-sm text-muted-foreground">{challenge.description}</p>
+                          <h3 className="text-h4 font-semibold mb-2 text-foreground">{challenge.title}</h3>
+                          <p className="text-body-sm text-foreground-muted">{challenge.description}</p>
                         </div>
                       </div>
                     </CardContent>
@@ -246,16 +238,16 @@ const PowerBIExpertWebappCaseStudy = () => {
               </div>
 
               {/* Key Insight */}
-              <Card className="mt-10 border-blue-500/30 bg-blue-500/5">
+              <Card className="mt-10 bg-accent-brand-soft border-border">
                 <CardContent className="pt-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center flex-shrink-0">
-                      <MessageSquare className="h-6 w-6 text-blue-500" />
+                    <div className="w-12 h-12 rounded-lg bg-background-elevated border border-border flex items-center justify-center flex-shrink-0">
+                      <MessageSquare className="h-6 w-6 text-accent-brand-strong" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-lg mb-2">The Real Opportunity</h3>
-                      <p className="text-muted-foreground">
-                        This is not just a tool. It is an <strong>open-source template</strong> that organizations can fork,
+                      <h3 className="text-h3 font-bold mb-2 text-foreground">The Real Opportunity</h3>
+                      <p className="text-foreground-muted">
+                        This is not just a tool. It is an <em className="italic font-normal text-foreground">open-source template</em> that organizations can fork,
                         customize, and embed into their own applications: a starter kit for anyone building Power BI
                         Embedded solutions who wants AI-powered Q&A without months of development.
                       </p>
@@ -268,20 +260,20 @@ const PowerBIExpertWebappCaseStudy = () => {
         </section>
 
         {/* The Solution */}
-        <section className="py-16 bg-background">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center">
-                  <Target className="h-5 w-5 text-green-500" />
+                <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                  <CheckCircle2 className="h-5 w-5 text-accent-brand-strong" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold">The Solution</h2>
+                <h2 className="font-serif text-h2 text-foreground">The Solution</h2>
               </div>
 
               <div className="grid lg:grid-cols-2 gap-10">
                 <div>
-                  <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                    I built an <strong className="text-foreground">enterprise-grade web application</strong> that enables
+                  <p className="text-body-lg text-foreground-muted leading-relaxed mb-6 max-w-prose">
+                    I built an <em className="italic font-normal text-foreground">enterprise-grade web application</em> that enables
                     natural language interaction with Power BI data, supporting multiple LLM providers and both
                     Desktop and Cloud connectivity.
                   </p>
@@ -289,8 +281,8 @@ const PowerBIExpertWebappCaseStudy = () => {
                   <div className="space-y-3">
                     {solutionFeatures.map((feature, index) => (
                       <div key={index} className="flex items-start gap-3">
-                        <CheckCircle2 className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
-                        <span className="text-sm">{feature}</span>
+                        <CheckCircle2 className="h-5 w-5 text-accent-brand-strong mt-0.5 flex-shrink-0" />
+                        <span className="text-body-sm text-foreground">{feature}</span>
                       </div>
                     ))}
                   </div>
@@ -298,45 +290,43 @@ const PowerBIExpertWebappCaseStudy = () => {
 
                 {/* LLM Provider Options */}
                 <div className="space-y-4">
-                  <h3 className="font-semibold text-lg mb-4">Your AI, Your Choice</h3>
+                  <h3 className="text-h4 font-semibold mb-4 text-foreground">Your AI, Your Choice</h3>
 
-                  <Card className="border-blue-500/30 relative overflow-hidden">
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-blue-500" />
+                  <Card className="transition-colors duration-fast ease-out-quart hover:border-border-strong">
                     <CardHeader className="pb-2">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center">
-                          <CloudCog className="h-5 w-5 text-white" />
+                        <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                          <CloudCog className="h-5 w-5 text-accent-brand-strong" />
                         </div>
                         <div>
-                          <CardTitle className="text-lg">Azure AI Foundry</CardTitle>
-                          <p className="text-sm text-muted-foreground">Claude / OpenAI</p>
+                          <CardTitle className="text-h4">Azure AI Foundry</CardTitle>
+                          <p className="text-body-sm text-foreground-muted">Claude / OpenAI</p>
                         </div>
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm text-muted-foreground">Data stays in YOUR Azure subscription. Enterprise compliance, existing governance.</p>
+                      <p className="text-body-sm text-foreground-muted">Data stays in YOUR Azure subscription. Enterprise compliance, existing governance.</p>
                     </CardContent>
                   </Card>
 
                   <div className="flex justify-center">
-                    <span className="text-muted-foreground font-medium">OR</span>
+                    <span className="text-caption uppercase tracking-wide font-mono text-foreground-subtle">OR</span>
                   </div>
 
-                  <Card className="border-green-500/30 relative overflow-hidden">
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-green-500" />
+                  <Card className="transition-colors duration-fast ease-out-quart hover:border-border-strong">
                     <CardHeader className="pb-2">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center">
-                          <Cpu className="h-5 w-5 text-white" />
+                        <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                          <Cpu className="h-5 w-5 text-accent-brand-strong" />
                         </div>
                         <div>
-                          <CardTitle className="text-lg">Ollama (Local)</CardTitle>
-                          <p className="text-sm text-muted-foreground">DeepSeek, Qwen, etc.</p>
+                          <CardTitle className="text-h4">Ollama (Local)</CardTitle>
+                          <p className="text-body-sm text-foreground-muted">DeepSeek, Qwen, etc.</p>
                         </div>
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm text-muted-foreground">100% air-gapped. Data never leaves your machine. Perfect for regulated industries.</p>
+                      <p className="text-body-sm text-foreground-muted">100% air-gapped. Data never leaves your machine. Perfect for regulated industries.</p>
                     </CardContent>
                   </Card>
                 </div>
@@ -346,14 +336,14 @@ const PowerBIExpertWebappCaseStudy = () => {
         </section>
 
         {/* Before/After Comparison */}
-        <section className="py-16 bg-muted/30">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background-elevated">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center">
-                  <TrendingUp className="h-5 w-5 text-blue-500" />
+                <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                  <TrendingUp className="h-5 w-5 text-accent-brand-strong" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold">The Transformation</h2>
+                <h2 className="font-serif text-h2 text-foreground">The Transformation</h2>
               </div>
 
               <Card>
@@ -361,18 +351,18 @@ const PowerBIExpertWebappCaseStudy = () => {
                   <div className="overflow-x-auto">
                     <table className="w-full">
                       <thead>
-                        <tr className="border-b bg-muted/50">
-                          <th className="text-left p-4 font-semibold">Area</th>
-                          <th className="text-left p-4 font-semibold text-orange-500">Before</th>
-                          <th className="text-left p-4 font-semibold text-green-500">After</th>
+                        <tr className="border-b border-border bg-background-elevated">
+                          <th className="text-left p-4 text-caption uppercase tracking-wide font-mono text-foreground-muted">Area</th>
+                          <th className="text-left p-4 text-caption uppercase tracking-wide font-mono text-foreground-muted">Before</th>
+                          <th className="text-left p-4 text-caption uppercase tracking-wide font-mono text-accent-brand-strong">After</th>
                         </tr>
                       </thead>
                       <tbody>
                         {beforeAfter.map((row, index) => (
-                          <tr key={index} className="border-b last:border-0">
-                            <td className="p-4 font-medium">{row.area}</td>
-                            <td className="p-4 text-sm text-muted-foreground">{row.before}</td>
-                            <td className="p-4 text-sm">{row.after}</td>
+                          <tr key={index} className="border-b border-border last:border-0">
+                            <td className="p-4 text-body-sm font-medium text-foreground">{row.area}</td>
+                            <td className="p-4 text-body-sm text-foreground-muted">{row.before}</td>
+                            <td className="p-4 text-body-sm text-foreground">{row.after}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -385,31 +375,31 @@ const PowerBIExpertWebappCaseStudy = () => {
         </section>
 
         {/* Use Cases */}
-        <section className="py-16 bg-background">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-purple-500/10 flex items-center justify-center">
-                  <Building2 className="h-5 w-5 text-purple-500" />
+                <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                  <Building2 className="h-5 w-5 text-accent-brand-strong" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold">Real-World Use Cases</h2>
+                <h2 className="font-serif text-h2 text-foreground">Real-World Use Cases</h2>
               </div>
 
-              <p className="text-lg text-muted-foreground mb-8">
+              <p className="text-body-lg text-foreground-muted mb-8 max-w-prose">
                 This webapp is designed as a foundation for custom enterprise solutions, not just a standalone tool.
               </p>
 
               <div className="grid md:grid-cols-2 gap-6">
                 {useCases.map((useCase, index) => (
-                  <Card key={index} className="hover:border-primary/50 transition-colors">
+                  <Card key={index} className="transition-colors duration-fast ease-out-quart hover:border-border-strong">
                     <CardContent className="pt-6">
                       <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 rounded-lg bg-purple-500/10 flex items-center justify-center flex-shrink-0">
-                          <useCase.icon className="h-6 w-6 text-purple-500" />
+                        <div className="w-12 h-12 rounded-lg bg-accent-brand-soft flex items-center justify-center flex-shrink-0">
+                          <useCase.icon className="h-6 w-6 text-accent-brand-strong" />
                         </div>
                         <div>
-                          <h3 className="font-semibold mb-2">{useCase.title}</h3>
-                          <p className="text-sm text-muted-foreground">{useCase.description}</p>
+                          <h3 className="text-h4 font-semibold mb-2 text-foreground">{useCase.title}</h3>
+                          <p className="text-body-sm text-foreground-muted">{useCase.description}</p>
                         </div>
                       </div>
                     </CardContent>
@@ -421,24 +411,24 @@ const PowerBIExpertWebappCaseStudy = () => {
         </section>
 
         {/* Video Demo */}
-        <section className="py-16 bg-muted/30">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background-elevated">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center">
-                  <Play className="h-5 w-5 text-red-500" />
+                <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                  <Play className="h-5 w-5 text-accent-brand-strong" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold">See It In Action</h2>
+                <h2 className="font-serif text-h2 text-foreground">See It In Action</h2>
               </div>
 
-              <Card className="overflow-hidden shadow-xl">
-                <CardHeader className="bg-muted/30 border-b">
+              <Card className="overflow-hidden">
+                <CardHeader className="bg-background border-b border-border">
                   <div className="flex items-center justify-between">
-                    <CardTitle className="flex items-center gap-2">
-                      <Play className="h-5 w-5 text-red-500" />
+                    <CardTitle className="flex items-center gap-2 text-h4">
+                      <Play className="h-5 w-5 text-accent-brand-strong" />
                       Complete Setup & Demo
                     </CardTitle>
-                    <Badge className="text-xs bg-primary text-primary-foreground">Full Walkthrough</Badge>
+                    <Badge className="text-xs bg-accent-brand text-accent-brand-foreground">Full Walkthrough</Badge>
                   </div>
                 </CardHeader>
                 <CardContent className="p-0">
@@ -457,9 +447,9 @@ const PowerBIExpertWebappCaseStudy = () => {
                 </CardContent>
               </Card>
 
-              <div className="mt-6 p-4 rounded-lg bg-muted/30 text-center">
-                <p className="text-sm text-muted-foreground">
-                  <strong className="text-foreground">Demo Covers:</strong> Setup, Azure AI integration, Desktop connectivity,
+              <div className="mt-6 p-4 rounded-md bg-background border border-border text-center">
+                <p className="text-body-sm text-foreground-muted">
+                  <span className="font-semibold text-foreground">Demo Covers:</span> Setup, Azure AI integration, Desktop connectivity,
                   USERELATIONSHIP automation, PBIP rename tools, and Power BI Service semantic model chat.
                 </p>
               </div>
@@ -468,67 +458,67 @@ const PowerBIExpertWebappCaseStudy = () => {
         </section>
 
         {/* Security Architecture */}
-        <section className="py-16 bg-background">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-background">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-5xl mx-auto">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center">
-                  <Shield className="h-5 w-5 text-emerald-500" />
+                <div className="w-10 h-10 rounded-full bg-accent-brand-soft flex items-center justify-center">
+                  <Shield className="h-5 w-5 text-accent-brand-strong" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold">Enterprise Security Architecture</h2>
+                <h2 className="font-serif text-h2 text-foreground">Enterprise Security Architecture</h2>
               </div>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                <Card className="text-center bg-gradient-to-br from-emerald-500/10 to-emerald-500/5 border-emerald-500/20">
+                <Card className="text-center transition-colors duration-fast ease-out-quart hover:border-border-strong">
                   <CardContent className="pt-6">
-                    <Shield className="h-8 w-8 text-emerald-500 mx-auto mb-3" />
-                    <div className="font-semibold mb-1">Data Boundary</div>
-                    <div className="text-xs text-muted-foreground">Schema-only transmission, PII excluded</div>
+                    <Shield className="h-8 w-8 text-accent-brand-strong mx-auto mb-3" />
+                    <div className="text-h4 font-semibold mb-1 text-foreground">Data Boundary</div>
+                    <div className="text-caption text-foreground-muted">Schema-only transmission, PII excluded</div>
                   </CardContent>
                 </Card>
-                <Card className="text-center bg-gradient-to-br from-blue-500/10 to-blue-500/5 border-blue-500/20">
+                <Card className="text-center transition-colors duration-fast ease-out-quart hover:border-border-strong">
                   <CardContent className="pt-6">
-                    <FileCode className="h-8 w-8 text-blue-500 mx-auto mb-3" />
-                    <div className="font-semibold mb-1">Audit Logging</div>
-                    <div className="text-xs text-muted-foreground">HMAC signatures + hash chains</div>
+                    <FileCode className="h-8 w-8 text-accent-brand-strong mx-auto mb-3" />
+                    <div className="text-h4 font-semibold mb-1 text-foreground">Audit Logging</div>
+                    <div className="text-caption text-foreground-muted">HMAC signatures + hash chains</div>
                   </CardContent>
                 </Card>
-                <Card className="text-center bg-gradient-to-br from-purple-500/10 to-purple-500/5 border-purple-500/20">
+                <Card className="text-center transition-colors duration-fast ease-out-quart hover:border-border-strong">
                   <CardContent className="pt-6">
-                    <Globe className="h-8 w-8 text-purple-500 mx-auto mb-3" />
-                    <div className="font-semibold mb-1">Air-Gap Validation</div>
-                    <div className="text-xs text-muted-foreground">Verify zero external network calls</div>
+                    <Globe className="h-8 w-8 text-accent-brand-strong mx-auto mb-3" />
+                    <div className="text-h4 font-semibold mb-1 text-foreground">Air-Gap Validation</div>
+                    <div className="text-caption text-foreground-muted">Verify zero external network calls</div>
                   </CardContent>
                 </Card>
-                <Card className="text-center bg-gradient-to-br from-amber-500/10 to-amber-500/5 border-amber-500/20">
+                <Card className="text-center transition-colors duration-fast ease-out-quart hover:border-border-strong">
                   <CardContent className="pt-6">
-                    <Lock className="h-8 w-8 text-amber-500 mx-auto mb-3" />
-                    <div className="font-semibold mb-1">Compliance Ready</div>
-                    <div className="text-xs text-muted-foreground">GDPR, HIPAA, SOC 2 design</div>
+                    <Lock className="h-8 w-8 text-accent-brand-strong mx-auto mb-3" />
+                    <div className="text-h4 font-semibold mb-1 text-foreground">Compliance Ready</div>
+                    <div className="text-caption text-foreground-muted">GDPR, HIPAA, SOC 2 design</div>
                   </CardContent>
                 </Card>
               </div>
 
-              <Card className="border-emerald-500/30 bg-emerald-500/5">
+              <Card className="bg-accent-brand-soft border-border">
                 <CardContent className="pt-6">
-                  <h3 className="font-bold text-lg mb-4">The Golden Rule: Your Data Never Leaves Your Environment</h3>
+                  <h3 className="text-h3 font-bold mb-4 text-foreground">The Golden Rule: Your Data Never Leaves Your Environment</h3>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <h4 className="font-semibold text-green-500 mb-2">Sent to AI (Metadata Only)</h4>
-                      <ul className="space-y-1 text-sm text-muted-foreground">
-                        <li>- Table and column names</li>
-                        <li>- Measure names and DAX expressions</li>
-                        <li>- Relationship definitions</li>
-                        <li>- Your natural language question</li>
+                      <h4 className="text-h4 font-semibold text-accent-brand-strong mb-2">Sent to AI (Metadata Only)</h4>
+                      <ul className="space-y-1 text-body-sm text-foreground-muted">
+                        <li className="flex items-start gap-2"><CheckCircle2 className="h-4 w-4 text-accent-brand-strong mt-1 flex-shrink-0" /> Table and column names</li>
+                        <li className="flex items-start gap-2"><CheckCircle2 className="h-4 w-4 text-accent-brand-strong mt-1 flex-shrink-0" /> Measure names and DAX expressions</li>
+                        <li className="flex items-start gap-2"><CheckCircle2 className="h-4 w-4 text-accent-brand-strong mt-1 flex-shrink-0" /> Relationship definitions</li>
+                        <li className="flex items-start gap-2"><CheckCircle2 className="h-4 w-4 text-accent-brand-strong mt-1 flex-shrink-0" /> Your natural language question</li>
                       </ul>
                     </div>
                     <div>
-                      <h4 className="font-semibold text-red-500 mb-2">NOT Sent to AI (Your Data)</h4>
-                      <ul className="space-y-1 text-sm text-muted-foreground">
-                        <li>- Actual row data</li>
-                        <li>- Personally Identifiable Information</li>
-                        <li>- Connection strings and credentials</li>
-                        <li>- Query results</li>
+                      <h4 className="text-h4 font-semibold text-destructive mb-2">NOT Sent to AI (Your Data)</h4>
+                      <ul className="space-y-1 text-body-sm text-foreground-muted">
+                        <li className="flex items-start gap-2"><Lock className="h-4 w-4 text-destructive mt-1 flex-shrink-0" /> Actual row data</li>
+                        <li className="flex items-start gap-2"><Lock className="h-4 w-4 text-destructive mt-1 flex-shrink-0" /> Personally Identifiable Information</li>
+                        <li className="flex items-start gap-2"><Lock className="h-4 w-4 text-destructive mt-1 flex-shrink-0" /> Connection strings and credentials</li>
+                        <li className="flex items-start gap-2"><Lock className="h-4 w-4 text-destructive mt-1 flex-shrink-0" /> Query results</li>
                       </ul>
                     </div>
                   </div>
@@ -539,11 +529,11 @@ const PowerBIExpertWebappCaseStudy = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 bg-gradient-to-r from-primary/10 to-blue-500/10 border-t">
-          <div className="container mx-auto px-6">
+        <section className="py-section-sm bg-accent-brand-soft/40 border-t border-border">
+          <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4">Ready to Build Your Own AI-Powered Power BI Solution?</h2>
-              <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
+              <h2 className="font-serif text-h2 mb-4 text-foreground">Ready to Build Your Own AI-Powered Power BI Solution?</h2>
+              <p className="text-foreground-muted mb-8 max-w-prose mx-auto">
                 Fork the repository, customize for your use case, and deploy. Whether you are building an internal tool
                 or a commercial product, this webapp provides the foundation you need.
               </p>
@@ -552,7 +542,7 @@ const PowerBIExpertWebappCaseStudy = () => {
                   href="https://github.com/sulaiman013/powerbi-expert-app"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-semibold"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-accent-brand text-accent-brand-foreground rounded-md transition-colors duration-fast ease-out-quart hover:bg-accent-brand-strong font-medium"
                 >
                   <GitBranch className="h-5 w-5" />
                   Get Started on GitHub
@@ -561,18 +551,18 @@ const PowerBIExpertWebappCaseStudy = () => {
                   href="https://youtu.be/5gNa9BUJ4r8"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors font-semibold"
+                  className="inline-flex items-center gap-2 px-6 py-3 border border-border-strong bg-background-elevated text-foreground rounded-md transition-colors duration-fast ease-out-quart hover:bg-background font-medium"
                 >
                   <Play className="h-5 w-5" />
                   Watch Demo Video
                 </a>
               </div>
               <div className="flex flex-wrap gap-3 justify-center mt-6">
-                <Badge className="text-sm px-4 py-2">Natural Language to DAX</Badge>
-                <Badge className="text-sm px-4 py-2">Azure AI Foundry</Badge>
-                <Badge className="text-sm px-4 py-2">Ollama Support</Badge>
-                <Badge className="text-sm px-4 py-2">PBIP Editing</Badge>
-                <Badge className="text-sm px-4 py-2">White-Label Ready</Badge>
+                <Badge variant="outline" className="text-sm px-4 py-2">Natural Language to DAX</Badge>
+                <Badge variant="outline" className="text-sm px-4 py-2">Azure AI Foundry</Badge>
+                <Badge variant="outline" className="text-sm px-4 py-2">Ollama Support</Badge>
+                <Badge variant="outline" className="text-sm px-4 py-2">PBIP Editing</Badge>
+                <Badge variant="outline" className="text-sm px-4 py-2">White-Label Ready</Badge>
               </div>
             </div>
           </div>

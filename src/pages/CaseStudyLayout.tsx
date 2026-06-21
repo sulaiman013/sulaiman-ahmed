@@ -1,7 +1,8 @@
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Check } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { Button } from "@/components/ui/button";
 
 interface Metric {
   value: string;
@@ -51,54 +52,59 @@ export default function CaseStudyLayout({
       <Navigation />
 
       {/* Hero */}
-      <section className="pt-28 pb-16 section-padding">
-        <div className="max-w-4xl mx-auto">
+      <section className="section-padding pt-28">
+        <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
           <Link
             to="/case-study"
-            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors mb-8"
+            className="inline-flex items-center gap-1.5 text-body-sm text-foreground-muted hover:text-accent-brand-strong transition-colors duration-fast ease-out-quart mb-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
           >
-            <ArrowLeft className="h-4 w-4" /> Back to Case Studies
+            <ArrowLeft className="h-4 w-4" aria-hidden="true" /> Back to Case Studies
           </Link>
 
-          <p className="text-sm font-medium text-primary mb-2">{subtitle}</p>
-          <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">
+          <p className="font-mono text-caption uppercase tracking-wider text-foreground-muted mb-3">
+            {subtitle}
+          </p>
+          <h1 className="font-serif text-display-lg text-foreground tracking-tight">
             {title}
           </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mb-10">
+          <p className="text-body-lg font-medium text-foreground max-w-prose mb-10 mt-6">
             {description}
           </p>
 
-          {/* Key Metrics */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {metrics.map((m) => (
-              <div
-                key={m.label}
-                className="rounded-xl bg-card border border-border/60 shadow-sm p-5 text-center"
-              >
-                <p className="text-2xl font-bold gradient-text mb-1">{m.value}</p>
-                <p className="text-sm font-medium text-foreground/80">{m.label}</p>
-                <p className="text-xs text-muted-foreground mt-1">{m.description}</p>
-              </div>
-            ))}
+          {/* Key Metrics — using shared blog-result system */}
+          <div className="blog-result-card">
+            <div className="blog-result-grid sm:!grid-cols-3">
+              {metrics.map((m) => (
+                <div key={m.label} className="blog-result-item">
+                  <span className="blog-result-label">{m.label}</span>
+                  <span className="blog-result-value">{m.value}</span>
+                  <span className="blog-result-sub">{m.description}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Hero image */}
       {heroImage && (
-        <section className="px-6 md:px-12 lg:px-20 xl:px-32 pb-16">
-          <div className="max-w-5xl mx-auto rounded-xl overflow-hidden border border-border/60 shadow-sm">
-            <img src={heroImage} alt={title} className="w-full" />
+        <section className="pb-section-sm">
+          <div className="mx-auto max-w-figure px-6 md:px-12 lg:px-20">
+            <figure className="rounded-lg overflow-hidden border border-border bg-background-elevated">
+              <img src={heroImage} alt={title} className="w-full" />
+            </figure>
           </div>
         </section>
       )}
 
       {/* Power BI Embed */}
       {embedUrl && (
-        <section className="px-6 md:px-12 lg:px-20 xl:px-32 pb-16">
-          <div className="max-w-5xl mx-auto">
-            <h2 className="text-2xl font-bold mb-6">Live Dashboard</h2>
-            <div className="rounded-xl overflow-hidden border border-border/60 shadow-sm bg-card">
+        <section className="pb-section-sm">
+          <div className="mx-auto max-w-figure px-6 md:px-12 lg:px-20">
+            <h2 className="font-serif text-display-md text-foreground tracking-tight mb-8">
+              Live Dashboard
+            </h2>
+            <div className="rounded-lg overflow-hidden border border-border bg-background-elevated">
               <div className="aspect-[16/9]">
                 <iframe
                   title={embedTitle || title}
@@ -116,36 +122,47 @@ export default function CaseStudyLayout({
       )}
 
       {/* Challenge */}
-      <section className="section-padding bg-secondary">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold mb-6">The Challenge</h2>
-          <ul className="space-y-3">
-            {challenges.map((c, i) => (
-              <li key={i} className="flex gap-3 text-muted-foreground">
-                <span className="shrink-0 w-6 h-6 rounded-full bg-destructive/10 text-destructive flex items-center justify-center text-xs font-bold">
-                  {i + 1}
-                </span>
-                {c}
-              </li>
-            ))}
-          </ul>
+      <section className="section-padding">
+        <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
+          <div className="max-w-prose">
+            <h2 className="font-serif text-display-md text-foreground tracking-tight mb-8">
+              The Challenge
+            </h2>
+            <ul className="space-y-3">
+              {challenges.map((c, i) => (
+                <li key={i} className="flex gap-3 text-foreground-muted text-body-lg">
+                  <span
+                    aria-hidden="true"
+                    className="shrink-0 w-6 h-6 rounded-pill bg-accent-brand-soft text-accent-brand-strong flex items-center justify-center text-caption font-bold mt-1"
+                  >
+                    {i + 1}
+                  </span>
+                  <span>{c}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 
       {/* Solution */}
       <section className="section-padding">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold mb-6">The Solution</h2>
-          <ul className="space-y-3">
-            {solutionPoints.map((s, i) => (
-              <li key={i} className="flex gap-3 text-muted-foreground">
-                <span className="shrink-0 w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold">
-                  ✓
-                </span>
-                {s}
-              </li>
-            ))}
-          </ul>
+        <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
+          <div className="max-w-prose">
+            <h2 className="font-serif text-display-md text-foreground tracking-tight mb-8">
+              The Solution
+            </h2>
+            <ul className="space-y-3">
+              {solutionPoints.map((s, i) => (
+                <li key={i} className="flex gap-3 text-foreground-muted text-body-lg">
+                  <span className="shrink-0 w-6 h-6 rounded-pill bg-accent-brand-soft text-accent-brand-strong flex items-center justify-center mt-1">
+                    <Check className="h-3.5 w-3.5" aria-hidden="true" />
+                  </span>
+                  <span>{s}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 
@@ -153,59 +170,64 @@ export default function CaseStudyLayout({
       {children}
 
       {/* Before / After */}
-      <section className="section-padding bg-secondary">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold mb-6">Before & After</h2>
-          <div className="rounded-xl overflow-hidden border border-border/60 shadow-sm bg-card">
-            <div className="grid grid-cols-[1fr_1fr_1fr] text-xs font-semibold text-muted-foreground border-b border-border/60">
-              <div className="px-4 py-3">Area</div>
-              <div className="px-4 py-3 border-l border-border/60">Before</div>
-              <div className="px-4 py-3 border-l border-border/60">After</div>
-            </div>
-            {beforeAfter.map((row, i) => (
-              <div
-                key={i}
-                className={`grid grid-cols-[1fr_1fr_1fr] text-sm ${
-                  i < beforeAfter.length - 1 ? "border-b border-border/40" : ""
-                }`}
-              >
-                <div className="px-4 py-3 font-medium">{row.area}</div>
-                <div className="px-4 py-3 text-muted-foreground border-l border-border/40">
-                  {row.before}
-                </div>
-                <div className="px-4 py-3 text-primary border-l border-border/40">
-                  {row.after}
-                </div>
-              </div>
-            ))}
+      <section className="section-padding">
+        <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
+          <h2 className="font-serif text-display-md text-foreground tracking-tight mb-8">
+            Before &amp; After
+          </h2>
+          <div className="blog-prose max-w-figure">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Area</th>
+                  <th scope="col">Before</th>
+                  <th scope="col">After</th>
+                </tr>
+              </thead>
+              <tbody>
+                {beforeAfter.map((row, i) => (
+                  <tr key={i}>
+                    <td className="font-medium text-foreground">{row.area}</td>
+                    <td className="text-foreground-muted">{row.before}</td>
+                    <td className="text-accent-brand-strong">{row.after}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
 
       {/* Tech Stack + Links */}
       <section className="section-padding">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold mb-6">Tech Stack</h2>
-          <div className="flex flex-wrap gap-2 mb-8">
-            {techStack.map((t) => (
-              <span
-                key={t}
-                className="px-4 py-2 rounded-full text-sm border border-border/60 text-muted-foreground"
-              >
-                {t}
-              </span>
-            ))}
+        <div className="mx-auto max-w-page px-6 md:px-12 lg:px-20">
+          <div className="max-w-prose">
+            <h2 className="font-serif text-display-md text-foreground tracking-tight mb-8">
+              Tech Stack
+            </h2>
+            <div className="flex flex-wrap gap-2 mb-10">
+              {techStack.map((t) => (
+                <span
+                  key={t}
+                  className="inline-flex items-center px-3 py-1 rounded-pill bg-accent-brand-soft text-accent-brand-strong border border-accent-brand/20 text-body-sm font-medium"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+            {githubUrl && (
+              <Button asChild size="lg">
+                <a
+                  href={githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                >
+                  View on GitHub
+                </a>
+              </Button>
+            )}
           </div>
-          {githubUrl && (
-            <a
-              href={githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block px-6 py-2.5 rounded-lg font-semibold text-sm text-primary-foreground bg-primary hover:brightness-110 transition-all"
-            >
-              View on GitHub
-            </a>
-          )}
         </div>
       </section>
 

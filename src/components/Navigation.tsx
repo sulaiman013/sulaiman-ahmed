@@ -1,9 +1,15 @@
-
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { Moon, Sun, Menu, X } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { useTheme } from "@/hooks/useTheme";
+import { cn } from "@/lib/utils";
+
+const navLinks = [
+  { to: "/blog", label: "Writing" },
+  { to: "/case-study", label: "Case Studies" },
+  { to: "/about", label: "About" },
+];
 
 const Navigation = () => {
   const { theme, toggleTheme } = useTheme();
@@ -12,178 +18,124 @@ const Navigation = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const handleScroll = () => setIsScrolled(window.scrollY > 16);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu when route changes
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
 
-  const scrollToSection = (sectionId: string) => {
+  const isHomePage = location.pathname === "/";
+  const handleContact = () => {
     setIsMobileMenuOpen(false);
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (isHomePage) {
+      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
     }
   };
 
-  const isHomePage = location.pathname === '/';
-
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-      isScrolled || isMobileMenuOpen ? 'bg-background/95 backdrop-blur-md border-b shadow-lg' : 'bg-background/80 backdrop-blur-sm'
-    }`}>
-      <div className="container mx-auto px-6">
-        <div className="flex items-center justify-between h-16">
-          <Link to="/" className="font-bold text-xl text-primary">
+    <nav
+      className={cn(
+        "fixed top-0 inset-x-0 z-50 transition-all duration-page ease-out-quart",
+        isScrolled || isMobileMenuOpen
+          ? "bg-background/85 backdrop-blur-md border-b border-border"
+          : "bg-background/40 backdrop-blur-sm border-b border-transparent"
+      )}
+    >
+      <div className="mx-auto max-w-page px-6">
+        <div className="flex h-16 items-center justify-between">
+          <Link
+            to="/"
+            className="font-serif text-[1.375rem] font-semibold tracking-tight text-foreground transition-colors duration-fast ease-out-quart hover:text-accent-brand"
+            style={{ fontVariationSettings: '"opsz" 36' }}
+          >
             Sulaiman Ahmed
           </Link>
-          
-          <div className="hidden md:flex items-center space-x-6">
-            {isHomePage ? (
-              <>
-                <Button variant="ghost" onClick={() => scrollToSection('hero')}>
-                  Home
-                </Button>
-                <Button variant="ghost" asChild>
-                  <Link to="/about">About</Link>
-                </Button>
-                <Button variant="ghost" asChild>
-                  <Link to="/portfolio">Portfolio</Link>
-                </Button>
-                <Button variant="ghost" asChild>
-                  <Link to="/case-study">Case Study</Link>
-                </Button>
-                <Button variant="ghost" asChild>
-                  <Link to="/experience">Experience</Link>
-                </Button>
-                <Button variant="ghost" asChild>
-                  <Link to="/blog">Blog</Link>
-                </Button>
-                <Button variant="ghost" onClick={() => scrollToSection('contact')}>
-                  Contact
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button variant="ghost" asChild>
-                  <Link to="/">Home</Link>
-                </Button>
-                <Button variant="ghost" asChild>
-                  <Link to="/about">About</Link>
-                </Button>
-                <Button variant="ghost" asChild>
-                  <Link to="/portfolio">Portfolio</Link>
-                </Button>
-                <Button variant="ghost" asChild>
-                  <Link to="/case-study">Case Study</Link>
-                </Button>
-                <Button variant="ghost" asChild>
-                  <Link to="/experience">Experience</Link>
-                </Button>
-                <Button variant="ghost" asChild>
-                  <Link to="/blog">Blog</Link>
-                </Button>
-              </>
-            )}
+
+          <div className="hidden md:flex items-center gap-1">
+            {navLinks.map((link) => (
+              <NavLink
+                key={link.to}
+                to={link.to}
+                className={({ isActive }) =>
+                  cn(
+                    "px-3 py-2 text-sm transition-colors duration-fast ease-out-quart rounded-sm",
+                    isActive
+                      ? "text-foreground"
+                      : "text-foreground-muted hover:text-foreground"
+                  )
+                }
+              >
+                {link.label}
+              </NavLink>
+            ))}
           </div>
-          
-          <div className="flex items-center space-x-4">
+
+          <div className="flex items-center gap-2">
             <Button
               variant="ghost"
               size="icon"
               onClick={toggleTheme}
-              className="rounded-full"
+              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              className="rounded-pill text-foreground-muted hover:text-foreground"
             >
-              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </Button>
             {isHomePage ? (
-              <Button size="sm" className="hidden md:inline-flex" onClick={() => scrollToSection('contact')}>
-                Reach Out
+              <Button size="sm" className="hidden md:inline-flex" onClick={handleContact}>
+                Get in touch
               </Button>
             ) : (
               <Button size="sm" className="hidden md:inline-flex" asChild>
-                <Link to="/#contact">Reach Out</Link>
+                <Link to="/#contact">Get in touch</Link>
               </Button>
             )}
-            {/* Mobile Menu Button */}
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden rounded-full"
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMobileMenuOpen}
+              className="md:hidden rounded-pill text-foreground-muted hover:text-foreground"
             >
               {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
           </div>
         </div>
 
-        {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden border-t bg-background/95 backdrop-blur-md">
-            <div className="px-4 py-4 space-y-2">
-              {isHomePage ? (
-                <>
-                  <Button variant="ghost" className="w-full justify-start" onClick={() => scrollToSection('hero')}>
-                    Home
+          <div className="md:hidden border-t border-border bg-background/95 backdrop-blur-md">
+            <div className="px-2 py-4 space-y-1">
+              {navLinks.map((link) => (
+                <NavLink
+                  key={link.to}
+                  to={link.to}
+                  className={({ isActive }) =>
+                    cn(
+                      "block w-full text-left px-3 py-2.5 text-sm transition-colors duration-fast ease-out-quart rounded-sm",
+                      isActive
+                        ? "text-foreground bg-accent-brand-soft/40"
+                        : "text-foreground-muted hover:text-foreground hover:bg-background-elevated"
+                    )
+                  }
+                >
+                  {link.label}
+                </NavLink>
+              ))}
+              <div className="pt-2 mt-2 border-t border-border">
+                {isHomePage ? (
+                  <Button className="w-full" onClick={handleContact}>
+                    Get in touch
                   </Button>
-                  <Button variant="ghost" className="w-full justify-start" asChild>
-                    <Link to="/about">About</Link>
+                ) : (
+                  <Button className="w-full" asChild>
+                    <Link to="/#contact">Get in touch</Link>
                   </Button>
-                  <Button variant="ghost" className="w-full justify-start" asChild>
-                    <Link to="/portfolio">Portfolio</Link>
-                  </Button>
-                  <Button variant="ghost" className="w-full justify-start" asChild>
-                    <Link to="/case-study">Case Study</Link>
-                  </Button>
-                  <Button variant="ghost" className="w-full justify-start" asChild>
-                    <Link to="/experience">Experience</Link>
-                  </Button>
-                  <Button variant="ghost" className="w-full justify-start" asChild>
-                    <Link to="/blog">Blog</Link>
-                  </Button>
-                  <Button variant="ghost" className="w-full justify-start" onClick={() => scrollToSection('contact')}>
-                    Contact
-                  </Button>
-                  <div className="pt-2 border-t">
-                    <Button className="w-full" onClick={() => scrollToSection('contact')}>
-                      Reach Out
-                    </Button>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <Button variant="ghost" className="w-full justify-start" asChild>
-                    <Link to="/">Home</Link>
-                  </Button>
-                  <Button variant="ghost" className="w-full justify-start" asChild>
-                    <Link to="/about">About</Link>
-                  </Button>
-                  <Button variant="ghost" className="w-full justify-start" asChild>
-                    <Link to="/portfolio">Portfolio</Link>
-                  </Button>
-                  <Button variant="ghost" className="w-full justify-start" asChild>
-                    <Link to="/case-study">Case Study</Link>
-                  </Button>
-                  <Button variant="ghost" className="w-full justify-start" asChild>
-                    <Link to="/experience">Experience</Link>
-                  </Button>
-                  <Button variant="ghost" className="w-full justify-start" asChild>
-                    <Link to="/blog">Blog</Link>
-                  </Button>
-                  <div className="pt-2 border-t">
-                    <Button className="w-full" asChild>
-                      <Link to="/#contact">Reach Out</Link>
-                    </Button>
-                  </div>
-                </>
-              )}
+                )}
+              </div>
             </div>
           </div>
         )}
