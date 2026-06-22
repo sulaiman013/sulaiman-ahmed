@@ -9,41 +9,47 @@ export default function PowerBIAIAssistantArchitectureCaseStudy() {
     <main className="min-h-screen bg-background flex flex-col">
       <Navigation />
 
-      {/* Slim toolbar above the embedded guide */}
-      <div className="pt-20 px-6 md:px-12 lg:px-20 xl:px-32 py-3 border-b border-border/40 bg-background/95 backdrop-blur-md sticky top-0 z-30">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
-          <Link
-            to="/case-study"
-            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors"
-          >
-            <ArrowLeft className="h-4 w-4" /> Back to Case Studies
-          </Link>
+      <div className="sticky top-0 z-30 border-b border-border bg-background/95 backdrop-blur-md pt-20">
+        <div className="mx-auto max-w-page px-6 py-3 md:px-12 lg:px-20">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <Link
+              to="/case-study"
+              className="inline-flex items-center gap-1.5 text-body-sm text-foreground-muted transition-colors duration-fast ease-out-quart hover:text-violet-700 dark:hover:text-violet-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
+            >
+              <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+              Back to Case Studies
+            </Link>
 
-          <div className="flex flex-wrap items-center gap-3 text-sm">
-            <span className="text-muted-foreground hidden md:inline">
-              Custom Power BI AI Assistant — Architecture & Replication Guide
-            </span>
-            <a
-              href={`${ASSETS}/story.html`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium border border-border/60 text-muted-foreground hover:text-primary hover:border-primary/40 transition-all"
-            >
-              <BookOpen className="h-3.5 w-3.5" /> Story version
-            </a>
-            <a
-              href={`${ASSETS}/index.html`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium border border-border/60 text-muted-foreground hover:text-primary hover:border-primary/40 transition-all"
-            >
-              <ExternalLink className="h-3.5 w-3.5" /> Open in full screen
-            </a>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="hidden text-caption uppercase tracking-wider text-foreground-subtle md:inline mr-2">
+                Deep dive ·{" "}
+                <span className="text-violet-700 dark:text-violet-300 font-medium normal-case tracking-normal">
+                  PowerBI AI Assistant
+                </span>
+              </span>
+              <a
+                href={`${ASSETS}/story.html`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-md border border-border bg-background-elevated px-3 py-1.5 text-xs font-medium text-foreground-muted transition-colors duration-fast ease-out-quart hover:border-violet-300 hover:bg-violet-50 hover:text-violet-700 dark:hover:border-violet-700 dark:hover:bg-violet-950/40 dark:hover:text-violet-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              >
+                <BookOpen className="h-3.5 w-3.5" aria-hidden="true" />
+                Read the story
+              </a>
+              <a
+                href={`${ASSETS}/index.html`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-md border border-violet-300 bg-violet-50 px-3 py-1.5 text-xs font-semibold text-violet-700 transition-colors duration-fast ease-out-quart hover:bg-violet-100 dark:border-violet-700 dark:bg-violet-950/50 dark:text-violet-300 dark:hover:bg-violet-950/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              >
+                <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+                Open guide in new tab
+              </a>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Full-bleed iframe of the architecture guide */}
       <iframe
         src={`${ASSETS}/index.html`}
         title="Custom Power BI AI Assistant — Architecture & Replication Guide"
