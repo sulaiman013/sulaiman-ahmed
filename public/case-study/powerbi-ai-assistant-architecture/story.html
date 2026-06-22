@@ -1,14 +1,210 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>The Story — How Sarah Stopped Fighting Her Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800;9..144,900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="story.css" />
+  <style>
+    /* ============================================================
+       sulaimanahmed.com brand overrides — violet single-accent,
+       Plus Jakarta Sans / Newsreader / JetBrains Mono.
+       Light is the default; dark variant supplied via [data-theme="dark"].
+       ============================================================ */
+    :root,
+    :root[data-theme="light"] {
+      --bg-0: #f5f8ec;
+      --bg-1: #eef3df;
+      --bg-2: #ffffff;
+      --bg-3: #f5f7e8;
+      --bg-card: #ffffff;
+      --bg-card-hover: #faf9f0;
+
+      --text-0: #1a1f12;
+      --text-1: #4a5240;
+      --text-2: #6f7660;
+      --text-3: #94998a;
+
+      --border: #d4dcc0;
+      --border-strong: #b8c2a3;
+
+      --accent: #6d28d9;
+      --accent-strong: #5b21b6;
+      --accent-soft: #ede9fe;
+      --accent-on: #ffffff;
+
+      --grad-1: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 100%);
+      --grad-2: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 100%);
+      --grad-3: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 100%);
+      --grad-4: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 100%);
+      --shadow-glow: 0 0 40px rgba(109, 40, 217, 0.18);
+
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-serif: Newsreader, Georgia, serif;
+      --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+    }
+
+    :root[data-theme="dark"] {
+      --bg-0: #1f2419;
+      --bg-1: #262d1f;
+      --bg-2: #2c3424;
+      --bg-3: #353d2a;
+      --bg-card: #262d1f;
+      --bg-card-hover: #2c3424;
+
+      --text-0: #f0f2e3;
+      --text-1: #bcc4a8;
+      --text-2: #8b9379;
+      --text-3: #6a705c;
+
+      --border: #3a4230;
+      --border-strong: #4a5240;
+
+      --accent: #a78bfa;
+      --accent-strong: #c4b5fd;
+      --accent-soft: rgba(167, 139, 250, 0.15);
+      --accent-on: #1f2419;
+
+      --grad-1: linear-gradient(135deg, #a78bfa 0%, #c4b5fd 100%);
+      --grad-2: linear-gradient(135deg, #a78bfa 0%, #c4b5fd 100%);
+      --grad-3: linear-gradient(135deg, #a78bfa 0%, #c4b5fd 100%);
+      --grad-4: linear-gradient(135deg, #a78bfa 0%, #c4b5fd 100%);
+      --shadow-glow: 0 0 40px rgba(167, 139, 250, 0.22);
+    }
+
+    body,
+    body.story-page {
+      font-family: var(--font-sans);
+      color: var(--text-0);
+      background: var(--bg-0);
+    }
+
+    code, pre, kbd, samp,
+    .mono { font-family: var(--font-mono); }
+
+    /* Hero title — display serif, no rainbow gradient text */
+    .story-title {
+      font-family: var(--font-serif) !important;
+      font-weight: 400 !important;
+      font-size: clamp(38px, 6vw, 76px) !important;
+      letter-spacing: -1.5px !important;
+      line-height: 1.02 !important;
+      color: var(--text-0) !important;
+      background: none !important;
+      -webkit-background-clip: initial !important;
+      background-clip: initial !important;
+      -webkit-text-fill-color: currentColor !important;
+    }
+    .story-title .grad {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 500;
+      color: var(--accent);
+      background: none !important;
+      -webkit-background-clip: initial !important;
+      background-clip: initial !important;
+      -webkit-text-fill-color: currentColor !important;
+    }
+
+    /* Chapter titles in the serif voice for editorial feel */
+    .chapter-title {
+      font-family: var(--font-serif);
+      font-weight: 500;
+      letter-spacing: -0.5px;
+      color: var(--text-0);
+    }
+
+    /* Kill any rainbow / gradient text anywhere in the story */
+    .num-big {
+      font-family: var(--font-serif);
+      font-weight: 600;
+      color: var(--text-0) !important;
+      background: none !important;
+      -webkit-background-clip: initial !important;
+      background-clip: initial !important;
+      -webkit-text-fill-color: currentColor !important;
+    }
+
+    /* Blockquote: violet accent, no side-stripe overreach */
+    blockquote {
+      font-family: var(--font-serif);
+      font-style: italic;
+      color: var(--text-1);
+      border-left: 2px solid var(--accent);
+      padding-left: 1rem;
+    }
+
+    /* Result tag uses violet accent */
+    .result-tag i,
+    .result-tag svg { color: var(--accent); }
+
+    /* Drop cap uses violet accent */
+    .dropcap::first-letter {
+      color: var(--accent);
+      font-family: var(--font-serif);
+    }
+
+    /* Reading progress bar — violet */
+    .reading-progress { background: var(--accent) !important; }
+
+    /* Topbar adjustments */
+    .topbar { background: rgba(245, 248, 236, 0.85); border-color: var(--border); }
+    :root[data-theme="dark"] .topbar { background: rgba(31, 36, 25, 0.85); }
+    .brand-title { color: var(--text-0); }
+    .brand-sub { color: var(--text-2); }
+    .logo-mark { color: var(--accent); }
+
+    /* Back-to-site anchor (added to topbar) */
+    .back-to-site {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-2);
+      letter-spacing: 0.2px;
+      padding-right: 16px;
+      border-right: 1px solid var(--border);
+      margin-right: 16px;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+    .back-to-site:hover { color: var(--accent); }
+
+    /* CTA buttons in violet */
+    .story-cta {
+      background: var(--accent);
+      color: var(--accent-on);
+      border: 1px solid var(--accent);
+      box-shadow: var(--shadow-glow);
+    }
+    .story-cta:hover { background: var(--accent-strong); border-color: var(--accent-strong); }
+
+    /* Chapter rail active state */
+    .rail-list a.active { color: var(--accent); }
+    .rail-list a.active .rl-num { color: var(--accent); }
+
+    /* Inline emphasis in prose */
+    .chapter-body em,
+    .chapter-body i { color: var(--text-0); }
+    .chapter-body strong,
+    .chapter-body b { color: var(--text-0); font-weight: 700; }
+
+    /* Links inherit accent */
+    .chapter-body a,
+    .footer a { color: var(--accent); }
+    .chapter-body a:hover,
+    .footer a:hover { color: var(--accent-strong); }
+
+    /* Numbered cards in epilogue */
+    .num-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+    .num-lbl { color: var(--text-2); }
+  </style>
 </head>
 <body class="story-page">
 
@@ -18,6 +214,7 @@
 <!-- top bar -->
 <header class="topbar story-topbar">
   <div class="topbar-inner">
+    <a href="/" class="back-to-site">&larr; sulaimanahmed.com</a>
     <a href="index.html" class="brand">
       <span class="logo-mark"><i data-lucide="sparkles"></i></span>
       <div class="brand-text">
@@ -617,8 +814,10 @@
   // Theme toggle (mirrors main page)
   (function () {
     const root = document.documentElement;
+    // Light is the default. Always set the attribute explicitly so the
+    // CSS variable blocks resolve deterministically.
     const stored = localStorage.getItem('ic-theme');
-    if (stored === 'light') root.setAttribute('data-theme', 'light');
+    root.setAttribute('data-theme', stored === 'dark' ? 'dark' : 'light');
     const t = document.getElementById('themeToggle');
     function setIco() {
       if (!t) return;
@@ -630,8 +829,7 @@
     if (t) t.addEventListener('click', () => {
       const cur = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
       const next = cur === 'light' ? 'dark' : 'light';
-      if (next === 'light') root.setAttribute('data-theme', 'light');
-      else root.removeAttribute('data-theme');
+      root.setAttribute('data-theme', next);
       localStorage.setItem('ic-theme', next);
       setIco();
     });

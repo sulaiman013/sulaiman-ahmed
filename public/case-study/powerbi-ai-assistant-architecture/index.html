@@ -1,19 +1,506 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>IC Insightful BOT — Architecture &amp; Replication Guide</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ============================================================
+       sulaimanahmen.com brand override layer
+       Loaded AFTER styles.css so these win the cascade.
+       Violet single-accent identity. Light-default. Newsreader display +
+       Plus Jakarta Sans body + JetBrains Mono code.
+       ============================================================ */
+
+    :root, html[data-theme="light"] {
+      --bg-0: #f5f8ec;
+      --bg-1: #eef3df;
+      --bg-2: #ffffff;
+      --bg-3: #f5f7e8;
+      --bg-card: #ffffff;
+      --bg-card-hover: #faf9f0;
+
+      --text-0: #1a1f12;
+      --text-1: #4a5240;
+      --text-2: #6f7660;
+      --text-3: #94998a;
+
+      --border: #d4dcc0;
+      --border-strong: #b8c2a3;
+
+      --accent: #6d28d9;
+      --accent-strong: #5b21b6;
+      --accent-soft: #ede9fe;
+      --accent-on: #ffffff;
+
+      --grad-1: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 100%);
+      --grad-2: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 100%);
+      --grad-3: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 100%);
+      --grad-4: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 100%);
+      --shadow-glow: 0 0 40px rgba(109, 40, 217, 0.18);
+
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-serif: Newsreader, Georgia, serif;
+      --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+
+      /* Map back to whatever names styles.css might use */
+      --bg: var(--bg-0);
+      --bg-elev: var(--bg-2);
+      --text: var(--text-0);
+      --text-muted: var(--text-1);
+      --text-subtle: var(--text-2);
+
+      color-scheme: light;
+    }
+
+    html[data-theme="dark"] {
+      --bg-0: #1f2419;
+      --bg-1: #262d1f;
+      --bg-2: #2c3424;
+      --bg-3: #353d2a;
+      --bg-card: #262d1f;
+      --bg-card-hover: #2c3424;
+
+      --text-0: #f0f2e3;
+      --text-1: #bcc4a8;
+      --text-2: #8b9379;
+      --text-3: #6a705c;
+
+      --border: #3a4230;
+      --border-strong: #4a5240;
+
+      --accent: #a78bfa;
+      --accent-strong: #c4b5fd;
+      --accent-soft: rgba(167, 139, 250, 0.15);
+      --accent-on: #1f2419;
+
+      --grad-1: linear-gradient(135deg, #a78bfa 0%, #c4b5fd 100%);
+      --grad-2: linear-gradient(135deg, #a78bfa 0%, #c4b5fd 100%);
+      --grad-3: linear-gradient(135deg, #a78bfa 0%, #c4b5fd 100%);
+      --grad-4: linear-gradient(135deg, #a78bfa 0%, #c4b5fd 100%);
+      --shadow-glow: 0 0 40px rgba(167, 139, 250, 0.22);
+
+      color-scheme: dark;
+    }
+
+    /* Page surfaces */
+    html, body {
+      background: var(--bg-0) !important;
+      color: var(--text-0) !important;
+      font-family: var(--font-sans) !important;
+    }
+
+    /* Body text */
+    body, p, li, td, th, span, div, a, button, input, textarea {
+      font-family: var(--font-sans);
+    }
+    code, pre, .codeblock {
+      font-family: var(--font-mono) !important;
+    }
+
+    /* Headings — Newsreader display serif, lighter weight, tighter tracking */
+    h1, h2, h3, .hero h1, .section h2 {
+      font-family: var(--font-serif) !important;
+      font-weight: 500;
+      letter-spacing: -0.5px;
+      color: var(--text-0);
+    }
+    h4, h5, h6 {
+      font-family: var(--font-sans) !important;
+      font-weight: 600;
+      color: var(--text-0);
+    }
+
+    /* Hero h1 */
+    .hero h1 {
+      font-family: var(--font-serif) !important;
+      font-weight: 400 !important;
+      font-size: clamp(38px, 6vw, 76px) !important;
+      letter-spacing: -1.5px !important;
+      line-height: 1.02 !important;
+      color: var(--text-0) !important;
+      -webkit-text-fill-color: var(--text-0) !important;
+    }
+    /* Kill the rainbow gradient on the .grad span; keep markup, render as italic emphasis */
+    .hero h1 .grad {
+      background: none !important;
+      -webkit-background-clip: initial !important;
+      background-clip: initial !important;
+      -webkit-text-fill-color: var(--text-0) !important;
+      color: var(--text-0) !important;
+      font-style: italic !important;
+      font-weight: 400 !important;
+    }
+
+    /* Hero sub */
+    .hero-sub {
+      color: var(--text-1) !important;
+      font-family: var(--font-sans) !important;
+    }
+    .hero-sub b {
+      color: var(--text-0);
+      font-weight: 600;
+    }
+
+    /* Hero blobs — violet variants, no cyan/purple combo */
+    .hero-blob-a {
+      background: radial-gradient(circle, rgba(109, 40, 217, 0.22) 0%, transparent 65%) !important;
+    }
+    .hero-blob-b {
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.18) 0%, transparent 65%) !important;
+    }
+
+    /* Eyebrow */
+    .eyebrow {
+      color: var(--text-2);
+      font-family: var(--font-sans);
+      font-size: 12px;
+      letter-spacing: 0.2px;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .eyebrow-dot, .eyebrow i { color: var(--accent) !important; }
+
+    /* KPI numerals — drop gradient text, use solid serif numerals */
+    .kpi-num {
+      background: none !important;
+      -webkit-background-clip: initial !important;
+      background-clip: initial !important;
+      -webkit-text-fill-color: var(--text-0) !important;
+      color: var(--text-0) !important;
+      font-family: var(--font-serif) !important;
+      font-weight: 600 !important;
+    }
+    /* All KPI icons use the single violet accent */
+    .kpi-icon,
+    .kpi:nth-child(1) .kpi-icon,
+    .kpi:nth-child(2) .kpi-icon,
+    .kpi:nth-child(3) .kpi-icon,
+    .kpi:nth-child(4) .kpi-icon,
+    .kpi:nth-child(5) .kpi-icon,
+    .kpi:nth-child(6) .kpi-icon {
+      color: var(--accent) !important;
+    }
+    .kpi-lbl { color: var(--text-1); }
+    .kpi-lbl span { color: var(--text-2); }
+    .kpi {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    /* Top bar */
+    .topbar {
+      background: rgba(245, 248, 236, 0.85) !important;
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    html[data-theme="dark"] .topbar {
+      background: rgba(31, 36, 25, 0.85) !important;
+    }
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+    .brand, .brand-title, .brand-sub {
+      color: var(--text-0) !important;
+      font-family: var(--font-sans);
+    }
+    .brand-title { font-weight: 700; }
+    .brand-sub { color: var(--text-2) !important; font-weight: 500; }
+    .logo-mark { color: var(--accent) !important; }
+    .topnav a {
+      color: var(--text-1) !important;
+      font-family: var(--font-sans);
+      font-weight: 500;
+    }
+    .topnav a:hover { color: var(--accent) !important; }
+    .theme-toggle {
+      color: var(--text-1) !important;
+      background: transparent;
+      border: 1px solid var(--border);
+    }
+    .theme-toggle:hover { color: var(--accent) !important; border-color: var(--accent); }
+
+    /* Back-to-site link */
+    .back-to-site {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-2);
+      letter-spacing: 0.2px;
+      padding-right: 16px;
+      border-right: 1px solid var(--border);
+      margin-right: 16px;
+      white-space: nowrap;
+      text-decoration: none;
+      font-family: var(--font-sans);
+    }
+    .back-to-site:hover { color: var(--accent); }
+
+    /* Buttons */
+    .btn { font-family: var(--font-sans); font-weight: 500; }
+    .btn-primary {
+      background: var(--accent) !important;
+      color: var(--accent-on) !important;
+      border: 1px solid var(--accent) !important;
+    }
+    .btn-primary:hover {
+      background: var(--accent-strong) !important;
+      border-color: var(--accent-strong) !important;
+    }
+    .btn-ghost {
+      background: transparent !important;
+      color: var(--accent) !important;
+      border: 1px solid var(--border) !important;
+    }
+    .btn-ghost:hover {
+      background: var(--accent-soft) !important;
+      border-color: var(--accent) !important;
+    }
+
+    /* Section backgrounds */
+    .section { background: var(--bg-0); }
+    .section-dark { background: var(--bg-1) !important; }
+    .section-tag {
+      color: var(--accent) !important;
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+    }
+    .section-lede {
+      color: var(--text-1) !important;
+      font-family: var(--font-sans);
+    }
+    .section h2 { color: var(--text-0) !important; }
+
+    /* Cards */
+    .path-card, .layer-card, .info-box, .pm-card, .mini-card, .diagram-card,
+    .diagram-wrap, .score-card, .pattern, .fact, .rs {
+      background: var(--bg-card) !important;
+      border: 1px solid var(--border) !important;
+      color: var(--text-0);
+    }
+    .path-card:hover, .layer-card:hover, .info-box:hover, .pm-card:hover {
+      border-color: var(--border-strong) !important;
+    }
+    .path-icon, .lc-ico, .info-title i, .mc-ico, .rs-ico, .pm-ico,
+    .diag-head-icon, .fact i, .score-tag i {
+      color: var(--accent) !important;
+    }
+    .path-pct, .path-name, .lc-num, .lc-title, .mc-num, .rs-num, .score-name {
+      color: var(--text-0) !important;
+    }
+    .path-when, .path-foot, .mc-lbl, .rs-lbl, .lc-q, .info-foot, .score-q {
+      color: var(--text-2) !important;
+    }
+    .path-body, .info-box p, .info-box li, .pm-card p, .pattern p {
+      color: var(--text-1) !important;
+    }
+
+    /* Onion layers */
+    .onion-layer {
+      background: var(--bg-card) !important;
+      border: 1px solid var(--border) !important;
+      color: var(--text-0) !important;
+    }
+    .layer-icon { color: var(--accent) !important; }
+    .layer-num { color: var(--accent) !important; font-family: var(--font-mono); }
+    .layer-name { color: var(--text-0) !important; }
+    .layer-tag {
+      background: var(--accent-soft) !important;
+      color: var(--accent-strong) !important;
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+    .onion-legend, .lg-row { color: var(--text-2) !important; }
+    .dot.reusable { background: var(--accent) !important; }
+    .dot.domain { background: var(--text-3) !important; }
+
+    /* Inline code */
+    code {
+      background: var(--accent-soft) !important;
+      color: var(--accent-strong) !important;
+      font-family: var(--font-mono) !important;
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+      font-size: 0.875em;
+    }
+    pre code, .codeblock {
+      background: var(--bg-1) !important;
+      color: var(--text-0) !important;
+      display: block;
+      padding: 1.25rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      overflow-x: auto;
+    }
+
+    /* Callouts — drop left-border stripe entirely */
+    .callout {
+      background: var(--accent-soft) !important;
+      border: 1px solid var(--border) !important;
+      border-left: 1px solid var(--border) !important;
+      color: var(--text-0) !important;
+      border-radius: 12px;
+    }
+    .callout-warn {
+      background: rgba(217, 119, 6, 0.08) !important;
+      border-color: rgba(217, 119, 6, 0.25) !important;
+    }
+    .callout-danger {
+      background: rgba(225, 29, 72, 0.07) !important;
+      border-color: rgba(225, 29, 72, 0.22) !important;
+    }
+    .callout-tag i { color: var(--accent) !important; }
+    .callout-warn .callout-tag i { color: #b45309 !important; }
+    .callout-danger .callout-tag i { color: #be123c !important; }
+    .callout-tag span { font-family: var(--font-sans); font-weight: 600; color: var(--text-0); }
+
+    /* Tables */
+    .hub-table, .mini-table, .cost-table, .bug-table {
+      color: var(--text-0);
+      font-family: var(--font-sans);
+    }
+    .hub-table th, .mini-table th, .cost-table th, .bug-table th {
+      color: var(--text-1) !important;
+      font-family: var(--font-sans);
+      font-weight: 600;
+    }
+    .hub-table td, .mini-table td, .cost-table td, .bug-table td {
+      color: var(--text-0);
+      border-color: var(--border) !important;
+    }
+    .row-fast { background: rgba(109, 40, 217, 0.06) !important; }
+    .row-old { color: var(--text-2) !important; }
+
+    /* Diagrams */
+    .diagram-title { color: var(--text-0); font-family: var(--font-sans); font-weight: 600; }
+    .diagram-title i { color: var(--accent) !important; }
+    .diagram-card-title { color: var(--text-0) !important; font-family: var(--font-sans); font-weight: 700; }
+    .diagram-card-sub { color: var(--text-2) !important; }
+    .diag-head-icon { color: var(--accent) !important; }
+    .diag-head-icon.fast, .diag-head-icon.slow { color: var(--accent) !important; }
+    .fast-head, .slow-head { background: var(--accent-soft) !important; border-bottom: 1px solid var(--border) !important; }
+
+    /* Mermaid host – ensure light-friendly background under svg */
+    .mermaid-host {
+      background: var(--bg-card) !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 10px;
+    }
+    .mermaid {
+      background: transparent !important;
+      color: var(--text-0);
+    }
+    .mermaid .label, .mermaid text {
+      font-family: var(--font-sans) !important;
+      fill: var(--text-0) !important;
+    }
+    .mermaid .edgeLabel { background-color: var(--bg-card) !important; color: var(--text-1) !important; }
+    .mermaid .flowchart-link, .mermaid .edgePath .path {
+      stroke: var(--text-2) !important;
+    }
+    .mermaid .marker { fill: var(--text-2) !important; stroke: var(--text-2) !important; }
+    .mermaid .cluster rect {
+      fill: var(--bg-1) !important;
+      stroke: var(--border-strong) !important;
+    }
+    .mermaid .cluster text { fill: var(--text-1) !important; }
+
+    /* Footer */
+    .footer {
+      background: var(--bg-1) !important;
+      border-top: 1px solid var(--border);
+      color: var(--text-1);
+    }
+    .footer-title { color: var(--text-0); font-family: var(--font-sans); font-weight: 700; }
+    .footer-tag, .footer-meta { color: var(--text-2); }
+    .footer .logo-mark { color: var(--accent) !important; }
+
+    /* Score cards */
+    .score-card { background: var(--bg-card) !important; }
+    .score-tag {
+      background: var(--accent-soft) !important;
+      color: var(--accent-strong) !important;
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    /* Patterns */
+    .pat-tag {
+      background: var(--accent-soft) !important;
+      color: var(--accent-strong) !important;
+      font-family: var(--font-mono);
+    }
+    .pat-tag i { color: var(--accent-strong) !important; }
+    .pat-name { color: var(--text-0); font-family: var(--font-sans); font-weight: 700; }
+
+    /* Shot captions */
+    .shot-caption {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-1);
+      font-family: var(--font-sans);
+    }
+    .shot-frame {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+    }
+
+    /* Lightbox */
+    .lightbox-backdrop { background: rgba(26, 31, 18, 0.78) !important; }
+    .lb-btn { color: var(--text-0); background: var(--bg-card); border: 1px solid var(--border); }
+    .lb-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* Bug table */
+    .bug-table-title { color: var(--text-0); font-family: var(--font-sans); font-weight: 600; }
+    .bug-table-title i { color: var(--accent) !important; }
+
+    /* PM card */
+    .pm-date { color: var(--text-2); font-family: var(--font-mono); font-size: 12px; }
+    .pm-name { color: var(--text-0); font-family: var(--font-sans); font-weight: 700; }
+
+    /* Deep section heads */
+    .deep-num {
+      background: var(--accent-soft) !important;
+      color: var(--accent-strong) !important;
+      font-family: var(--font-mono);
+      font-weight: 700;
+    }
+    .deep-num i { color: var(--accent-strong) !important; }
+    .deep-head p { color: var(--text-1); }
+
+    /* Recipe stats */
+    .recipe-stats .rs { background: var(--bg-card); border: 1px solid var(--border); }
+
+    /* Two-col diagrams */
+    .diagram-card { background: var(--bg-card) !important; border: 1px solid var(--border) !important; }
+
+    /* Links in prose */
+    a { color: var(--accent); }
+    a:hover { color: var(--accent-strong); }
+
+    /* Disable any leftover bg-clip-text rainbow gradient text */
+    [style*="-webkit-background-clip"], [style*="background-clip: text"] {
+      -webkit-background-clip: initial !important;
+      background-clip: initial !important;
+      -webkit-text-fill-color: var(--text-0) !important;
+    }
+  </style>
 </head>
 <body>
 
 <!-- ================== TOP NAV ================== -->
 <header class="topbar">
   <div class="topbar-inner">
+    <a href="/" class="back-to-site">← sulaimanahmed.com</a>
     <a href="#top" class="brand">
       <span class="logo-mark"><i data-lucide="sparkles"></i></span>
       <div class="brand-text">
@@ -238,12 +725,12 @@
     <div class="mermaid-host">
       <pre class="mermaid">
 flowchart LR
-  classDef browser fill:#0e1f2e,stroke:#22d3ee,stroke-width:1.5px,color:#e0f2fe
-  classDef edge fill:#1c1235,stroke:#a78bfa,stroke-width:1.5px,color:#ede9fe
-  classDef supa fill:#062e1d,stroke:#34d399,stroke-width:1.5px,color:#d1fae5
-  classDef recipe fill:#2c1d05,stroke:#fbbf24,stroke-width:1.5px,color:#fef3c7
-  classDef llm fill:#311220,stroke:#fb7185,stroke-width:1.5px,color:#ffe4e6
-  classDef pbi fill:#0a1f3d,stroke:#60a5fa,stroke-width:1.5px,color:#dbeafe
+  classDef browser fill:#ede9fe,stroke:#6d28d9,stroke-width:1.5px,color:#1f2419
+  classDef edge fill:#f5f3ff,stroke:#7c3aed,stroke-width:1.5px,color:#1f2419
+  classDef supa fill:#d1fae5,stroke:#059669,stroke-width:1.5px,color:#064e3b
+  classDef recipe fill:#fef3c7,stroke:#d97706,stroke-width:1.5px,color:#78350f
+  classDef llm fill:#ffe4e6,stroke:#e11d48,stroke-width:1.5px,color:#881337
+  classDef pbi fill:#c4b5fd,stroke:#5b21b6,stroke-width:1.5px,color:#1f2419
 
   UI("Browser&lt;br&gt;Ask AI · Capture · Summarize"):::browser
 
@@ -297,60 +784,60 @@ flowchart LR
     <div class="diagram-title">
       <i data-lucide="git-fork"></i><span>The main difference in one line</span>
     </div>
-    <div style="padding: 22px 24px 6px; border-radius: 14px; background: linear-gradient(180deg, rgba(34,211,238,0.05), rgba(251,191,36,0.04)); border: 1px solid rgba(255,255,255,0.06);">
-      <p style="margin: 0 0 18px; font-size: 17px; line-height: 1.55; color: rgba(255,255,255,0.92);">
-        <b style="color: #22d3ee;">The slow path is generative.</b> The AI itself writes the DAX query from scratch every time.
-        <b style="color: #fbbf24;">The fast path is lookup.</b> A pre-LLM matcher finds a hand-curated recipe and runs it directly.
+    <div style="padding: 22px 24px 6px; border-radius: 14px; background: var(--accent-soft); border: 1px solid var(--border);">
+      <p style="margin: 0 0 18px; font-size: 17px; line-height: 1.55; color: var(--text-0);">
+        <b style="color: #b45309;">The slow path is generative.</b> The AI itself writes the DAX query from scratch every time.
+        <b style="color: var(--accent-strong);">The fast path is lookup.</b> A pre-LLM matcher finds a hand-curated recipe and runs it directly.
         That single decision &mdash; <i>who writes the query</i> &mdash; cascades into everything else.
       </p>
       <table class="hub-table" style="width: 100%; border-collapse: collapse; margin-bottom: 10px;">
         <thead>
           <tr>
-            <th style="text-align: left; padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.08); color: rgba(255,255,255,0.65); font-weight: 600; font-size: 13px;">Dimension</th>
-            <th style="text-align: left; padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.08); color: #fbbf24; font-weight: 700; font-size: 13px;"><i data-lucide="waves" style="width:14px;height:14px;vertical-align:-2px;margin-right:6px;"></i>Slow path</th>
-            <th style="text-align: left; padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.08); color: #22d3ee; font-weight: 700; font-size: 13px;"><i data-lucide="zap" style="width:14px;height:14px;vertical-align:-2px;margin-right:6px;"></i>Fast path</th>
+            <th style="text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text-2); font-weight: 600; font-size: 13px;">Dimension</th>
+            <th style="text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); color: #b45309; font-weight: 700; font-size: 13px;"><i data-lucide="waves" style="width:14px;height:14px;vertical-align:-2px;margin-right:6px;"></i>Slow path</th>
+            <th style="text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--accent-strong); font-weight: 700; font-size: 13px;"><i data-lucide="zap" style="width:14px;height:14px;vertical-align:-2px;margin-right:6px;"></i>Fast path</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); font-weight: 600;">Who writes the DAX</td>
-            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: rgba(255,255,255,0.78);">The AI, fresh every time</td>
-            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: rgba(255,255,255,0.92);"><b>Pre-written recipe</b></td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-0);">Who writes the DAX</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text-1);">The AI, fresh every time</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text-0);"><b>Pre-written recipe</b></td>
           </tr>
           <tr>
-            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); font-weight: 600;">Cost per call</td>
-            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: rgba(255,255,255,0.78);">~$0.0014 (post-opt) &middot; up to $0.018 with image</td>
-            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: #34d399;"><b>~$0.00018 &mdash; 50&times; cheaper</b></td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-0);">Cost per call</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text-1);">~$0.0014 (post-opt) &middot; up to $0.018 with image</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid var(--border); color: #047857;"><b>~$0.00018 &mdash; 50&times; cheaper</b></td>
           </tr>
           <tr>
-            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); font-weight: 600;">Latency</td>
-            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: rgba(255,255,255,0.78);">8 &ndash; 25 seconds</td>
-            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: #34d399;"><b>2.5 &ndash; 5 seconds &mdash; 3&times; faster</b></td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-0);">Latency</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text-1);">8 &ndash; 25 seconds</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid var(--border); color: #047857;"><b>2.5 &ndash; 5 seconds &mdash; 3&times; faster</b></td>
           </tr>
           <tr>
-            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); font-weight: 600;">Determinism</td>
-            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: rgba(255,255,255,0.78);">Same question may produce slightly different DAX</td>
-            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: rgba(255,255,255,0.92);"><b>Same question &rarr; same DAX &rarr; same number, always</b></td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-0);">Determinism</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text-1);">Same question may produce slightly different DAX</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text-0);"><b>Same question &rarr; same DAX &rarr; same number, always</b></td>
           </tr>
           <tr>
-            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); font-weight: 600;">Coverage</td>
-            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: rgba(255,255,255,0.78);">Anything in the semantic model</td>
-            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: rgba(255,255,255,0.78);">Only the question shapes you pre-wrote</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-0);">Coverage</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text-1);">Anything in the semantic model</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text-1);">Only the question shapes you pre-wrote</td>
           </tr>
           <tr>
-            <td style="padding: 10px 12px; font-weight: 600;">Production hit rate</td>
-            <td style="padding: 10px 12px; color: rgba(255,255,255,0.78);">~70% of calls (long tail, paraphrases, image questions)</td>
-            <td style="padding: 10px 12px; color: rgba(255,255,255,0.92);"><b>27.6% of calls</b> (top-frequency questions)</td>
+            <td style="padding: 10px 12px; font-weight: 600; color: var(--text-0);">Production hit rate</td>
+            <td style="padding: 10px 12px; color: var(--text-1);">~70% of calls (long tail, paraphrases, image questions)</td>
+            <td style="padding: 10px 12px; color: var(--text-0);"><b>27.6% of calls</b> (top-frequency questions)</td>
           </tr>
         </tbody>
       </table>
     </div>
-    <p style="margin: 16px 0 4px; font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.78);">
+    <p style="margin: 16px 0 4px; font-size: 14px; line-height: 1.6; color: var(--text-1);">
       You need both. The fast path catches the questions owners notice when answers vary &mdash; the highest-frequency 30%
       where determinism is non-negotiable. The slow path catches everything else, including new shapes you have not pre-authored.
       The recipe layer sits <b>in front of</b> the slow path: every request tries the matcher first, falls through to the LLM-driven path on a miss.
     </p>
-    <p style="margin: 8px 0 0; font-size: 14px; line-height: 1.6; color: #fde68a; font-style: italic;">
+    <p style="margin: 8px 0 0; font-size: 14px; line-height: 1.6; color: var(--accent-strong); font-style: italic;">
       The real reason to ship the fast path is not cost. It is <b>trust</b>. The 50&times; cost reduction is a bonus.
     </p>
   </div>
@@ -498,9 +985,9 @@ sequenceDiagram
     <div class="mermaid-host">
       <pre class="mermaid">
 flowchart TB
-  classDef step fill:#0e1f2e,stroke:#22d3ee,color:#e0f2fe,stroke-width:1.5px
-  classDef warn fill:#311220,stroke:#fb7185,color:#ffe4e6,stroke-width:1.5px
-  classDef good fill:#062e1d,stroke:#34d399,color:#d1fae5,stroke-width:1.5px
+  classDef step fill:#ede9fe,stroke:#6d28d9,color:#1f2419,stroke-width:1.5px
+  classDef warn fill:#ffe4e6,stroke:#e11d48,color:#881337,stroke-width:1.5px
+  classDef good fill:#d1fae5,stroke:#059669,color:#064e3b,stroke-width:1.5px
 
   A("L1 · Supabase auth&lt;br&gt;auth.getUser() — JWT re-validated every call&lt;br&gt;not signed in → 401"):::step
   B("L2 · user_branches join table&lt;br&gt;uuid · branch_code · PK pair&lt;br&gt;no rows → 403 'No branch access'"):::warn
@@ -568,10 +1055,10 @@ flowchart TB
     <div class="mermaid-host">
       <pre class="mermaid">
 flowchart LR
-  classDef client fill:#0e1f2e,stroke:#22d3ee,color:#e0f2fe,stroke-width:1.5px
-  classDef wire fill:#2c1d05,stroke:#fbbf24,color:#fef3c7,stroke-width:1.5px
-  classDef server fill:#1c1235,stroke:#a78bfa,color:#ede9fe,stroke-width:1.5px
-  classDef llm fill:#311220,stroke:#fb7185,color:#ffe4e6,stroke-width:1.5px
+  classDef client fill:#ede9fe,stroke:#6d28d9,color:#1f2419,stroke-width:1.5px
+  classDef wire fill:#fef3c7,stroke:#d97706,color:#78350f,stroke-width:1.5px
+  classDef server fill:#f5f3ff,stroke:#7c3aed,color:#1f2419,stroke-width:1.5px
+  classDef llm fill:#ffe4e6,stroke:#e11d48,color:#881337,stroke-width:1.5px
 
   P("getDisplayMedia&lt;br&gt;browser permission picker&lt;br&gt;frameRate 2 · preferCurrentTab"):::client
   G("ImageCapture.grabFrame&lt;br&gt;or hidden video fallback"):::client
@@ -641,10 +1128,10 @@ flowchart LR
     <div class="mermaid-host">
       <pre class="mermaid">
 flowchart TB
-  classDef token fill:#0a1f3d,stroke:#60a5fa,color:#dbeafe,stroke-width:1.5px
-  classDef step fill:#0e1f2e,stroke:#22d3ee,color:#e0f2fe,stroke-width:1.5px
-  classDef err fill:#311220,stroke:#fb7185,color:#ffe4e6,stroke-width:1.5px
-  classDef ok fill:#062e1d,stroke:#34d399,color:#d1fae5,stroke-width:1.5px
+  classDef token fill:#c4b5fd,stroke:#5b21b6,color:#1f2419,stroke-width:1.5px
+  classDef step fill:#ede9fe,stroke:#6d28d9,color:#1f2419,stroke-width:1.5px
+  classDef err fill:#ffe4e6,stroke:#e11d48,color:#881337,stroke-width:1.5px
+  classDef ok fill:#d1fae5,stroke:#059669,color:#064e3b,stroke-width:1.5px
 
   Tool("dispatchTool query_dax dax branch"):::step
 
@@ -718,10 +1205,10 @@ flowchart TB
     <div class="mermaid-host">
       <pre class="mermaid">
 flowchart LR
-  classDef vision fill:#311220,stroke:#fb7185,color:#ffe4e6,stroke-width:1.5px
-  classDef dax fill:#0a1f3d,stroke:#60a5fa,color:#dbeafe,stroke-width:1.5px
-  classDef route fill:#1c1235,stroke:#a78bfa,color:#ede9fe,stroke-width:1.5px
-  classDef accent fill:#2c1d05,stroke:#fbbf24,color:#fef3c7,stroke-width:1.5px
+  classDef vision fill:#ffe4e6,stroke:#e11d48,color:#881337,stroke-width:1.5px
+  classDef dax fill:#c4b5fd,stroke:#5b21b6,color:#1f2419,stroke-width:1.5px
+  classDef route fill:#f5f3ff,stroke:#7c3aed,color:#1f2419,stroke-width:1.5px
+  classDef accent fill:#fef3c7,stroke:#d97706,color:#78350f,stroke-width:1.5px
 
   Q("User question&lt;br&gt;maybe with image")
   Disp("const roundModel = round === 0 ? visionModel : daxModel&lt;br&gt;route.ts:511"):::route
@@ -783,10 +1270,10 @@ flowchart LR
     <div class="mermaid-host">
       <pre class="mermaid">
 flowchart TB
-  classDef src fill:#0e1f2e,stroke:#22d3ee,color:#e0f2fe,stroke-width:1.5px
-  classDef ds fill:#0a1f3d,stroke:#60a5fa,color:#dbeafe,stroke-width:1.5px
-  classDef ren fill:#1c1235,stroke:#a78bfa,color:#ede9fe,stroke-width:1.5px
-  classDef out fill:#062e1d,stroke:#34d399,color:#d1fae5,stroke-width:1.5px
+  classDef src fill:#ede9fe,stroke:#6d28d9,color:#1f2419,stroke-width:1.5px
+  classDef ds fill:#c4b5fd,stroke:#5b21b6,color:#1f2419,stroke-width:1.5px
+  classDef ren fill:#f5f3ff,stroke:#7c3aed,color:#1f2419,stroke-width:1.5px
+  classDef out fill:#d1fae5,stroke:#059669,color:#064e3b,stroke-width:1.5px
 
   TMDL("source-of-truth&lt;br&gt;TMDL · dbt manifest · information_schema&lt;br&gt;~620 lines hand-mirrored TS"):::src
 
@@ -854,10 +1341,10 @@ flowchart TB
     <div class="mermaid-host">
       <pre class="mermaid">
 flowchart LR
-  classDef sql fill:#0a1f3d,stroke:#60a5fa,color:#dbeafe,stroke-width:1.5px
-  classDef gen fill:#0e1f2e,stroke:#22d3ee,color:#e0f2fe,stroke-width:1.5px
-  classDef out fill:#062e1d,stroke:#34d399,color:#d1fae5,stroke-width:1.5px
-  classDef route fill:#1c1235,stroke:#a78bfa,color:#ede9fe,stroke-width:1.5px
+  classDef sql fill:#c4b5fd,stroke:#5b21b6,color:#1f2419,stroke-width:1.5px
+  classDef gen fill:#ede9fe,stroke:#6d28d9,color:#1f2419,stroke-width:1.5px
+  classDef out fill:#d1fae5,stroke:#059669,color:#064e3b,stroke-width:1.5px
+  classDef route fill:#f5f3ff,stroke:#7c3aed,color:#1f2419,stroke-width:1.5px
 
   MS[("MySQL ICALL_Gold&lt;br&gt;fact_opportunities&lt;br&gt;fact_leads · fact_appointments")]:::sql
 
@@ -919,10 +1406,10 @@ ROW("Sold", CALCULATE(
     <div class="mermaid-host">
       <pre class="mermaid">
 flowchart LR
-  classDef src fill:#0a1f3d,stroke:#60a5fa,color:#dbeafe,stroke-width:1.5px
-  classDef hum fill:#062e1d,stroke:#34d399,color:#d1fae5,stroke-width:1.5px
-  classDef bot fill:#1c1235,stroke:#a78bfa,color:#ede9fe,stroke-width:1.5px
-  classDef rule fill:#2c1d05,stroke:#fbbf24,color:#fef3c7,stroke-width:1.5px
+  classDef src fill:#c4b5fd,stroke:#5b21b6,color:#1f2419,stroke-width:1.5px
+  classDef hum fill:#d1fae5,stroke:#059669,color:#064e3b,stroke-width:1.5px
+  classDef bot fill:#f5f3ff,stroke:#7c3aed,color:#1f2419,stroke-width:1.5px
+  classDef rule fill:#fef3c7,stroke:#d97706,color:#78350f,stroke-width:1.5px
 
   C("lib/guide/content.tsx&lt;br&gt;PAGES: ReportPage[]&lt;br&gt;{name, intent, whenToUse, slicers,&lt;br&gt; visuals, bigQuestions}&lt;br&gt;&lt;br&gt;QUICK_PATTERNS&lt;br&gt;cross-cutting"):::src
 
@@ -998,11 +1485,11 @@ flowchart LR
     <div class="mermaid-host">
       <pre class="mermaid">
 flowchart TB
-  classDef ask fill:#0e1f2e,stroke:#22d3ee,color:#e0f2fe,stroke-width:1.5px
-  classDef gate fill:#2c1d05,stroke:#fbbf24,color:#fef3c7,stroke-width:1.5px
-  classDef match fill:#0a1f3d,stroke:#60a5fa,color:#dbeafe,stroke-width:1.5px
-  classDef hit fill:#062e1d,stroke:#34d399,color:#d1fae5,stroke-width:1.5px
-  classDef miss fill:#311220,stroke:#fb7185,color:#ffe4e6,stroke-width:1.5px
+  classDef ask fill:#ede9fe,stroke:#6d28d9,color:#1f2419,stroke-width:1.5px
+  classDef gate fill:#fef3c7,stroke:#d97706,color:#78350f,stroke-width:1.5px
+  classDef match fill:#c4b5fd,stroke:#5b21b6,color:#1f2419,stroke-width:1.5px
+  classDef hit fill:#d1fae5,stroke:#059669,color:#064e3b,stroke-width:1.5px
+  classDef miss fill:#ffe4e6,stroke:#e11d48,color:#881337,stroke-width:1.5px
 
   Q("User question&lt;br&gt;+ branch + image?"):::ask
   Img{"image attached?"}:::gate
@@ -1080,12 +1567,12 @@ flowchart TB
     <div class="mermaid-host">
       <pre class="mermaid">
 flowchart TB
-  classDef pk fill:#2c1d05,stroke:#fbbf24,color:#fef3c7,stroke-width:1.5px
-  classDef id fill:#0e1f2e,stroke:#22d3ee,color:#e0f2fe,stroke-width:1.5px
-  classDef inp fill:#0a1f3d,stroke:#60a5fa,color:#dbeafe,stroke-width:1.5px
-  classDef out fill:#062e1d,stroke:#34d399,color:#d1fae5,stroke-width:1.5px
-  classDef cost fill:#1c1235,stroke:#a78bfa,color:#ede9fe,stroke-width:1.5px
-  classDef tool fill:#311220,stroke:#fb7185,color:#ffe4e6,stroke-width:1.5px
+  classDef pk fill:#fef3c7,stroke:#d97706,color:#78350f,stroke-width:1.5px
+  classDef id fill:#ede9fe,stroke:#6d28d9,color:#1f2419,stroke-width:1.5px
+  classDef inp fill:#c4b5fd,stroke:#5b21b6,color:#1f2419,stroke-width:1.5px
+  classDef out fill:#d1fae5,stroke:#059669,color:#064e3b,stroke-width:1.5px
+  classDef cost fill:#f5f3ff,stroke:#7c3aed,color:#1f2419,stroke-width:1.5px
+  classDef tool fill:#ffe4e6,stroke:#e11d48,color:#881337,stroke-width:1.5px
 
   T("copilot_usage&lt;br&gt;after 10 migrations"):::pk
 
@@ -1157,9 +1644,9 @@ order by created_at desc;</pre>
     <div class="mermaid-host">
       <pre class="mermaid">
 flowchart LR
-  classDef sse fill:#0a1f3d,stroke:#60a5fa,color:#dbeafe,stroke-width:1.5px
-  classDef edge fill:#1c1235,stroke:#a78bfa,color:#ede9fe,stroke-width:1.5px
-  classDef brow fill:#0e1f2e,stroke:#22d3ee,color:#e0f2fe,stroke-width:1.5px
+  classDef sse fill:#c4b5fd,stroke:#5b21b6,color:#1f2419,stroke-width:1.5px
+  classDef edge fill:#f5f3ff,stroke:#7c3aed,color:#1f2419,stroke-width:1.5px
+  classDef brow fill:#ede9fe,stroke:#6d28d9,color:#1f2419,stroke-width:1.5px
 
   OR("OpenRouter SSE&lt;br&gt;data: JSON chunks&lt;br&gt;finish_reason · usage in last chunk"):::sse
 
@@ -1227,9 +1714,9 @@ flowchart LR
     <div class="mermaid-host">
       <pre class="mermaid">
 flowchart LR
-  classDef before fill:#311220,stroke:#fb7185,color:#ffe4e6,stroke-width:1.5px
-  classDef step fill:#0a1f3d,stroke:#60a5fa,color:#dbeafe,stroke-width:1.5px
-  classDef after fill:#062e1d,stroke:#34d399,color:#d1fae5,stroke-width:1.5px
+  classDef before fill:#ffe4e6,stroke:#e11d48,color:#881337,stroke-width:1.5px
+  classDef step fill:#c4b5fd,stroke:#5b21b6,color:#1f2419,stroke-width:1.5px
+  classDef after fill:#d1fae5,stroke:#059669,color:#064e3b,stroke-width:1.5px
 
   B("Baseline&lt;br&gt;~$0.012/call · 12.8K avg prompt&lt;br&gt;29% cached share"):::before
 
@@ -1287,9 +1774,9 @@ flowchart LR
     <div class="mermaid-host">
       <pre class="mermaid">
 flowchart LR
-  classDef p fill:#0a1f3d,stroke:#60a5fa,color:#dbeafe,stroke-width:1.5px
-  classDef o fill:#062e1d,stroke:#34d399,color:#d1fae5,stroke-width:1.5px
-  classDef opt fill:#2c1d05,stroke:#fbbf24,color:#fef3c7,stroke-width:1.5px
+  classDef p fill:#c4b5fd,stroke:#5b21b6,color:#1f2419,stroke-width:1.5px
+  classDef o fill:#d1fae5,stroke:#059669,color:#064e3b,stroke-width:1.5px
+  classDef opt fill:#fef3c7,stroke:#d97706,color:#78350f,stroke-width:1.5px
 
   P0("Setup&lt;br&gt;Next.js + Supabase&lt;br&gt;0.5d"):::p
   P1("Phase 1&lt;br&gt;route skeleton&lt;br&gt;auth · rate limit · usage row&lt;br&gt;0.5d"):::p
@@ -1313,9 +1800,9 @@ flowchart LR
     <div class="mermaid-host">
       <pre class="mermaid">
 flowchart LR
-  classDef before fill:#311220,stroke:#fb7185,color:#ffe4e6,stroke-width:1.5px
-  classDef batch fill:#0a1f3d,stroke:#60a5fa,color:#dbeafe,stroke-width:1.5px
-  classDef after fill:#062e1d,stroke:#34d399,color:#d1fae5,stroke-width:1.5px
+  classDef before fill:#ffe4e6,stroke:#e11d48,color:#881337,stroke-width:1.5px
+  classDef batch fill:#c4b5fd,stroke:#5b21b6,color:#1f2419,stroke-width:1.5px
+  classDef after fill:#d1fae5,stroke:#059669,color:#064e3b,stroke-width:1.5px
 
   S("baseline 49.4%"):::before
   B1("batch 1 reliability + 3&lt;br&gt;+18.2pp · 67.6%"):::batch

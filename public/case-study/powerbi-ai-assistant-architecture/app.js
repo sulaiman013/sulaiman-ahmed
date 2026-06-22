@@ -17,13 +17,16 @@
   }
 
   /* ---------- THEME ---------- */
+  // Light is the default. Always set the attribute explicitly so the
+  // CSS variable blocks (:root, html[data-theme="light"], html[data-theme="dark"])
+  // resolve deterministically — never rely on attribute absence.
   const stored = localStorage.getItem('ic-theme');
-  if (stored === 'light') root.setAttribute('data-theme', 'light');
+  root.setAttribute('data-theme', stored === 'dark' ? 'dark' : 'light');
 
   const toggle = document.getElementById('themeToggle');
 
   function isDark() {
-    return root.getAttribute('data-theme') !== 'light';
+    return root.getAttribute('data-theme') === 'dark';
   }
 
   function setToggleIcon() {
@@ -102,8 +105,7 @@
   window.__renderMermaid = renderMermaid;
 
   function setTheme(theme) {
-    if (theme === 'light') root.setAttribute('data-theme', 'light');
-    else root.removeAttribute('data-theme');
+    root.setAttribute('data-theme', theme === 'dark' ? 'dark' : 'light');
     localStorage.setItem('ic-theme', theme);
     setToggleIcon();
     renderMermaid().then(() => { if (window.__wireLightbox) window.__wireLightbox(); });
