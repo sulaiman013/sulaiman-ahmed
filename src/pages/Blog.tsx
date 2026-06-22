@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Calendar, Clock, User, Search, FileText, TrendingUp, Target, Linkedin, Eye } from "lucide-react";
+import { ArrowRight, Calendar, Clock, User, Search, FileText, TrendingUp, Linkedin, Eye } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import BlogThumbnail from "@/components/BlogThumbnail";
@@ -123,10 +123,7 @@ export default function Blog() {
     });
   }, [search, activeTag]);
 
-  // MVP tracker stats
-  const MVP_GOAL = 24; // 24 blogs in 12 months (2/month)
   const BLOGS_PUBLISHED = posts.length;
-  const MVP_PROGRESS = Math.round((BLOGS_PUBLISHED / MVP_GOAL) * 100);
 
   // Calculate days since last post
   // Auto-derive from the newest post in the data so this number stays
@@ -172,8 +169,7 @@ export default function Blog() {
             </div>
           </div>
 
-          {/* MVP Tracker Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
             {/* Blogs Published */}
             <div className="rounded-xl border border-border bg-background-elevated p-5">
               <div className="flex items-center gap-2 mb-3">
@@ -182,14 +178,7 @@ export default function Blog() {
                 </div>
                 <span className="text-body-sm font-medium text-foreground-muted">Blogs Published</span>
               </div>
-              <p className="font-mono text-4xl font-bold text-foreground mb-2">{BLOGS_PUBLISHED}</p>
-              <div className="w-full bg-accent-brand-soft rounded-full h-1.5 mb-1.5 overflow-hidden">
-                <div
-                  className="bg-accent-brand h-1.5 w-full origin-left rounded-full transition-transform duration-700 ease-out-quart"
-                  style={{ transform: `scaleX(${MVP_PROGRESS / 100})` }}
-                />
-              </div>
-              <p className="text-caption text-foreground-subtle">{BLOGS_PUBLISHED}/{MVP_GOAL} MVP goal</p>
+              <p className="font-mono text-4xl font-bold text-foreground">{BLOGS_PUBLISHED}</p>
             </div>
 
             {/* Days Since Last Post */}
@@ -204,24 +193,6 @@ export default function Blog() {
                 {daysSinceLastPost}
               </p>
               <p className="text-caption text-foreground-subtle mt-2">Target: Post every 14 days</p>
-            </div>
-
-            {/* MVP Journey */}
-            <div className="rounded-xl border border-border bg-background-elevated p-5">
-              <div className="flex items-center gap-2 mb-3">
-                <div className="p-1.5 rounded-md bg-accent-brand-soft">
-                  <Target className="h-4 w-4 text-accent-brand-strong" aria-hidden="true" />
-                </div>
-                <span className="text-body-sm font-medium text-foreground-muted">MVP Journey</span>
-              </div>
-              <p className="font-mono text-4xl font-bold text-foreground mb-2">{MVP_PROGRESS}%</p>
-              <div className="w-full bg-accent-brand-soft rounded-full h-1.5 mb-1.5 overflow-hidden">
-                <div
-                  className="bg-accent-brand h-1.5 w-full origin-left rounded-full transition-transform duration-700 ease-out-quart"
-                  style={{ transform: `scaleX(${MVP_PROGRESS / 100})` }}
-                />
-              </div>
-              <p className="text-caption text-foreground-subtle">Microsoft Data Platform MVP</p>
             </div>
           </div>
 
