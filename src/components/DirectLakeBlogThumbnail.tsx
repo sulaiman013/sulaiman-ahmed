@@ -3,7 +3,9 @@ const SHARED = "/blog/icons";
 
 export default function DirectLakeBlogThumbnail() {
   return (
-    <div className="relative w-full aspect-[21/9] rounded-lg overflow-hidden bg-background-elevated border border-border">
+    <div className="relative w-full aspect-[21/9] rounded-lg overflow-hidden border border-sky-200/60 dark:border-sky-900/40 bg-gradient-to-br from-sky-50 via-background-elevated to-background-elevated dark:from-sky-950/40 dark:via-background-elevated dark:to-background-elevated">
+      <div className="pointer-events-none absolute -bottom-16 -right-16 h-56 w-56 rounded-full bg-sky-300/30 blur-3xl dark:bg-sky-700/20" aria-hidden="true" />
+      <div className="pointer-events-none absolute -top-16 -left-10 h-40 w-40 rounded-full bg-sky-200/40 blur-3xl dark:bg-sky-800/15" aria-hidden="true" />
       {/* Subtle grid pattern, tinted with accent */}
       <div
         className="absolute inset-0 opacity-[0.05]"

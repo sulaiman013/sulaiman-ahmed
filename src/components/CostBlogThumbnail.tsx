@@ -2,7 +2,9 @@ const ICONS = "/blog/fabric-capacity-explained/icons";
 
 export default function CostBlogThumbnail() {
   return (
-    <div className="relative w-full aspect-[21/9] rounded-lg overflow-hidden border border-border bg-background-elevated">
+    <div className="relative w-full aspect-[21/9] rounded-lg overflow-hidden border border-amber-200/60 dark:border-amber-900/40 bg-gradient-to-br from-amber-50 via-background-elevated to-background-elevated dark:from-amber-950/40 dark:via-background-elevated dark:to-background-elevated">
+      <div className="pointer-events-none absolute -bottom-16 -right-16 h-56 w-56 rounded-full bg-amber-300/30 blur-3xl dark:bg-amber-700/20" aria-hidden="true" />
+      <div className="pointer-events-none absolute -top-16 -left-10 h-40 w-40 rounded-full bg-amber-200/40 blur-3xl dark:bg-amber-800/15" aria-hidden="true" />
       {/* Grid pattern - accent tint */}
       <div
         className="absolute inset-0 opacity-[0.06]"

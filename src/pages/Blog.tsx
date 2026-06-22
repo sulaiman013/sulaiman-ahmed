@@ -129,10 +129,19 @@ export default function Blog() {
   const MVP_PROGRESS = Math.round((BLOGS_PUBLISHED / MVP_GOAL) * 100);
 
   // Calculate days since last post
-  const lastPostDate = new Date("2026-05-09"); // Date of latest blog
+  // Auto-derive from the newest post in the data so this number stays
+  // current whenever a new post is added. The post.date format is
+  // "Month YYYY" (e.g. "June 2026") — we treat it as the 1st of that month.
+  const parsePostMonthYear = (label: string): Date => {
+    const [month, year] = label.split(" ");
+    const d = new Date(`${month} 1, ${year}`);
+    return Number.isNaN(d.getTime()) ? new Date() : d;
+  };
+  const lastPostDate = parsePostMonthYear(posts[0].date);
   const today = new Date();
-  const daysSinceLastPost = Math.floor(
-    (today.getTime() - lastPostDate.getTime()) / (1000 * 60 * 60 * 24)
+  const daysSinceLastPost = Math.max(
+    0,
+    Math.floor((today.getTime() - lastPostDate.getTime()) / (1000 * 60 * 60 * 24))
   );
 
   return (

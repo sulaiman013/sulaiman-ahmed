@@ -1,6 +1,8 @@
 export default function BlogThumbnail() {
   return (
-    <div className="relative w-full aspect-[21/9] rounded-lg overflow-hidden bg-background-elevated border border-border">
+    <div className="relative w-full aspect-[21/9] rounded-lg overflow-hidden border border-rose-200/60 dark:border-rose-900/40 bg-gradient-to-br from-rose-50 via-background-elevated to-background-elevated dark:from-rose-950/40 dark:via-background-elevated dark:to-background-elevated">
+      <div className="pointer-events-none absolute -bottom-16 -right-16 h-56 w-56 rounded-full bg-rose-300/30 blur-3xl dark:bg-rose-700/20" aria-hidden="true" />
+      <div className="pointer-events-none absolute -top-16 -left-10 h-40 w-40 rounded-full bg-rose-200/40 blur-3xl dark:bg-rose-800/15" aria-hidden="true" />
       {/* Identity strip - top left */}
       <div className="absolute top-3 left-4 z-20 flex items-center gap-2">
         <img

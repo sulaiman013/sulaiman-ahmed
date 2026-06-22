@@ -3,7 +3,9 @@ const SHARED = "/blog/icons";
 
 export default function MLVBlogThumbnail() {
   return (
-    <div className="relative w-full aspect-[21/9] rounded-lg overflow-hidden bg-background-elevated border border-border">
+    <div className="relative w-full aspect-[21/9] rounded-lg overflow-hidden border border-indigo-200/60 dark:border-indigo-900/40 bg-gradient-to-br from-indigo-50 via-background-elevated to-background-elevated dark:from-indigo-950/40 dark:via-background-elevated dark:to-background-elevated">
+      <div className="pointer-events-none absolute -bottom-16 -right-16 h-56 w-56 rounded-full bg-indigo-300/30 blur-3xl dark:bg-indigo-700/20" aria-hidden="true" />
+      <div className="pointer-events-none absolute -top-16 -left-10 h-40 w-40 rounded-full bg-indigo-200/40 blur-3xl dark:bg-indigo-800/15" aria-hidden="true" />
       {/* Grid pattern - subtle accent tint */}
       <div
         className="absolute inset-0 opacity-[0.06]"
