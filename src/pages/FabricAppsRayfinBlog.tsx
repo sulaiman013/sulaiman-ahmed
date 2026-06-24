@@ -85,7 +85,7 @@ export default function FabricAppsRayfinBlog() {
               </h3>
               <ul className="space-y-1.5 mb-0 text-[14px]">
                 <li><strong>Power BI did not die. It evolved.</strong> The semantic model is still the source of truth. What is new is the operational app built around it: a Fabric App.</li>
-                <li><strong>Rayfin is the way you build one.</strong> Microsoft's open-source SDK, from Build 2026, takes a TypeScript data model and provisions a Fabric SQL database, a GraphQL API, Entra authentication, and hosting, all from <code>npx rayfin up</code>.</li>
+                <li><strong>Rayfin is the way you build one.</strong> Microsoft's open-source SDK, from Build 2026, takes a TypeScript data model and provisions a Fabric SQL database, a GraphQL API, Entra authentication, and hosting. You scaffold with <code>npm create @microsoft/rayfin@latest</code>, then deploy with <code>npx rayfin up</code>.</li>
                 <li><strong>The translytical loop is the magic.</strong> A Fabric SQL database auto-mirrors to OneLake as Delta. A Direct Lake model reads that one copy. Analytics see operational writes in near real time, with no nightly ETL.</li>
                 <li><strong>Demo 1, the Lead Pipeline app:</strong> an operational CRM, a Kanban board plus an analyst-grade dashboard, all reading one Direct Lake semantic model.</li>
                 <li><strong>Demo 2, the Superstore:</strong> two apps, a self-checkout that writes a sale and an analytics app that reads it back, wired together through the translytical loop, with a customer and order drill-through.</li>
@@ -148,10 +148,12 @@ export default function FabricAppsRayfinBlog() {
 
             <p>
               Quick grounding, because three names do a lot of work here. <strong>Microsoft Fabric</strong> unifies
-              your data in <strong>OneLake</strong>, one logical lake, one open copy in Delta and Parquet, that every
-              Fabric workload reads without moving it. A <strong>Direct Lake</strong> semantic model reads straight
-              from those OneLake Delta tables into memory, giving you import-level speed with near-real-time
-              freshness. If you want the deep version of that last part, I wrote a whole guide on it:
+              your data in <strong>OneLake</strong>, one logical lake, one open copy in <strong>Delta Parquet</strong>
+              {" "}(Delta Lake tables backed by Parquet files), that every Fabric workload reads without moving it.
+              A <strong>Direct Lake</strong> semantic model reads straight from those OneLake Delta tables, loading
+              columns into memory on demand via transcoding. After the first query warms the columns, performance is
+              comparable to Import mode, but with near-real-time freshness instead of refresh cycles. If you want the
+              deep version of that last part, I wrote a whole guide on it:
               {" "}
               <Link to="/blog/fabric-direct-lake-semantic-models" className="text-primary hover:underline">
                 Direct Lake Semantic Models
@@ -203,10 +205,12 @@ export class Sale {
 }`}</CodeBlock>
 
             <p>
-              Then one command turns that into a live, governed backend:
+              Then two commands turn that into a live, governed backend. The first scaffolds the project, the second
+              deploys it:
             </p>
 
-            <CodeBlock lang="bash">{`npx rayfin up        # provisions the SQL database + GraphQL API + Entra auth + hosting`}</CodeBlock>
+            <CodeBlock lang="bash">{`npm create @microsoft/rayfin@latest   # scaffold a new Rayfin project
+npx rayfin up                          # provisions the SQL database + GraphQL API + Entra auth + hosting`}</CodeBlock>
 
             <Callout type="info">
               <strong>What "provisions for you" really means.</strong> No infrastructure to stand up. The SQL database
@@ -224,9 +228,10 @@ export class Sale {
             <p>
               Here is the idea that makes Fabric Apps more than "a CRUD app on Azure." When your app writes a row to a
               Fabric SQL database, that database <strong>automatically mirrors itself into OneLake</strong> as Delta
-              Parquet, in seconds, with zero setup. The moment a sale is written, it is already sitting in OneLake as
-              an analytics-ready Delta table. A Direct Lake semantic model reads that exact copy. So the report that
-              explains the data and the app that creates it finally live in the same place.
+              Parquet, in near real time (Microsoft's documented latency is seconds to a few minutes), with zero setup.
+              The moment a sale is written, it is already sitting in OneLake as an analytics-ready Delta table. A
+              Direct Lake semantic model reads that exact copy. So the report that explains the data and the app that
+              creates it finally live in the same place.
             </p>
 
             <p>
@@ -395,16 +400,17 @@ export class Sale {
               Within one app, the loop is automatic. Across two apps, you add one thin workflow. The analytics model
               lives on the historical warehouse, so the self-checkout's live writes need to be folded in. The recipe:
               a full-calendar date dimension so today's sales always have a date key, a OneLake shortcut to the
-              checkout app's mirrored <code>Sales</code> and <code>SaleLines</code> tables, and a small idempotent
-              stored procedure on a one-minute pipeline that appends new lines into the fact table. The procedure also
-              upserts the live shopper into the customer dimension, using the captured name, so they show up by name
-              rather than as a blank.
+              checkout app's mirrored sale data (the Rayfin <code>Sale</code> and <code>SaleLine</code> entities,
+              exposed in the analytics warehouse as <code>Sales</code> and <code>SaleLines</code>), and a small
+              idempotent stored procedure on a one-minute pipeline that appends new lines into the fact table. The
+              procedure also upserts the live shopper into the customer dimension, picking one of the captured names
+              per customer at insert time, so they show up by name rather than as a blank.
             </p>
 
             <CodeBlock lang="sql">{`CREATE OR ALTER PROCEDURE dbo.usp_LoadLiveSales
 AS
 BEGIN
-    -- 1) Upsert live shoppers into DimCustomer (name snapshotted on the Sale).
+    -- 1) Upsert live shoppers into DimCustomer (one captured name per customer_id at insert time).
     INSERT INTO DimCustomer (customer_id, customer_phone, customer_name, customer_segment, city, region)
     SELECT
         CAST(s.customer_id AS varchar(50)),
@@ -535,7 +541,7 @@ END;`}</CodeBlock>
                   <tr>
                     <td><strong>SQL to OneLake mirror</strong></td>
                     <td>Automatic</td>
-                    <td>The SQL database copies itself to OneLake as Delta, in seconds, always on</td>
+                    <td>The SQL database copies itself to OneLake as Delta, in seconds to a few minutes, always on</td>
                   </tr>
                   <tr>
                     <td><strong>Data workflow</strong></td>
@@ -622,24 +628,25 @@ END;`}</CodeBlock>
             </p>
 
             <ul>
-              <li><strong>Capacity and region.</strong> A Fabric capacity, trial or a paid F SKU. The real gate is the region: Fabric App is not available everywhere yet. Central US works; some regions are gated, and a trial can default to one that is not supported, so pick the region deliberately.</li>
-              <li><strong>Tenant settings.</strong> An admin turns on the Fabric Apps workload, "Users can create Fabric items," and, for the analytics app, the "Semantic Model Execute Queries REST API" setting.</li>
-              <li><strong>Roles.</strong> Contributor or Admin on the workspace to deploy. For the analytics app, Build and Read on the semantic model.</li>
+              <li><strong>Capacity and region.</strong> A Fabric capacity, trial or a paid F SKU. The real gate is the region: Fabric App (preview) is currently available in only a subset of Azure regions, and many common ones are explicitly unsupported (East US, East US 2, South Central US, West US 3, UK South/West, North Europe, Germany West Central, Japan West, Australia Southeast, and others). Central US, North Central US, West US, West US 2, France Central, Norway East, Switzerland North, West Europe, East Asia, Southeast Asia, Australia East, Central India, Japan East, and Korea Central are among the supported set. A trial can default to one that is not supported, so check the official region availability table before picking a workspace home region.</li>
+              <li><strong>Tenant settings.</strong> A tenant admin enables the <strong>Fabric apps (preview)</strong> workload under Tenant settings (organization-wide or for specific security groups). For an analytics app that queries a semantic model, the admin also enables the <strong>Semantic Model Execute Queries REST API</strong> setting under Integration settings.</li>
+              <li><strong>Roles.</strong> Contributor or Admin on the workspace to deploy (a workspace-level requirement, separate from the tenant toggles above). For the analytics app, Build and Read on the semantic model.</li>
             </ul>
 
             <p>
-              Two CLIs do the work. The Fabric CLI signs you in and inspects the estate. Rayfin has its own login and
-              does the deploy.
+              Two CLIs do the work. The Fabric CLI signs you in and inspects the estate. Rayfin scaffolds the project,
+              signs in separately, and does the deploy.
             </p>
 
             <CodeBlock lang="bash">{`# Sign in to Fabric and inspect the estate
 fab auth login            # browser sign-in, no device code
 fab ls                    # your workspaces
 
-# Deploy with Rayfin
-npx rayfin login
-npx rayfin up             # SQL database + GraphQL API + Entra auth + hosting
-npx rayfin up db apply    # apply schema changes`}</CodeBlock>
+# Scaffold and deploy with Rayfin
+npm create @microsoft/rayfin@latest    # scaffold a new project
+npx rayfin login                        # sign in to Rayfin
+npx rayfin up                           # SQL database + GraphQL API + Entra auth + hosting
+npx rayfin up db apply                  # apply schema changes`}</CodeBlock>
 
             <Callout type="warning">
               <strong>One limitation worth knowing up front.</strong> An app that is connected to a semantic model
