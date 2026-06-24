@@ -14,6 +14,24 @@ export type Database = {
   }
   public: {
     Tables: {
+      blog_views: {
+        Row: {
+          slug: string
+          updated_at: string
+          view_count: number
+        }
+        Insert: {
+          slug: string
+          updated_at?: string
+          view_count?: number
+        }
+        Update: {
+          slug?: string
+          updated_at?: string
+          view_count?: number
+        }
+        Relationships: []
+      }
       blogs: {
         Row: {
           category: string
@@ -148,7 +166,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      increment_blog_view: { Args: { blog_slug: string }; Returns: number }
     }
     Enums: {
       [_ in never]: never
