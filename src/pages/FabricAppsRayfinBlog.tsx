@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ImageLightbox from "@/components/ImageLightbox";
+import RayfinShiftDiagram from "@/components/blog-diagrams/RayfinShiftDiagram";
 import { useViewCount } from "@/hooks/useViewCount";
 
 const IMG = "/blog/dashboards-to-data-apps-rayfin";
@@ -127,12 +128,7 @@ export default function FabricAppsRayfinBlog() {
               replaced. It got a write side.
             </p>
 
-            <ImageLightbox
-              src={`${IMG}/01-dashboards-to-data-apps.png`}
-              alt="From dashboards to data apps: a Power BI report (read only, see the data) evolves into a Fabric App with Rayfin (read and write, act on the data), both sitting on one governed semantic model in OneLake"
-              variant="diagram"
-              caption="The shift: Power BI shows the data, a Fabric App acts on it, both on one governed source of truth in OneLake."
-            />
+            <RayfinShiftDiagram />
 
             <p>
               This post is the complete tour. I will cover what a Fabric App actually is, what Rayfin provisions for
