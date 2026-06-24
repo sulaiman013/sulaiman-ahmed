@@ -4,6 +4,9 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ImageLightbox from "@/components/ImageLightbox";
 import RayfinShiftDiagram from "@/components/blog-diagrams/RayfinShiftDiagram";
+import RayfinOneCommandDiagram from "@/components/blog-diagrams/RayfinOneCommandDiagram";
+import RayfinTranslyticalDiagram from "@/components/blog-diagrams/RayfinTranslyticalDiagram";
+import RayfinReportsVsAppsDiagram from "@/components/blog-diagrams/RayfinReportsVsAppsDiagram";
 import { useViewCount } from "@/hooks/useViewCount";
 
 const IMG = "/blog/dashboards-to-data-apps-rayfin";
@@ -169,12 +172,7 @@ export default function FabricAppsRayfinBlog() {
               entire backend and hosts your frontend.
             </p>
 
-            <ImageLightbox
-              src={`${IMG}/02-rayfin-one-command.png`}
-              alt="One command, a full backend: a TypeScript @entity model passes through npx rayfin up and Fabric provisions a SQL database, a GraphQL data API, Entra authentication, and static hosting"
-              variant="diagram"
-              caption="You write the data model. Rayfin provisions the SQL database, the GraphQL API, Entra auth, and hosting, deployed to your tenant."
-            />
+            <RayfinOneCommandDiagram />
 
             <p>
               A data model in Rayfin looks like this. Decorators describe the columns and the relationships, and the
@@ -238,12 +236,7 @@ npx rayfin up                          # provisions the SQL database + GraphQL A
               related Power BI report-writeback feature; the loop in this post is the application-flavored version.)
             </p>
 
-            <ImageLightbox
-              src={`${IMG}/03-translytical-loop.png`}
-              alt="The translytical loop: an operational app writes to a Fabric SQL database, which auto-mirrors to OneLake as Delta in seconds, a Direct Lake model reads that one copy, and an analytics app reads the model in near real time, with no nightly ETL"
-              variant="diagram"
-              caption="One copy of the data. Write it in one app, read it in another, near real time, with no nightly ETL in between."
-            />
+            <RayfinTranslyticalDiagram />
 
             <p>
               Two parts of that loop are automatic and two are yours, and knowing the split is the whole trick. The
@@ -578,12 +571,7 @@ END;`}</CodeBlock>
               is knowing which one a problem needs.
             </p>
 
-            <ImageLightbox
-              src={`${IMG}/11-reports-vs-apps.png`}
-              alt="Reports show, apps act: reach for Power BI to see and decide with governed read-only analytics, reach for a Fabric App to act and operate with read-write CRUD, forms, and logic on write, and use both on one semantic model"
-              variant="diagram"
-              caption="Power BI to understand, a Fabric App to operate. They share one model, so pick by the primary job."
-            />
+            <RayfinReportsVsAppsDiagram />
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
               <div className="rounded-xl border border-blue-500/30 bg-blue-500/5 p-5">
