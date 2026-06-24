@@ -85,7 +85,7 @@ export default function FabricAppsRayfinBlog() {
               </h3>
               <ul className="space-y-1.5 mb-0 text-[14px]">
                 <li><strong>Power BI did not die. It evolved.</strong> The semantic model is still the source of truth. What is new is the operational app built around it: a Fabric App.</li>
-                <li><strong>Rayfin is the way you build one.</strong> Microsoft's open-source SDK, from Build 2026, takes a TypeScript data model and provisions a Fabric SQL database, a GraphQL API, Entra authentication, and hosting. You scaffold with <code>npm create @microsoft/rayfin@latest</code>, then deploy with <code>npx rayfin up</code>.</li>
+                <li><strong>Rayfin is Microsoft's CLI and SDK for building one.</strong> Open-source, from Build 2026, it takes a TypeScript data model and provisions a Fabric SQL database, a GraphQL API, Entra authentication, and hosting. You scaffold with <code>npm create @microsoft/rayfin@latest</code>, then deploy with <code>npx rayfin up</code>.</li>
                 <li><strong>The translytical loop is the magic.</strong> A Fabric SQL database auto-mirrors to OneLake as Delta. A Direct Lake model reads that one copy. Analytics see operational writes in near real time, with no nightly ETL.</li>
                 <li><strong>Demo 1, the Lead Pipeline app:</strong> an operational CRM, a Kanban board plus an analyst-grade dashboard, all reading one Direct Lake semantic model.</li>
                 <li><strong>Demo 2, the Superstore:</strong> two apps, a self-checkout that writes a sale and an analytics app that reads it back, wired together through the translytical loop, with a customer and order drill-through.</li>
@@ -106,11 +106,12 @@ export default function FabricAppsRayfinBlog() {
             </p>
 
             <p>
-              That switch is the gap. Power BI is brilliant at helping a business <strong>see</strong> its data. But
-              seeing is not the same as doing. Every report is a read-only window. The moment you want to act, capture
-              a new lead, move a deal, ring up a sale, record a decision, you leave the analytics behind and go
-              somewhere else. Then someone has to stitch that "somewhere else" back into the warehouse with a pipeline,
-              and the cycle of nightly ETL and stale dashboards begins again.
+              That switch is the gap. Power BI is brilliant at helping a business <strong>see</strong> its data. Even
+              with the newer translytical task flows that let a report write back through User Data Functions, the
+              report is still a report — the primary surface is the visual, with actions bolted on. The moment you
+              want a full application experience, a Kanban board, a checkout flow, a multi-step form, you leave the
+              report behind and go somewhere else. Then someone has to stitch that "somewhere else" back into the
+              warehouse with a pipeline, and the cycle of nightly ETL and stale dashboards begins again.
             </p>
 
             <p>
@@ -235,8 +236,10 @@ npx rayfin up                          # provisions the SQL database + GraphQL A
             </p>
 
             <p>
-              Microsoft calls this a <strong>translytical</strong> application: transactional and analytical on one
-              system, no copy, no glue pipeline between the app and the analytics.
+              I call this the <strong>translytical loop</strong>. Microsoft's own term for the broader pattern is
+              <strong> translytical application</strong> — transactional and analytical on one system, no copy, no
+              glue pipeline between the app and the analytics. (Microsoft also uses "translytical task flow" for the
+              related Power BI report-writeback feature; the loop in this post is the application-flavored version.)
             </p>
 
             <ImageLightbox
